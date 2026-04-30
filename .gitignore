@@ -1,0 +1,9 @@
+# Ignora la cartella di collegamento a Drive
+drive.lnk
+
+# Ignora file di sistema Windows
+Thumbs.db
+desktop.ini
+
+# Ignora chiavi API
+.env
