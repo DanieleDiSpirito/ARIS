@@ -1,21 +1,40 @@
-import fitz  # La libreria PyMuPDF
+import fitz  # PyMuPDF
 import json
 import re
+import csv
 
 def estrai_testo_manuale():
-    percorso_pdf = "checks_maintenance.pdf"
-    percorso_output = "testo_estratto.json"
+    percorso_pdf = "../data/raw/manuali_manutenzione/checks_maintenance.pdf"
+    percorso_output = "../data/processed/checks_maintenance.json"
     
+    nome_file = percorso_pdf.split("/")[-1]
+    document_id = "00"
+    pagina_manuale = ""
+    sezione_pagina = None
+    pagina_manuale_int = 0
+
+    with open('../data/raw/metadata/document_index.csv', 'r', encoding='utf-8') as csvfile:
+        reader = list(csv.DictReader(csvfile))
+        for row in reader:
+            if row['nome_file'] == nome_file:
+                document_id = row['id_documento']
+                pagina_manuale = row['pagina_manuale']
+                if pagina_manuale.startswith('s'):
+                    pagina_manuale_int = 1
+                    sezione_pagina = 's'
+                else:
+                    pagina_manuale_int = int(pagina_manuale)
+                break
+
+    assert document_id != "00", f"Document ID for {nome_file} not found"
+
     print(f"Apertura del file {percorso_pdf} in corso...")
     
     try:
-        # Apriamo il documento usando 'with' così si chiude da solo alla fine
         with fitz.open(percorso_pdf) as doc:
             dati_estratti = []
             
             # --- 1. LE SCATOLE DELLA MEMORIA ---
-            # Inizializziamo le variabili fuori dal ciclo. Conserveranno il valore
-            # finché non troveranno un nuovo titolo!
             sezione_corrente = "Sconosciuta"
             titolo_corrente = "Nessun Titolo"
             
@@ -25,7 +44,7 @@ def estrai_testo_manuale():
             # (\d+\.\d+)  : Un numero, un punto, un altro numero (es. 2.3) -> Gruppo 1
             # \s+         : Uno o più spazi vuoti
             # (.+)        : Tutto il resto del testo (es. CHECKS AND MAINTENANCE) -> Gruppo 2
-            pattern_titolo = re.compile(r"^(\d+\.\d+)\s+(.+)")
+            pattern_titolo = re.compile(r"^([\d\.]+)\s+(.+)")
 
             # Iniziamo a sfogliare le pagine
             for num_pagina in range(len(doc)):
@@ -56,8 +75,9 @@ def estrai_testo_manuale():
                         
                     # Puliamo il testo trasformando i vari "A capo" interni in spazi normali
                     # Questo crea paragrafi belli e continui per l'Intelligenza Artificiale
-                    testo_pulito = testo_blocco.replace('\n', ' ')
-                    
+                    testo_pulito = testo_blocco.replace('\n', ' ') 
+                    testo_pulito = re.sub(r'\s+', ' ', testo_pulito).strip()
+
                     # --- 5. LA LOGICA DI RICONOSCIMENTO TITOLI ---
                     match = pattern_titolo.search(testo_pulito)
                     
@@ -74,9 +94,9 @@ def estrai_testo_manuale():
                     # Se non è un titolo, è testo normale. Creiamo il record JSON
                     # associando la sezione e il titolo attualmente salvati in memoria.
                     record = {
-                        "document_id": "DOC001",
-                        "file_name": percorso_pdf,
-                        "page": num_pagina + 1,
+                        "document_id": document_id,
+                        "file_name": '/'.join(percorso_pdf.split("/")[-2:]),
+                        "page": str(pagina_manuale_int + num_pagina) if sezione_pagina != 's' else f's-{num_pagina + 1}',
                         "section": sezione_corrente,
                         "title": titolo_corrente,
                         "text": testo_pulito
@@ -89,7 +109,6 @@ def estrai_testo_manuale():
         with open(percorso_output, "w", encoding="utf-8") as file_json:
             json.dump(dati_estratti, file_json, indent=4, ensure_ascii=False)
             
-        print(f"MAGIA COMPLETATA! 🎉")
         print(f"Ho estratto {len(dati_estratti)} blocchi strutturati nel file: {percorso_output}")
 
     except Exception as e:
