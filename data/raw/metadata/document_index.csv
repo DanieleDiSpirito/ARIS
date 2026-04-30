@@ -1,0 +1,9 @@
+id_documento,nome_file,tipo_documento,macchina,versione,lingua,note
+01,safety_precautions.pdf,manuali_manutenzione,Fanuc Robot Series ,R-30iB Mate/R-30iB Mate Plus,en,Avvertenze di sicurezza
+02,overview_configuration.pdf,manuali_manutenzione,Fanuc Robot Series ,R-30iB Mate/R-30iB Mate Plus,en,Descrizione generale e Componenti principali
+03,checks_maintenance.pdf,manuali_manutenzione,Fanuc Robot Series ,R-30iB Mate/R-30iB Mate Plus,en,Procedure di manutenzione ordinaria
+04,troubleshooting_alarms.pdf,codici_errore,Fanuc Robot Series ,R-30iB Mate/R-30iB Mate Plus,en,Codici errore e allarmi 
+05,troubleshooting_visual.pdf,codici_errore,Fanuc Robot Series ,R-30iB Mate/R-30iB Mate Plus,en,Troubleshooting e diagnostica visiva
+06,circuit_boards_amplifiers.pdf,schede_tecniche,Fanuc Robot Series ,R-30iB Mate/R-30iB Mate Plus,en,Specifiche tecniche e limiti di funzionamento
+07,replacing_units.pdf,procedure,Fanuc Robot Series ,R-30iB Mate/R-30iB Mate Plus,en,Procedure di manutenzione straordinaria
+08,connections.pdf,schede_tecniche,Fanuc Robot Series ,R-30iB Mate/R-30iB Mate Plus,en,Cablaggi (descrizione e schemi) 
