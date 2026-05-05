@@ -6,8 +6,8 @@ import csv
 import os
 
 def estrai_testo_manuale():
-    percorso_pdf = "../../data/raw/manuali_manutenzione/overview_configuration.pdf"
-    percorso_output = "../../data/processed/overview_configuration.json"
+    percorso_pdf = "../../data/raw/codici_errore/troubleshooting_visual.pdf"
+    percorso_output = "../../data/processed/troubleshooting_visual.json"
     
     nome_file = percorso_pdf.split("/")[-1]
     document_id = "00"
@@ -101,7 +101,7 @@ def estrai_testo_manuale():
                 area_utile = fitz.Rect(0, 80, larghezza, altezza - 60)
                 blocchi = pagina_fitz.get_text("blocks", clip=area_utile)
                 
-                tabelle_inserite = set() # Tiene traccia delle tabelle processate in questa pagina
+                tabelle_inserite = set()
                 tabelle_della_pagina = tabelle_formattate.get(num_pagina, [])
 
                 for blocco in blocchi:
@@ -168,8 +168,8 @@ def estrai_testo_manuale():
                             }
                             dati_estratti.append(record_tab)
                             tabelle_inserite.add(indice_tab)
-                        continue # Salta il testo spazzatura della tabella estratto da pymupdf
-                        
+                        continue
+
                     # 2. SE NON È TABELLA, ESTRAI E PULISCI IL TESTO
                     testo_blocco = blocco[4].strip()
                     if not testo_blocco:
@@ -198,7 +198,7 @@ def estrai_testo_manuale():
                     if numero_parole < 8 and not testo_pulito.lower().startswith(("fig", "table", "note", "warning")):
                         continue
 
-                    # 5. CREAZIONE RECORD STANDARD
+                    # 6. CREAZIONE RECORD STANDARD
                     record = {
                         "document_id": document_id,
                         "file_name": '/'.join(percorso_pdf.split("/")[-2:]),
@@ -209,7 +209,7 @@ def estrai_testo_manuale():
                     }
                     dati_estratti.append(record)
                 
-                # RETE DI SICUREZZA: Inserisci tabelle rimaste indietro (es. in fondo alla pagina senza testo attorno)
+                # RETE DI SICUREZZA: Inserisci tabelle rimaste indietro
                 for idx, tab_dict in enumerate(tabelle_della_pagina):
                     if idx not in tabelle_inserite:
                         record_tab = {

@@ -3,16 +3,32 @@
         "document_id": "02",
         "file_name": "manuali_manutenzione/overview_configuration.pdf",
         "page": "3",
-        "section": "Sconosciuta",
-        "title": "Nessun Titolo",
-        "text": "Specifiche per Basic controller -> Functional Safety: ISO 13849-1 IEC 61508 | EMC Standard: - | Robot Standard Electrical Standard: - | Requirement: - | Difference: - Specifiche per NRTL controller -> EMC Standard: - | Robot Standard Electrical Standard: UL1740 CAN/CSA Z434 NFPA79 | Requirement: UL standard CSA standard •USA and Canada | Difference: •UL listed main breaker Specifiche per CE controller -> EMC Standard: EN 55011 EN 61000-6-2 EN 61000-6-4 | Robot Standard Electrical Standard: EN/ISO 10218-1 EN 60204-1 | Requirement: CE Marking •Europe | Difference: •Noise filter •EMC Cabinet •Shielded cable"
+        "section": "1",
+        "title": "OVERVIEW",
+        "text": "This manual is applied to R-30iB Mate/ R-30iB Mate Plus controller (called R-30iB Mate/ R-30iB Mate Plus). R-30iB Mate/ R-30iB Mate Plus has different controller depending on the required standards. NRTL controller : To meet UL/CSA standard CE controller : To meet Machinery Directive, Low voltage Directive, EMC Directive to cover the requirement of CE mark This manual covers these controllers of the R-30iB Mate/ R-30iB Mate Plus. The difference of NRTL and CE controller from the Basic controller is small as shown in Table 1 (ex. EMC parts, Breakers). And the specific descriptions of CE and NRTL controller have notifications in this manual."
     },
     {
         "document_id": "02",
         "file_name": "manuali_manutenzione/overview_configuration.pdf",
         "page": "3",
-        "section": "Sconosciuta",
-        "title": "Nessun Titolo",
+        "section": "1",
+        "title": "OVERVIEW",
+        "text": "Specifications for Basic controller -> Functional Safety: ISO 13849-1 IEC 61508 | EMC Standard: - | Robot Standard Electrical Standard: - | Requirement: - | Difference: - Specifications for NRTL controller -> EMC Standard: - | Robot Standard Electrical Standard: UL1740 CAN/CSA Z434 NFPA79 | Requirement: UL standard CSA standard •USA and Canada | Difference: •UL listed main breaker Specifications for CE controller -> EMC Standard: EN 55011 EN 61000-6-2 EN 61000-6-4 | Robot Standard Electrical Standard: EN/ISO 10218-1 EN 60204-1 | Requirement: CE Marking •Europe | Difference: •Noise filter •EMC Cabinet •Shielded cable"
+    },
+    {
+        "document_id": "02",
+        "file_name": "manuali_manutenzione/overview_configuration.pdf",
+        "page": "3",
+        "section": "1",
+        "title": "OVERVIEW",
+        "text": "This manual describes the maintenance and connection of R-30iB Mate/ R-30iB Mate Plus. ･Maintenance Part: Troubleshooting, and the setting, adjustment, and replacement of units ･Connection Part: Connection of R-30iB Mate/ R-30iB Mate Plus to the robot mechanical unit and peripheral devices, and installation of the controller"
+    },
+    {
+        "document_id": "02",
+        "file_name": "manuali_manutenzione/overview_configuration.pdf",
+        "page": "3",
+        "section": "1",
+        "title": "OVERVIEW",
         "text": "WARNING Before you enter the robot working area, be sure to turn off the power to the controller or press the EMERGENCY STOP button on the operator's panel or teach pendant. Otherwise, you could injure personnel or damage equipment."
     },
     {
@@ -45,15 +61,7 @@
         "page": "5",
         "section": "2.1",
         "title": "EXTERNAL VIEW OF THE CONTROLLER",
-        "text": "Heat exchanger 6-Axis Servo amplifier"
-    },
-    {
-        "document_id": "02",
-        "file_name": "manuali_manutenzione/overview_configuration.pdf",
-        "page": "5",
-        "section": "2.1",
-        "title": "EXTERNAL VIEW OF THE CONTROLLER",
-        "text": "Back plane unit Fig.2.1 (c) R-30iB Mate/ R-30iB Mate Plus cabinet interior (Front-1)"
+        "text": "Fig.2.1 (c) R-30iB Mate/ R-30iB Mate Plus cabinet interior (Front-1)"
     },
     {
         "document_id": "02",
@@ -77,14 +85,6 @@
         "page": "6",
         "section": "2.1",
         "title": "EXTERNAL VIEW OF THE CONTROLLER",
-        "text": "6-Axis Servo amplifier (Rear side)"
-    },
-    {
-        "document_id": "02",
-        "file_name": "manuali_manutenzione/overview_configuration.pdf",
-        "page": "6",
-        "section": "2.1",
-        "title": "EXTERNAL VIEW OF THE CONTROLLER",
         "text": "6-Axis Servo amplifier (Rear side) 6-Axis Servo amplifier (Rear side)"
     },
     {
@@ -93,7 +93,7 @@
         "page": "6",
         "section": "2.1",
         "title": "EXTERNAL VIEW OF THE CONTROLLER",
-        "text": "(Middle size) (Large size) Fig.2.1 (f) R-30iB Mate/ R-30iB Mate Plus cabinet interior (Rear)"
+        "text": "Fig.2.1 (f) R-30iB Mate/ R-30iB Mate Plus cabinet interior (Rear)"
     },
     {
         "document_id": "02",
@@ -102,22 +102,6 @@
         "section": "2.1",
         "title": "EXTERNAL VIEW OF THE CONTROLLER",
         "text": "Fig.2.1 (g) R-30iB Mate/ R-30iB Mate Plus cabinet interior (Middle/Large size) (Rear) NOTE The number of fans on the fan unit (0,1,2) will vary depending on the robot type."
-    },
-    {
-        "document_id": "02",
-        "file_name": "manuali_manutenzione/overview_configuration.pdf",
-        "page": "7",
-        "section": "2.1",
-        "title": "EXTERNAL VIEW OF THE CONTROLLER",
-        "text": "CYCLE START button with LED(Green)"
-    },
-    {
-        "document_id": "02",
-        "file_name": "manuali_manutenzione/overview_configuration.pdf",
-        "page": "7",
-        "section": "2.1",
-        "title": "EXTERNAL VIEW OF THE CONTROLLER",
-        "text": "Mode switch (In case of 3-mode switch)"
     },
     {
         "document_id": "02",
@@ -141,22 +125,22 @@
         "page": "8",
         "section": "2.1",
         "title": "EXTERNAL VIEW OF THE CONTROLLER",
-        "text": "Deadman switch Fig.2.1 (j) Teach pendant (iPendant)"
+        "text": "Fig.2.1 (j) Teach pendant (iPendant)"
     },
     {
         "document_id": "02",
         "file_name": "manuali_manutenzione/overview_configuration.pdf",
         "page": "9",
-        "section": "2.1",
-        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "section": "2.2",
+        "title": "COMPONENT FUNCTIONS",
         "text": "Fig.2.2 Block diagram of the R-30iB Mate/ R-30iB Mate Plus"
     },
     {
         "document_id": "02",
         "file_name": "manuali_manutenzione/overview_configuration.pdf",
         "page": "10",
-        "section": "2.1",
-        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "section": "2.2",
+        "title": "COMPONENT FUNCTIONS",
         "text": "- Main board The main board contains a microprocessor, its peripheral circuits, memory, and operator's panel control circuit. The main CPU controls servo mechanism positioning. - I/O printed circuit board Various types of printed circuit boards are provided for applications including process I/O board. These are connected with FANUC I/O Link. - E-stop unit This unit controls the emergency stop system of the robot controller. It also has user interface terminals of safety relevant signals, external on/off signals etc. - Power supply unit The power supply unit converts the AC power to various levels of DC power. - Backplane printed circuit board The various control printed circuit boards are mounted on the backplane printed circuit board. - Teach pendant All operations including robot programming are performed with this unit. The controller status and data are indicated on the liquid-crystal display (LCD) on the pendant. - 6-Axis Servo amplifier The servo amplifier controls servomotor, Pulsecoder signal, brake control, overtravel and hand broken. - Operator's panel Buttons and LEDs on the operator's panel are used to start the robot and to indicate the robot status. - Fan unit, heat exchanger These components cool the inside of the controller. - Circuit breaker If the electric system in the controller malfunctions, or if abnormal input power causes high current in the system, the input power is connected to the circuit breaker to protect the equipment. - Regenerative resistor To discharge the counter electromotive force from the servomotor, connect a regenerative resistor to the servo amplifier."
     }
 ]

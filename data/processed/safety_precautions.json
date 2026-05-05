@@ -1,0 +1,378 @@
+[
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-1",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "This chapter describes the precautions which must be followed to ensure the safe use of the robot. Before using the robot, be sure to read this chapter thoroughly. For detailed functions of the robot operation, read the relevant operator's manual to understand fully its specification. For the safety of the operator and the system, follow all safety precautions when operating a robot and its peripheral equipment installed in a work cell. In addition, refer to the “FANUC Robot SAFETY HANDBOOK (B-80687EN)”. 1 DEFINITON OF USER"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-1",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "Operator: • Turns the robot controller power on/off • Starts the robot program from operator panel Programmer: • Operates the robot • Teaches the robot inside the safety fence Maintenance engineer: • Operates the robot • Teaches the robot inside the safety fence • Maintenance (repair, adjustment, replacement) - Operator is not allowed to work in the safety fence. - Programmer and maintenance engineer is allowed to work in the safety fence. Works carried out in the safety fence include transportation, installation, teaching, adjustment, and maintenance. - To work inside the safety fence, the person must be trained on proper robot operation. During the operation, programming, and maintenance of your robotic system, the programmer, operator, and maintenance engineer should take additional care of their safety by wearing the following safety items. - Adequate clothes for the operation - Safety shoes - A helmet 2 DEFINITION OF SAFETY NOTATIONS"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-1",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "To ensure the safety of users and prevent damage to the machine, this manual indicates each precaution on safety with \"WARNING\" or \"CAUTION\" according to its severity. Supplementary information is indicated by \"NOTE\". Read the contents of each \"WARNING\", \"CAUTION\" and \"NOTE\" before using the robot."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-2",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "Specifications for W ARNING -> Definitions: Used if hazard resulting in the death or serious injury of the user will be expected to occur if he or she fails to follow the approved procedure. Specifications for C AUTION -> Definitions: Used if a hazard resulting in the minor or moderate injury of the user, or equipment damage may be expected to occur if he or she fails to follow the approved procedure. Specifications for NOTE -> Definitions: Used if a supplementary explanation not related to any of WARNING and CAUTION is to be indicated."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-2",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "• Check this manual thoroughly, and keep it handy for the future reference. 3 USER SAFETY"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-2",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "User safety is the primary safety consideration. Because it is very dangerous to enter the operating space of the robot during automatic operation, adequate safety precautions must be observed. The following lists the general safety precautions. Careful consideration must be made to ensure user safety. (1) Have the robot system users attend the training courses held by FANUC."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-2",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "FANUC provides various training courses. Contact our sales office for details. (2) Even when the robot is stationary, it is possible that the robot is still in a ready to move state, and is waiting for a signal. In this state, the robot is regarded as still in motion. To ensure user safety, provide the system with an alarm to indicate visually or aurally that the robot is in motion. (3) Install a safety fence with a gate so that no user can enter the work area without passing through the gate. Install an interlocking device, a safety plug, and so forth in the safety gate so that the robot is stopped as the safety gate is opened."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-2",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "The controller is designed to receive this interlocking signal of the door switch. When the gate is opened and this signal received, the controller stops the robot (Please refer to \"STOP TYPE OF ROBOT\" in \"SAFETY PRECAUTIONS\" for detail of stop type). For connection, see Fig. 3 (b). (4) Provide the peripheral equipment with appropriate earth (Class A, Class B, Class C, and Class D). (5) Try to install the peripheral equipment outside the robot operating space. (6) Draw an outline on the floor, clearly indicating the range of the robot operating space, including the tools such as a hand. (7) Install a mat switch or photoelectric switch on the floor with an interlock to a visual or aural alarm that stops the robot when a user enters the work area. (8) If necessary, install a safety lock so that no one except the user in charge can turn on the power of the robot."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-2",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "The circuit breaker installed in the controller is designed to disable anyone from turning it on when it is locked with a padlock. (9) When adjusting each peripheral equipment independently, be sure to turn off the power of the robot. (10) Operators should be ungloved while manipulating the operator panel or teach pendant. Operation with gloved fingers could cause an operation error."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-3",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "(11) Programs, system variables, and other information can be saved on memory card or USB memories. Be sure to save the data periodically in case the data is lost in an accident. (refer to Controller OPERATOR’S MANUAL.) (12) The robot should be transported and installed by accurately following the procedures recommended by FANUC. Wrong transportation or installation may cause the robot to fall, resulting in severe injury to workers. (13) In the first operation of the robot after installation, the operation should be restricted to low speeds. Then, the speed should be gradually increased to check the operation of the robot. (14) Before the robot is started, it should be checked that no one is inside the safety fence. At the same time, a check must be made to ensure that there is no risk of hazardous situations. If detected, such a situation should be eliminated before the operation. (15) When the robot is used, the following precautions should be taken. Otherwise, the robot and peripheral equipment can be adversely affected, or workers can be severely injured. - Avoid using the robot in a flammable environment. - Avoid using the robot in an explosive environment. - Avoid using the robot in an environment full of radiation. - Avoid using the robot under water or at high humidity. - Avoid using the robot to carry a person or animal. - Avoid using the robot as a stepladder. (Never climb up on or hang from the robot.) - Outdoor (16) When connecting the peripheral equipment related to stop (safety fence etc.) and each signal (external emergency, fence etc.) of robot, be sure to confirm the stop movement and do not take the wrong connection. (17) When preparing footstep, please consider security for installation and maintenance work in high place according to Fig. 3 (c). Please consider footstep and safety belt mounting position."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-3",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "Fig. 3 (a) Safety fence and safety gate"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-3",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "Interlocking device and safety plug that are activated if the gate is opened."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-4",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "(Note) Connect EAS1 and EAS11, EAS2 and EAS21. Terminals EAS1,EA11,EAS2,EAS21 are on the emergency stop board."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-4",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "Fig.3 (b) Limit switch circuit diagram of the safety fence"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-4",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "Fig. 3 (c) Pedestal for maintenance 3.1 SAFETY OF THE OPERATOR"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-4",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "An operator refers to a person who turns on and off the robot system and starts a robot program from, for example, the operator panel during daily operation. Operators cannot work inside of the safety fence. (1) If the robot does not need to be operated, turn off the robot controller power or press the EMERGENCY STOP button during working. (2) Operate the robot system outside the operating space of the robot. (3) Install a safety fence or safety door to avoid the accidental entry of a person other than an operator in charge or keep operator out from the hazardous place. (4) Install one or more necessary quantity of EMERGENCY STOP button(s) within the operator’s reach in appropriate location(s) based on the system layout."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-4",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "The robot controller is designed to be connected to an external EMERGENCY STOP button. With this connection, the controller stops the robot operation (Please refer to \"STOP TYPE OF ROBOT\" in \"SAFETY PRECAUTIONS\" for detail of stop type) when the external EMERGENCY STOP button is pressed. See the diagram below for connection."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-5",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "(Note) Connect EES1 and EES11, EES2 and EES21. Terminals EES1,EES11,EES2,EES21 are on the emergency stop board."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-5",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "Fig. 3.1 Connection diagram for external emergency stop button 3.2 SAFETY OF THE PROGRAMMER"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-5",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "While teaching the robot, the operator must enter the robot operation area. The programmer must ensure the safety especially. (1) Unless it is specifically necessary to enter the robot operating space, carry out all tasks outside the operating space. (2) Before teaching the robot, check that the robot and its peripheral equipment are all in the normal operating condition. (3) If it is inevitable to enter the robot operating space to teach the robot, check the locations, settings, and other conditions of the safety devices (such as the EMERGENCY STOP button, the DEADMAN switch on the teach pendant) before entering the area. (4) The programmer must be extremely careful not to let anyone else enter the robot operating space. (5) Programming should be done outside the area of the safety fence as far as possible. If programming needs to be done inside the safety fence, the programmer should take the following precautions: – Before entering the area of the safety fence, ensure that there is no risk of dangerous situations in the area. – Be prepared to press the emergency stop button whenever necessary. – Robot motions should be made at low speeds. – Before starting programming, check the whole robot system status to ensure that no remote instruction to the peripheral equipment or motion would be dangerous to the user. Our operator panel is provided with an emergency stop button and a key switch (mode switch) for selecting the automatic operation (AUTO) and the teach modes (T1 and T2). Before entering the inside of the safety fence for the purpose of teaching, set the switch to a teach mode, remove the key from the mode switch to prevent other people from changing the operation mode carelessly, then open the safety gate. If the safety gate is opened with the automatic operation set, the robot stops (Please refer to \"STOP TYPE OF ROBOT\" in \"SAFETY PRECAUTIONS\" for detail of stop type). After the switch is set to a teach mode, the safety gate is disabled. The programmer should understand that the safety gate is disabled and is responsible for keeping other people from entering the inside of the safety fence. Our teach pendant is provided with a DEADMAN switch as well as an emergency stop button. These button and switch function as follows: (1) Emergency stop button: Causes the stop of the robot (Please refer to \"STOP TYPE OF ROBOT\" in \"SAFETY PRECAUTIONS\" for detail of stop type) when pressed. (2) DEADMAN switch: Functions differently depending on the teach pendant enable/disable switch setting status. (a) Enable: Servo power is turned off when the operator releases the DEADMAN switch or when the operator presses the switch strongly. (b) Disable: The DEADMAN switch is disabled. (Note) The DEADMAN switch is provided to stop the robot when the operator releases the teach pendant or presses the pendant strongly in case of emergency. The R-30iB/R-30iB Plus/R-30iB Mate/R-30iB Mate Plus employs a 3-position DEADMAN switch, which allows the robot to operate when the 3-position DEADMAN switch is pressed to its intermediate point. When the operator releases the DEADMAN switch or presses the switch strongly, the robot stops immediately."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-6",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "The operator’s intention of starting teaching is determined by the controller through the dual operation of setting the teach pendant enable/disable switch to the enable position and pressing the DEADMAN switch. The operator should make sure that the robot could operate in such conditions and be responsible in carrying out tasks safely. Based on the risk assessment by FANUC, number of operation of DEADMAN SW should not exceed about 10000 times per year. The teach pendant, operator panel, and peripheral equipment interface send each robot start signal. However the validity of each signal changes as follows depending on the mode switch and the DEADMAN switch of the operator panel, the teach pendant enable switch and the remote condition on the software."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-6",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "Specifications for AUTO mode -> Teach pendant enable switch: On | Software remote condition: Local | Teach pendant: Not allowed | Operator panel: Not allowed | Peripheral equipment: Not allowed Specifications for T1, T2 mode -> Teach pendant enable switch: On | Software remote condition: Local | Teach pendant: Allowed to start | Operator panel: Not allowed | Peripheral equipment: Not allowed"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-6",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "T1,T2 mode: DEADMAN switch is effective. (6) To start the system using the operator box or operator panel, make certain that nobody is the robot operating space area and that there are no abnormalities in the robot operating space. (7) When a program is completed, be sure to carry out a test operation according to the following procedure. (a) Run the program for at least one operation cycle in the single step mode at low speed. (b) Run the program for at least one operation cycle in continuous operation at low speed. (c) Run the program for one operation cycle in continuous operation at the intermediate speed and check that no abnormalities occur due to a delay in timing. (d) Run the program for one operation cycle in continuous operation at the normal operating speed and check that the system operates automatically without trouble. (e) After checking the completeness of the program through the test operation above, execute it in the automatic operation. (8) While operating the system in the automatic operation, the programmer should leave the safety fence. 3.3 SAFETY OF THE MAINTENANCE ENGINEER"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-6",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "For the safety of maintenance engineer personnel, pay utmost attention to the following. (1) During operation, never enter the robot operating space. (2) A hazardous situation may arise when the robot or the system, are kept with their power-on during maintenance operations. Therefore, for any maintenance operation, the robot and the system should be put into the power-off state. If necessary, a lock should be in place in order to prevent any other person from turning on the robot and/or the system. In case maintenance needs to be executed in the power-on state, the emergency stop button must be pressed. (3) If it becomes necessary to enter the robot operating space while the power is on, press the emergency stop button on the operator box or operator panel, or the teach pendant before entering the range. The maintenance worker must indicate that maintenance work is in progress and be careful not to allow other people to operate the robot carelessly."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-7",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "(4) When entering the area enclosed by the safety fence, the worker must check the whole robot system in order to make sure no dangerous situations exist. In case the worker needs to enter the safety area whilst a dangerous situation exists, extreme care must be taken, and whole robot system status must be carefully monitored. (5) Before the maintenance of the pneumatic system is started, the supply pressure should be shut off and the pressure in the piping should be reduced to zero. (6) Before the start of maintenance work, check that the robot and its peripheral equipment are all in the normal operating condition. (7) Do not operate the robot in the automatic operation while anybody is in the robot operating space. (8) When you maintain the robot alongside a wall or instrument, or when multiple users are working nearby, make certain that their escape path is not obstructed. (9) When a tool is mounted on the robot, or when any movable device other than the robot is installed, such as belt conveyor, pay careful attention to its motion. (10) If necessary, have a user who is familiar with the robot system stand beside the operator panel and observe the work being performed. If any danger arises, the user should be ready to press the EMERGENCY STOP button at any time. (11) When replacing a part, please contact your local FANUC representative. If a wrong procedure is followed, an accident may occur, causing damage to the robot and injury to the user. (12) When replacing or reinstalling components, take care to prevent foreign material from entering the system. (13) When handling each unit or printed circuit board in the controller during inspection, turn off the circuit breaker to protect against electric shock. If there are two cabinets, turn off the both circuit breaker. (14) A part should be replaced with a part recommended by FANUC. If other parts are used, malfunction or damage would occur. Especially, a fuse that is not recommended by FANUC should not be used. Such a fuse may cause a fire. (15) When restarting the robot system after completing maintenance work, make sure in advance that there is no person in the operating space and that the robot and the peripheral equipment are not abnormal. (16) When a motor or brake is removed, the robot arm should be supported with a crane or other equipment beforehand so that the arm would not fall during the removal. (17) Whenever grease is spilled on the floor, it should be removed as quickly as possible to prevent dangerous falls. (18) The following parts are heated. If a maintenance user needs to touch such a part in the heated state, the user should wear heat-resistant gloves or use other protective tools. － Servo motor － Inside the controller － Reducer － Gearbox － Wrist unit (19) Maintenance should be done under suitable light. Care must be taken that the light would not cause any danger. (20) When a motor, reducer, or other heavy load is handled, a crane or other equipment should be used to protect maintenance workers from excessive load. Otherwise, the maintenance workers would be severely injured. (21) The robot should not be stepped on or climbed up during maintenance. If it is attempted, the robot would be adversely affected. In addition, a misstep can cause injury to the worker. (22) When performing maintenance work in high place, secure a footstep and wear safety belt. (23) After the maintenance is completed, spilled oil or water and metal chips should be removed from the floor around the robot and within the safety fence. (24) When a part is replaced, all bolts and other related components should put back into their original places. A careful check must be given to ensure that no components are missing or left not mounted. (25) In case robot motion is required during maintenance, the following precautions should be taken :"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-8",
+        "section": "Unknown",
+        "title": "No Title",
+        "text": "- Foresee an escape route. And during the maintenance motion itself, monitor continuously the whole robot system so that your escape route will not become blocked by the robot, or by peripheral equipment. - Always pay attention to potentially dangerous situations, and be prepared to press the emergency stop button whenever necessary. (26) The robot should be periodically inspected. (Refer to the robot mechanical manual and controller maintenance manual.) A failure to do the periodical inspection can adversely affect the performance or service life of the robot and may cause an accident (27) After a part is replaced, a test execution should be given for the robot according to a predetermined method. (See TESTING section of “Controller operator’s manual”.) During the test execution, the maintenance worker should work outside the safety fence. 4 SAFETY OF THE TOOLS AND PERIPHERAL DEVICES"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-8",
+        "section": "4.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "(1) Use a limit switch or other sensor to detect a dangerous condition and, if necessary, design the program to stop the robot when the sensor signal is received. (2) Design the program to stop the robot when an abnormality occurs in any other robots or peripheral equipment, even though the robot itself is normal. (3) For a system in which the robot and its peripheral equipment are in synchronous motion, particular care must be taken in programming so that they do not interfere with each other. (4) Provide a suitable interface between the robot and its peripheral equipment so that the robot can detect the states of all devices in the system and can be stopped according to the states. 4.2 PRECAUTIONS FOR MECHANISM"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-8",
+        "section": "4.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "(1) Keep the component cells of the robot system clean, operate the robot where insulated from the influence of oil, water, and dust. (2) Don’t use unconfirmed liquid for cutting fluid and cleaning fluid. (3) Adopt limit switches or mechanical stoppers to limit the robot motion, and avoid the robot from collisions against peripheral equipment or tools. (4) Observe the following precautions about the mechanical unit cables. Failure to follow precautions may cause problems. • Use mechanical unit cable that have required user interface. • Do not add user cable or hose to inside of the mechanical unit. • Please do not obstruct the movement of the mechanical unit when cables are added to outside of mechanical unit. • In the case of the model that a cable is exposed, please do not perform remodeling (Adding a protective cover and fix an outside cable more) obstructing the behavior of the outcrop of the cable. • When installing user peripheral equipment on the robot mechanical unit, please pay attention that the device does not interfere with the robot itself. (5) The frequent power-off stop for the robot during operation causes the trouble of the robot. Please avoid the system construction that power-off stop would be operated routinely. (Refer to bad case example.) Please perform power-off stop after reducing the speed of the robot and stopping it by hold stop or cycle stop when it is not urgent. (Please refer to \"STOP TYPE OF ROBOT\" in \"SAFETY PRECAUTIONS\" for detail of stop type.) (Bad case example)"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-9",
+        "section": "4.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "• Whenever poor product is generated, a line stops by emergency stop and power-off of the robot is incurred. • When alteration is necessary, safety switch is operated by opening safety fence and power-off stop is incurred for the robot during operation. • An operator pushes the emergency stop button frequently, and a line stops. • An area sensor or a mat switch connected to safety signal operates routinely and power-off stop is incurred for the robot. • Power-off stop is regularly incurred due to an inappropriate setting for Dual Check Safety (DCS). (6) Power-off stop of Robot is executed when collision detection alarm (SRVO-050) etc. occurs. Please try to avoid unnecessary power-off stops. It may cause the trouble of the robot, too. So remove the causes of the alarm. 5 SAFETY OF THE ROBOT MECHANISM"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-9",
+        "section": "5.1",
+        "title": "PRECAUTIONS IN OPERATION",
+        "text": "(1) When operating the robot in the jog mode, set it at an appropriate speed so that the operator can manage the robot in any eventuality. (2) Before pressing the jog key, be sure you know in advance what motion the robot will perform in the jog mode. 5.2 PRECAUTIONS IN PROGRAMMING"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-9",
+        "section": "5.1",
+        "title": "PRECAUTIONS IN OPERATION",
+        "text": "(1) When the operating spaces of robots overlap, make certain that the motions of the robots do not interfere with each other. (2) Be sure to specify the predetermined work origin in a motion program for the robot and program the motion so that it starts from the origin and terminates at the origin. Make it possible for the operator to easily distinguish at a glance that the robot motion has terminated. 5.3 PRECAUTIONS FOR MECHANISMS"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-9",
+        "section": "5.1",
+        "title": "PRECAUTIONS IN OPERATION",
+        "text": "Keep the robot operation area clean, and operate the robot in an environment free of grease, water, and dust. 5.4 PROCEDURE TO MOVE ARM WITHOUT DRIVE POWER IN EMERGENCY OR ABNORMAL SITUATIONS"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-9",
+        "section": "5.1",
+        "title": "PRECAUTIONS IN OPERATION",
+        "text": "For emergency or abnormal situations (e.g. persons trapped in or pinched by the robot), brake release unit can be used to move the robot axes without drive power. Please refer to controller maintenance manual and mechanical unit operator’s manual for using method of brake release unit and method of supporting robot."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-10",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "(1) To control the pneumatic, hydraulic and electric actuators, carefully consider the necessary time delay after issuing each control command up to actual motion and ensure safe control. (2) Provide the end effector with a limit switch, and control the robot system by monitoring the state of the end effector. 7 STOP TYPE OF ROBOT"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-10",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "The following three robot stop types exist: Power-Off Stop (Category 0 following IEC 60204-1) Servo power is turned off and the robot stops immediately. Servo power is turned off when the robot is moving, and the path of the deceleration is uncontrolled. The following processing is performed at Power-Off stop. - An alarm is generated and servo power is turned off. - The robot operation is stopped immediately. Execution of the program is paused. Frequent Power-Off stop of the robot during operation can cause failures of the robot. Avoid system designs that require routine or frequent Power-Off stop conditions. Controlled stop (Category 1 following IEC 60204-1) The robot is decelerated until it stops, and servo power is turned off. The following processing is performed at Controlled stop. - The alarm \"SRVO-199 Controlled stop\" occurs along with a decelerated stop. Execution of the program is paused. - An alarm is generated and servo power is turned off. Hold (Category 2 following IEC 60204-1) The robot is decelerated until it stops, and servo power remains on. The following processing is performed at Hold. - The robot operation is decelerated until it stops. Execution of the program is paused."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-10",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "WARNING The stopping distance and stopping time of Controlled stop are longer than the stopping distance and stopping time of Power-Off stop. A risk assessment for the whole robot system, which takes into consideration the increased stopping distance and stopping time, is necessary when Controlled stop is used. When the emergency stop button is pressed or the FENCE is open, the stop type of robot is Power-Off stop or Controlled stop. The configuration of stop type for each situation is called stop pattern. The stop pattern is different according to the controller type or option configuration."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-11",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "Specifications for A -> Mode: AUTO | Emergency stop button: P-Stop | External Emergency stop: P-Stop | FENCE open: C-Stop | SVOFF input: C-Stop | Servo disconnect: P-Stop Specifications for B -> Mode: AUTO | Emergency stop button: P-Stop | External Emergency stop: P-Stop | FENCE open: P-Stop | SVOFF input: P-Stop | Servo disconnect: P-Stop Specifications for C -> Mode: AUTO | Emergency stop button: C-Stop | External Emergency stop: C-Stop | FENCE open: C-Stop | SVOFF input: C-Stop | Servo disconnect: C-Stop"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-11",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "P-Stop: Power-Off stop C-Stop: Controlled stop -: Disable The following table indicates the Stop pattern according to the controller type or option configuration."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-11",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "Specifications for Standard -> R-30iB/ R-30iB Mate: A (*) Specifications for Controlled stop by E-Stop (A05B-2600-J570) -> R-30iB/ R-30iB Mate: C (*)"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-11",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "(*) R-30iB / R-30iB Mate does not have servo disconnect. / R-30iB Mate does not have SVOFF input. The stop pattern of the controller is displayed in \"Stop pattern\" line in software version screen. Please refer to \"Software version\" in operator's manual of controller for the detail of software version screen. \"Controlled stop by E-Stop\" option When \"Controlled stop by E-Stop\" (A05B-2600-J570) option is specified, the stop type of the following alarms becomes Controlled stop but only in AUTO mode. In T1 or T2 mode, the stop type is Power-Off stop which is the normal operation of the system."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-11",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "Specifications for SRVO-001 Operator panel E-stop -> Condition: Operator panel emergency stop is pressed. Specifications for SRVO-002 Teach pendant E-stop -> Condition: Teach pendant emergency stop is pressed. Specifications for SRVO-007 External emergency stops -> Condition: External emergency stop input (EES1-EES11, EES2-EES21) is open. Specifications for SRVO-408 DCS SSO Ext Emergency Stop -> Condition: In DCS Safe I/O connect function, SSO[3] is OFF. Specifications for SRVO-409 DCS SSO Servo Disconnect -> Condition: In DCS Safe I/O connect function, SSO[4] is OFF."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-11",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "Controlled stop is different from Power-Off stop as follows: - In Controlled stop, the robot is stopped on the program path. This function is effective for a system where the robot can interfere with other devices if it deviates from the program path. - In Controlled stop, physical impact is less than Power-Off stop. This function is effective for systems where the physical impact to the mechanical unit or EOAT (End Of Arm Tool) should be minimized. - The stopping distance and stopping time of Controlled stop is longer than the stopping distance and stopping time of Power-Off stop, depending on the robot model and axis. Please refer to the operator's manual of a particular robot model for the data of stopping distance and stopping time. When this option is loaded, this function cannot be disabled."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-12",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "The stop type of DCS Position and Speed Check functions is not affected by the loading of this option."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-12",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "WARNING The stopping distance and stopping time of Controlled stop are longer than the stopping distance and stopping time of Power-Off stop. A risk assessment for the whole robot system, which takes into consideration the increased stopping distance and stopping time, is necessary when this option is loaded. 8 WARNING & CAUTION LABEL"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-12",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "Fig.8 (a) Step-on prohibitive label Description Do not step on or climb the robot or controller as it may adversely affect the robot or controller and you may get hurt if you lose your footing. (2) High-temperature warning label"
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-12",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "Fig.8 (b) High-Temperature warning label Description Be cautious about a section where this label is affixed, as the section generates heat. If you must touch such a section when it is hot, use a protective provision such as heat-resistant gloves."
+    },
+    {
+        "document_id": "01",
+        "file_name": "manuali_manutenzione/safety_precautions.pdf",
+        "page": "s-13",
+        "section": "6.1",
+        "title": "PRECAUTIONS IN PROGRAMMING",
+        "text": "Fig.8 (c) High-voltage warning label Description A high voltage is applied to the places where this label is attached. Before starting maintenance, turn the power to the controller off, and turn the circuit breaker off to avoid electric shock hazards. Take additional precautions with the servo amplifier and other equipment, because high-voltage remains in these units for a certain amounts of time"
+    }
+]
