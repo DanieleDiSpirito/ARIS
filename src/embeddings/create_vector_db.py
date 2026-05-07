@@ -7,6 +7,9 @@ from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_openai import OpenAIEmbeddings
 
+from dotenv import load_dotenv
+load_dotenv()  
+
 def create_documents_from_json(json_path):
     """Carica il JSON dei chunk e lo converte in oggetti Document di LangChain."""
     with open(json_path, "r", encoding="utf-8") as f:
@@ -60,7 +63,11 @@ def main():
         if "OPENAI_API_KEY" not in os.environ:
             print("❌ ERRORE: Per usare il cloud devi impostare la variabile d'ambiente OPENAI_API_KEY.")
             return
-        embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
+        embeddings = OpenAIEmbeddings(
+            model="text-embedding-3-small",
+            openai_api_key=os.getenv("OPENAI_API_KEY"),
+            openai_api_base="https://openrouter.ai/api/v1"
+        )
         persist_dir = os.path.join("vector_db", f"chroma_cloud_{args.chunk_size}")
 
     # 3. Costruisci il Vector Database (ChromaDB)

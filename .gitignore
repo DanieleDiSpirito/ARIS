@@ -7,3 +7,6 @@ desktop.ini
 
 # Ignora chiavi API
 .env
+
+# Ignora file dentro vector_db (database di vettori)
+vector_db/chroma_*/*
