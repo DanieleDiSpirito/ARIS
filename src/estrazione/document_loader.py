@@ -5,6 +5,7 @@ import os
 import re
 import statistics
 import pdfplumber
+from sys import argv
 
 def estrai_elementi_pagina(pagina_pdf, y_min=75, y_max=780):
     """
@@ -144,7 +145,7 @@ def classifica_riga(testo_riga, size_max, size_moda, font_moda):
     elif "mincho" in font_lower:
         return "TESTO_PUNTATO"
     elif is_bold and size_max <= 9.5:
-        return "TESTO_DIDASCALIA"
+        return "TESTO_Caption"
     elif is_bold and testo_riga.isupper() and testo_riga.startswith(("WARNING", "CAUTION", "NOTE")):
         return "TESTO_WARNING"
     else:
@@ -256,8 +257,8 @@ def crea_json_definitivo(percorso_pdf, percorso_csv):
                 elif tag == "TESTO_WARNING":
                     stato_corrente["text_buffer"].append(f"\n**{testo}**")
                     
-                elif tag == "TESTO_DIDASCALIA":
-                    stato_corrente["text_buffer"].append(f"\n[Didascalia]: {testo}")
+                elif tag == "TESTO_Caption":
+                    stato_corrente["text_buffer"].append(f"\n[Caption]: {testo}")
                     
                 else: 
                     stato_corrente["text_buffer"].append(testo)
@@ -273,8 +274,8 @@ def crea_json_definitivo(percorso_pdf, percorso_csv):
 # ==========================================
 if __name__ == "__main__":
     
-    cartella_dati = "../dataRaw"
-    file_csv = "../dataRaw/document_index.csv"
+    cartella_dati = "../../data/raw/" + argv[1]
+    file_csv = "../../data/raw/metadata/document_index.csv"
     
     pattern_ricerca = os.path.join(cartella_dati, "*.pdf")
     lista_pdf = glob.glob(pattern_ricerca)
@@ -290,7 +291,7 @@ if __name__ == "__main__":
         if dati_pdf:
             nome_file_output = nome_file.replace(".pdf", ".json")
             
-            with open(nome_file_output, "w", encoding="utf-8") as f:
+            with open("../../data/processed/" + nome_file_output, "w", encoding="utf-8") as f:
                 json.dump(dati_pdf, f, indent=4, ensure_ascii=False)
                 
             print(f"    ✓ Finito. Creato '{nome_file_output}' con {len(dati_pdf)} record.\n")

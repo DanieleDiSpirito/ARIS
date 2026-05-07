@@ -5,10 +5,10 @@ import glob
 
 def is_garbage_line(line):
     """
-    Rileva se una riga è rumore da diagramma, ignorando la parola 'Didascalia'.
+    Rileva se una riga è rumore da diagramma, ignorando la parola 'Caption'.
     """
     # Rimuove il tag per non falsare il conteggio delle lettere
-    test_line = line.replace("[Didascalia]:", "").strip()
+    test_line = line.replace("[Caption]:", "").strip()
     
     if len(test_line) < 3: 
         return True
@@ -85,7 +85,7 @@ def preprocess_knowledge_base(input_folder, output_file):
                     continue
                 
                 # B. Filtro Didascalie brevi
-                if "[Didascalia]:" in rec['text'] and len(rec['text']) < 40:
+                if "[Caption]:" in rec['text'] and len(rec['text']) < 40:
                     continue
                 
                 # C. Normalizzazione testo e rimozione righe tabella vuote
@@ -125,12 +125,12 @@ def preprocess_knowledge_base(input_folder, output_file):
                 rec['text'] += f"\n\n[ENRICHMENT FROM {code_ref}]:\n" + alarm_map[code_ref]
                 print(f"    ⚓ Arricchito {rec['title']} con dati da {code_ref}")
 
-    with open(output_file, 'w', encoding='utf-8') as f:
+    with open("../../data/processed/" + output_file, 'w', encoding='utf-8') as f:
         json.dump(all_records, f, indent=4, ensure_ascii=False)
     
     print(f"\n✅ Preprocessing completato! Creati {len(all_records)} record puliti e arricchiti.")
     print(f"📂 File salvato: {output_file}")
 
 if __name__ == "__main__":
-    preprocess_knowledge_base("../estrazione", "knowledge_base_finale_V3.json")
+    preprocess_knowledge_base("../../data/processed", "knowledge_base.json")
     

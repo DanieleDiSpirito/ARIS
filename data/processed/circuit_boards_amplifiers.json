@@ -1,213 +1,6 @@
 [
     {
         "document_id": "06",
-<<<<<<< HEAD
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "93",
-        "section": "4",
-        "title": "PRINTED CIRCUIT BOARDS",
-        "text": "The printed circuit boards are factory-set for operation. Usually, you do not need to set or adjust them. This chapter describes the standard settings and adjustment required if a defective printed circuit board is replaced. It also describes the test pins and the LED indications. The controller printed circuit board includes the main unit printed circuit board and one or more cards or modules installed horizontally to the main-unit printed-circuit board. These PC boards have interface connectors, LED indicators, and a plastic panel at the front. At the rear, there is a backplane connector. 4.1 MAIN BOARD"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "93",
-        "section": "4",
-        "title": "PRINTED CIRCUIT BOARDS",
-        "text": "Fig.4.1 Main board"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "94",
-        "section": "4",
-        "title": "PRINTED CIRCUIT BOARDS",
-        "text": "Specifications for Main board -> Ordering Specification: A05B-2650-H001 | Board Specification: A20B-8200-0790 | Note: Standard, Ethernet:1ch Specifications for CPU card -> Ordering Specification: A05B-2600-H020 | Board Specification: A20B-3300-0686 | Note: Standard / SDRAM 32Mbyte"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "95",
-        "section": "4",
-        "title": "PRINTED CIRCUIT BOARDS",
-        "text": "Specifications for Axis control card -> Ordering Specification: A05B-2600-H040 | Board Specification: A20B-3300-0664 | Note: 6-axis Specifications for FROM/SRAM module -> Ordering Specification: A05B-2600-H060 | Board Specification: A20B-3900-0283 | Note: FROM 32M/ SRAM 1M Specifications for Fan board -> Ordering Specification: A05B-2650-H001 | Board Specification: A20B-8200-0669"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "96",
-        "section": "4",
-        "title": "PRINTED CIRCUIT BOARDS",
-        "text": "NOTE In case of using the function of I/O Link i slave, the combination of the specification of mainboard, CPU card and software is limited as below. [Main board (For I/O Link i slave)] + [CPU card (For I/O Link i slave)] + [Software (V8.30P14 or later)] Except for the above condition, the system does not work correctly as followings. a) [Main board] + [CPU card (For I/O Link i slave)] Neither the function of I/O Link slave nor I/O Link i slave work correctly. And the alarm regarding I/O Link or I/O Link i occur on the master side. And in case the software version is not correct, system does not work correctly. b) [Main board (For I/O Link i slave)] + [CPU card] The system does not work correctly. In case of using the R-30iB Mate Plus, the combination of the specification of mainboard, CPU card and software is limited as below. [Main board (R-30iB Mate Plus)] + [CPU card (R-30iB Mate Plus)] + [Software (V9.00P03 or later)] Except for the above condition, the system does not work correctly. And CPU card (R-30iB Mate Plus) may be broken."
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "97",
-        "section": "4",
-        "title": "PRINTED CIRCUIT BOARDS",
-        "text": "When the alarm condition has occurred in the main board, this LED is turned on. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS."
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "97",
-        "section": "4",
-        "title": "PRINTED CIRCUIT BOARDS",
-        "text": "Specifications for RLED1 -> Color: Red | Description: When the alarm condition has occurred in the CPU card, this LED is turned on. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS."
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "97",
-        "section": "4",
-        "title": "PRINTED CIRCUIT BOARDS",
-        "text": "Specifications for LEDG1 -> Color: Green Green Green Green | Description: These LEDs show the operating status of the system. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. Specifications for LEDG2 ->  Specifications for LEDG3 ->  Specifications for LEDG4 -> "
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "97",
-        "section": "4",
-        "title": "PRINTED CIRCUIT BOARDS",
-        "text": "Specifications for RX/TX -> Color: Green | Description: Blink during data transmission of Ethernet TP Specifications for LINK -> Color: Green | Description: Light when a link of Ethernet is established"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "98",
-        "section": "4.2",
-        "title": "EMERGENCY STOP BOARD (A20B-2005-0150, A20B-2103-0170)",
-        "text": "Fig.4.2 Emergency stop board"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "99",
-        "section": "4.3",
-        "title": "BACKPLANE",
-        "text": "Specifications for 2 slot backplane -> Ordering Specification Pa: A05B-2650-H080 A05 | rts number: B-2650-C040 | Board specification: A20B-8200-0680"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "99",
-        "section": "4.3",
-        "title": "BACKPLANE",
-        "text": "Specifications for P24V P5V GND P33V -> 4 PROCESS I/O BOARD MA (A20B-2004-0381) LED:LINK (Green) LED:ALM(Not used) ICOM1 ICOM2 P24V CRMA52A LED:FALM (Red) LED:ALM1 (Red) P33V CRMA 52B JD1B JD1A GND FUSE1 (1A) P5V Fig.4.4 Process I/O Board MA ) Test pins Name Use P24V +24V P5V +5V For measuring the DC supply voltage: P24V P5V | Dato: +24V +5V For m | Dato: easuring the DC supply voltage"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "100",
-        "section": "4.3",
-        "title": "BACKPLANE",
-        "text": "Specifications for ICOM1 -> Dato: UDI1- 10 (Connector CRMA52A) | Standard setting: Side A | Description: For common voltage setting Side A: +24V common Side B: 0V common Specifications for ICOM2 -> Dato: UDI11- 20 (Connector CRMA52B)"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "100",
-        "section": "4.3",
-        "title": "BACKPLANE",
-        "text": "Specifications for ALM1 -> Color: Red | Description: A communication alarm occurred between the main board and process I/O board. Specifications for FALM -> Color: Red | Description: The fuse (FUSE1) on the process I/O board has blown. Specifications for LINK -> Color: Green | Description: Blink (1:3) Communication in progress ON = approx. 0.5 sec, OFF = approx. 1.5 sec Specifications for ALM -> Color: Red | Description: Not used"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "100",
-        "section": "4.3",
-        "title": "BACKPLANE",
-        "text": "Fig.4.5 Process I/O Board MB (1) Test pins and pads"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "100",
-        "section": "4.3",
-        "title": "BACKPLANE",
-        "text": "Specifications for 24V 5V GND -> Dato: +24V +5V GND | Use: For measuring the DC supply voltage Specifications for 3R3V -> Dato: +3.3V Specifications for P24VF P5VF GNDF -> Dato: +24V +5V GND | Use: D/A converter power supply Specifications for AOUT1 AOUT2 -> Dato: Channel 1 Channel 2 | Use: For analog output signal (D/A) voltage measurement"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "101",
-        "section": "4.3",
-        "title": "BACKPLANE",
-        "text": "(2) Adjustment VR1/VR2 Channel 1 gain and offset adjustment Connect the “+” and “-” terminals of a digital voltmeter, respectively, to the AOUT1 check pin and the GNDF check pin (not a general ground point). From the teach pendant, execute AOUT[1]=3413, using a robot program. While observing the voltage at the AOUT1 check pin with the digital voltmeter, adjust potentiometers VR1 and VR2 for 15.0V. VR3/VR4 Channel 2 gain and offset adjustment Connect the “+” and “-” terminals of a digital voltmeter, respectively, to the AOUT2 check pin and the GNDF check pin (not a general ground point). From the teach pendant, execute AOUT[2]=3413, using a robot program. While observing the voltage at the AOUT2 check pin with the digital voltmeter, adjust potentiometers VR3 and VR4 for 15.0V. (3) LEDs"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "101",
-        "section": "4.3",
-        "title": "BACKPLANE",
-        "text": "Specifications for ALM1 Red -> r Description: A communication alarm occurred between the main CPU and process I/O board. Specifications for FALM Red -> r Description: The fuse (FUSE1) on the process I/O board has blown. Specifications for LINK Gree -> r Description: Blink (1:3) Communication in progress ON = approx. 0.5 sec, OFF = approx. 1.5 sec n Blink (1:1) Communication not in progress ON = approx. 0.25 sec, OFF = approx. 0.25 sec Specifications for ALM Red -> r Description: Not used"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "103",
-        "section": "5",
-        "title": "6-AXIS SERVO AMPLIFIERS",
-        "text": "The 6-axis servo amplifiers are factory-set for operation. Usually, you do not need to set or adjust them. This chapter describes the standard settings and adjustment required if a defective 6-axis servo amplifier is replaced. It also describes the use of test pins and meanings of the LED indications. Table 5 6-axis servo amplifier specification (Power supply regeneration)"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "103",
-        "section": "5",
-        "title": "6-AXIS SERVO AMPLIFIERS",
-        "text": "Specifications for ARC Mate 120iC, M-20iA, M-20iB M-710iC, R-1000iA -> 6-AXIS SERVO AMPLIFIER: A06B-6400-H102 | REGENERATIVE RESISTOR: A05B-2650-C101 Specifications for R-2000iC, M-2iA, M-3iA -> 6-AXIS SERVO AMPLIFIER: A06B-6400-H002 | REGENERATIVE RESISTOR: A05B-2650-C101 Specifications for ARC Mate 100iC M-10iA -> 6-AXIS SERVO AMPLIFIER: A06B-6400-H003 | REGENERATIVE RESISTOR: A05B-2650-C101 Specifications for ARC Mate 50iD -> 6-AXIS SERVO AMPLIFIER: A06B-6400-H005 | REGENERATIVE RESISTOR: A05B-2650-C101 Specifications for LR Mate 200iD, M-1iA ARC Mate 50iD (Limited type) CR-4iA, CR-7iA -> 6-AXIS SERVO AMPLIFIER: A06B-6400-H005 | REGENERATIVE RESISTOR: A05B-2650-C100"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "103",
-        "section": "5",
-        "title": "6-AXIS SERVO AMPLIFIERS",
-        "text": "WARNING Before touching the servo amplifier, for example, for maintenance purposes, check the voltage at the screw above the LED “V4” with a DC voltage tester to see if the remaining voltage is not higher than 50V"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "104",
-        "section": "5.1",
-        "title": "LEDS OF 6-AXIS SERVO AMPLIFIER",
-        "text": "Specifications for V4 -> Color: Red | Description: Lights when the DCLINK circuit inside the servo amplifier is charged to reach a specific voltage. Specifications for SVALM -> Color: Red | Description: Lights when the servo amplifier detects an alarm. Specifications for SVEMG -> Color: Red | Description: Lights when an emergency stop signal is input to the servo amplifier. Specifications for DRDY -> Color: Green | Description: Lights when the servo amplifier is ready to drive the servo motor. Specifications for OPEN -> Color: Green | Description: Lights when the communication between the servo amplifier and the main board is normal. Specifications for P5V -> Color: Green | Description: Lights when the power supply circuit inside the servo amplifier outputs a voltage of +5 V normally. Specifications for P3.3V -> Color: Green | Description: Lights when the power supply circuit inside the servo amplifier outputs a voltage of +3.3 V normally."
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "105",
-        "section": "5.2",
-        "title": "SETTING OF 6-AXIS SERVO AMPLIFIER",
-        "text": "Specifications for COM1 -> Standard setting: Side A | Description: Robot Digital Input (RI) device common voltage. Side A: +24V common Side B: 0V common"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "105",
-        "section": "5.2",
-        "title": "SETTING OF 6-AXIS SERVO AMPLIFIER",
-        "text": "Fig.5.2 Circuit based on jumper pin location or setting of switch"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "106",
-        "section": "5.3",
-        "title": "6-AXIS SERVO AMPLIFIER SPECIFICATIONS",
-        "text": "Specifications for INPUT RATINGS -> Dato: VOLTAGE | A06B-6400-H102: AC200~AC240V ( +10% / -15% ), 50/60Hz, 3phase Specifications for OUTPUT RATINGS -> Dato: MAXIMUM OUTPUT | A06B-6400-H102: 240V ~"
-    },
-    {
-        "document_id": "06",
-        "file_name": "schede_tecniche/circuit_boards_amplifiers.pdf",
-        "page": "106",
-        "section": "5.3",
-        "title": "6-AXIS SERVO AMPLIFIER SPECIFICATIONS",
-        "text": "Specifications for INPUT RATINGS -> Dato: VOLTAGE | A06B-6400-H005: AC200~AC240V ( +10% / -15% ), 50/60Hz, 3/1phase Specifications for OUTPUT RATINGS -> Dato: MAXIMUM OUTPUT | A06B-6400-H005: 240V ~"
-=======
         "file_name": "circuit_boards_amplifiers.pdf",
         "page": "93",
         "section": "4",
@@ -220,7 +13,7 @@
         "page": "93",
         "section": "4.1",
         "title": "MAIN BOARD",
-        "text": "Card and Modules Axis control card CPU card FROM/SRAM module Fan board \n[Didascalia]: (R-30 i B Mate) Axis control card CPU card FROM/SRAM module Fan board \n\n|  |\n|---|\n|  |\n\n \n[Didascalia]: (R-30 i B Mate Plus) \n[Didascalia]: Fig.4.1 Main board"
+        "text": "Card and Modules Axis control card CPU card FROM/SRAM module Fan board \n[Caption]: (R-30 i B Mate) Axis control card CPU card FROM/SRAM module Fan board \n\n|  |\n|---|\n|  |\n\n \n[Caption]: (R-30 i B Mate Plus) \n[Caption]: Fig.4.1 Main board"
     },
     {
         "document_id": "06",
@@ -244,7 +37,7 @@
         "page": "96",
         "section": "4.1",
         "title": "MAIN BOARD",
-        "text": "**NOTE** In case of using the function of I/O Link i slave, the combination of the specification of mainboard, CPU card and software is limited as below. [Main board (For I/O Link i slave)] + [CPU card (For I/O Link i slave)] + [Software (V8.30P14 or later)] Except for the above condition, the system does not work correctly as followings. a) [Main board] + [CPU card (For I/O Link i slave)] Neither the function of I/O Link slave nor I/O Link i slave work correctly. And the alarm regarding I/O Link or I/O Link i occur on the master side. And in case the software version is not correct, system does not work correctly. b) [Main board (For I/O Link i slave)] + [CPU card] The system does not work correctly. In case of using the R-30 i B Mate Plus, the combination of the specification of mainboard, CPU card and software is limited as below. [Main board (R-30 i B Mate Plus)] + [CPU card (R-30 i B Mate Plus)] + [Software (V9.00P03 or later)] Except for the above condition, the system does not work correctly. And CPU card (R-30 i B Mate Plus) may be broken. LEDs \n\n|  |  |\n|---|---|\n\n \n[Didascalia]: X ) \n[Didascalia]: X ) KN ) T \n[Didascalia]: KN ) T X / \n[Didascalia]: X / L I R \n[Didascalia]: AR L I R 2 ( 1 ( \n[Didascalia]: 2 ( 1 ( CD CD \n[Didascalia]: E \n[Didascalia]: M DD DD P E E \n[Didascalia]: AC E E T L L \n[Didascalia]: L L \n[Didascalia]: X ) \n[Didascalia]: KN ) T \n[Didascalia]: / \n[Didascalia]: I R X \n[Didascalia]: ( L ( \n[Didascalia]: X ) B 2 1 \n[Didascalia]: KN ) T 83 BD BD \n[Didascalia]: Seven Segment LED I R X / DC E E \n[Didascalia]: L L L \n\n|  |  |\n|---|---|\n\n \n[Didascalia]: A 2 ( 1 ( \n[Didascalia]: 83 AD AD \n[Didascalia]: RLED1 (RED) DC E E \n[Didascalia]: L L \n\n|  |  |\n|---|---|\n\n \n[Didascalia]: LEDG1 \n[Didascalia]: LEDG2 \n[Didascalia]: LEDG3 (GREEN) \n[Didascalia]: LEDG4 \n[Didascalia]: CD38A CD38B \n[Didascalia]: (R-30 i B Mate)"
+        "text": "**NOTE** In case of using the function of I/O Link i slave, the combination of the specification of mainboard, CPU card and software is limited as below. [Main board (For I/O Link i slave)] + [CPU card (For I/O Link i slave)] + [Software (V8.30P14 or later)] Except for the above condition, the system does not work correctly as followings. a) [Main board] + [CPU card (For I/O Link i slave)] Neither the function of I/O Link slave nor I/O Link i slave work correctly. And the alarm regarding I/O Link or I/O Link i occur on the master side. And in case the software version is not correct, system does not work correctly. b) [Main board (For I/O Link i slave)] + [CPU card] The system does not work correctly. In case of using the R-30 i B Mate Plus, the combination of the specification of mainboard, CPU card and software is limited as below. [Main board (R-30 i B Mate Plus)] + [CPU card (R-30 i B Mate Plus)] + [Software (V9.00P03 or later)] Except for the above condition, the system does not work correctly. And CPU card (R-30 i B Mate Plus) may be broken. LEDs \n\n|  |  |\n|---|---|\n\n \n[Caption]: X ) \n[Caption]: X ) KN ) T \n[Caption]: KN ) T X / \n[Caption]: X / L I R \n[Caption]: AR L I R 2 ( 1 ( \n[Caption]: 2 ( 1 ( CD CD \n[Caption]: E \n[Caption]: M DD DD P E E \n[Caption]: AC E E T L L \n[Caption]: L L \n[Caption]: X ) \n[Caption]: KN ) T \n[Caption]: / \n[Caption]: I R X \n[Caption]: ( L ( \n[Caption]: X ) B 2 1 \n[Caption]: KN ) T 83 BD BD \n[Caption]: Seven Segment LED I R X / DC E E \n[Caption]: L L L \n\n|  |  |\n|---|---|\n\n \n[Caption]: A 2 ( 1 ( \n[Caption]: 83 AD AD \n[Caption]: RLED1 (RED) DC E E \n[Caption]: L L \n\n|  |  |\n|---|---|\n\n \n[Caption]: LEDG1 \n[Caption]: LEDG2 \n[Caption]: LEDG3 (GREEN) \n[Caption]: LEDG4 \n[Caption]: CD38A CD38B \n[Caption]: (R-30 i B Mate)"
     },
     {
         "document_id": "06",
@@ -252,7 +45,7 @@
         "page": "97",
         "section": "4.1",
         "title": "MAIN BOARD",
-        "text": "|  |\n|---|\n|  |\n\n \n[Didascalia]: X ) X ) \n[Didascalia]: KN ) T T KN ) \n[Didascalia]: KN ) M ) X / X / \n[Didascalia]: O L I R R L I \n[Didascalia]: AR L I C 2 ( 1 ( A 1 ( 2 ( \n[Didascalia]: E 1 ( 2 ( CD CD 83 AD AD \n[Didascalia]: M DD DD P E E DC E E \n[Didascalia]: AC E E T L L L L \n[Didascalia]: L L \n[Didascalia]: X ) \n[Didascalia]: KN ) T \n[Didascalia]: X / \n[Didascalia]: L I R \n[Didascalia]: B 2 ( 1 ( \n[Didascalia]: 83 BD BD \n[Didascalia]: Seven Segment LED DC E E \n[Didascalia]: L L \n\n|  |  |\n|---|---|\n\n \n[Didascalia]: RLED1 (RED) \n[Didascalia]: LEDG1 \n[Didascalia]: LEDG2 \n[Didascalia]: LEDG3 (GREEN) \n[Didascalia]: LEDG4 \n[Didascalia]: CD38B \n[Didascalia]: (R-30 i B Mate Plus) \n\n| Seven segment LED | Description |\n|---|---|\n|  | When the alarm condition has occurred in the main board, this LED is turned on. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |\n\n \n\n| ALARM LED | Color | Description |\n|---|---|---|\n| RLED1 | Red | When the alarm condition has occurred in the CPU card, this LED is turned on. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |\n\n \n\n| STATUS LED | Color | Description |\n|---|---|---|\n| LEDG1 | Green Green Green Green | These LEDs show the operating status of the system. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |\n| LEDG2 |  |  |\n| LEDG3 |  |  |\n| LEDG4 |  |  |\n\n \n\n| ETHERNET LED | Color | Description |\n|---|---|---|\n| RX/TX | Green | Blink during data transmission of Ethernet TP |\n| LINK | Green | Light when a link of Ethernet is established |\n\n Note. TP:For Ethernet TP, CAMERA: For camera"
+        "text": "|  |\n|---|\n|  |\n\n \n[Caption]: X ) X ) \n[Caption]: KN ) T T KN ) \n[Caption]: KN ) M ) X / X / \n[Caption]: O L I R R L I \n[Caption]: AR L I C 2 ( 1 ( A 1 ( 2 ( \n[Caption]: E 1 ( 2 ( CD CD 83 AD AD \n[Caption]: M DD DD P E E DC E E \n[Caption]: AC E E T L L L L \n[Caption]: L L \n[Caption]: X ) \n[Caption]: KN ) T \n[Caption]: X / \n[Caption]: L I R \n[Caption]: B 2 ( 1 ( \n[Caption]: 83 BD BD \n[Caption]: Seven Segment LED DC E E \n[Caption]: L L \n\n|  |  |\n|---|---|\n\n \n[Caption]: RLED1 (RED) \n[Caption]: LEDG1 \n[Caption]: LEDG2 \n[Caption]: LEDG3 (GREEN) \n[Caption]: LEDG4 \n[Caption]: CD38B \n[Caption]: (R-30 i B Mate Plus) \n\n| Seven segment LED | Description |\n|---|---|\n|  | When the alarm condition has occurred in the main board, this LED is turned on. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |\n\n \n\n| ALARM LED | Color | Description |\n|---|---|---|\n| RLED1 | Red | When the alarm condition has occurred in the CPU card, this LED is turned on. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |\n\n \n\n| STATUS LED | Color | Description |\n|---|---|---|\n| LEDG1 | Green Green Green Green | These LEDs show the operating status of the system. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |\n| LEDG2 |  |  |\n| LEDG3 |  |  |\n| LEDG4 |  |  |\n\n \n\n| ETHERNET LED | Color | Description |\n|---|---|---|\n| RX/TX | Green | Blink during data transmission of Ethernet TP |\n| LINK | Green | Light when a link of Ethernet is established |\n\n Note. TP:For Ethernet TP, CAMERA: For camera"
     },
     {
         "document_id": "06",
@@ -260,7 +53,7 @@
         "page": "98",
         "section": "4.2",
         "title": "A20B-2103-0170)",
-        "text": "[Didascalia]: (R-30 i B Mate A20B-2005-0150) \n[Didascalia]: (R-30 i B Mate Plus A20B-2103-0170) \n[Didascalia]: Fig.4.2 Emergency stop board"
+        "text": "[Caption]: (R-30 i B Mate A20B-2005-0150) \n[Caption]: (R-30 i B Mate Plus A20B-2103-0170) \n[Caption]: Fig.4.2 Emergency stop board"
     },
     {
         "document_id": "06",
@@ -268,7 +61,7 @@
         "page": "99",
         "section": "4.3",
         "title": "BACKPLANE",
-        "text": "Backplane Mini slot(2slot) \n[Didascalia]: Fig.4.3 Backplane \n\n| Name | Ordering Specification Pa | rts number | Board specification |\n|---|---|---|---|\n| 2 slot backplane | A05B-2650-H080 A05 | B-2650-C040 | A20B-8200-0680 |\n\n \n\n|  | 4 PROCESS I/O BOARD MA (A20B-2004-0381) LED:LINK (Green) LED:ALM(Not used) ICOM1 ICOM2 P24V CRMA52A LED:FALM (Red) LED:ALM1 (Red) P33V CRMA 52B JD1B JD1A GND FUSE1 (1A) P5V Fig.4.4 Process I/O Board MA ) Test pins Name Use P24V +24V P5V +5V For measuring the DC supply voltage |  |  |\n|---|---|---|---|\n|  | Name |  | Use |\n| P24V P5V GND P33V | P24V P5V | +24V +5V For m | easuring the DC supply voltage |\n|  |  | GND +3.3V |  |\n\n \n\n|  |\n|---|\n|  |\n\n \n\n|  |\n|---|\n|  |"
+        "text": "Backplane Mini slot(2slot) \n[Caption]: Fig.4.3 Backplane \n\n| Name | Ordering Specification Pa | rts number | Board specification |\n|---|---|---|---|\n| 2 slot backplane | A05B-2650-H080 A05 | B-2650-C040 | A20B-8200-0680 |\n\n \n\n|  | 4 PROCESS I/O BOARD MA (A20B-2004-0381) LED:LINK (Green) LED:ALM(Not used) ICOM1 ICOM2 P24V CRMA52A LED:FALM (Red) LED:ALM1 (Red) P33V CRMA 52B JD1B JD1A GND FUSE1 (1A) P5V Fig.4.4 Process I/O Board MA ) Test pins Name Use P24V +24V P5V +5V For measuring the DC supply voltage |  |  |\n|---|---|---|---|\n|  | Name |  | Use |\n| P24V P5V GND P33V | P24V P5V | +24V +5V For m | easuring the DC supply voltage |\n|  |  | GND +3.3V |  |\n\n \n\n|  |\n|---|\n|  |\n\n \n\n|  |\n|---|\n|  |"
     },
     {
         "document_id": "06",
@@ -284,7 +77,7 @@
         "page": "100",
         "section": "4.5",
         "title": "PROCESS I/O BOARD MB (A20B-2101-0731)",
-        "text": "LED:LINK (Green) LED:FALM (Red) CRW11 LED:ALM1 (Red) 24V 5V LED:ALM (Not used) VR3 AOUT1 VR4 P5VF \n\n|  |\n|---|\n|  |\n\n \n\n|  |  |\n|---|---|\n\n \n\n|  |\n|---|\n|  |\n\n GND VR2 GNDF JD1B JD1A 3R3V FUSE1 (1A) VR1 AOUT2 P24VF \n[Didascalia]: Fig.4.5 Process I/O Board MB (1) Test pins and pads \n\n| Name |  | Use |\n|---|---|---|\n| 24V 5V GND | +24V +5V GND | For measuring the DC supply voltage |\n| 3R3V | +3.3V |  |\n| P24VF P5VF GNDF | +24V +5V GND | D/A converter power supply |\n| AOUT1 AOUT2 | Channel 1 Channel 2 | For analog output signal (D/A) voltage measurement |"
+        "text": "LED:LINK (Green) LED:FALM (Red) CRW11 LED:ALM1 (Red) 24V 5V LED:ALM (Not used) VR3 AOUT1 VR4 P5VF \n\n|  |\n|---|\n|  |\n\n \n\n|  |  |\n|---|---|\n\n \n\n|  |\n|---|\n|  |\n\n GND VR2 GNDF JD1B JD1A 3R3V FUSE1 (1A) VR1 AOUT2 P24VF \n[Caption]: Fig.4.5 Process I/O Board MB (1) Test pins and pads \n\n| Name |  | Use |\n|---|---|---|\n| 24V 5V GND | +24V +5V GND | For measuring the DC supply voltage |\n| 3R3V | +3.3V |  |\n| P24VF P5VF GNDF | +24V +5V GND | D/A converter power supply |\n| AOUT1 AOUT2 | Channel 1 Channel 2 | For analog output signal (D/A) voltage measurement |"
     },
     {
         "document_id": "06",
@@ -300,7 +93,7 @@
         "page": "101",
         "section": "4.6",
         "title": "CONNECTOR CONVERTER BOARD (A20B-2004-0411)",
-        "text": "|  |  |\n|---|---|\n\n \n\n|  |  |  |\n|---|---|---|\n\n \n\n|  |  |\n|---|---|\n\n \n\n|  |  |\n|---|---|\n\n \n\n|  |\n|---|\n|  |\n|  |\n\n CRMA58 CRMA59 \n[Didascalia]: (Connector converter board)"
+        "text": "|  |  |\n|---|---|\n\n \n\n|  |  |  |\n|---|---|---|\n\n \n\n|  |  |\n|---|---|\n\n \n\n|  |  |\n|---|---|\n\n \n\n|  |\n|---|\n|  |\n|  |\n\n CRMA58 CRMA59 \n[Caption]: (Connector converter board)"
     },
     {
         "document_id": "06",
@@ -332,7 +125,7 @@
         "page": "105",
         "section": "5.2",
         "title": "SETTING OF 6-AXIS SERVO AMPLIFIER",
-        "text": "| Name | Standard setting | Description |\n|---|---|---|\n| COM1 | Side A | Robot Digital Input (RI) device common voltage. Side A: +24V common Side B: 0V common |\n\n \n[Didascalia]: Fig.5.2 Circuit based on jumper pin location or setting of switch"
+        "text": "| Name | Standard setting | Description |\n|---|---|---|\n| COM1 | Side A | Robot Digital Input (RI) device common voltage. Side A: +24V common Side B: 0V common |\n\n \n[Caption]: Fig.5.2 Circuit based on jumper pin location or setting of switch"
     },
     {
         "document_id": "06",
@@ -341,6 +134,5 @@
         "section": "5.3",
         "title": "6-AXIS SERVO AMPLIFIER SPECIFICATIONS",
         "text": "：（ ） \n\n| UNIT |  | A06B-6400-H102 | A06B-6400-H002 | A06B-6400-H003 |\n|---|---|---|---|---|\n| INPUT RATINGS | VOLTAGE | AC200~AC240V ( +10% / -15% ), 50/60Hz, 3phase |  |  |\n|  | POWER CAPACITY | 5.1KVA | 5.1KVA | 2.7KVA |\n| OUTPUT RATINGS | MAXIMUM OUTPUT | 240V ~ |  |  |\n|  | CURRENT：J1 | 80Ap / 23.0Arms | 80Ap / 23.0Arms | 40Ap / 13.4Arms |\n|  | CURRENT：J2 | 80Ap / 23.0Arms | 80Ap / 23.0Arms | 40Ap / 13.4Arms |\n|  | CURRENT：J3 | 80Ap / 23.0Arms | 80Ap / 23.0Arms | 20Ap / 6.5Arms |\n|  | CURRENT：J4 | 40Ap / 13.4Arms | 40Ap / 13.4Arms | 20Ap / 6.5Arms |\n|  | CURRENT：J5 | 40Ap / 13.4Arms | 40Ap / 13.4Arms | 20Ap / 6.5Arms |\n|  | CURRENT：J6 | 40Ap / 13.4Arms | 40Ap / 13.4Arms | 20Ap / 6.5Arms |\n|  | TOTAL CURRENT | 70Arms | 70Arms | 30Arms |\n\n \n\n| UNIT |  | A06B-6400-H005 |\n|---|---|---|\n| INPUT RATINGS | VOLTAGE | AC200~AC240V ( +10% / -15% ), 50/60Hz, 3/1phase |\n|  | POWER CAPACITY | 1.3/1.4 ( 3/1phase ) |\n| OUTPUT RATINGS | MAXIMUM OUTPUT | 240V ~ |\n|  | CURRENT：J1 | 20Ap / 3.6Arms |\n|  | CURRENT：J2 | 20Ap / 3.6Arms |\n|  | CURRENT：J3 | 20Ap / 3.6Arms |\n|  | CURRENT：J4 | 20Ap / 3.6Arms |\n|  | CURRENT：J5 | 10Ap / 2.0Arms |\n|  | CURRENT：J6 | 10Ap / 2.0Arms |\n|  | TOTAL CURRENT | 18.4Arms |"
->>>>>>> ce7152fc0e7b1a2798e75b266f198fc16cd39513
     }
 ]
