@@ -247,19 +247,17 @@ L'estrazione utilizza un approccio **dual-engine** per massimizzare la qualità:
 - [x] Raccolta e organizzazione documentazione FANUC
 - [x] Indice documentale (`document_index.csv`)
 - [x] Script estrazione con dual-engine (PyMuPDF + pdfplumber)
-- [x] Estrazione `overview_configuration.pdf`
-- [x] Estrazione `checks_maintenance.pdf`
-- [ ] Estrazione dei rimanenti 6 PDF
-- [ ] Preprocessing avanzato e pulizia testo
-- [ ] Chunking semantico con overlap
-- [ ] Creazione embeddings (cloud + locale)
-- [ ] Vector database (FAISS / ChromaDB)
-- [ ] Pipeline RAG completa
-- [ ] Integrazione LLM (cloud + locale)
-- [ ] Prompt engineering
-- [ ] Interfaccia utente (Streamlit)
-- [ ] Dataset di test (15-20 domande)
-- [ ] Validazione e confronto con consultazione manuale
+- [x] Estrazione completa degli 8 manuali PDF
+- [x] Preprocessing avanzato e pulizia testuale (Filtro rumore OCR, label `[Caption]`)
+- [x] Chunking semantico context-aware (Iniezione Titoli, Gestione Tabelle Markdown, Metadati)
+- [ ] Creazione embeddings (Sperimentazione Cloud vs Locale)
+- [ ] Popolamento Vector database (FAISS / ChromaDB)
+- [ ] Pipeline RAG completa (Retriever + Generatore)
+- [ ] Integrazione LLM (Gestione risposta e citazione esatta delle fonti)
+- [ ] Prompt engineering e tecniche di mitigazione allucinazioni
+- [ ] Interfaccia utente interattiva (Streamlit)
+- [ ] Costruzione dataset di test (15-20 casi d'uso di manutenzione reale)
+- [ ] Validazione quantitativa (es. LLM-as-a-judge con RAGAS/Trulens)
 
 ---
 
@@ -271,5 +269,5 @@ Questo progetto è distribuito sotto licenza **MIT**. Vedi il file [LICENSE](LIC
 
 <p align="center">
   <i>Progetto di tesi — Assistente LLM per Manutenzione Industriale</i><br>
-  <b>Daniele Di Spirito</b> · 2026
+  <b>Daniele Di Spirito, Vincenzo Zeppa</b> · 2026
 </p>
