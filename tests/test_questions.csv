@@ -1,4 +1,4 @@
-id,domanda,categoria,risposta_attesa,documento_atteso,pagina_attesa,difficolta
+id,question,category,expected_answer,expected_file,expected_page,difficulty
 Q001,"Quali sono le specifiche della Main board con codice A05B-2650-H001 per il controller R-30iB Mate?","Consultazione tecnica","È una scheda standard con 1 canale Ethernet.","circuit_boards_amplifiers.pdf","94","bassa"
 Q002,"Qual è la corrente di uscita massima per ogni punto DO nell'interfaccia di controllo dei dispositivi periferici?","Consultazione tecnica","La corrente di uscita massima per ogni punto DO è 0.2 A.","connections.pdf","164","media"
 Q003,"Qual è la temperatura ambiente consentita per il funzionamento del controller?","Consultazione tecnica","La temperatura operativa consentita è compresa tra 0°C e 45°C.","connections.pdf","209","bassa"
