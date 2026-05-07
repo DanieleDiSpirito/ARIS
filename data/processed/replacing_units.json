@@ -1,0 +1,170 @@
+[
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "110",
+        "section": "8",
+        "title": "REPLACING UNITS",
+        "text": "This section explains how to replace each unit in the control section. \n**WARNING** Before you start to replace a unit, turn off the controller main power. Also keep all machines in the area of the controller switched. Otherwise, you could injure personnel or damage equipment. \n**WARNING** Before replacing components, read the maintenance manual to understand the replacement procedure. Performing an incorrect replacement procedure can lead to an unpredictable accident, resulting in breakage in the robot or personal injury. \n**WARNING** When a heavy component or unit is to be handled, support the workers with a crane or the like not to apply excessive loads to the workers. Note that incorrect handling can cause serious injury to the workers. \n**CAUTION** Components in the controller heat up, so care should be taken. When you have to touch a heated component, prepare a protector such as heat-resistant gloves. Before attempting to replace units, be sure to read the chapter of “SAFETY PRECAUTIONS” in this manual thoroughly."
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "110",
+        "section": "8.1",
+        "title": "REPLACING THE PRINTED-CIRCUIT BOARDS",
+        "text": "**CAUTION** When you replace printed-circuit boards, observe the following cautions: 1 Keep the controller power switched off. 2 When you remove a printed-circuit board, do not touch the semiconductor devices on the board with your hand or make them touch other components. 3 Make sure that the replacement printed-circuit board has been set up appropriately. (Setting plug etc.) 4 After replacing a printed-circuit board, make adjustments correctly if the board needs to be adjusted. 5 If the backplane board, power supply unit, or main board (including cards and modules) is replaced, it is likely that robot parameters and taught data are lost. Before you start to replace these components, save a backup copy of the robot parameters and taught data to an external memory device. 6 Before you disconnect a cable, note its location. If a cable is detached for replacement, reconnect it exactly as before."
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "111",
+        "section": "8.1.1",
+        "title": "Replacing the Backplane Board (Unit)",
+        "text": "Replace the backplane board together with the plastic case. (1) Remove the (2) screws fastening the case. (When cables are connected to option boards, detach the cables.) (2) Release the latches in the upper part on each side of the case from the base metal plate, and pull out the case. The case can be pulled out with the backplane board, fan, and battery installed in the case. (2) Unlatche, and pull out the case. (2) (2) \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n (1)Remove the (2)screws (3) Replace the backplane unit with a new one. (4) Confirm that the screw and latch positions of the case are in place, and slowly set the case. When the case is attached, the backplane board installed in the case is connected to the main board with the connectors. When setting the case, check that the connectors are connected properly, and be careful not to apply excessive force. (5) After confirming that the case is surely latched, tighten the (2) screws of the case. Lightly press the fan and battery, and make sure that the connectors are connected securely. (If the cables of option boards have been detached, connect the cables again.) \n**CAUTION** When you remove the backplane unit, be sure that the battery is good (3.1-3.3VDC) and it is installed correctly. USE STATIC PROTECTION."
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "112",
+        "section": "8.1.2",
+        "title": "Replacing the Main Board",
+        "text": "The backplane unit incorporates the backplane board, main board, and option boards. \n**CAUTION** Before starting replacement, turn off the main power of the controller. The main board is equipped with battery-backed memory devices for holding robot parameters and taught data. When the main board is replaced, the memory contents are lost. (1) Remove the case. (See Subsection 8.1.1.) (2) Detach cables from the connectors on the main board, and remove the (3) screws fastening the main board. The main board and fan board are connected directly with connector CA132. Detach the main board by sliding the main board downward. CA132 \n\n|  |  |\n|---|---|\n\n (2)Remove screws (3) Replace the main board with a new one. (4) Install the case. (See Subsection 8.1.1.)"
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "112",
+        "section": "8.2",
+        "title": "BOARD",
+        "text": "**CAUTION** Before you start to replace a card or module, make a backup copy of robot parameters and programs. If the FROM/SRAM module is replaced, SRAM memory contents are lost. Demounting a Card 1. Pull up the spacer metal fitting. (Fig. 8.2 (a)) 2. Insert a finger into the rear of the card and pull up the card slowly in the arrow direction. (Fig. 8.2 (b) (Note: At this time, hold the neighborhood of the main board on the opposite side with the other hand whenever possible. A force of 7 to 8 kgf is required for extraction.)"
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "113",
+        "section": "8.2",
+        "title": "BOARD",
+        "text": "3. When one side of the card board is raised slightly by pulling up, do not fully extract the card board, but push back the card softly. 4. When the card board is pushed back to be parallel with the main board, pinch two sides of the card board and pull up the card board. This completes the extraction of the card board. \n\n| Card PCB Spacer Card PCB Fig.8.2 (a) Demounting a ca For extraction, insert a finger into the rear of this point, then pull up the card in the arrow direction. 160-pin Connector Spacer connector on the back side side |  |  |  |  |  |  |  |  |  |  |\n|---|---|---|---|---|---|---|---|---|---|---|\n|  | Card PCB Spacer Card PCB Fig.8.2 (a) Demounting a ca For extraction, insert a finger into the rear of this point, then pull up the card in the arrow direction. 160-pin Connector Spacer connector on the back side side | Card PCB |  |  |  |  |  |  |  | Card PCB |\n|  |  |  |  |  |  |  |  |  |  |  |\n|  |  |  |  |  |  |  |  |  |  |  |\n|  |  |  |  |  |  |  |  |  |  |  |\n|  |  |  |  |  |  |  |  |  |  |  |\n|  |  |  |  |  |  |  |  |  |  |  |\n\n \n\n| Spacer Card PCB |  |\n|---|---|\n| Fig.8.2 (a) Demounting a ca extraction, insert a finger into the rear | rd |\n\n \n\n|  |\n|---|\n|  |\n\n Side view \n[Didascalia]: Fig.8.2 (b) Demounting a card"
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "114",
+        "section": "8.2",
+        "title": "BOARD",
+        "text": "Mounting a Card 1. Check that the metal fittings of the spacers are raised. (Fig.8.2 (c)) 2. To align the board insertion position, touch the spacer end faces of the board with the spacer. (Fig. 8.2 (d)) (At this time, the board is touching the spacers only.) 3. While aligning the board with the spacers, lower the connector side slowly until the connectors touch each other. (Fig.8.2 (d)) (do not press until aligned.) 4. The mating position can be determined more easily by moving the card back and forth until the alignment “nubs” and “holes” are aligned on the connectors. The board must be turned to view the board connectors on the side. (Fig.8.2 (d)) 5. At this time, push on the back of the board over the connector. The force required for connector insertion is about 10 kgf. If the connector will not insert easily, re-check the alignment of the connector to prevent damaging the connector(s). If installing a standard CPU CARD, do not press on the heat sink installed on the CPU and LSI chip. Otherwise, the CPU or LSI chip can be damaged. (Fig.8.2 (e)) 6. Push in the spacer metal fitting to lock the board in place. (Fig.8.2 (f)) \n\n|  |  |  |  |\n|---|---|---|---|\n| Card PCB |  |  |  |\n\n \n[Didascalia]: Fig.8.2 (c) Mounting a card \n[Didascalia]: Fig.8.2 (d) Mounting a card"
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "115",
+        "section": "8.2",
+        "title": "BOARD",
+        "text": "Press here only for insertion. Press around center of heat sink. Press here only for insertion. (R-30 i B Mate CPU Card Standard) (R-30 i B Mate CPU Card High speed) (R-30 i B Mate Plus CPU Card) \n[Didascalia]: Fig.8.2 (e) Mounting a card \n\n|  |  |  | Card PCB |  |\n|---|---|---|---|---|\n|  |  | Spacer Card PCB Fig.8.2 (f) Mounting a card ule |  |  |\n|  | CAUTION When replacing the module, be careful not to touch If you touch the edge connector inadvertently, wipe with a clean cloth. |  |  | the module edge connector. any dirt off of the contact |\n\n (1) Move the clip of the socket outward. (a) (2) Extract the module by raising it at a 30 degree slant and pulling outward."
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "116",
+        "section": "8.2",
+        "title": "BOARD",
+        "text": "Mounting a module (1) Insert the module at a 30 degree slant into the module socket, with side B facing upward. (b) (2) Push the module inward and downward until it is locked. (c) (a) (b) (c) \n[Didascalia]: Fig.8.2 (g) Demounting/mounting a module Figure 8.2 (h) shows the locations of the cards and modules. Axis control card CPU card FROM/SRAM module \n\n|  |  |\n|---|---|\n\n \n[Didascalia]: Fig.8.2 (h) Locations of cards and modules"
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "117",
+        "section": "8.3",
+        "title": "REPLACING THE EMERGENCY STOP UNIT",
+        "text": "(1) Detach the cables from the emergency stop unit. (2) Remove (4(small size), 2(middle/large size)) screws, and replace the emergency stop unit. (3) Reconnect the cables. \n[Didascalia]: (Small size) (Middle/Large size)"
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "117",
+        "section": "8.4",
+        "title": "REPLACING THE EMERGENCY STOP BOARD",
+        "text": "(1) Detach the cables from the emergency stop board unit. (2) Unlock the nylon latches (4 places) holding the board, and replace the board. (3) Reconnect the cables."
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "118",
+        "section": "8.5",
+        "title": "REPLACING THE POWER SUPPLY UNIT",
+        "text": "(1) Detach the cable from the power supply unit. (2) Remove the (2) screws, and remove the power supply unit. (3) Install a replacement power supply unit by reversing above steps. (2) Screws Power supply unit Connector for cable \n\n|  |  |\n|---|---|"
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "119",
+        "section": "8.6",
+        "title": "REPLACING THE REGENERATIVE RESISTOR UNIT",
+        "text": "**CAUTION** Before you start, turn off the controller main power. Be careful not to get burned, because the regenerative resistor unit is very hot immediately after operation. (1) Remove the (4) screws fastening the rear plate of the cabinet, and remove the rear plate. (2) Unplug connector CRR63 and CRR11 at the 6-Axis servo amplifier. (3) Remove the (4) screws on the regenerative resistor unit and remove it. (4) Install the replacement unit by reversing above steps. \n\n|  |  |\n|---|---|\n\n 6-Axis servo amplifier \n\n| Rear plate Regenerative (Small size) |\n|---|\n| Rear plate Regenerative resistor (Middle/Large size) Fig. 8.6 Regenerative resister - 119 - |"
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "120",
+        "section": "8.7",
+        "title": "REPLACING THE 6-AXIS SERVO AMPLIFIER",
+        "text": "**WARNING** Before touching the 6-Axis servo amplifier, for example, for maintenance purposes, check the voltage at the screw above the LED “V4” with a DC voltage tester to see if the remaining voltage is not higher than 50V. \n**CAUTION** Because the 6-Axis servo amplifier is heated immediately after operation, leave the 6-Axis servo amplifier until it cools down thoroughly, before replacing it. (1) Check the voltage at the screw above the LED \"V4\" with a DC voltage tester to see if the remaining voltage is not higher than 50V."
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "121",
+        "section": "8.7",
+        "title": "REPLACING THE 6-AXIS SERVO AMPLIFIER",
+        "text": "(2) Detach the cables from the 6-Axis servo amplifier. (3) Remove (2) screws fastening the 6-Axis servo amplifier. (2) Screws \n[Didascalia]: Fig.8.7 Replacing the servo amplifier (4) Hold the handle at the upper side of the amplifier and remove 6-Axis servo amplifier. (5) Install a replacement amplifier by reversing above procedure. \n**CAUTION** If the controller is not fixed on the floor, the controller falls down when the 6-Axis servo amplifier is removed."
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "122",
+        "section": "8.8",
+        "title": "REPLACING THE TEACH PENDANT",
+        "text": "The specifications of the teach pendant vary with its use. When you replace the teach pendant, check its specifications carefully. (1) Be sure that the power of a robot controller is off. (2) Detach the cable from the teach pendant. (3) Replace the teach pendant. Detach or attach the cable by rotating the connector retaining ring. \n[Didascalia]: Fig.8.8 Replacing the teach pendant"
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "123",
+        "section": "8.9",
+        "title": "REPLACING THE CONTROL SECTION FAN MOTOR",
+        "text": "The control section fan motor can be replaced without using a tool. The fan motor is mounted on the backplane unit. (1) Be sure that the power to the robot controller is turned off. (2) Pull out the fan motor to be replaced. (When pulling out the fan motor, hold the latch of the fan unit, and unlatch the unit from the case.) Hold this part and pull out the motor. \n\n| (3) Install a new fan unit. (Insert the unit |  |\n|---|---|\n|  | until the latch of the unit snaps into the case.) |\n|  |  |\n|  |  |\n\n Insert the unit until the latch snaps into the case. \n[Didascalia]: Fig.8.9 Replacing the control section fan motor"
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "124",
+        "section": "8.10",
+        "title": "REPLACING THE AC FAN MOTOR",
+        "text": "**CAUTION** Do not touch the fan motor when it is rotating, or you could be injured."
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "124",
+        "section": "8.10.1",
+        "title": "Replacing the Heat Exchanger and Door Fan Unit",
+        "text": "The heat exchanger is inside its door. To replace the heat exchanger, it is necessary to remove the door fan unit in advance. Door fan unit (1) Remove (4) M4 screws. (2) Disconnect the connector at the FAN. (3) Mount the replacement fan unit by reversing above procedure. Be careful not to let the cable get caught in the fan. Heat exchanger (1) Dismount the door fan unit. (See the above procedure.) (2) Open the cabinet door, and detach cables. (3) Remove retaining (4) M5 nuts, and dismount the unit. (4) Mount the replacement unit by reversing above procedure. \n\n| fan unit crews(4)) Fig.8.10.1(a) Replacing the heat ex r fan unit ) Remove (4) M4 screws. ) Dismount the rear fan unit and disconnect the conn ) Mount the replacement fan unit by reversing abo caught in the fan. ar fan unit 4 Screws(4)) Fig.8.10.1(b) Replacing - 124 - |  | Heat exchanger (M5 Nuts(4)) changer and door fan unit ector. ve procedure. Be careful not to let the cable get |\n|---|---|---|\n|  | Fig.8.10.1(b) Replacing - 124 - | Connector the rear fan unit |\n|  |  |  |\n\n Door (M4"
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "125",
+        "section": "8.11.1",
+        "title": "Battery for Memory Backup (3 VDC)",
+        "text": "The programs and system variables are stored in the SRAM in the main board. The power to the SRAM memory is backed up by a lithium battery mounted on the front panel of the main board. The above data is not lost even when the main power of controller is turned off. A new battery can maintain the contents of memory for about 4 years (Note). When the voltage of the battery becomes low, the low-voltage battery alarm (system-035) is displayed on the teach pendant. When this alarm is displayed, replace the battery as soon as possible. In general, the battery can be replaced within one or two weeks, however, this depends on the system configuration. If the battery voltage gets lower, it becomes impossible to back up the content of the SRAM. Cycling power to the controller in this state causes the system not to start, and the seven segment LED located on the main board displays “1” because the contents of memory have been lost. Clear the entire SRAM memory and reenter data after replacing the battery. Important data should be saved to the memory card or other external device beforehand in case of emergency. \n**CAUTION** In a newly introduced robot, the battery is factory-installed. Battery replacement may, therefore, be needed within 4 years after the introduction of the robot. Replacing the lithium battery (1) Prepare a new lithium battery (ordering drawing number: A05B-2650-K030, A98L-0031-0028). (2) Turn the robot controller on for about 30 seconds. (3) Turn the robot controller off. (4) Pull out the battery unit located in the lower right part of the backplane unit. (Hold the latch of the battery unit, unlatch the battery unit from the case, and pull out the unit.). part and pull out the battery unit. \n\n|  |  |\n|---|---|"
+    },
+    {
+        "document_id": "07",
+        "file_name": "replacing_units.pdf",
+        "page": "126",
+        "section": "8.11.1",
+        "title": "Battery for Memory Backup (3 VDC)",
+        "text": "(5) Install a new battery unit. (Insert the battery unit until the latch of the unit snaps into the case.) Check that the battery unit is latched securely. Insert the unit until the latch snaps into the case \n**CAUTION** Execute steps (3) to (5) within 30 minutes. Note that keeping the control unit unconnected to a battery for a long period of time may result in the memory contents being lost. For a rainy day, you should make a backup copy of the robot programs and system variables before replacing the battery. \n**WARNING** Using other than the recommended battery may result in the battery explosion. Replace the battery only with the specified battery (A05B-2650-K030, A98L-0031-0028). Dispose of the replaced battery as an industrial waste, according to the laws and other rules in the country where the controller is installed and those established by the municipality and other organizations that have jurisdiction over the area where the controller is installed."
+    }
+]

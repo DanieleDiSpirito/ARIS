@@ -1,0 +1,162 @@
+[
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "73",
+        "section": "3.6",
+        "title": "FUSE-BASED TROUBLESHOOTING",
+        "text": "This section describes the alarms and symptoms generated and actions required when the fuses installed on the printed circuit boards and units have blown. (1) Fuses on the main board FUSE1: For protecting the +24 V output of the peripheral device interface (A60L-0001-0290#LM10) (R-30 i B Mate Plus) FUSE9:For protecting the +24E output for vision (This fuse is installed on the R-30 i B Mate Plus main board.) (A60L-0001-0290#LM05C) \n\n| Name | Symptom observed when fuse has blown | Action |\n|---|---|---|\n| FUSE1 | An alarm (SRVO-220) is displayed on the teach pendant. | 1. 24SDI and 0 V may be short-circuited. Check the peripheral device cable for any abnormality, and replace it if necessary. 2. Disconnect CRS40. If fuse (FUSE3) still blows, replace the main board. 3. Replace the cable between the emergency stop unit and the servo amplifier. 4. Replace the cable between the main board and the emergency stop unit. 5. Replace the emergency stop unit. 6. Replace the servo amplifier. |\n| FUSE9 (R-30iB Mate Plus) | +24E used for vision is not output. | 1. Check +24E used by the vision for a ground fault. 2. Check the cables connecting to the vision camera and the related parts for an abnormally. 3. Replace the main board. |"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "74",
+        "section": "3.6",
+        "title": "FUSE-BASED TROUBLESHOOTING",
+        "text": "FUSE1 (1.0A) CRS40 \n[Didascalia]: (R-30 i B Mate) FUSE1 (1.0A) FUSE9 (0.5A) CRS40 \n[Didascalia]: (R-30 i B Mate Plus) \n[Didascalia]: Fig.3.6(a) Fuse on the main board"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "75",
+        "section": "3.6",
+        "title": "FUSE-BASED TROUBLESHOOTING",
+        "text": "(2) Servo amplifier fuse FS1: For generation of the power to the amplifier control circuit (A60L-0001-0290#LM32C) FS2: For protection of the 24V output to the end effector, XROT, XHBK, and the fan motor inside the robot (M-3 i A, option). (A60L-0001-0290#LM32C) FS3: For protection of the 24V output to the regenerative resister (A60L-0001-0290#LM32C) \n\n| Name | Symptom observed when fuse has blown | Action |\n|---|---|---|\n| FS1 | All LEDs on the servo amplifier go out. The FSSB disconnection alarm (SRVO-057) or FSSB initialization alarm (SRVO-058) is displayed on the teach pendant. | Replace the 6-Axis servo amplifier. |\n| FS2 | The 6-Axis servo amplifier fuse blown (SRVO-214), Hand broken (SRVO-006), and Robot overtravel (SRVO-005) are displayed on the teach pendant. | 1 Check +24VF used by the end effector for a ground fault. 2 Check the robot connection cable and the robot’s internal cable. 3 Replace the 6-Axis servo amplifier. 4 In case of M-3iA, check the fan motor inside the robot (option). |\n| FS3 | The 6-Axis servo amplifier fuse blown (SRVO-214), DCAL alarm (SRVO-043) are displayed on the teach pendant. | 1 Check the regenerative resister, and replace it if required. 2 Replace the 6-Axis servo amplifier. |\n\n \n[Didascalia]: Fig.3.6(b) Fuse on the servo amplifier"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "76",
+        "section": "3.6",
+        "title": "FUSE-BASED TROUBLESHOOTING",
+        "text": "(3) Emergency stop board fuses FUSE2: For emergency stop circuit (A60L-0001-0290#LM10C) FUSE3: For teach pendant power supply circuit (A60L-0001-0290#LM10C) FUSE4: For +24V protection (A60L-0001-0290#LM20C) FUSE5: For +24V of mainboard protection (A60L-0001-0290#LM50C) FUSE6,FUSE7: For AC200V of fans protection (door/rear) (A60L-0001-0175#3.2A) (R-30 i B Mate Plus) FUSE8: For 200V power monitor circuit (A60L-0001-0175#0.3A) \n\n| Name | Symptom observed when fuse has blown | Action |\n|---|---|---|\n| FUSE2 | Alarm (SRVO-007) is displayed on the teach pendant, and the red LED (24EXT) on the emergency stop board lights. | 1. Check the voltage between EXT24V and EXT0V (TBOP19). If no external power supply is used, check the jumper pin between EXT24V and INT24V or between EXT0V and INT0V. 2. Check the 24EXT (emergency stop line) for a short circuit or connection to ground. 3. Replace the emergency stop board. 4. Check the teach pendant and replace it if necessary. |\n| FUSE3 | The display on the teach pendant disappears, and the red LED (24T) on the emergency stop board lights. | 1. Check the teach pendant cable and replace it if necessary. 2. Check the cable between the emergency stop board (CRS40) and the main board (CRS40) , and replace it if necessary. 3. Check the teach pendant and replace it if necessary. 4. Replace the emergency stop board. 5. Replace the main board. (*) |\n| FUSE4 | An alarm relating to an input signal that causes an emergency stop is issued, and the red LED (24V2) on the emergency stop board lights. | 1. Check the connection on TROP20. 2. Check the cable between the emergency stop board (CRS40) and the main board (CRS40), and replace it if necessary. 3. Check the cable between the emergency stop board (CRMA92) and the 6-Axis servo amplifier (CRMA91), and replace it if necessary. 4. If the cable between the emergency stop board (CRMB22) and the 6-Axis servo amplifier (CRMB16) exist. Check this cable and replace it if necessary. 5. Replace the emergency stop board. 6. Replace the E-stop unit. 7. Replace the main board. (*) 8. Replace the 6-Axis servo amplifier. |\n| FUSE5 | The teach pendant can not be operated and the red LED (24V3) on the emergency stop board lights. | 1. Check the cable between the emergency stop board (CRS40) and the main board (CRS40), and replace it if necessary. 2. Check the cable between the emergency stop board (CRMA92) and the 6-Axis servo amplifier (CRMA91), and replace it if necessary. 3. Replace the back plane board. 4. Replace the main board. (*) 5. Replace the emergency stop board. 6. Replace the 6-Axis servo amplifier. |\n| FUSE6 FUSE7 | The fan stops. | 1. Check the fan cable and replace it if necessary. 2. Replace the fan unit. 3. Replace the emergency stop board. |"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "77",
+        "section": "3.6",
+        "title": "FUSE-BASED TROUBLESHOOTING",
+        "text": "| Name | Symptom observed when fuse has blown | Action |\n|---|---|---|\n| FUSE8 (R-30iB Mate Plus) | The teach pendant can not be operated and the seven segment LED located on the main board displays “7”. If this fuse blows when power-on, the green LEDs “LEDG2” and “LEDG4” of the status LEDs on the main board light. The system does not work correctly. | 1. Replace the emergency stop board. |\n\n * If the main board or FROM/SRAM module is replaced, the contents of memory (parameters, specified data, etc.) will be lost. Before you replace the unit, therefore, make a backup copy of the data. If an alarm is issued, data backup may be disabled. So, back up the contents of memory routinely. \n[Didascalia]: (R-30 i B Mate) \n[Didascalia]: (R-30 i B Mate Plus) \n[Didascalia]: Fig.3.6 (c) Fuse on the emergency stop board"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "78",
+        "section": "3.6",
+        "title": "FUSE-BASED TROUBLESHOOTING",
+        "text": "(4) Fuse on the process I/O MA,MB FUSE1: Fuse for +24E (A60L-0001-0046#1.0) \n\n| Name | Symptom observed when fuse has blown | Action |\n|---|---|---|\n| FUSE1 | The LED (ALM1 or FALM) the process I/O board lights. | 1. Check if the cables and peripheral devices connected to the process I/O board are normal. 2. Replace the process I/O board. |\n\n \n[Didascalia]: Fig.3.6 (d) Fuse on the process I/O board MA \n[Didascalia]: Fig.3.6 (e) Fuse on the process I/O board MB"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "79",
+        "section": "3.6",
+        "title": "FUSE-BASED TROUBLESHOOTING",
+        "text": "(5) Fuse on the sensor I/F unit for CR-4 i A, CR-7 i A \n\n| Name | Symptom observed when fuse has blown | Action |\n|---|---|---|\n| FUSE | The LED of the sensor I/F unit lights. | 1. Check if the cables and peripheral devices connected to the sensor I/F unit are normal. 2. Replace the sensor I/F unit. |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n\n FUSE (2A) \n\n|  |  |\n|---|---|\n\n \n\n|  |\n|---|\n|  |\n\n FUSE LED(Red) \n[Didascalia]: Fig.3.6 (f) Fuse on sensor I/F unit for CR-4 i A, CR-7 i A"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "80",
+        "section": "3.7",
+        "title": "TROUBLESHOOTING BASED ON LED INDICATIONS",
+        "text": "The printed circuit boards and servo amplifier are provided with alarm LEDs and status LEDs. The LED status and corresponding troubleshooting procedures are described below. Main board 6-Axis servo amplifier Emergency stop board \n[Didascalia]: Fig.3.7 Troubleshooting based on LED indication"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "81",
+        "section": "3.7.1",
+        "title": "Troubleshooting Using the LEDS on the Main Board",
+        "text": "(1) Troubleshooting using the status display LED To troubleshoot an alarm that arises before the teach pendant is ready to display, check the status LEDs (green) on the main board at power-on. After power-on, the LEDs light as described in steps 1 to end, in the order described. If an alarm is detected, the step in which the alarm occurred can be determined from which LEDs are lit. \n[Didascalia]: (R-30 i B Mate) \n[Didascalia]: 7-segment LED \n[Didascalia]: RLED1 (Red) \n[Didascalia]: LEDG1 \n[Didascalia]: LEDG2 \n[Didascalia]: (Green) \n[Didascalia]: LEDG3 \n[Didascalia]: LEDG4 \n\n|  |\n|---|\n|  |\n\n \n[Didascalia]: 7-segment LED \n[Didascalia]: RLED1 (Red) \n[Didascalia]: LEDG1 \n[Didascalia]: LEDG2 \n[Didascalia]: LEDG3 (Green) \n[Didascalia]: LEDG4 \n[Didascalia]: Fig. 3.7.1 Troubleshooting Using the LEDS On the Main Board"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "82",
+        "section": "3.7.1",
+        "title": "Troubleshooting Using the LEDS on the Main Board",
+        "text": "| Step | LED | Action to be taken |\n|---|---|---|\n| 1: After power-on, all LEDs are lit. | LEDG1 LEDG2 LEDG3 LEDG4 | [Action 1] Replace the CPU card. * [Action 2] Replace the main board. |\n| 2: Software operation start-up. | LEDG1 LEDG2 LEDG3 LEDG4 | [Action 1] Replace the CPU card. * [Action 2] Replace the main board. |\n| 3: The initialization of dram on the CPU card is completed. | LEDG1 LEDG2 LEDG3 LEDG4 | [Action 1] Replace the CPU card. * [Action 2] Replace the main board. |\n| 4: The initialization of DPRAM on the communication IC is completed. | LEDG1 LEDG2 LEDG3 LEDG4 | [Action 1] Replace the CPU card. * [Action 2] Replace the main board. * [Action 3] Replace the FROM/SRAM module. |\n| 5: The initialization of the communication IC is completed. | LEDG1 LEDG2 LEDG3 LEDG4 | [Action 1] Replace the CPU card. * [Action 2] Replace the main board. * [Action 3] Replace the FROM/SRAM module. |\n| 6: The loading of the basic software is completed. | LEDG1 LEDG2 LEDG3 LEDG4 | * [Action 1] Replace the main board. * [Action 2] Replace the FROM/SRAM module. |\n| 7: Basic software start-up. | LEDG1 LEDG2 LEDG3 LEDG4 | * [Action 1] Replace the main board. * [Action 2] Replace the FROM/SRAM module. * [Action3] Replace the power supply unit. |\n| 8: Start-up of communication with the teach pendant. | LEDG1 LEDG2 LEDG3 LEDG4 | * [Action 1] Replace the main board. [Action 2] Replace the FROM/SRAM module. |\n| 9: The loading of optional software is completed. | LEDG1 LEDG2 LEDG3 LEDG4 | * [Action 1] Replace the main board. [Action 2] Replace the process I/O board. |\n| 10: DI/DO initialization | LEDG1 LEDG2 LE DG3 LEDG4 | [Action 1] Replace the FROM/SRAM module. [Action 2] Replace the main board. |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "83",
+        "section": "3.7.1",
+        "title": "Troubleshooting Using the LEDS on the Main Board",
+        "text": "| Step | LED | Action to be taken |\n|---|---|---|\n| 11: The preparation of the SRAM module is completed. | LEDG1 LEDG2 LEDG3 LEDG4 | [Action 1] Replace the axis control card. * [Action 2] Replace the main board. [Action 3] Replace the servo amplifier. |\n| 12: Axis control card initialization | LEDG1 LEDG2 LEDG3 LEDG4 | [Action 1] Replace the axis control card. * [Action 2] Replace the main board. [Action 3] Replace the servo amplifier. |\n| 13: Calibration is completed. | LEDG1 LEDG2 LEDG3 LEDG4 | [Action 1] Replace the axis control card. * [Action 2] Replace the main board. [Action 3] Replace the servo amplifier. |\n| 14: Start-up of power application for the servo system | LEDG1 LEDG2 LEDG3 LEDG4 | * [Action 1] Replace the main board. |\n| 15: Program execution | LEDG1 LEDG2 LEDG3 LEDG4 | * [Action 1] Replace the main board. [Action 2] Replace the process I/O board. |\n| 16: DI/DO output start-up. | LEDG1 LEDG2 LEDG3 LEDG4 | * [Action 1] Replace the main board. |\n| 17: Initialization is terminated. | LEDG1 LEDG2 LEDG3 LEDG4 | Initialization has ended normally. |\n| 18: Normal status | LEDG1 LEDG2 LEDG3 LEDG4 | Status LEDs 1 and 2 blink when the system is operating normally. |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n|  |  |\n\n * If the main board or FROM/SRAM module is replaced, the contents of memory (parameters, specified data, etc.) will be lost. Before you replace the unit, therefore, make a backup copy of the data. If an alarm is issued, data backup may be disabled. So, back up the contents of memory routinely. \n\n| LED indication | Description |\n|---|---|\n| RLED1 (Red) | [Description] CPU card is not working. [Action 1] Replace the CPU card. |"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "84",
+        "section": "3.7.1",
+        "title": "Troubleshooting Using the LEDS on the Main Board",
+        "text": "| 7-segment LED indicator | Description |\n|---|---|\n|  | [Description] A parity alarm condition has occurred in DRAM on the CPU card installed on the main board. [Action1] Replace the CPU card.3.7 * [Action2] Replace the main board. |\n|  | [Description] A parity alarm condition has occurred in SRAM on the FROM/SRAM module installed on the main board. [Action1] Replace the FROM/SRAM module. * [Action2] Replace the main board. |\n|  | [Description] A bus error has occurred in the communication controller. * [Action] Replace the main board. |\n|  | [Description] A parity alarm condition has occurred in DRAM controlled by the communication controller. * [Action] Replace the main board. |\n|  | [Description] A servo alarm condition has occurred on the main board. [Action1] Replace the axis control card. * [Action2] Replace the main board. [Action3] If an option board is installed, replace the option board. |\n|  | [Description] The SYSEMG alarm has occurred. [Action1] Replace the axis control card. [Action2] Replace the CPU card. * [Action3] Replace the main board. |\n|  | [Description] The SYSFAIL alarm has occurred. [Action1] Replace the axis control card. [Action2] Replace the CPU card. * [Action3] Replace the main board. [Action4] If an option board is installed, replace the option board. |\n|  | [Description] 5V is supplied to Main board. Above alarms do not occur. |\n\n * If the main board or FROM/SRAM module is replaced, the contents of memory (parameters, specified data, etc.) will be lost. Before you replace the unit, therefore, make a backup copy of the data. If an alarm is issued, data backup may be disabled. So, back up the contents of memory routinely."
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "85",
+        "section": "3.7.2",
+        "title": "Troubleshooting by LEDs on the 6-Axis Servo Amplifier",
+        "text": "The 6-Axis servo amplifier has alarm LEDs. Troubleshoot the alarm indicated by the LEDs, referring also to the alarm indication on the teach pendant. \n[Didascalia]: Fig.3.7.2 LEDs on the 6-Axis servo amplifier \n**WARNING** Before touching the 6-Axis servo amplifier, check the DC link voltage with the screws located above the LED \"V4\". By using a DC voltage tester, check that the voltage is 50 V or less. \n\n| LED | Color | Description |\n|---|---|---|\n| V4 | Red | Lights when the DCLINK circuit inside the servo amplifier is charged to reach the specified voltage. If the LED does not light after pre-charge is finished: [Action 1] The DC Link may be short-circuited. Check for connection. [Action 2] The charge current control resistor may be defective. Replace the emergency stop unit. [Action 3] Replace the servo amplifier. |\n| SVALM | Red | Lights when the servo amplifier detects an alarm. If the LED lights when there is no alarm condition in the machine: [Action] Replace the servo amplifier. If the LED does not light when there is an alarm condition in the machine: [Action] Replace the servo amplifier. |"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "86",
+        "section": "3.7.2",
+        "title": "Troubleshooting by LEDs on the 6-Axis Servo Amplifier",
+        "text": "| LED | Color | Description |\n|---|---|---|\n| SVEMG | Red | Lights when an emergency stop signal is input to the servo amplifier. If the LED lights when the machine is not at an emergency stop: [Action] Replace the servo amplifier. If the LED does light when the machine is at an emergency stop: [Action] Replace the servo amplifier. |\n| DRDY | Green | Lights when the servo amplifier is ready to drive the servo motor. If the LED does not light when the motor is activated: [Action] Replace the servo amplifier. |\n| OPEN | Green | Lights when the communication between the servo amplifier and the main board is normal. If the LED does not light: [Action 1] Check for the connection of the FSSB optical cable. [Action 2] Replace the servo card. [Action 3] Replace the servo amplifier. |\n| P5V | Green | Lights when the power supply circuit inside the servo amplifier outputs a voltage of +5 V normally. If the LED does not light: [Action 1] Check the robot connection cable (RP1/RMP1) to see if there is a ground fault in the +5V wire. [Action 2] Replace the servo amplifier. |\n| P3.3V | Green | Lights when the power supply circuit inside the servo amplifier outputs a voltage of +3.3 V normally. If the LED does not light: [Action] Replace the servo amplifier. |"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "86",
+        "section": "3.7.3",
+        "title": "Troubleshooting by LED on the Emergency Stop Board",
+        "text": "| LED indication | Failure description and required measure |\n|---|---|\n| 24EXT (Red) | [Description] When the LED (red) turned on, the fuse (FUSE2) is brown. 24EXT for the emergency stop circuit is not supplied. [Action 1] If the fuse (FUSE2) has not brown in this state, check the voltage between EXT24V and EXT0V (TBOP19). If no external power supply is used, check the jumper pin between EXT24V and INT24V or between EXT0V and INT0V. [Action 2] Check the 24EXT (emergency stop line) for a short circuit or connection to ground. [Action 3] Replace the emergency stop board. [Action 4] Check the teach pendant, and replace it if required. |\n| 24T (Red) | [Description] When the LED (red) turned on, the fuse (FUSE3) is brown. 24T for the teach pendant is not supplied. [Action 1] Check the teach pendant cable (CRS36), and replace it if required. [Action 2] Check the cable between the emergency stop board (CRS40) and the main board (CRS40), and replace it if necessary. [Action 3] Check the teach pendant, and replace it if required. [Action 4] Replace the emergency stop board. *[Action 5] Replace the main board. |"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "87",
+        "section": "3.7.3",
+        "title": "Troubleshooting by LED on the Emergency Stop Board",
+        "text": "| LED indication | Failure description and required measure |\n|---|---|\n| 24V2 (Red) | [Description] When the LED (red) turned on, the fuse (FUSE4) is brown. 24V-2 for the emergency stop input signal is not supplied. [Action 1] Check the connection of TBOP20. [Action 2] Check the cable between the emergency stop board (CRS40) and the main board (CRS40), and replace it if necessary. [Action 3] Check the cable between the emergency stop board (CRMA92) and the 6-Axis servo amplifier (CRMA91), and replace it if necessary. [Action 4] If the cable between the emergency stop board (CRMB22) and the 6-Axis servo amplifier (CRMB16) exist. Check this cable and replace it if necessary. [Action 5] Replace the emergency stop board. [Action 6] Replace the E-stop unit. *[Action 7] Replace the main board. [Action 8] Replace the 6-Axis servo amplifier. |\n| 24V3 (Red) | [Description] When the LED (red) turned on, the fuse (FUSE5) is brown. 24V-3 for the main board is not supplied. [Action 1] Check the cable between the emergency stop board (CRS40) and the main board (CRS40), and replace it if necessary. [Action 2] Check the cable between the emergency stop board (CRMA92) and the 6-Axis servo amplifier (CRMA91), and replace it if necessary. [Action 3] Replace the backplane board. *[Action 4] Replace the main board. [Action 5] Replace the emergency stop board. [Action 6] Replace the 6-Axis servo amplifier. |\n| SVON1/SVON2 (Green) | [Description] These LEDs (green) indicate the status of SVON1/SVON2 signals from the emergency stop board to the servo amplifier. When the SVON1 and SVON2 (green) turned on, the servo amplifier is ready to energize. |\n\n * If the main board or FROM/SRAM module is replaced, the contents of memory (parameters, specified data, etc.) will be lost. Before you replace the unit, therefore, make a backup copy of the data. If an alarm is issued, data backup may be disabled. So, back up the contents of memory routinely. \n[Didascalia]: (R-30 i B Mate)"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "88",
+        "section": "3.7.3",
+        "title": "Troubleshooting by LED on the Emergency Stop Board",
+        "text": "[Didascalia]: (R-30 i B Mate Plus) \n[Didascalia]: Fig.3.7.3 LEDs on the emergency stop board"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "88",
+        "section": "3.7.4",
+        "title": "Troubleshooting by Alarm LEDs on the Process I/O Board",
+        "text": "| LED | Color | Description |\n|---|---|---|\n| ALM1 | Red | [Description] An alarm was issued during communication between the main board and the process I/O board. [Action 1] Replace the process I/O board. [Action 2] Replace the I/O link connection cable. [Action 3] Replace the main board. |\n| FALM | Red | [Description] The fuse on the process I/O board was blown. [Action1] Replace the fuse on the process I/O board. [Action2] Check the cables and peripheral units connected to the process I/O board and replace the defective units. [Action3] Replace the process I/O board. |\n\n \n[Didascalia]: Fig.3.7.4 (a) LEDs on the process I/O board MA"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "89",
+        "section": "3.7.4",
+        "title": "Troubleshooting by Alarm LEDs on the Process I/O Board",
+        "text": "[Didascalia]: Fig.3.7.4 (b) LEDs on the process I/O board MB"
+    },
+    {
+        "document_id": "05",
+        "file_name": "troubleshooting_visual.pdf",
+        "page": "89",
+        "section": "3.7.5",
+        "title": "Troubleshooting by LEDs on the Sensor I/F Unit for CR-4 i A,",
+        "text": "CR-7 i A The sensor I/F unit for the I/O Link i only has the following LEDs to indicate the communication status of the I/O Link i and sensor. \n\n|  |  |\n|---|---|\n|  |  |\n|  |  |\n\n ALM LED(Red) ER0~2 LED(Red) \n\n| LINK LED(Green) |  |\n|---|---|\n\n CRS50 FUSE (2A) FUSE LED(Red) \n[Didascalia]: Fig.3.7.5 LEDs on the sensor I/F unit for CR-4 i A, CR-7 i A"
+    }
+]
