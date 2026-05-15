@@ -5,6 +5,13 @@ import os
 import re
 from dotenv import load_dotenv
 
+import json
+from langchain_core.documents import Document
+from langchain_community.retrievers import BM25Retriever
+# Import basato sui risultati della ricerca nel tuo ambiente
+from langchain_classic.retrievers.ensemble import EnsembleRetriever
+from langchain_chroma import Chroma
+
 # Importiamo gli stessi moduli usati per creare il vector db
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_openai import OpenAIEmbeddings
@@ -14,7 +21,7 @@ load_dotenv()
 # Determiniamo i percorsi in modo robusto
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
-TEST_FILE = os.path.join(BASE_DIR, "test_questions_en.csv")
+TEST_FILE = os.path.join(BASE_DIR, "test_questions.csv")
 
 class LangchainEmbeddingAdapter:
     """Adattatore per usare gli embedding di Langchain con il client nativo di ChromaDB"""
@@ -51,90 +58,127 @@ def get_embedding_function(env):
     else:
         raise ValueError(f"Ambiente {env} non supportato.")
 
-def calcola_hit_rate(db_path, env):
-    client = chromadb.PersistentClient(path=db_path)
-    emb_fn = get_embedding_function(env)
+def carica_documenti_per_bm25(json_path):
+    """Funzione di supporto: carica il JSON specifico per il BM25."""
+    with open(json_path, "r", encoding="utf-8") as f:
+        chunks = json.load(f)
+    documents = []
+    for chunk in chunks:
+        testo = chunk.get("text", "")
+        metadati = {k: v for k, v in chunk.items() if k != "text"}
+        documents.append(Document(page_content=testo, metadata=metadati))
+    return documents
 
-    # Determiniamo il nome della collection.
+def calcola_hit_rate(db_path, env):
+    # 1. SETUP CHROMA NATIVO E LANGCHAIN EMBEDDER (Il tuo setup originale)
+    client = chromadb.PersistentClient(path=db_path)
+    
+    if env == "locale":
+        lc_embedder = HuggingFaceEmbeddings(
+            model_name="BAAI/bge-m3",
+            model_kwargs={'device': 'cpu'},
+            encode_kwargs={'normalize_embeddings': True}
+        )
+    elif env == "cloud":
+        if "OPENAI_API_KEY" not in os.environ:
+            raise ValueError("OPENAI_API_KEY non è impostata nell'ambiente.")
+        lc_embedder = OpenAIEmbeddings(
+            model="text-embedding-3-small",
+            openai_api_key=os.environ.get("OPENAI_API_KEY"),
+            openai_api_base="https://openrouter.ai/api/v1"
+        )
+
+    # Trova il nome della collection
     collections = [c.name for c in client.list_collections()]
     if not collections:
         print(f"❌ Nessuna collezione trovata in {db_path}")
         return 0.0
 
-    collection_name = "manuali_fanuc"
-    if "manuali_fanuc" not in collections and "langchain" in collections:
-        collection_name = "langchain"
-    elif collection_name not in collections:
-        collection_name = collections[0]
+    collection_name = "manuali_fanuc" if "manuali_fanuc" in collections else (
+        "langchain" if "langchain" in collections else collections[0]
+    )
 
-    collection = client.get_collection(name=collection_name, embedding_function=emb_fn)
+    # 2. SETUP RETRIEVER VETTORIALE (Langchain wrapper sul tuo client Chroma)
+    lc_chroma = Chroma(
+        client=client, 
+        collection_name=collection_name, 
+        embedding_function=lc_embedder
+    )
+    retriever_vettoriale = lc_chroma.as_retriever(search_kwargs={"k": 5})
 
-    # Caricamento domande
+    # 3. SETUP RETRIEVER TESTUALE BM25
+    # Ricaviamo il nome del JSON dal nome della cartella del DB (es. chroma_locale_700 -> dataset_chunks_locale_700.json)
+    db_basename = os.path.basename(db_path)
+    parts = db_basename.split('_')
+    json_filename = f"dataset_chunks_{parts[1]}_{parts[2]}.json" if len(parts) >= 3 else "dataset_chunks_locale_700.json"
+    json_path = os.path.join(PROJECT_ROOT, "data/chunks", json_filename) # Aggiusta il percorso se i JSON sono in una sottocartella
+    
+    if not os.path.exists(json_path):
+        print(f"⚠️ JSON non trovato per BM25: {json_path}. Uso solo Chroma.")
+        retriever_ibrido = retriever_vettoriale
+    else:
+        docs_bm25 = carica_documenti_per_bm25(json_path)
+        retriever_bm25 = BM25Retriever.from_documents(docs_bm25)
+        retriever_bm25.k = 5
+        # 4. CREAZIONE DELL'ENSEMBLE (IL MOTORE IBRIDO)
+        retriever_ibrido = EnsembleRetriever(
+            retrievers=[retriever_bm25, retriever_vettoriale], 
+            weights=[0.4, 0.6]
+        )
+
+    # 5. VALUTAZIONE CON LA TUA LOGICA REGEX
     if not os.path.exists(TEST_FILE):
         print(f"❌ File di test non trovato: {TEST_FILE}")
         return 0.0
 
     df = pd.read_csv(TEST_FILE)
-    if len(df) == 0:
-        return 0.0
+    if len(df) == 0: return 0.0
 
     hits = 0
 
     for _, row in df.iterrows():
-        # Embedding manuale della query
-        query_embedding = emb_fn.embed_query(row['question'])
+        # Eseguiamo la query sul motore ibrido anziché solo su Chroma
+        results = retriever_ibrido.invoke(row['question'])[:3] # Prendiamo i Top 3 finali
 
-        # Query al database con embedding pre-calcolato
-        results = collection.query(
-            query_embeddings=[query_embedding],
-            n_results=3
-        )
-
-        # Verifica nei metadati con TOLLERANZA +-1 Pagina
         trovato = False
-        if results['metadatas'] and len(results['metadatas']) > 0:
-            for meta in results['metadatas'][0]:
+        if results:
+            for doc in results:
+                meta = doc.metadata
                 if meta and meta.get('file_name') == row['expected_file']:
                     found_p = str(meta.get('page')).strip()
                     exp_p = str(row['expected_page']).strip()
                     
-                    # 1. Controllo esatto (se coincidono perfettamente)
+                    # 1. Controllo esatto
                     if found_p == exp_p:
                         trovato = True
                         break
                     
-                    # 2. Controllo tolleranza +- 1 (anche per formati complessi come "s-7")
+                    # 2. Il tuo Controllo tolleranza +- 1 con Regex
                     try:
-                        # Cerca i numeri all'interno della stringa della pagina
                         f_match = re.search(r'\d+', found_p)
                         e_match = re.search(r'\d+', exp_p)
                         
                         if f_match and e_match:
-                            # Controlla che i prefissi siano uguali (es. "s-" == "s-")
                             f_prefix = found_p[:f_match.start()]
                             e_prefix = exp_p[:e_match.start()]
                             
                             if f_prefix == e_prefix:
                                 f_num = int(f_match.group())
                                 e_num = int(e_match.group())
-                                
-                                # Se la differenza è <= 1, è un HIT!
                                 if abs(f_num - e_num) <= 1:
                                     trovato = True
                                     break
                     except Exception:
-                        pass # Se c'è un errore di conversione, ignora e passa al prossimo chunk
+                        pass 
 
         if trovato:
             hits += 1
         else:
-            # DEBUG: Stampiamo gli errori reali rimasti
             print(f"\n❌ Errore sulla domanda: {row['id']}")
             print(f"Atteso: File '{row['expected_file']}' - Pagina '{row['expected_page']}'")
             print("Trovato nei top 3:")
-            if results['metadatas'] and len(results['metadatas']) > 0:
-                for i, meta in enumerate(results['metadatas'][0]):
-                    print(f"  {i+1}) File: '{meta.get('file_name')}' - Pagina: '{meta.get('page')}'")
+            for i, doc in enumerate(results):
+                print(f"  {i+1}) File: '{doc.metadata.get('file_name')}' - Pagina: '{doc.metadata.get('page')}'")
             print("-" * 40)
 
     return (hits / len(df)) * 100

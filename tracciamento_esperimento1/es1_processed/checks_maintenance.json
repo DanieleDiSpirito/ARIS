@@ -1,0 +1,10 @@
+[
+    {
+        "document_id": "03",
+        "file_name": "checks_maintenance.pdf",
+        "page": "11",
+        "section": "2.3",
+        "title": "CHECKS AND MAINTENANCE",
+        "text": "Daily maintenance and periodic maintenance/inspection ensure reliable robot performance for extended periods of time. (1) Daily maintenance Before operating the system each day, clean each part of the system and check the system parts for any damage or cracks. Also, check the following: (a) Before operation Check the cable connected to the teach pendant for excessive twisting. Check the controller and peripheral devices for abnormalities. (b) After operation At the end of operation, return the robot to the specified position, and then turn off the controller. Clean each part, and check for any damage or cracks. If the ventilation port of the controller is dusty, clean it. (2) Check after one month Check that the fan is rotating normally. If the fan has dirt and dust built up, clean the fan according to step (3) described below for inspection to be performed every 6 months. (3) Periodic inspection performed every six months Remove any dirt and dust from the inside of the cabinet. Wipe off dirt and dust from the fan. (4) Battery daily check Replace the battery on the front panel of the main board every 4 years. Please refer to the Section 7.11. (5) Maintenance tools The following maintenance tools are recommended: (a) Measuring instruments AC/DC voltmeter (A digital voltmeter is sometimes required.) Oscilloscope with a frequency range of 5 MHz or higher, two channels (b) Tools Cross-head screwdrivers: Large, medium, and small Straight-head screwdrivers: Large, medium, and small Nut driver set (Metric) Pliers Cutting pliers Diagonal cutting pliers (6) Automatic backup When the automatic backup area (FRA:) of F-ROM in the controller is specified as a backup copy destination and automatic backup is performed frequently, F-ROM may be damaged. If the automatic backup is performed frequently, use the external storage device."
+    }
+]
