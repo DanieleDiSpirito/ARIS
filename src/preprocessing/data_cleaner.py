@@ -46,8 +46,9 @@ def clean_text_content(text):
     righe_pulite = []
     for riga in text.split('\n'):
         if '|' in riga:
-            # Se la riga contiene solo pipe, trattini e spazi, saltala
-            if len(re.sub(r'[|\-\s]', '', riga)) == 0:
+            # Se la riga contiene solo pipe e spazi, saltala (è vuota)
+            # Preserviamo i trattini perché servono per l'intestazione Markdown (es. |---|---|)
+            if len(re.sub(r'[|\s]', '', riga)) == 0:
                 continue
         righe_pulite.append(riga)
     text = '\n'.join(righe_pulite)

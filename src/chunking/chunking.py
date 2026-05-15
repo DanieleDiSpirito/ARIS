@@ -110,6 +110,13 @@ def genera_dataset_chunks(input_file, chunk_size, chunk_overlap, tipo_modello, n
                 
             # Risolve duplicati includendo la section nel chunk_id
             section_safe = str(item.get('section', '0')).replace('.', '_')
+            
+            # Determina has_table PRIMA di rimuovere i trattini
+            has_table_flag = "|" in frammento and "---" in frammento
+            
+            # Rimuove le righe divisorie di Markdown (es. |---|---|) dal testo finale
+            testo_finale = re.sub(r'^[\s\|:\-]+$\n?', '', frammento, flags=re.MULTILINE).strip()
+
             chunk_record = {
                 "chunk_id": f"{item['document_id']}_{section_safe}_{item['page']}_{i}_{tipo_modello}",
                 "document_id": item["document_id"],
@@ -117,11 +124,11 @@ def genera_dataset_chunks(input_file, chunk_size, chunk_overlap, tipo_modello, n
                 "page": item["page"],
                 "section": item["section"],
                 "title": item["title"],
-                "text": frammento,
+                "text": testo_finale,
                 "token_size_target": chunk_size,
                 "modello_target": tipo_modello,
-                "char_count": len(frammento),
-                "has_table": "|" in frammento and "---" in frammento,
+                "char_count": len(testo_finale),
+                "has_table": has_table_flag,
                 "has_alarm_code": bool(re.search(r'SRVO-\d{3}|SYST-\d{3}', frammento))
             }
             chunks_finali.append(chunk_record)

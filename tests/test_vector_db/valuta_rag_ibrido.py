@@ -20,8 +20,8 @@ load_dotenv()
 
 # Determiniamo i percorsi in modo robusto
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-PROJECT_ROOT = os.path.dirname(BASE_DIR)
-TEST_FILE = os.path.join(BASE_DIR, "test_questions.csv")
+TESTS_DIR = os.path.dirname(BASE_DIR)
+PROJECT_ROOT = os.path.dirname(TESTS_DIR)
 
 class LangchainEmbeddingAdapter:
     """Adattatore per usare gli embedding di Langchain con il client nativo di ChromaDB"""
@@ -69,7 +69,7 @@ def carica_documenti_per_bm25(json_path):
         documents.append(Document(page_content=testo, metadata=metadati))
     return documents
 
-def calcola_hit_rate(db_path, env):
+def calcola_hit_rate(db_path, env, test_file):
     # 1. SETUP CHROMA NATIVO E LANGCHAIN EMBEDDER (Il tuo setup originale)
     client = chromadb.PersistentClient(path=db_path)
     
@@ -127,11 +127,11 @@ def calcola_hit_rate(db_path, env):
         )
 
     # 5. VALUTAZIONE CON LA TUA LOGICA REGEX
-    if not os.path.exists(TEST_FILE):
-        print(f"❌ File di test non trovato: {TEST_FILE}")
+    if not os.path.exists(test_file):
+        print(f"❌ File di test non trovato: {test_file}")
         return 0.0
 
-    df = pd.read_csv(TEST_FILE)
+    df = pd.read_csv(test_file)
     if len(df) == 0: return 0.0
 
     hits = 0
@@ -189,8 +189,12 @@ def main():
                         help="Ambiente usato per gli embedding (locale o cloud)")
     parser.add_argument("--db", type=str, nargs='*',
                         help="Nomi delle cartelle DB da valutare (es. chroma_cloud_700). Se non specificato, valuta quelli predefiniti.")
+    parser.add_argument("--lang", type=str, default="it", choices=["it", "en"],
+                        help="Lingua del test ('it' o 'en')")
 
     args = parser.parse_args()
+
+    test_file = os.path.join(TESTS_DIR, f"test_questions_{args.lang}.csv")
 
     # Se l'utente non specifica i DB, cerchiamo quelli generati per l'ambiente corrente
     if args.db:
@@ -218,7 +222,7 @@ def main():
     for db_name, db_path in db_to_eval:
         print(f"📊 Valutazione DB: {db_name}")
         try:
-            score = calcola_hit_rate(db_path, args.env)
+            score = calcola_hit_rate(db_path, args.env, test_file)
             print(f"✅ Risultato {db_name}: Hit Rate@3 = {score:.2f}%\n")
         except Exception as e:
             print(f"❌ Errore durante la valutazione di {db_name}: {e}\n")

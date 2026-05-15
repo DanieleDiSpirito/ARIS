@@ -11,6 +11,10 @@ desktop.ini
 # Ignora file dentro vector_db (database di vettori)
 vector_db/chroma_*/chroma.sqlite3
 vector_db/chroma_*/*/*.bin
+vector_db/chroma_*/*/*.pickle
 
 # Ignora file istruzioni AI
 AI_INSTRUCTIONS.md
+
+# Ignora file __pycache__
+**/__pycache__/*
