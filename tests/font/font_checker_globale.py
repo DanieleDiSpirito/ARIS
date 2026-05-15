@@ -84,7 +84,7 @@ def verifica_font_intero_pdf(pdf_path, target_font=None, target_size=None, tolle
 # ==========================================
 if __name__ == "__main__":
     
-    FILE_PDF = "./dataRaw/troubleshooting_alarms.pdf" # Metti qui il tuo PDF
+    FILE_PDF = "../../data/raw/codici_errore/troubleshooting_alarms.pdf"
     
     # Imposta i filtri: cerchiamo TUTTO ciò che è a 9.0pt, a prescindere dal font
     FONT_DA_CERCARE = "Arial-BoldMT"   

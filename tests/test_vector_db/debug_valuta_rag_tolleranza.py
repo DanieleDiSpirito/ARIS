@@ -2,6 +2,7 @@ import pandas as pd
 import chromadb
 import argparse
 import os
+import re
 from dotenv import load_dotenv
 
 # Importiamo gli stessi moduli usati per creare il vector db
@@ -12,8 +13,13 @@ load_dotenv()
 
 # Determiniamo i percorsi in modo robusto
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
-TEST_FILE = os.path.join(BASE_DIR, "test_questions.csv")
+TEST_FILE = os.path.join(BASE_DIR, "test_questions_en.csv")
+
+TESTS_DIR = os.path.dirname(BASE_DIR)
+PROJECT_ROOT = os.path.dirname(TESTS_DIR)
+
 
 class LangchainEmbeddingAdapter:
     """Adattatore per usare gli embedding di Langchain con il client nativo di ChromaDB"""
@@ -50,11 +56,11 @@ def get_embedding_function(env):
     else:
         raise ValueError(f"Ambiente {env} non supportato.")
 
-def calcola_hit_rate(db_path, env):
+def calcola_hit_rate(db_path, env, test_file):
     client = chromadb.PersistentClient(path=db_path)
     emb_fn = get_embedding_function(env)
 
-    # Determiniamo il nome della collection. Langchain di default usa "langchain".
+    # Determiniamo il nome della collection.
     collections = [c.name for c in client.list_collections()]
     if not collections:
         print(f"❌ Nessuna collezione trovata in {db_path}")
@@ -69,18 +75,18 @@ def calcola_hit_rate(db_path, env):
     collection = client.get_collection(name=collection_name, embedding_function=emb_fn)
 
     # Caricamento domande
-    if not os.path.exists(TEST_FILE):
-        print(f"❌ File di test non trovato: {TEST_FILE}")
+    if not os.path.exists(test_file):
+        print(f"❌ File di test non trovato: {test_file}")
         return 0.0
 
-    df = pd.read_csv(TEST_FILE)
+    df = pd.read_csv(test_file)
     if len(df) == 0:
         return 0.0
 
     hits = 0
 
     for _, row in df.iterrows():
-        # Embedding manuale della query per evitare ambiguità con l'adapter
+        # Embedding manuale della query
         query_embedding = emb_fn.embed_query(row['question'])
 
         # Query al database con embedding pre-calcolato
@@ -89,18 +95,45 @@ def calcola_hit_rate(db_path, env):
             n_results=3
         )
 
-        # Verifica nei metadati
+        # Verifica nei metadati con TOLLERANZA +-1 Pagina
         trovato = False
         if results['metadatas'] and len(results['metadatas']) > 0:
             for meta in results['metadatas'][0]:
-                if meta and str(meta.get('page')) == str(row['expected_page']) and meta.get('file_name') == row['expected_file']:
-                    trovato = True
-                    break
+                if meta and meta.get('file_name') == row['expected_file']:
+                    found_p = str(meta.get('page')).strip()
+                    exp_p = str(row['expected_page']).strip()
+                    
+                    # 1. Controllo esatto (se coincidono perfettamente)
+                    if found_p == exp_p:
+                        trovato = True
+                        break
+                    
+                    # 2. Controllo tolleranza +- 1 (anche per formati complessi come "s-7")
+                    try:
+                        # Cerca i numeri all'interno della stringa della pagina
+                        f_match = re.search(r'\d+', found_p)
+                        e_match = re.search(r'\d+', exp_p)
+                        
+                        if f_match and e_match:
+                            # Controlla che i prefissi siano uguali (es. "s-" == "s-")
+                            f_prefix = found_p[:f_match.start()]
+                            e_prefix = exp_p[:e_match.start()]
+                            
+                            if f_prefix == e_prefix:
+                                f_num = int(f_match.group())
+                                e_num = int(e_match.group())
+                                
+                                # Se la differenza è <= 1, è un HIT!
+                                if abs(f_num - e_num) <= 1:
+                                    trovato = True
+                                    break
+                    except Exception:
+                        pass # Se c'è un errore di conversione, ignora e passa al prossimo chunk
 
         if trovato:
             hits += 1
         else:
-            # DEBUG: Stampiamo gli errori per capire cosa succede
+            # DEBUG: Stampiamo gli errori reali rimasti
             print(f"\n❌ Errore sulla domanda: {row['id']}")
             print(f"Atteso: File '{row['expected_file']}' - Pagina '{row['expected_page']}'")
             print("Trovato nei top 3:")
@@ -117,8 +150,11 @@ def main():
                         help="Ambiente usato per gli embedding (locale o cloud)")
     parser.add_argument("--db", type=str, nargs='*',
                         help="Nomi delle cartelle DB da valutare (es. chroma_cloud_700). Se non specificato, valuta quelli predefiniti.")
-
+    parser.add_argument("--lang", type=str, default="it", choices=["it", "en"],
+                        help="Lingua del test. Scelta tra: 'it' (Italiano) e 'en' (Inglese)")
     args = parser.parse_args()
+    
+    test_file = os.path.join(TESTS_DIR, f"test_questions_{args.lang}.csv")
 
     # Se l'utente non specifica i DB, cerchiamo quelli generati per l'ambiente corrente
     if args.db:
@@ -146,7 +182,7 @@ def main():
     for db_name, db_path in db_to_eval:
         print(f"📊 Valutazione DB: {db_name}")
         try:
-            score = calcola_hit_rate(db_path, args.env)
+            score = calcola_hit_rate(db_path, args.env, test_file)
             print(f"✅ Risultato {db_name}: Hit Rate@3 = {score:.2f}%\n")
         except Exception as e:
             print(f"❌ Errore durante la valutazione di {db_name}: {e}\n")

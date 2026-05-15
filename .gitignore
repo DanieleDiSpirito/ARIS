@@ -9,4 +9,8 @@ desktop.ini
 .env
 
 # Ignora file dentro vector_db (database di vettori)
-vector_db/chroma_*/*
+vector_db/chroma_*/chroma.sqlite3
+vector_db/chroma_*/*/*.bin
+
+# Ignora file istruzioni AI
+AI_INSTRUCTIONS.md
