@@ -6,11 +6,8 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.documents import Document
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_community.retrievers import BM25Retriever
-from langchain_classic.retrievers import EnsembleRetriever
 
 load_dotenv()
 
@@ -18,13 +15,12 @@ COLLECTION_NAME = "langchain"
 
 # Mappa env+chunk_size → cartella del vector DB
 def get_db_path(env: str, chunk_size: int) -> str:
-    """Restituisce il percorso corretto del Vector DB in base all'ambiente e alla dimensione dei chunk."""
     return os.path.join("vector_db", f"chroma_{env}_{chunk_size}")
 
 
 def get_embeddings(env: str):
-    """Seleziona il modello di embedding coerente con quello usato durante l'ingestion.
-
+    """
+    Seleziona il modello di embedding coerente con quello usato durante l'ingestion:
     - locale → BAAI/bge-m3  (1024 dimensioni, HuggingFace, locale)
     - cloud  → text-embedding-3-small  (1536 dimensioni, OpenAI)
     """
@@ -82,10 +78,11 @@ Domanda dell'operatore:
 
 
 def format_docs_with_sources(docs):
+    """Formatta i chunk recuperati per il prompt e li stampa a schermo per debug."""
     if not docs:
         return "Nessun dato trovato nel contesto."
 
-    print(f"\n--- 🔎 CHUNK INVIATI ALL'LLM — Ibrido BM25+Vector ({len(docs)} totali) ---")
+    print(f"\n--- 🔎 CHUNK INVIATI ALL'LLM ({len(docs)} totali) ---")
     formatted_chunks = []
     for i, doc in enumerate(docs):
         file_name = doc.metadata.get("file_name", "Documento Sconosciuto")
@@ -107,7 +104,7 @@ def setup_rag_chain(retriever, env="locale"):
         llm = ChatOpenAI(
             base_url="http://localhost:1234/v1",
             api_key="lm-studio",
-            temperature=0.0 # Zero creatività per massima precisione tecnica
+            temperature=0.0  # Zero creatività per massima precisione tecnica
         )
     elif env == "cloud":
         print("☁️ LLM: Cloud (OpenRouter)")
@@ -136,53 +133,14 @@ def setup_rag_chain(retriever, env="locale"):
 
 
 def answer_question(rag_chain, question):
-    """Invia la domanda alla catena e gestisce eventuali errori di connessione."""
     try:
         return rag_chain.invoke(question)
     except Exception as e:
         return f"❌ Errore di connessione o generazione. Dettagli: {str(e)}"
 
 
-def build_hybrid_retriever(db: Chroma, k: int = 3) -> EnsembleRetriever:
-    """Costruisce un retriever ibrido combinando BM25 (keyword) e Chroma (semantic).
-
-    Args:
-        db: istanza Chroma già caricata.
-        k: numero di documenti da recuperare per ciascun retriever.
-
-    Returns:
-        EnsembleRetriever con peso 50% BM25 + 50% Vector Search.
-    """
-    # 1. Retriever denso (Vector Search)
-    chroma_retriever = db.as_retriever(search_kwargs={"k": k})
-
-    # 2. Retriever sparso (BM25 / Keyword Search)
-    # Carichiamo tutti i documenti dal Chroma DB per inizializzare BM25.
-    # NOTA: per dataset molto grandi, in produzione si userebbe un indice BM25
-    # persistito separatamente (es. Elasticsearch/OpenSearch).
-    all_data = db.get()
-    if not all_data or not all_data.get("documents"):
-        raise RuntimeError("❌ Nessun documento trovato nel database vettoriale. Impossibile costruire BM25.")
-
-    docs = [
-        Document(page_content=text, metadata=meta)
-        for text, meta in zip(all_data["documents"], all_data["metadatas"])
-        if text
-    ]
-    print(f"✅ BM25 inizializzato su {len(docs)} chunk...")
-    bm25_retriever = BM25Retriever.from_documents(docs)
-    bm25_retriever.k = k
-
-    # 3. Ensemble: combina i due retriever con pesi uguali
-    ensemble = EnsembleRetriever(
-        retrievers=[bm25_retriever, chroma_retriever],
-        weights=[0.5, 0.5]   # 50% keyword + 50% semantic
-    )
-    return ensemble
-
-
 def main():
-    parser = argparse.ArgumentParser(description="Testa la RAG Pipeline Ibrida (BM25 + Vector Search) dal terminale")
+    parser = argparse.ArgumentParser(description="Testa la RAG Pipeline (Puro Vector Search) dal terminale")
     parser.add_argument("--env", type=str, choices=["locale", "cloud"], default="locale",
                         help="Scegli tra 'locale' (LM Studio) o 'cloud' (OpenRouter)")
     parser.add_argument("--chunk_size", type=int, default=700,
@@ -194,7 +152,7 @@ def main():
 
     db_path = get_db_path(args.env, args.chunk_size)
 
-    print(f"🔄 Avvio test pipeline RAG (Ibrido) — env: {args.env.upper()} | chunk_size: {args.chunk_size}")
+    print(f"🔄 Avvio test pipeline RAG (Puro) — env: {args.env.upper()} | chunk_size: {args.chunk_size}")
 
     if not os.path.exists(db_path):
         print(f"❌ ERRORE: Database vettoriale non trovato in '{db_path}'.")
@@ -208,14 +166,7 @@ def main():
         embedding_function=embeddings,
         collection_name=COLLECTION_NAME
     )
-
-    # Costruisce il retriever ibrido BM25 + Vector
-    print("🤝 Costruzione Retriever Ibrido (50% BM25 + 50% Vector Search)...")
-    try:
-        retriever = build_hybrid_retriever(db, k=3)
-    except RuntimeError as e:
-        print(e)
-        return
+    retriever = db.as_retriever(search_kwargs={"k": 3})
 
     try:
         chain = setup_rag_chain(retriever, env=args.env)

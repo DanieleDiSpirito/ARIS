@@ -5,13 +5,11 @@ import os
 import re
 from dotenv import load_dotenv
 
-# Importiamo gli stessi moduli usati per creare il vector db
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_openai import OpenAIEmbeddings
 
 load_dotenv()
 
-# Determiniamo i percorsi in modo robusto
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 PROJECT_ROOT = os.path.dirname(BASE_DIR)
@@ -60,7 +58,6 @@ def calcola_hit_rate(db_path, env, test_file):
     client = chromadb.PersistentClient(path=db_path)
     emb_fn = get_embedding_function(env)
 
-    # Determiniamo il nome della collection.
     collections = [c.name for c in client.list_collections()]
     if not collections:
         print(f"❌ Nessuna collezione trovata in {db_path}")
@@ -74,7 +71,6 @@ def calcola_hit_rate(db_path, env, test_file):
 
     collection = client.get_collection(name=collection_name, embedding_function=emb_fn)
 
-    # Caricamento domande
     if not os.path.exists(test_file):
         print(f"❌ File di test non trovato: {test_file}")
         return 0.0
@@ -86,16 +82,13 @@ def calcola_hit_rate(db_path, env, test_file):
     hits = 0
 
     for _, row in df.iterrows():
-        # Embedding manuale della query
         query_embedding = emb_fn.embed_query(row['question'])
 
-        # Query al database con embedding pre-calcolato
         results = collection.query(
             query_embeddings=[query_embedding],
             n_results=3
         )
 
-        # Verifica nei metadati con TOLLERANZA +-1 Pagina
         trovato = False
         if results['metadatas'] and len(results['metadatas']) > 0:
             for meta in results['metadatas'][0]:
@@ -103,19 +96,15 @@ def calcola_hit_rate(db_path, env, test_file):
                     found_p = str(meta.get('page')).strip()
                     exp_p = str(row['expected_page']).strip()
                     
-                    # 1. Controllo esatto (se coincidono perfettamente)
                     if found_p == exp_p:
                         trovato = True
                         break
                     
-                    # 2. Controllo tolleranza +- 1 (anche per formati complessi come "s-7")
                     try:
-                        # Cerca i numeri all'interno della stringa della pagina
                         f_match = re.search(r'\d+', found_p)
                         e_match = re.search(r'\d+', exp_p)
                         
                         if f_match and e_match:
-                            # Controlla che i prefissi siano uguali (es. "s-" == "s-")
                             f_prefix = found_p[:f_match.start()]
                             e_prefix = exp_p[:e_match.start()]
                             
@@ -123,17 +112,15 @@ def calcola_hit_rate(db_path, env, test_file):
                                 f_num = int(f_match.group())
                                 e_num = int(e_match.group())
                                 
-                                # Se la differenza è <= 1, è un HIT!
                                 if abs(f_num - e_num) <= 1:
                                     trovato = True
                                     break
                     except Exception:
-                        pass # Se c'è un errore di conversione, ignora e passa al prossimo chunk
+                        pass
 
         if trovato:
             hits += 1
         else:
-            # DEBUG: Stampiamo gli errori reali rimasti
             print(f"\n❌ Errore sulla domanda: {row['id']}")
             print(f"Atteso: File '{row['expected_file']}' - Pagina '{row['expected_page']}'")
             print("Trovato nei top 3:")
@@ -156,7 +143,6 @@ def main():
     
     test_file = os.path.join(TESTS_DIR, f"test_questions_{args.lang}.csv")
 
-    # Se l'utente non specifica i DB, cerchiamo quelli generati per l'ambiente corrente
     if args.db:
         db_list = args.db
     else:
@@ -165,7 +151,6 @@ def main():
         if args.env == "locale":
             db_list.extend(["db_nitro", "db_standard", "db_exacto"])
 
-    # Controlliamo quali DB esistono effettivamente
     db_to_eval = []
     for db in db_list:
         db_path = os.path.join(PROJECT_ROOT, "vector_db", db)

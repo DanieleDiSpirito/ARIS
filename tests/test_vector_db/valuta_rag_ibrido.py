@@ -8,17 +8,14 @@ from dotenv import load_dotenv
 import json
 from langchain_core.documents import Document
 from langchain_community.retrievers import BM25Retriever
-# Import basato sui risultati della ricerca nel tuo ambiente
 from langchain_classic.retrievers.ensemble import EnsembleRetriever
 from langchain_chroma import Chroma
 
-# Importiamo gli stessi moduli usati per creare il vector db
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_openai import OpenAIEmbeddings
 
 load_dotenv()
 
-# Determiniamo i percorsi in modo robusto
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TESTS_DIR = os.path.dirname(BASE_DIR)
 PROJECT_ROOT = os.path.dirname(TESTS_DIR)
@@ -70,7 +67,7 @@ def carica_documenti_per_bm25(json_path):
     return documents
 
 def calcola_hit_rate(db_path, env, test_file):
-    # 1. SETUP CHROMA NATIVO E LANGCHAIN EMBEDDER (Il tuo setup originale)
+    # SETUP CHROMA NATIVO E LANGCHAIN EMBEDDER
     client = chromadb.PersistentClient(path=db_path)
     
     if env == "locale":
@@ -88,7 +85,6 @@ def calcola_hit_rate(db_path, env, test_file):
             openai_api_base="https://openrouter.ai/api/v1"
         )
 
-    # Trova il nome della collection
     collections = [c.name for c in client.list_collections()]
     if not collections:
         print(f"❌ Nessuna collezione trovata in {db_path}")
@@ -98,7 +94,7 @@ def calcola_hit_rate(db_path, env, test_file):
         "langchain" if "langchain" in collections else collections[0]
     )
 
-    # 2. SETUP RETRIEVER VETTORIALE (Langchain wrapper sul tuo client Chroma)
+    # SETUP RETRIEVER VETTORIALE (Langchain wrapper sul client Chroma)
     lc_chroma = Chroma(
         client=client, 
         collection_name=collection_name, 
@@ -106,12 +102,11 @@ def calcola_hit_rate(db_path, env, test_file):
     )
     retriever_vettoriale = lc_chroma.as_retriever(search_kwargs={"k": 5})
 
-    # 3. SETUP RETRIEVER TESTUALE BM25
-    # Ricaviamo il nome del JSON dal nome della cartella del DB (es. chroma_locale_700 -> dataset_chunks_locale_700.json)
+    # SETUP RETRIEVER TESTUALE BM25
     db_basename = os.path.basename(db_path)
     parts = db_basename.split('_')
     json_filename = f"dataset_chunks_{parts[1]}_{parts[2]}.json" if len(parts) >= 3 else "dataset_chunks_locale_700.json"
-    json_path = os.path.join(PROJECT_ROOT, "data/chunks", json_filename) # Aggiusta il percorso se i JSON sono in una sottocartella
+    json_path = os.path.join(PROJECT_ROOT, "data/chunks", json_filename)
     
     if not os.path.exists(json_path):
         print(f"⚠️ JSON non trovato per BM25: {json_path}. Uso solo Chroma.")
@@ -120,13 +115,12 @@ def calcola_hit_rate(db_path, env, test_file):
         docs_bm25 = carica_documenti_per_bm25(json_path)
         retriever_bm25 = BM25Retriever.from_documents(docs_bm25)
         retriever_bm25.k = 5
-        # 4. CREAZIONE DELL'ENSEMBLE (IL MOTORE IBRIDO)
+        # CREAZIONE DELL'ENSEMBLE (IL MOTORE IBRIDO)
         retriever_ibrido = EnsembleRetriever(
             retrievers=[retriever_bm25, retriever_vettoriale], 
             weights=[0.4, 0.6]
         )
 
-    # 5. VALUTAZIONE CON LA TUA LOGICA REGEX
     if not os.path.exists(test_file):
         print(f"❌ File di test non trovato: {test_file}")
         return 0.0
@@ -137,8 +131,7 @@ def calcola_hit_rate(db_path, env, test_file):
     hits = 0
 
     for _, row in df.iterrows():
-        # Eseguiamo la query sul motore ibrido anziché solo su Chroma
-        results = retriever_ibrido.invoke(row['question'])[:3] # Prendiamo i Top 3 finali
+        results = retriever_ibrido.invoke(row['question'])[:3]
 
         trovato = False
         if results:
@@ -148,12 +141,10 @@ def calcola_hit_rate(db_path, env, test_file):
                     found_p = str(meta.get('page')).strip()
                     exp_p = str(row['expected_page']).strip()
                     
-                    # 1. Controllo esatto
                     if found_p == exp_p:
                         trovato = True
                         break
                     
-                    # 2. Il tuo Controllo tolleranza +- 1 con Regex
                     try:
                         f_match = re.search(r'\d+', found_p)
                         e_match = re.search(r'\d+', exp_p)
@@ -196,16 +187,13 @@ def main():
 
     test_file = os.path.join(TESTS_DIR, f"test_questions_{args.lang}.csv")
 
-    # Se l'utente non specifica i DB, cerchiamo quelli generati per l'ambiente corrente
     if args.db:
         db_list = args.db
     else:
         db_list = [f"chroma_{args.env}_300", f"chroma_{args.env}_700", f"chroma_{args.env}_1000"]
-        # DB legacy
         if args.env == "locale":
             db_list.extend(["db_nitro", "db_standard", "db_exacto"])
 
-    # Controlliamo quali DB esistono effettivamente
     db_to_eval = []
     for db in db_list:
         db_path = os.path.join(PROJECT_ROOT, "vector_db", db)

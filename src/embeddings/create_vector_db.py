@@ -37,7 +37,6 @@ def main():
                         help="Dimensione in token dei chunk da vettorizzare")
     args = parser.parse_args()
     
-    # 1. Verifica e carica il file JSON corretto dalla fase precedente
     file_path = os.path.join("data", "chunks", f"dataset_chunks_{args.env}_{args.chunk_size}.json")
     if not os.path.exists(file_path):
         print(f"❌ File non trovato: {file_path}")
@@ -48,7 +47,6 @@ def main():
     docs = create_documents_from_json(file_path)
     print(f"✅ Trovati {len(docs)} frammenti di testo pronti per l'embedding.")
     
-    # 2. Configura il Modello di Embedding (Cloud o Locale)
     if args.env == "locale":
         print("🧠 Inizializzazione modello locale: BAAI/bge-m3...")
         # Usa 'cpu' di default. Cambialo in 'cuda' se hai una scheda video NVIDIA compatibile.
@@ -70,28 +68,25 @@ def main():
         )
         persist_dir = os.path.join("vector_db", f"chroma_cloud_{args.chunk_size}")
 
-    # 3. Costruisci il Vector Database (ChromaDB)
     print(f"🗄️ Generazione embeddings e salvataggio DB in: {persist_dir}")
     print("⏳ L'operazione potrebbe richiedere alcuni minuti...")
     
-    # Svuota la directory se il database esiste già per evitare duplicati
     if os.path.exists(persist_dir):
         print("⚠️ Un database precedente esiste già in questa cartella. Verrà sovrascritto.")
         shutil.rmtree(persist_dir)
         
     os.makedirs(persist_dir, exist_ok=True)
     
-    # Chroma calcola gli embedding di tutti i documenti e li salva su disco
     db = Chroma.from_documents(
         documents=docs,
         embedding=embeddings,
         persist_directory=persist_dir
     )
     
+    # test di ricerca rapido per verificare la funzionalità
     print(f"🎉 Operazione completata! Vector DB salvato con successo in '{persist_dir}'.")
     print("Test rapido del DB:")
     
-    # 4. (Opzionale) Facciamo un micro-test di ricerca per verificare che funzioni
     query_test = "errore o allarme"
     results = db.similarity_search_with_score(query_test, k=1)
     if results:
@@ -99,11 +94,9 @@ def main():
         print(f"\n🔍 Risultato di test per '{query_test}':")
         print(f"Titolo: {best_doc.metadata.get('title')}")
         print(f"Testo: {best_doc.page_content[:100]}...")
-        # Il punteggio in ChromaDB è una distanza (minore è meglio)
         print(f"Distanza: {score:.4f}")
 
 if __name__ == "__main__":
-    # Assicura che l'esecuzione avvenga dalla root del progetto (ARIS)
     if os.path.basename(os.getcwd()) == "embeddings":
         os.chdir("../..")
     elif os.path.basename(os.getcwd()) == "src":

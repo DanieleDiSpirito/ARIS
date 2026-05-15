@@ -1,7 +1,6 @@
 import json
 import os
 import re
-# Richiede: pip install langchain-text-splitters tiktoken transformers
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from transformers import AutoTokenizer
 
@@ -33,7 +32,6 @@ def extract_table_header(text):
         line1 = lines[i].strip()
         line2 = lines[i+1].strip()
         if line1.startswith('|') and line2.startswith('|') and '-' in line2:
-            # Verifica che line2 contenga solo pipe, trattini, spazi o due punti
             if re.match(r'^[\s\|:\-]+$', line2):
                 return f"{line1}\n{line2}"
     return None
@@ -43,29 +41,23 @@ def genera_dataset_chunks(input_file, chunk_size, chunk_overlap, tipo_modello, n
     Legge il JSON pulito, divide il testo usando il tokenizer corretto (Cloud o Locale)
     e salva un nuovo file JSON.
     """
-    # Creiamo la cartella data/chunks se non esiste e salviamo i file lì
     output_dir = os.path.join("data", "chunks")
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, f"dataset_chunks_{tipo_modello}_{chunk_size}.json")
     
     print(f"🔪 Avvio chunking per {tipo_modello} ({chunk_size} token, Overlap: {chunk_overlap})...")
     
-    # 1. Carica il JSON pulito
     with open(input_file, "r", encoding="utf-8") as f:
         dati_puliti = json.load(f)
 
-    # 2. Configura lo Splitter in base al tipo di modello
     if tipo_modello == "cloud":
-        # Usiamo tiktoken per OpenAI
         text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
-            model_name=nome_modello, # es. "text-embedding-3-small"
+            model_name=nome_modello,
             chunk_size=chunk_size,
             chunk_overlap=chunk_overlap,
             separators=["\n\n", "\n", ".", " ", ""]
         )
     elif tipo_modello == "locale":
-        # Usiamo il tokenizer di HuggingFace per il modello locale
-        # Prima scarica/carica il tokenizer esatto del modello
         tokenizer = AutoTokenizer.from_pretrained(nome_modello)
         
         text_splitter = RecursiveCharacterTextSplitter.from_huggingface_tokenizer(
@@ -79,28 +71,23 @@ def genera_dataset_chunks(input_file, chunk_size, chunk_overlap, tipo_modello, n
 
     chunks_finali = []
 
-    # 3. Processa ogni record
     for item in dati_puliti:
-        # Pre-pulizia
         testo_pulito = clean_text_for_chunking(item["text"])
         if not testo_pulito:
             continue
             
-        # Iniettiamo il titolo all'inizio del testo per migliorare il contesto
         testo_da_dividere = f"[{item['title']}]\n{testo_pulito}"
         
-        # Divide il testo in una lista di frammenti
         frammenti = text_splitter.split_text(testo_da_dividere)
         
         current_table_header = None
         
         for i, frammento in enumerate(frammenti):
             # --- Context-Aware Chunking per le Tabelle ---
-            # 1. Se questo frammento contiene un header di tabella, lo salviamo
             header_in_frammento = extract_table_header(frammento)
             if header_in_frammento:
                 current_table_header = header_in_frammento
-            # 2. Se è una continuazione di tabella (inizia con '|' ma senza separatori nelle prime righe), iniettiamo l'header
+            # Se è una continuazione di tabella (inizia con '|' ma senza separatori nelle prime righe), iniettiamo l'header
             elif current_table_header and frammento.strip().startswith('|') and not extract_table_header(frammento[:200]):
                 frammento = f"{current_table_header}\n{frammento.strip()}"
 
@@ -133,19 +120,15 @@ def genera_dataset_chunks(input_file, chunk_size, chunk_overlap, tipo_modello, n
             }
             chunks_finali.append(chunk_record)
 
-    # 4. Salva il file
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(chunks_finali, f, indent=4, ensure_ascii=False)
         
     print(f"✅ Fatto! Creato {output_file} con {len(chunks_finali)} chunks.\n")
 
 if __name__ == "__main__":
-    # Usa il percorso relativo corretto per il progetto
-    
     os.chdir("../..")
     file_input = os.path.join("data", "processed", "knowledge_base.json")
     
-    # 1. GENERIAMO I DATASET PER L'ESPERIMENTO SUL CLOUD (OpenAI)
     config_esperimenti_cloud = [
         {"size": 300, "overlap": 40},
         {"size": 700, "overlap": 100},
@@ -162,7 +145,6 @@ if __name__ == "__main__":
             nome_modello="text-embedding-3-small"
         )
         
-    # 2. GENERIAMO I DATASET PER L'ESPERIMENTO LOCALE (BAAI/bge-m3)
     config_esperimenti_locale = [
         {"size": 300, "overlap": 40},
         {"size": 700, "overlap": 100},
@@ -176,7 +158,7 @@ if __name__ == "__main__":
             chunk_size=config["size"], 
             chunk_overlap=config["overlap"],
             tipo_modello="locale",
-            nome_modello="BAAI/bge-m3" # HuggingFace scaricherà il tokenizer in automatico!
+            nome_modello="BAAI/bge-m3"
         )
         
     print("🎉 Tutti i dataset (Cloud e Locali) sono pronti per gli esperimenti!")

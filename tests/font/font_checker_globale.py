@@ -18,7 +18,7 @@ def verifica_font_intero_pdf(pdf_path, target_font=None, target_size=None, tolle
             for numero_pagina, pagina in enumerate(pdf.pages, start=1):
                 parole = pagina.extract_words(extra_attrs=["fontname", "size"])
                 if not parole:
-                    continue # Salta le pagine vuote
+                    continue
                     
                 # Raggruppamento in righe basato sull'asse Y (tolleranza 3 pixel)
                 righe = {}
@@ -36,7 +36,6 @@ def verifica_font_intero_pdf(pdf_path, target_font=None, target_size=None, tolle
                 match_count_pagina = 0
                 risultati_pagina = []
                 
-                # Analizziamo le righe dall'alto verso il basso
                 for y in sorted(righe.keys()):
                     riga_words = sorted(righe[y], key=lambda x: x['x0'])
                     testo = " ".join([w['text'] for w in riga_words]).strip()
@@ -44,14 +43,12 @@ def verifica_font_intero_pdf(pdf_path, target_font=None, target_size=None, tolle
                     if not testo:
                         continue
                     
-                    # Calcolo della MODA per font e size
                     dimensioni = [w['size'] for w in riga_words]
                     font_names = [w['fontname'] for w in riga_words]
                     
                     size_moda = round(statistics.mode(dimensioni), 1)
                     font_moda = statistics.mode(font_names)
                     
-                    # Logica di filtraggio
                     match_font = True
                     match_size = True
                     
@@ -61,13 +58,11 @@ def verifica_font_intero_pdf(pdf_path, target_font=None, target_size=None, tolle
                     if target_size is not None and abs(size_moda - target_size) > tolleranza_size:
                         match_size = False
                         
-                    # Se la riga supera i filtri impostati, salvala!
                     if match_font and match_size:
                         match_count_pagina += 1
                         totale_match_documento += 1
                         risultati_pagina.append(f"Pag: {numero_pagina:<3} | Y: {y:<4} | Size: {size_moda:<5} | Font: {font_moda:<25} | Testo: {testo}")
                 
-                # Stampa i risultati SOLO se ha trovato qualcosa in questa specifica pagina
                 if match_count_pagina > 0:
                     print(f"\n--- Trovati {match_count_pagina} match a Pagina {numero_pagina} ---")
                     for res in risultati_pagina:
@@ -79,16 +74,12 @@ def verifica_font_intero_pdf(pdf_path, target_font=None, target_size=None, tolle
     except FileNotFoundError:
         print(f"Errore: Il file '{pdf_path}' non è stato trovato. Controlla il percorso.")
 
-# ==========================================
-# SEZIONE DI INPUT
-# ==========================================
+
 if __name__ == "__main__":
     
     FILE_PDF = "../../data/raw/codici_errore/troubleshooting_alarms.pdf"
     
-    # Imposta i filtri: cerchiamo TUTTO ciò che è a 9.0pt, a prescindere dal font
-    FONT_DA_CERCARE = "Arial-BoldMT"   
+    FONT_DA_CERCARE = "Arial-BoldMT"
     SIZE_DA_CERCARE = 12
-       
     
     verifica_font_intero_pdf(FILE_PDF, target_font=FONT_DA_CERCARE, target_size=SIZE_DA_CERCARE)

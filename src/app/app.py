@@ -1,51 +1,53 @@
 import streamlit as st
-import chromadb
 import os
 import sys
-from langchain_chroma import Chroma
-from langchain_huggingface import HuggingFaceEmbeddings
 
-# --- AGGIORNAMENTO PERCORSI MODULI ---
-# Aggiungiamo la cartella 'rag_pipeline' al percorso di ricerca di Python
 current_dir = os.path.dirname(os.path.abspath(__file__))
 rag_folder_path = os.path.join(current_dir, "..", "rag_pipeline")
 sys.path.append(rag_folder_path)
 
 try:
-    from rag_pipeline import setup_rag_chain 
+    from rag_pipeline import setup_rag_chain, get_db_path, get_embeddings
 except ImportError:
     st.error(f"❌ Impossibile trovare 'rag_pipeline.py' in: {rag_folder_path}")
     st.stop()
 
-# --- CONFIGURAZIONE PERCORSI DATABASE ---
-# Usiamo un percorso relativo che risale fino alla cartella root 'ARIS'
-DB_PATH = os.path.join(current_dir, "..", "..", "vector_db", "chroma_locale_700") 
-COLLECTION_NAME = "manuali_fanuc_es1"
+from langchain_chroma import Chroma
+
+COLLECTION_NAME = "langchain"
+
+PROJECT_ROOT = os.path.abspath(os.path.join(current_dir, "..", ".."))
 
 @st.cache_resource
-def init_retriever():
-    """Inizializza il database vettoriale."""
-    if not os.path.exists(DB_PATH):
-        st.error(f"❌ Database non trovato in: {os.path.abspath(DB_PATH)}. Verifica la struttura delle cartelle.")
+def init_retriever(env: str, chunk_size: int):
+    """Inizializza il retriever con il DB e l'embedding corretto per l'env scelto."""
+    db_path = os.path.join(PROJECT_ROOT, get_db_path(env, chunk_size))
+
+    if not os.path.exists(db_path):
+        st.error(f"❌ Database non trovato in: {db_path}")
         st.stop()
-        
-    client = chromadb.PersistentClient(path=DB_PATH)
-    embedder = HuggingFaceEmbeddings(
-        model_name="BAAI/bge-m3",
-        model_kwargs={'device': 'cpu'},
-        encode_kwargs={'normalize_embeddings': True}
-    )
+
+    embedder = get_embeddings(env)
     lc_chroma = Chroma(
-        client=client, 
-        collection_name=COLLECTION_NAME, 
+        persist_directory=db_path,
+        collection_name=COLLECTION_NAME,
         embedding_function=embedder
     )
     return lc_chroma.as_retriever(search_kwargs={"k": 3})
 
-# --- INTERFACCIA STREAMLIT ---
+
+@st.cache_resource
+def init_rag_chain(env: str, chunk_size: int):
+    """Inizializza l'intera chain RAG (retriever + LLM).
+    Cached per evitare di ricreare l'LLM ad ogni rerun della sidebar.
+    Si ricalcola solo se cambiano env o chunk_size.
+    """
+    retriever = init_retriever(env, chunk_size)
+    return setup_rag_chain(retriever, env=env)
+
+
 st.set_page_config(page_title="ARIS - Assistente Fanuc", page_icon="🤖", layout="wide")
 
-# --- SIDEBAR DI CONFIGURAZIONE ---
 st.sidebar.title("⚙️ Configurazione Sistema")
 st.sidebar.markdown("---")
 
@@ -53,27 +55,34 @@ scelta_env = st.sidebar.radio(
     "Seleziona Motore LLM:",
     ["locale", "cloud"],
     index=0,
-    help="Locale usa LM Studio sul tuo PC. Cloud usa OpenRouter (richiede API Key)."
+    help="Locale usa LM Studio sul tuo PC. Cloud usa OpenRouter (richiede API Key nel .env)."
+)
+
+scelta_chunk_size = st.sidebar.selectbox(
+    "Dimensione Chunk:",
+    [300, 700, 1000],
+    index=1,
+    help="Deve corrispondere alla dimensione usata durante l'ingestion nel Vector DB."
 )
 
 st.sidebar.markdown("---")
+db_label = get_db_path(scelta_env, scelta_chunk_size)
+embedding_label = "bge-m3 (1024d, locale)" if scelta_env == "locale" else "text-embedding-3-small (1536d, OpenRouter)"
 st.sidebar.info(f"""
 **Stato Sistema:**
-- DB: `{os.path.basename(DB_PATH)}`
-- Chunk Size: `700 token`
-- Retriever: `Ibrido (Semantico + BM25)`
+- DB: `{db_label}`
+- Collection: `{COLLECTION_NAME}`
+- Chunk Size: `{scelta_chunk_size} token`
+- Embedding: `{embedding_label}`
+- Retriever: `Puro Vector Search`
 """)
 
-# --- LOGICA DI AVVIO ---
 st.title("🤖 ARIS: Assistente per Manutenzione Industriale")
 st.caption("Supporto tecnico basato su RAG per Robot Fanuc R-30iB Mate")
 
-# 1. Inizializza il database
-retriever = init_retriever()
-
-# 2. Configura la catena
+# Inizializza retriever + chain (entrambi cached per env+chunk_size)
 try:
-    rag_chain = setup_rag_chain(retriever, env=scelta_env)
+    rag_chain = init_rag_chain(scelta_env, scelta_chunk_size)
 except Exception as e:
     st.error(f"Errore nella configurazione della pipeline: {e}")
     st.stop()
@@ -93,7 +102,7 @@ if prompt := st.chat_input("Chiedi aiuto su un errore o una procedura (es: SRVO-
 
     with st.chat_message("assistant"):
         placeholder = st.empty()
-        
+
         with st.spinner(f"L'IA ({scelta_env}) sta consultando i manuali..."):
             try:
                 full_response = rag_chain.invoke(prompt)
@@ -103,4 +112,6 @@ if prompt := st.chat_input("Chiedi aiuto su un errore o una procedura (es: SRVO-
                 msg_errore = f"❌ Errore durante la generazione ({scelta_env}). "
                 if scelta_env == "locale":
                     msg_errore += "Assicurati che LM Studio abbia il Server avviato su porta 1234."
+                else:
+                    msg_errore += "Verifica che OPENAI_API_KEY sia configurata nel file .env."
                 st.error(f"{msg_errore}\n\nDettagli: {e}")

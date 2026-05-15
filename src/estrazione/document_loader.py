@@ -33,23 +33,19 @@ def estrai_elementi_pagina(pagina_pdf, y_min=75, y_max=780):
         # Costruiamo la tabella in formato Markdown per l'LLM
         md_lines = []
         for i, riga in enumerate(dati_tabella):
-            # Pulizia celle: rimpiazza gli a capo interni con spazi
             riga_pulita = [str(cella).replace('\n', ' ').strip() if cella else "" for cella in riga]
             md_lines.append("| " + " | ".join(riga_pulita) + " |")
-            
-            # Subito dopo l'intestazione, mettiamo la riga separatrice del Markdown
             if i == 0: 
                 md_lines.append("|" + "|".join(["---"] * len(riga_pulita)) + "|")
                 
         testo_markdown = "\n\n" + "\n".join(md_lines) + "\n\n"
         
-        # Salviamo la tabella come "finto" elemento di testo per ingannare il Classificatore
         elementi_pagina.append({
             "testo": testo_markdown,
             "y_top": round(bbox[1]),
             "size_max": 11.0,
             "size_moda": 11.0,
-            "font_moda": "TabellaMarkdown" # Nome font fittizio come "Trigger"
+            "font_moda": "TabellaMarkdown"
         })
 
     # ==========================================
@@ -61,14 +57,11 @@ def estrai_elementi_pagina(pagina_pdf, y_min=75, y_max=780):
     for parola in parole_grezze:
         x0, top, x1, bottom = parola['x0'], parola['top'], parola['x1'], parola['bottom']
         
-        # La Ghigliottina Spaziale (Salta header e footer)
         if top < y_min or top > y_max:
             continue
             
-        # Lo Scudo Anti-Doppioni (Salta le parole che si trovano dentro una tabella)
         dentro_tabella = False
         for bx0, btop, bx1, bbottom in aree_tabelle:
-            # Controllo geometrico di intersezione
             if x1 > bx0 and x0 < bx1 and bottom > btop and top < bbottom:
                 dentro_tabella = True
                 break
@@ -76,7 +69,6 @@ def estrai_elementi_pagina(pagina_pdf, y_min=75, y_max=780):
         if dentro_tabella:
             continue
             
-        # Raggruppamento delle parole rimanenti per riga (altezza)
         y_top = round(top)
         riga_trovata = False
         for y in righe_grezze.keys():
@@ -112,7 +104,6 @@ def estrai_elementi_pagina(pagina_pdf, y_min=75, y_max=780):
     # ==========================================
     # 4. ALLINEAMENTO FINALE Y-TOP
     # ==========================================
-    # Mescoliamo tabelle e righe testuali nell'ordine esatto in cui appaiono dall'alto al basso
     elementi_pagina.sort(key=lambda e: e['y_top'])
     
     return elementi_pagina
@@ -127,7 +118,6 @@ def classifica_riga(testo_riga, size_max, size_moda, font_moda):
     font_lower = font_moda.lower()
     is_bold = "bold" in font_lower
     
-    # Intercettiamo immediatamente le nostre Tabelle Markdown
     if font_lower == "tabellamarkdown":
         return "TESTO_TABELLA"
     
@@ -220,13 +210,11 @@ def crea_json_definitivo(percorso_pdf, percorso_csv):
             if stato_corrente["text_buffer"] and indice_pagina > 0:
                 salva_blocco_corrente(indice_pagina - 1)
 
-            # Estrazione logica dal Modulo 1 (Ora si chiama estrai_elementi_pagina)
             elementi = estrai_elementi_pagina(pagina)
             
             for elem in elementi:
                 testo = elem["testo"]
                 
-                # Classificazione dal Modulo 2
                 tag = classifica_riga(testo, elem["size_max"], elem["size_moda"], elem["font_moda"])
                 
                 # --- Smistamento Logico ---
@@ -247,7 +235,6 @@ def crea_json_definitivo(percorso_pdf, percorso_csv):
                     stato_corrente["title"] = testo
                     
                 elif tag == "TESTO_TABELLA":
-                    # Mettiamo le tabelle esattamente dove cadono
                     stato_corrente["text_buffer"].append(testo)
                     
                 elif tag == "TESTO_PUNTATO":
@@ -263,7 +250,6 @@ def crea_json_definitivo(percorso_pdf, percorso_csv):
                 else: 
                     stato_corrente["text_buffer"].append(testo)
                     
-    # --- 4. FINE DOCUMENTO ---
     salva_blocco_corrente(len(pdf.pages) - 1)
     
     return risultato_json

@@ -95,28 +95,51 @@ Il sistema segue una classica pipeline **Retrieval-Augmented Generation**:
 
 ```
 ARIS/
+├── 📁 artifacts/                        # Artifacts del progetto
+│   ├── 📄 analysis_chunking.md
+│   └── 📄 analysis_knowledge_base.md
+|
 ├── 📁 data/
 │   ├── 📁 raw/                          # Documentazione originale
 │   │   ├── 📁 manuali_manutenzione/     # Manuali PDF del controller
 │   │   ├── 📁 codici_errore/            # Tabelle errori e troubleshooting
-│   │   ├── 📁 procedure/               # Procedure di sostituzione
+│   │   ├── 📁 procedure/                # Procedure di sostituzione
 │   │   ├── 📁 schede_tecniche/          # Schemi circuiti e cablaggi
-│   │   └── 📁 metadata/                # Indice documentale (CSV)
+│   │   └── 📁 metadata/                 # Indice documentale (CSV)
 │   ├── 📁 processed/                    # Testo estratto (JSON)
 │   └── 📁 chunks/                       # Chunk pronti per il RAG
 │
 ├── 📁 src/
-│   └── 📁 estrazione/                   # Script di estrazione PDF
-│       ├── 📄 estrazione_overview_configuration.py
-│       └── 📄 estrazione_checks_maintenance.py
+│   ├── 📁 estrazione/                   # Script di estrazione PDF
+│   │   └── 📄 document_loader.py
+|   ├── 📁 chunking/                     # Script di chunking
+│   │   └── 📄 chunking.py
+|   ├── 📁 embeddings/                   # Script per la creazione del database vettoriale
+│   │   └── 📄 create_vector_db.py
+|   ├── 📁 preprocessing/                # Script di pulizia dati
+│   │   └── 📄 data_cleaner.py
+|   ├── 📁 rag_pipeline/                 # Pipeline RAG
+│   │   ├── 📄 rag_pipeline.py           # Pipeline Puro RAG (Vector Search)
+│   │   └── 📄 rag_pipeline_hybrid.py    # Pipeline Ibrida (BM25 + Vector Search)
+│   └── 📁 app/                          # Interfaccia Streamlit
+│       └── 📄 app.py
 │
-├── 📁 vector_db/                        # Database vettoriale
+├── 📁 vector_db/                       # Database vettoriale ChromaDB
+│   ├── 📁 chroma_locale_300/           # bge-m3 · collection "langchain" · 300 token
+│   ├── 📁 chroma_locale_700/           # bge-m3 · collection "langchain" · 700 token
+│   ├── 📁 chroma_locale_1000/          # bge-m3 · collection "langchain" · 1000 token
+│   ├── 📁 chroma_cloud_300/            # text-embedding-3-small · collection "langchain" · 300 token
+│   ├── 📁 chroma_cloud_700/            # text-embedding-3-small · collection "langchain" · 700 token
+│   └── 📁 chroma_cloud_1000/           # text-embedding-3-small · collection "langchain" · 1000 token
+|
 ├── 📁 notebooks/                        # Analisi e sperimentazione
 ├── 📁 tests/                            # Dataset di test e valutazione
 ├── 📁 thesis_report/                    # Elaborato di tesi
 │
+├── 📄 .env                              # API Key e variabili d'ambiente
 ├── 📄 requirements.txt                  # Dipendenze Python
 ├── 📄 LICENSE                           # MIT License
+├── 📄 INFO.md                           # Informazioni sul progetto
 └── 📄 README.md                         # Questo file
 ```
 
@@ -143,8 +166,9 @@ Il sistema elabora la documentazione ufficiale FANUC per il controller **R-30iB 
 
 ### Prerequisiti
 
-- Python 3.10+
-- [Conda](https://docs.conda.io/) (consigliato) o pip
+- Python 3.11+
+- [Conda](https://docs.conda.io/) (consigliato)
+- [LM Studio](https://lmstudio.ai/) per l'esecuzione locale del LLM
 
 ### Setup con Conda
 
@@ -153,20 +177,26 @@ Il sistema elabora la documentazione ufficiale FANUC per il controller **R-30iB 
 git clone https://github.com/DanieleDiSpirito/ARIS.git
 cd ARIS
 
-# Crea e attiva l'ambiente
-conda create -n aris python=3.10 -y
-conda activate aris
+# Crea e attiva l'ambiente (Python 3.11)
+conda create -n aris_311 python=3.11 -y
+conda activate aris_311
 
 # Installa le dipendenze
 pip install -r requirements.txt
 ```
 
-### Setup con pip
+### Configurazione `.env`
 
-```bash
-git clone https://github.com/DanieleDiSpirito/ARIS.git
-cd ARIS
-pip install -r requirements.txt
+Crea un file `.env` nella root del progetto:
+
+```env
+# Chiave OpenRouter (per LLM e Embedding cloud)
+OPENAI_API_KEY=sk-or-v1-...
+
+# Opzionale: LangSmith (per debug della pipeline)
+# LANGCHAIN_TRACING_V2=true
+# LANGCHAIN_API_KEY=ls__...
+# LANGCHAIN_PROJECT=aris-rag-project
 ```
 
 ---
@@ -178,13 +208,11 @@ pip install -r requirements.txt
 Esegui gli script di estrazione dalla directory `src/estrazione/`:
 
 ```bash
-cd src/estrazione
-
 # Estrae testo e tabelle da overview_configuration.pdf
-python estrazione_overview_configuration.py
+python src/estrazione/estrazione_overview_configuration.py
 
 # Estrae testo da checks_maintenance.pdf
-python estrazione_checks_maintenance.py
+python src/estrazione/estrazione_checks_maintenance.py
 ```
 
 I file JSON estratti vengono salvati in `data/processed/`.
@@ -212,6 +240,43 @@ Ogni blocco estratto segue questo schema JSON:
 | `section` | Codice sezione (es. 2.1, 2.3) |
 | `title` | Titolo della sezione corrente |
 | `text` | Testo estratto e pulito |
+
+### 3. Pipeline RAG — Test da Terminale
+
+Entrambi gli script si avviano dalla **root del progetto** (`ARIS/`) e supportano gli stessi argomenti:
+
+| Argomento | Valori | Default | Descrizione |
+|---|---|---|---|
+| `--env` | `locale`, `cloud` | `locale` | LM Studio locale o OpenRouter cloud |
+| `--chunk_size` | `300`, `700`, `1000` | `700` | Dimensione chunk → seleziona il DB corretto |
+| `--query` | stringa | `"SRVO-004?"` | Domanda da porre al sistema |
+
+```bash
+# Puro RAG (Vector Search), motore locale
+python src/rag_pipeline/rag_pipeline.py --query "Cosa significa l'allarme SRVO-004?"
+
+# Puro RAG, motore cloud (OpenRouter), chunk da 700
+python src/rag_pipeline/rag_pipeline.py --env cloud --chunk_size 700 --query "Specifiche Main board A05B-2650-H001"
+
+# Ibrido BM25 + Vector Search, motore locale
+python src/rag_pipeline/rag_pipeline_hybrid.py --query "Cosa significa l'allarme SRVO-004?"
+```
+
+> **Embedding usato:**
+> - `locale` → `BAAI/bge-m3` (1024 dim, eseguito localmente, nessuna API)
+> - `cloud` → `text-embedding-3-small` (1536 dim, OpenRouter)
+
+### 4. Interfaccia Streamlit
+
+```bash
+conda activate aris_311
+cd src/app
+python -m streamlit run app.py
+```
+
+Dalla sidebar è possibile selezionare:
+- **Motore LLM**: locale (LM Studio) o cloud (OpenRouter)
+- **Dimensione Chunk**: per scegliere il Vector DB corrispondente
 
 ---
 
@@ -250,14 +315,18 @@ L'estrazione utilizza un approccio **dual-engine** per massimizzare la qualità:
 - [x] Estrazione completa degli 8 manuali PDF
 - [x] Preprocessing avanzato e pulizia testuale (Filtro rumore OCR, label `[Caption]`)
 - [x] Chunking semantico context-aware (Iniezione Titoli, Gestione Tabelle Markdown, Metadati)
-- [ ] Creazione embeddings (Sperimentazione Cloud vs Locale)
-- [ ] Popolamento Vector database (FAISS / ChromaDB)
-- [ ] Pipeline RAG completa (Retriever + Generatore)
-- [ ] Integrazione LLM (Gestione risposta e citazione esatta delle fonti)
-- [ ] Prompt engineering e tecniche di mitigazione allucinazioni
-- [ ] Interfaccia utente interattiva (Streamlit)
+- [x] Creazione embeddings — locale (`BAAI/bge-m3`) e cloud (`text-embedding-3-small`)
+- [x] Popolamento Vector database (ChromaDB · collection `langchain` · chunk da 700 token · locale + cloud)
+- [x] Pipeline RAG Puro (`rag_pipeline.py`) — Vector Search con embedding dinamico
+- [x] Pipeline RAG Ibrida (`rag_pipeline_hybrid.py`) — BM25 + Vector Search (EnsembleRetriever)
+- [x] Parametri CLI flessibili (`--env`, `--chunk_size`, `--query`) con DB path dinamico
+- [x] Integrazione LLM locale (LM Studio) e Cloud (OpenRouter)
+- [x] Prompt engineering avanzato (System/Human separati, lettura tabelle, formattazione adattiva)
+- [x] Interfaccia utente Streamlit (`src/app/app.py`) — sidebar con selezione env e chunk_size
+- [x] Debug chunk a schermo (anteprima testi e metadati recuperati per ogni query)
+- [ ] Configurazione LangSmith per tracing della pipeline (aggiungere variabili `.env`)
 - [ ] Costruzione dataset di test (15-20 casi d'uso di manutenzione reale)
-- [ ] Validazione quantitativa (es. LLM-as-a-judge con RAGAS/Trulens)
+- [ ] Valutazione quantitativa (RAGAS / LLM-as-a-judge)
 
 ---
 

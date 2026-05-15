@@ -4,13 +4,11 @@ import argparse
 import os
 from dotenv import load_dotenv
 
-# Importiamo gli stessi moduli usati per creare il vector db
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_openai import OpenAIEmbeddings
 
 load_dotenv()
 
-# Determiniamo i percorsi in modo robusto
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TESTS_DIR = os.path.dirname(BASE_DIR)
 PROJECT_ROOT = os.path.dirname(TESTS_DIR)
@@ -55,7 +53,6 @@ def calcola_hit_rate(db_path, env, test_file):
     client = chromadb.PersistentClient(path=db_path)
     emb_fn = get_embedding_function(env)
 
-    # Determiniamo il nome della collection. Langchain di default usa "langchain".
     collections = [c.name for c in client.list_collections()]
     if not collections:
         print(f"❌ Nessuna collezione trovata in {db_path}")
@@ -69,7 +66,6 @@ def calcola_hit_rate(db_path, env, test_file):
 
     collection = client.get_collection(name=collection_name, embedding_function=emb_fn)
 
-    # Caricamento domande
     if not os.path.exists(test_file):
         print(f"❌ File di test non trovato: {test_file}")
         return 0.0
@@ -81,16 +77,13 @@ def calcola_hit_rate(db_path, env, test_file):
     hits = 0
 
     for _, row in df.iterrows():
-        # Embedding manuale della query per evitare ambiguità con l'adapter
         query_embedding = emb_fn.embed_query(row['question'])
 
-        # Query al database con embedding pre-calcolato
         results = collection.query(
             query_embeddings=[query_embedding],
             n_results=3
         )
 
-        # Verifica nei metadati
         trovato = False
         if results['metadatas'] and len(results['metadatas']) > 0:
             for meta in results['metadatas'][0]:
@@ -116,16 +109,13 @@ def main():
 
     test_file = os.path.join(TESTS_DIR, f"test_questions_{args.lang}.csv")
 
-    # Se l'utente non specifica i DB, cerchiamo quelli generati per l'ambiente corrente
     if args.db:
         db_list = args.db
     else:
         db_list = [f"chroma_{args.env}_300", f"chroma_{args.env}_700", f"chroma_{args.env}_1000"]
-        # DB legacy
         if args.env == "locale":
             db_list.extend(["db_nitro", "db_standard", "db_exacto"])
 
-    # Controlliamo quali DB esistono effettivamente
     db_to_eval = []
     for db in db_list:
         db_path = os.path.join(PROJECT_ROOT, "vector_db", db)
