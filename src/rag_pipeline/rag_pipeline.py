@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_core.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate
-from langchain_core.runnables import RunnablePassthrough
+from langchain_core.runnables import RunnablePassthrough, RunnableLambda
 from langchain_core.output_parsers import StrOutputParser
 from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -42,33 +42,51 @@ def get_embeddings(env: str):
 
 def build_prompt():
     """Costruisce il prompt con System+Human separati.
-    - System: regole rigide di sicurezza, istruzioni per leggere le tabelle, regole di formattazione.
-    - Human: contesto recuperato + domanda dell'operatore.
+    Gestisce tre situazioni:
+      1. Messaggi di chat generica (saluti, ringraziamenti, follow-up)
+      2. Riferimenti alla conversazione precedente
+      3. Domande tecniche sui manuali Fanuc
     """
-    system_template = """Sei un assistente tecnico esperto per robot Fanuc.
-Devi rispondere ESCLUSIVAMENTE usando il "Contesto tecnico recuperato".
+    system_template = """Sei ARIS, un assistente tecnico esperto per robot Fanuc, amichevole e disponibile.
 
-ATTENZIONE ALLA LETTURA DEI DATI:
-Il contesto spesso contiene tabelle formattate con il carattere "|".
-Se l'operatore chiede le specifiche di un codice (es. A05B-...), analizza riga per riga queste tabelle per trovare la corrispondenza.
-Se trovi il dato, estrailo e rendilo discorsivo.
-Solo se, dopo aver letto attentamente tutte le righe e le tabelle, sei ASSOLUTAMENTE CERTO che il dato non esista, scrivi testualmente:
-"La documentazione disponibile non contiene informazioni sufficienti per indicare una procedura sicura. Si consiglia di consultare un tecnico qualificato."
+Hai accesso a:
+- Un "Contesto tecnico recuperato" dai manuali Fanuc
+- Una "Cronologia conversazione" con i messaggi precedenti
 
-Non inventare mai procedure, codici errore, valori tecnici o bypass di sicurezza.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REGOLA 1 — MESSAGGI DI CHAT GENERICA
+Se il messaggio dell'operatore è un saluto (es. "ciao", "buongiorno", "grazie"), 
+una presentazione, o una domanda non tecnica (es. "cosa sai fare?", "chi sei?"),
+rispondi in modo naturale e cordiale SENZA usare il contesto tecnico.
+Presentati brevemente come assistente tecnico per robot Fanuc.
 
-REGOLE DI FORMATTAZIONE:
-- Se la domanda è su un ALLARME, ERRORE o GUASTO:
-  Rispondi usando un elenco numerato: 1. Significato, 2. Possibili cause, 3. Controlli, 4. Azioni, 5. Fonte documentale.
-- Per DOMANDE SU SPECIFICHE o COMPONENTI (es. schede, codici parte):
-  NON usare l'elenco dei guasti. Scrivi una risposta discorsiva chiara con le caratteristiche richieste.
-  Aggiungi sempre alla fine, su una nuova riga: "Fonte documentale: [Nome File e Pagina]".
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REGOLA 2 — RIFERIMENTI ALLA CONVERSAZIONE PRECEDENTE
+Se il messaggio fa riferimento a uno scambio precedente (es. "quella risposta non va bene",
+"puoi approfondire?", "e per l'asse 2?", "come dicevi prima..."), usa la Cronologia 
+conversazione per capire il contesto, poi rispondi o correggi di conseguenza.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+REGOLA 3 — DOMANDE TECNICHE SUI MANUALI
+Se la domanda è tecnica (allarmi, procedure, specifiche hardware, connessioni):
+- Rispondi ESCLUSIVAMENTE usando il "Contesto tecnico recuperato".
+- Il contesto contiene tabelle con "|": analizza riga per riga per trovare la corrispondenza.
+- Solo se sei ASSOLUTAMENTE CERTO che il dato non esista nella documentazione, scrivi:
+  "La documentazione disponibile non contiene informazioni sufficienti. Si consiglia di consultare un tecnico qualificato."
+- Non inventare mai procedure, codici errore, valori tecnici o bypass di sicurezza.
+
+FORMATTAZIONE per domande tecniche:
+- ALLARME / ERRORE / GUASTO → elenco numerato: 1. Significato 2. Possibili cause 3. Controlli 4. Azioni 5. Fonte.
+- SPECIFICHE / COMPONENTI → risposta discorsiva con: "Fonte documentale: [File e Pagina]" alla fine.
 """
 
-    human_template = """Contesto tecnico recuperato:
+    human_template = """Cronologia conversazione (ultimi scambi):
+{history}
+
+Contesto tecnico recuperato:
 {context}
 
-Domanda dell'operatore:
+Messaggio dell'operatore:
 {question}"""
 
     return ChatPromptTemplate.from_messages([
@@ -98,13 +116,21 @@ def format_docs_with_sources(docs):
 
 
 def setup_rag_chain(retriever, env="locale"):
-    """Configura la pipeline RAG collegando retriever, prompt e LLM."""
+    """Configura la pipeline RAG collegando retriever, prompt e LLM.
+
+    La chain accetta un dict: {"question": str, "history": str}
+    - question : domanda corrente dell'operatore
+    - history  : ultimi scambi formattati come stringa (può essere vuota)
+    """
     if env == "locale":
-        print("🤖 LLM: Locale (LM Studio su localhost:1234)")
+        print(f"🤖 LLM: Locale (server su localhost:1234)")
+        local_model = os.getenv("LOCAL_LLM_MODEL", None)
+        base_url = os.getenv("LOCAL_LLM_URL", "http://localhost:1234/v1")
         llm = ChatOpenAI(
-            base_url="http://localhost:1234/v1",
+            model=local_model,
+            base_url=base_url,
             api_key="lm-studio",
-            temperature=0.0  # Zero creatività per massima precisione tecnica
+            temperature=0.1
         )
     elif env == "cloud":
         print("☁️ LLM: Cloud (OpenRouter)")
@@ -114,16 +140,24 @@ def setup_rag_chain(retriever, env="locale"):
             model="openai/gpt-3.5-turbo",
             openai_api_base="https://openrouter.ai/api/v1",
             openai_api_key=os.getenv("OPENAI_API_KEY"),
-            temperature=0.0
+            temperature=0.1
         )
     else:
         raise ValueError("Il parametro env deve essere 'locale' o 'cloud'")
 
     prompt = build_prompt()
 
-    # Pipeline RAG: retriever → formattazione → prompt → LLM → output
+    # Estrae la sola domanda dal dict di input per il retriever
+    get_question = RunnableLambda(lambda x: x["question"] if isinstance(x, dict) else x)
+    get_history  = RunnableLambda(lambda x: x.get("history", "") if isinstance(x, dict) else "")
+
+    # Pipeline RAG: retriever usa solo {question}, il prompt riceve context + question + history
     rag_chain = (
-        {"context": retriever | format_docs_with_sources, "question": RunnablePassthrough()}
+        {
+            "context":  get_question | retriever | format_docs_with_sources,
+            "question": get_question,
+            "history":  get_history,
+        }
         | prompt
         | llm
         | StrOutputParser()

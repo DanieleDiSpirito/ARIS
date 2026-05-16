@@ -7,9 +7,9 @@ rag_folder_path = os.path.join(current_dir, "..", "rag_pipeline")
 sys.path.append(rag_folder_path)
 
 try:
-    from rag_pipeline import setup_rag_chain, get_db_path, get_embeddings
+    from rag_pipeline_hybrid import setup_rag_chain, get_db_path, get_embeddings, build_hybrid_retriever
 except ImportError:
-    st.error(f"❌ Impossibile trovare 'rag_pipeline.py' in: {rag_folder_path}")
+    st.error(f"❌ Impossibile trovare 'rag_pipeline_hybrid.py' in: {rag_folder_path}")
     st.stop()
 
 from langchain_chroma import Chroma
@@ -20,7 +20,7 @@ PROJECT_ROOT = os.path.abspath(os.path.join(current_dir, "..", ".."))
 
 @st.cache_resource
 def init_retriever(env: str, chunk_size: int):
-    """Inizializza il retriever con il DB e l'embedding corretto per l'env scelto."""
+    """Inizializza il retriever ibrido (BM25 + Vector Search) per l'env scelto."""
     db_path = os.path.join(PROJECT_ROOT, get_db_path(env, chunk_size))
 
     if not os.path.exists(db_path):
@@ -33,7 +33,7 @@ def init_retriever(env: str, chunk_size: int):
         collection_name=COLLECTION_NAME,
         embedding_function=embedder
     )
-    return lc_chroma.as_retriever(search_kwargs={"k": 3})
+    return build_hybrid_retriever(lc_chroma, k=3)
 
 
 @st.cache_resource
@@ -74,10 +74,10 @@ st.sidebar.info(f"""
 - Collection: `{COLLECTION_NAME}`
 - Chunk Size: `{scelta_chunk_size} token`
 - Embedding: `{embedding_label}`
-- Retriever: `Puro Vector Search`
+- Retriever: `Ibrido BM25 + Vector Search (50/50)`
 """)
 
-st.title("🤖 ARIS: Assistente per Manutenzione Industriale")
+st.title("🤖  ARIS: Assistente per Manutenzione Industriale")
 st.caption("Supporto tecnico basato su RAG per Robot Fanuc R-30iB Mate")
 
 # Inizializza retriever + chain (entrambi cached per env+chunk_size)
@@ -105,7 +105,18 @@ if prompt := st.chat_input("Chiedi aiuto su un errore o una procedura (es: SRVO-
 
         with st.spinner(f"L'IA ({scelta_env}) sta consultando i manuali..."):
             try:
-                full_response = rag_chain.invoke(prompt)
+                # Costruisce la cronologia degli ultimi 3 scambi (6 messaggi)
+                # escludendo il messaggio appena aggiunto
+                history_msgs = st.session_state.messages[:-1][-6:]
+                history_str = "\n".join(
+                    f"{m['role'].upper()}: {m['content']}"
+                    for m in history_msgs
+                ) if history_msgs else "(nessuna conversazione precedente)"
+
+                full_response = rag_chain.invoke({
+                    "question": prompt,
+                    "history":  history_str,
+                })
                 placeholder.markdown(full_response)
                 st.session_state.messages.append({"role": "assistant", "content": full_response})
             except Exception as e:
