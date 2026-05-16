@@ -95,7 +95,27 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if prompt := st.chat_input("Chiedi aiuto su un errore o una procedura (es: SRVO-004)..."):
+with st.bottom:
+    audio_value = st.audio_input("🎤 Registra messaggio vocale", label_visibility="collapsed")
+    prompt = st.chat_input("Chiedi aiuto su un errore o una procedura (es: SRVO-004)...")
+
+
+if audio_value is not None and st.session_state.get("last_audio_value") != audio_value:
+    st.session_state["last_audio_value"] = audio_value
+    with st.spinner("Sto trascrivendo l'audio..."):
+        try:
+            import speech_recognition as sr
+            r = sr.Recognizer()
+            with sr.AudioFile(audio_value) as source:
+                audio_data = r.record(source)
+            testo_vocale = r.recognize_google(audio_data, language="it-IT")
+            prompt = testo_vocale  # Sovrascrive il prompt con la trascrizione
+        except sr.UnknownValueError:
+            st.error("❌ Non ho capito l'audio. Riprova.")
+        except Exception as e:
+            st.error(f"❌ Errore nel riconoscimento vocale: {e}")
+
+if prompt:
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)

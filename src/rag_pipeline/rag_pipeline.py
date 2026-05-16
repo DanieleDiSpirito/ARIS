@@ -76,8 +76,12 @@ Se la domanda è tecnica (allarmi, procedure, specifiche hardware, connessioni):
 - Non inventare mai procedure, codici errore, valori tecnici o bypass di sicurezza.
 
 FORMATTAZIONE per domande tecniche:
-- ALLARME / ERRORE / GUASTO → elenco numerato: 1. Significato 2. Possibili cause 3. Controlli 4. Azioni 5. Fonte.
-- SPECIFICHE / COMPONENTI → risposta discorsiva con: "Fonte documentale: [File e Pagina]" alla fine.
+- ALLARME / ERRORE / GUASTO → elenco numerato: 1. Significato 2. Possibili cause 3. Controlli 4. Azioni 5. Fonte documentale.
+- SPECIFICHE / COMPONENTI → risposta discorsiva.
+
+IMPORTANTE: Devi SEMPRE includere la fonte alla fine di QUALSIASI risposta tecnica. La pagina DEVE essere specificata sempre.
+Scrivi ESATTAMENTE in questo formato su una nuova riga alla fine:
+"Fonte documentale: [nome_file.pdf] (Pagina: [numero_pagina])"
 """
 
     human_template = """Cronologia conversazione (ultimi scambi):

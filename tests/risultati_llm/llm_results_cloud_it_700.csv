@@ -1,0 +1,73 @@
+id,domanda,risposta_llm,llm_file_trovato,llm_pag_trovata,expected_file,expected_page,match,tempo_sec,stato
+Q001,Quali sono le specifiche della Main board con codice A05B-2650-H001 per il controller R-30iB Mate?,"La Main board con codice A05B-2650-H001 per il controller R-30iB Mate ha le seguenti specifiche:
+- Ordering Specification: A20B-8200-0669
+- Board Specification: Non specificato nel contesto tecnico recuperato
+
+Per ulteriori dettagli sulla Board Specification, ti consiglio di consultare la documentazione tecnica relativa al controller R-30iB Mate.
+
+Fonte documentale: connections.pdf (Pagina: 218)",connections.pdf,218,circuit_boards_amplifiers.pdf,94,NO,2.39,OK
+Q002,Qual è la corrente di uscita massima per ogni punto DO nell'interfaccia di controllo dei dispositivi periferici?,"La corrente di uscita massima per ogni punto DO nell'interfaccia di controllo dei dispositivi periferici è di 0.2 A.
+Fonte documentale: connections.pdf (Pagina: 163)",connections.pdf,163,connections.pdf,164,SI,1.25,OK
+Q003,Qual è la temperatura ambiente consentita per il funzionamento del controller?,"La temperatura ambiente consentita per il funzionamento del controller è specificata a 45 °C. Se la temperatura ambiente supera questo valore, è necessario raffreddarla per garantire il corretto funzionamento del sistema.
+
+Fonte documentale: connections.pdf (Pagina: 211)",connections.pdf,211,connections.pdf,209,NO,1.24,OK
+Q004,Qual è il consumo medio di energia per il robot M-1iA?,"Il consumo medio di energia per il robot M-1iA è di 1kVA.
+
+Fonte documentale: connections.pdf (Pagina: 210)",connections.pdf,210,connections.pdf,209,SI,1.11,OK
+Q005,Cosa significa l'allarme SRVO-004 Fence open e come si ripristina il safety fence?,"L'allarme SRVO-004 ""Fence open"" indica che, in modalità di funzionamento automatico, il contatto del safety fence collegato a EAS1-EAS11 o EAS2-EAS21 di TBOP20 è aperto. Per ripristinare il safety fence, segui queste azioni:
+1. Quando il safety fence è collegato, chiudilo.
+2. Controlla i cavi e gli interruttori collegati tra EAS1 ed EAS11 e tra EAS2 ed EAS21 del blocco terminale TBOP20 sulla scheda di arresto di emergenza.
+3. Se il segnale del safety fence non viene utilizzato, effettua un collegamento tra EAS1 ed EAS11 e tra EAS2 ed EAS21 del blocco terminale TBOP20 sulla scheda di arresto di emergenza.
+4. Controlla l'interruttore di modalità. Se riscontri problemi, sostituisci l'interruttore di modalità.
+5. Sostituisci la scheda di arresto di emergenza.
+
+Se l'allarme SRVO-004 viene emesso insieme a SRVO-213, potrebbe essersi bruciato un fusibile. Segui le stesse azioni indicate per SRVO-213.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 23)",troubleshooting_alarms.pdf,23,troubleshooting_alarms.pdf,23,SI,3.89,OK
+Q006,Cosa indica l'allarme SRVO-014 e cosa succede al controller dopo che si verifica?,"L'allarme SRVO-014 indica un'anomalia del motore del ventilatore (Fan motor abnormal). Quando un motore del ventilatore si ferma sull'unità backplane, il Teach pendant mostra il seguente messaggio. Dopo un minuto dall'attivazione dell'allarme, il robot si ferma e non può essere operato dal TP. Il robot può essere ripristinato sostituendo il motore del ventilatore. Il numero tra parentesi indica quale ventilatore è anomalo:
+- (1): FAN0
+- (2): FAN1
+- (3): entrambi i ventilatori
+
+Dopo un minuto dall'attivazione di questo allarme, il controller si fermerà automaticamente. Per risolvere il problema, è necessario controllare il motore del ventilatore e i relativi cavi, sostituendoli se necessario. Successivamente, è consigliabile sostituire la scheda del ventilatore. Prima di eseguire questa azione, è importante effettuare un backup completo del controller per salvare tutti i programmi e le impostazioni. Infine, è consigliabile sostituire la scheda principale del controller.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 29)",troubleshooting_alarms.pdf,29,troubleshooting_alarms.pdf,29,SI,3.12,OK
+Q007,Cosa indica l'allarme SRVO-043?,"La documentazione fornisce informazioni sull'allarme SRVO-043. Ecco cosa indica:
+
+1. Significato: L'allarme SRVO-043 indica un errore di CRCERR (Errore di controllo di ridondanza ciclica) durante la comunicazione.
+2. Possibili cause: Disturbi nei dati seriali durante la comunicazione.
+3. Controlli: Verificare la corretta connessione e integrità dei cavi di comunicazione.
+4. Azioni: Seguire le azioni indicate per l'allarme SRVO-068.
+5. Fonte documentale: troubleshooting_alarms.pdf (Pagina: 43)",troubleshooting_alarms.pdf,43,troubleshooting_alarms.pdf,33,NO,1.89,OK
+Q008,Qual è la causa dell'allarme SRVO-213?,"Allarme SRVO-213:
+1. Significato: Errore di comunicazione tra il modulo di tracciamento della linea e il modulo Pulsecoder.
+2. Possibili cause: Comunicazione anomala tra il Pulsecoder e il modulo di tracciamento della linea.
+3. Controlli: Verificare la connessione e lo stato dei cavi tra i due moduli. Controllare eventuali interferenze esterne che potrebbero influire sulla comunicazione.
+4. Azioni: Eseguire le stesse azioni consigliate per l'allarme SRVO-090.
+5. Fonte documentale: troubleshooting_alarms.pdf (Pagina: 45)",troubleshooting_alarms.pdf,45,troubleshooting_alarms.pdf,53,NO,1.9,OK
+Q009,Quali sono i passaggi per resettare l'Overtravel (Overtravel release) al momento dell'installazione?,"Per resettare l'Overtravel (Overtravel release) al momento dell'installazione, segui questi passaggi:
+
+1. Seleziona [OT release] sulla schermata di rilascio dell'overtravel per rilasciare ciascun asse del robot dallo stato di overtravel.
+2. Tieni premuto il tasto shift e premi il pulsante di rilascio dell'allarme per ripristinare la condizione di allarme.
+3. Continua a tenere premuto il tasto shift e muovi manualmente gli assi per portarli tutti nella gamma di movimento consentita.
+
+Fonte documentale: connections.pdf (Pagina: 214)",connections.pdf,214,connections.pdf,214,SI,2.06,OK
+Q010,Qual è la procedura per abilitare o disabilitare l'HBK (Hand Broken) dal Teach Pendant?,"Per abilitare o disabilitare l'HBK (Hand Broken) dal Teach Pendant, segui questa procedura:
+
+1. Premi il tasto [MENU] sul Teach Pendant.
+2. Seleziona [NEXT].
+3. Seleziona [SYSTEM].
+4. Premi il tasto ""F1"" (TYPE) sul Teach Pendant.
+5. Seleziona ""Config"" per abilitare o disabilitare l'HBK.
+
+Ricorda che ci sono diverse impostazioni e condizioni associate all'abilitazione o disabilitazione dell'HBK, come indicate nella tabella riportata di seguito:
+
+| Status | Hand Broken enable/disable setting | HBK | HBK detection | Robot operation | Message |
+| 1 | Enable | CLOSE | Yes | Possible | None |
+| 2 | Enable | OPEN | Yes | Impossible | SRVO-006 |
+| 3 | Disable | CLOSE | No | Impossible | SRVO-302 |
+| 4 | Disable | OPEN | No | Possible | At cold start, SRVO-300 |
+
+Ricorda che è importante seguire attentamente le istruzioni e le condizioni specificate per evitare errori o allarmi.
+
+Fonte documentale: connections.pdf (Pagina: 214)",connections.pdf,214,connections.pdf,214,SI,2.92,OK

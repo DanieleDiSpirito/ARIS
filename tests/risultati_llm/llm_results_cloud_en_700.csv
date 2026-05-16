@@ -1,0 +1,56 @@
+id,domanda,risposta_llm,llm_file_trovato,llm_pag_trovata,expected_file,expected_page,match,tempo_sec,stato
+Q001,What are the specifications of the Main board with part number A05B-2650-H001 for the R-30iB Mate controller?,"The Main board with part number A05B-2650-H001 for the R-30iB Mate controller has the following specifications:
+- Ordering Specification: A05B-2650-H001
+- Board Specification: A20B-8200-0669
+- Peripheral device interface: 20
+- Remarks: Standard
+
+These are the details retrieved from the document ""connections.pdf"" on page 153.
+
+Fonte documentale: connections.pdf (Pagina: 153)",connections.pdf,153,circuit_boards_amplifiers.pdf,94,NO,2.15,OK
+Q002,What is the maximum output current for each DO point in the peripheral device control interface?,"The maximum output current per DO point in the peripheral device control interface is 0.2 A.
+Source document: connections.pdf (Page: 163)",connections.pdf,163,connections.pdf,164,SI,0.79,OK
+Q003,What is the allowable ambient temperature for the controller operation?,"The allowable ambient temperature for the controller operation is specified to be 45°C. If the ambient temperature exceeds this value, it is recommended to cool down the ambient temperature to ensure proper operation of the controller.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 30)",troubleshooting_alarms.pdf,30,connections.pdf,209,NO,1.22,OK
+Q004,What is the average power consumption for the M-1iA robot?,"The average power consumption for the M-1iA robot is 1kW.
+
+Fonte documentale: connections.pdf (Pagina: 210)",connections.pdf,210,connections.pdf,209,SI,0.88,OK
+Q005,What does the SRVO-004 Fence open alarm mean and how do you reset the safety fence?,"The SRVO-004 Fence open alarm indicates that in the automatic operation mode, the safety fence contact connected to EAS1-EAS11 or EAS2-EAS21 of TBOP20 is open. To reset the safety fence, you should follow these steps:
+1. Close the safety fence if it is connected.
+2. Check the cables and switches connected between EAS1 and EAS11 and between EAS2 and EAS21 of the terminal block TBOP20 on the emergency stop board.
+3. If the safety fence signal is not used, make a connection between EAS1 and EAS11 and between EAS2 and EAS21 of the terminal block TBOP20 on the emergency stop board.
+4. Check the mode switch and replace it if any trouble is found.
+5. If needed, replace the emergency stop board.
+
+Remember, if SRVO-004 is issued together with SRVO-213, a fuse may have blown, and you should take the same actions as for SRVO-213.
+
+Source document: troubleshooting_alarms.pdf (Page: 23)",troubleshooting_alarms.pdf,23,troubleshooting_alarms.pdf,23,SI,2.17,OK
+Q006,What does the SRVO-014 alarm indicate and what happens to the controller after it occurs?,"The SRVO-014 alarm indicates a Fan motor abnormality. When this alarm occurs, the Teach pendant will display a message indicating which fan (FAN0, FAN1, or both) is abnormal. Within one minute of the alarm, the robot will stop operating and cannot be controlled from the Teach pendant. To resolve this issue, you should check the fan motor and its cables, replacing them if necessary. If needed, replace the fan board. Before replacing the main board, it is recommended to perform a complete controller backup to save all programs and settings. If the alarm persists, the main board should be replaced.
+
+After 1 minute of the SRVO-014 alarm, the controller will stop operation.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 29)",troubleshooting_alarms.pdf,29,troubleshooting_alarms.pdf,29,SI,1.79,OK
+Q007,What does the SRVO-043 alarm indicate?,"La documentazione non contiene informazioni riguardanti un allarme con codice SRVO-043. Si consiglia di consultare un tecnico qualificato per ulteriori dettagli.
+Fonte documentale: [troubleshooting_alarms.pdf] (Pagina: 43)",troubleshooting_alarms.pdf,43,troubleshooting_alarms.pdf,33,NO,1.18,OK
+Q008,What is the cause of the SRVO-213 alarm?,"The cause of the SRVO-213 alarm is related to the communication between the Pulsecoder and the robot's main board. This alarm occurs when there is an abnormality in this communication link. To address this issue, you should check the connection between the Pulsecoder and the main board, ensuring that all cables are properly connected and there are no faults in the communication pathway. If any abnormalities are found, they should be corrected accordingly.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 45)",troubleshooting_alarms.pdf,45,troubleshooting_alarms.pdf,53,NO,1.43,OK
+Q009,What are the steps to reset the Overtravel (Overtravel release) at the time of installation?,"To reset the Overtravel at the time of installation, follow these steps:
+1) Select [OT release] on the overtravel release screen to release each robot axis from the overtravel state.
+2) Hold down the shift key, and press the alarm release button to reset the alarm condition.
+3) Still hold down the shift key, and jog to bring all axes into the movable range.
+
+These steps will help reset the Overtravel condition during the installation process.
+
+Fonte documentale: connections.pdf (Pagina: 214)",connections.pdf,214,connections.pdf,214,SI,1.36,OK
+Q010,What is the procedure to enable or disable the HBK (Hand Broken) from the Teach Pendant?,"To enable or disable the HBK (Hand Broken) from the Teach Pendant, follow these steps:
+1. Press the [MENU] key on the teach pendant.
+2. Select [NEXT].
+3. Select [SYSTEM].
+4. Press ""F1"" (TYPE) on the teach pendant.
+5. Select ""Config"" to disable/enable HBK.
+
+Remember to refer to Subsection 5.6.3 in the CONNECTIONS manual for more details on enabling or disabling the Hand Broken signal.
+
+Fonte documentale: connections.pdf (Pagina: 214)",connections.pdf,214,connections.pdf,214,SI,1.65,OK
