@@ -1,3 +1,5 @@
+import time
+import re
 import pandas as pd
 import chromadb
 import argparse
@@ -7,11 +9,14 @@ from dotenv import load_dotenv
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_openai import OpenAIEmbeddings
 
+from retrieval_metrics import calcola_metriche_query, stampa_report
+
 load_dotenv()
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-TESTS_DIR = os.path.dirname(BASE_DIR)
+BASE_DIR     = os.path.dirname(os.path.abspath(__file__))
+TESTS_DIR    = os.path.dirname(BASE_DIR)
 PROJECT_ROOT = os.path.dirname(TESTS_DIR)
+
 
 class LangchainEmbeddingAdapter:
     """Adattatore per usare gli embedding di Langchain con il client nativo di ChromaDB"""
@@ -39,7 +44,6 @@ def get_embedding_function(env):
     elif env == "cloud":
         if "OPENAI_API_KEY" not in os.environ:
             raise ValueError("OPENAI_API_KEY non è impostata nell'ambiente.")
-
         lc_embedder = OpenAIEmbeddings(
             model="text-embedding-3-small",
             openai_api_key=os.environ.get("OPENAI_API_KEY"),
@@ -49,14 +53,44 @@ def get_embedding_function(env):
     else:
         raise ValueError(f"Ambiente {env} non supportato.")
 
-def calcola_hit_rate(db_path, env, test_file):
+
+def _pagine_match(found_p: str, exp_p: str, tolleranza: int) -> bool:
+    """Confronto pagine con tolleranza opzionale ±N."""
+    found_p, exp_p = str(found_p).strip(), str(exp_p).strip()
+    if found_p == exp_p:
+        return True
+    if tolleranza == 0:
+        return False
+    try:
+        f_m = re.search(r'\d+', found_p)
+        e_m = re.search(r'\d+', exp_p)
+        if f_m and e_m and found_p[:f_m.start()] == exp_p[:e_m.start()]:
+            if abs(int(f_m.group()) - int(e_m.group())) <= tolleranza:
+                return True
+    except Exception:
+        pass
+    return False
+
+
+def valuta_db(db_path: str, env: str, test_file: str, k: int = 3,
+              tolleranza: int = 1, debug: bool = False) -> dict:
+    """
+    Esegue il retrieval vettoriale per ogni domanda del test set e
+    calcola l'insieme completo di metriche (Hit Rate@k, Precision@k,
+    Recall@k, MRR, breakdown per categoria e difficoltà, tempo medio).
+
+    Parametri
+    ---------
+    tolleranza : tolleranza di pagina ±N (default 1)
+    debug      : se True, stampa i dettagli delle domande non trovate
+    """
     client = chromadb.PersistentClient(path=db_path)
     emb_fn = get_embedding_function(env)
 
     collections = [c.name for c in client.list_collections()]
     if not collections:
         print(f"❌ Nessuna collezione trovata in {db_path}")
-        return 0.0
+        return {}
 
     collection_name = "manuali_fanuc"
     if "manuali_fanuc" not in collections and "langchain" in collections:
@@ -68,43 +102,73 @@ def calcola_hit_rate(db_path, env, test_file):
 
     if not os.path.exists(test_file):
         print(f"❌ File di test non trovato: {test_file}")
-        return 0.0
+        return {}
 
     df = pd.read_csv(test_file)
     if len(df) == 0:
-        return 0.0
+        return {}
 
-    hits = 0
+    all_metas = []
+    tempi     = []
 
     for _, row in df.iterrows():
+        t0 = time.perf_counter()
         query_embedding = emb_fn.embed_query(row['question'])
-
         results = collection.query(
             query_embeddings=[query_embedding],
-            n_results=3
+            n_results=k
         )
+        tempi.append(time.perf_counter() - t0)
 
-        trovato = False
-        if results['metadatas'] and len(results['metadatas']) > 0:
-            for meta in results['metadatas'][0]:
-                if meta and str(meta.get('page')) == str(row['expected_page']) and meta.get('file_name') == row['expected_file']:
-                    trovato = True
-                    break
+        metas = results['metadatas'][0] if results['metadatas'] else []
+        all_metas.append(metas)
 
-        if trovato:
-            hits += 1
+        if debug:
+            trovato = any(
+                m and m.get('file_name') == row['expected_file']
+                and _pagine_match(str(m.get('page', '')), str(row['expected_page']), tolleranza)
+                for m in metas
+            )
+            if not trovato:
+                print(f"\n❌ Errore sulla domanda: {row['id']}")
+                print(f"   Atteso : File '{row['expected_file']}' — Pagina '{row['expected_page']}'")
+                print(f"   Top {k} trovati (tolleranza ±{tolleranza}):")
+                for i, m in enumerate(metas):
+                    print(f"     {i+1}) File: '{m.get('file_name')}' — Pagina: '{m.get('page')}'")
+                print("-" * 50)
 
-    return (hits / len(df)) * 100
+    cats  = df['category'].tolist()   if 'category'   in df.columns else None
+    diffs = df['difficulty'].tolist() if 'difficulty' in df.columns else None
+
+    return calcola_metriche_query(
+        retrieved_metas=all_metas,
+        expected_files=df['expected_file'].tolist(),
+        expected_pages=df['expected_page'].astype(str).tolist(),
+        categories=cats,
+        difficulties=diffs,
+        k=k,
+        tolleranza=tolleranza,
+        tempi_retrieval=tempi,
+    )
+
 
 def main():
-    parser = argparse.ArgumentParser(description="Valuta il RAG su DB specifici")
-    parser.add_argument("--env", type=str, choices=["locale", "cloud"], default="locale",
-                        help="Ambiente usato per gli embedding (locale o cloud)")
-    parser.add_argument("--db", type=str, nargs='*',
-                        help="Nomi delle cartelle DB da valutare (es. chroma_cloud_700). Se non specificato, valuta quelli predefiniti.")
-    parser.add_argument("--lang", type=str, default="it", choices=["it", "en"],
-                        help="Lingua del test ('it' o 'en')")
-
+    parser = argparse.ArgumentParser(
+        description="Valuta il RAG vettoriale su DB specifici",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.add_argument("--env",        type=str, choices=["locale", "cloud"], default="locale",
+                        help="Ambiente usato per gli embedding")
+    parser.add_argument("--db",         type=str, nargs='*',
+                        help="Nomi delle cartelle DB (es. chroma_cloud_700)")
+    parser.add_argument("--lang",       type=str, default="it", choices=["it", "en"],
+                        help="Lingua del test")
+    parser.add_argument("--k",          type=int, default=3,
+                        help="Numero di chunk recuperati per query")
+    parser.add_argument("--tolleranza", type=int, default=1,
+                        help="Tolleranza di pagina ±N (0 = corrispondenza esatta)")
+    parser.add_argument("--debug",      action="store_true",
+                        help="Stampa i dettagli delle domande non trovate")
     args = parser.parse_args()
 
     test_file = os.path.join(TESTS_DIR, f"test_questions_{args.lang}.csv")
@@ -116,26 +180,37 @@ def main():
         if args.env == "locale":
             db_list.extend(["db_nitro", "db_standard", "db_exacto"])
 
-    db_to_eval = []
-    for db in db_list:
-        db_path = os.path.join(PROJECT_ROOT, "vector_db", db)
-        if os.path.exists(db_path):
-            db_to_eval.append((db, db_path))
+    db_to_eval = [
+        (db, os.path.join(PROJECT_ROOT, "vector_db", db))
+        for db in db_list
+        if os.path.exists(os.path.join(PROJECT_ROOT, "vector_db", db))
+    ]
 
     if not db_to_eval:
-        print(f"⚠️ Nessun vector DB trovato per la valutazione nell'ambiente '{args.env}'.")
-        print(f"Usa --db per specificare nomi custom, oppure esegui prima 'python src/embeddings/create_vector_db.py --env {args.env}'")
+        print(f"⚠️ Nessun vector DB trovato per l'ambiente '{args.env}'.")
+        print(f"Usa --db o esegui 'python src/embeddings/create_vector_db.py --env {args.env}'")
         return
 
-    print(f"🔄 Avvio valutazione RAG per ambiente '{args.env}'...\n")
+    print(
+        f"🔄 Avvio valutazione RAG (vettoriale) — env={args.env} "
+        f"lang={args.lang} k={args.k} tolleranza=±{args.tolleranza}"
+        f"{' [DEBUG]' if args.debug else ''}\n"
+    )
 
     for db_name, db_path in db_to_eval:
-        print(f"📊 Valutazione DB: {db_name}")
+        print(f"⏳ Valutazione DB: {db_name} ...")
         try:
-            score = calcola_hit_rate(db_path, args.env, test_file)
-            print(f"✅ Risultato {db_name}: Hit Rate@3 = {score:.2f}%\n")
+            metriche = valuta_db(
+                db_path, args.env, test_file,
+                k=args.k, tolleranza=args.tolleranza, debug=args.debug
+            )
+            if metriche:
+                stampa_report(db_name, metriche)
+            else:
+                print(f"⚠️ Nessuna metrica calcolata per {db_name}\n")
         except Exception as e:
             print(f"❌ Errore durante la valutazione di {db_name}: {e}\n")
+
 
 if __name__ == "__main__":
     main()
