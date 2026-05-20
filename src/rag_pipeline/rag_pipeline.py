@@ -134,7 +134,8 @@ def setup_rag_chain(retriever, env="locale"):
             model=local_model,
             base_url=base_url,
             api_key="lm-studio",
-            temperature=0.1
+            temperature=0.1,
+            streaming=True
         )
     elif env == "cloud":
         print("☁️ LLM: Cloud (OpenRouter)")
@@ -144,7 +145,8 @@ def setup_rag_chain(retriever, env="locale"):
             model="openai/gpt-3.5-turbo",
             openai_api_base="https://openrouter.ai/api/v1",
             openai_api_key=os.getenv("OPENAI_API_KEY"),
-            temperature=0.1
+            temperature=0.1,
+            streaming=True
         )
     else:
         raise ValueError("Il parametro env deve essere 'locale' o 'cloud'")

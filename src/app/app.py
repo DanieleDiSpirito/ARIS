@@ -53,9 +53,9 @@ st.sidebar.markdown("---")
 
 scelta_env = st.sidebar.radio(
     "Seleziona Motore LLM:",
-    ["locale", "cloud"],
+    ["cloud", "locale"],
     index=0,
-    help="Locale usa LM Studio sul tuo PC. Cloud usa OpenRouter (richiede API Key nel .env)."
+    help="Cloud usa OpenRouter (richiede API Key nel .env). Locale usa LM Studio sul tuo PC."
 )
 
 scelta_chunk_size = st.sidebar.selectbox(
@@ -121,8 +121,6 @@ if prompt:
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        placeholder = st.empty()
-
         with st.spinner(f"L'IA ({scelta_env}) sta consultando i manuali..."):
             try:
                 # Costruisce la cronologia degli ultimi 3 scambi (6 messaggi)
@@ -133,12 +131,16 @@ if prompt:
                     for m in history_msgs
                 ) if history_msgs else "(nessuna conversazione precedente)"
 
-                full_response = rag_chain.invoke({
+                response_stream = rag_chain.stream({
                     "question": prompt,
                     "history":  history_str,
                 })
-                placeholder.markdown(full_response)
-                st.session_state.messages.append({"role": "assistant", "content": full_response})
+                
+                # Estrae il primo chunk per innescare il caricamento ed il retrieval all'interno dello spinner
+                try:
+                    first_chunk = next(response_stream)
+                except StopIteration:
+                    first_chunk = ""
             except Exception as e:
                 msg_errore = f"❌ Errore durante la generazione ({scelta_env}). "
                 if scelta_env == "locale":
@@ -146,3 +148,13 @@ if prompt:
                 else:
                     msg_errore += "Verifica che OPENAI_API_KEY sia configurata nel file .env."
                 st.error(f"{msg_errore}\n\nDettagli: {e}")
+                st.stop()
+
+        def stream_generator():
+            if first_chunk:
+                yield first_chunk
+            for chunk in response_stream:
+                yield chunk
+
+        full_response = st.write_stream(stream_generator())
+        st.session_state.messages.append({"role": "assistant", "content": full_response})

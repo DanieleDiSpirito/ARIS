@@ -274,9 +274,11 @@ cd src/app
 python -m streamlit run app.py
 ```
 
-Dalla sidebar è possibile selezionare:
-- **Motore LLM**: locale (LM Studio) o cloud (OpenRouter)
-- **Dimensione Chunk**: per scegliere il Vector DB corrispondente
+L'interfaccia supporta lo **streaming dei token in tempo reale** per un'esperienza d'uso fluida ed immediata.
+
+Dalla sidebar è possibile configurare:
+- **Motore LLM**: impostato di default su **cloud** (OpenRouter) per massima velocità e accuratezza di generazione, con possibilità di commutare sul motore **locale** (LM Studio su localhost).
+- **Dimensione Chunk**: seleziona al volo il Vector DB corrispondente (300, 700 o 1000 token).
 
 ---
 
@@ -324,7 +326,9 @@ L'estrazione utilizza un approccio **dual-engine** per massimizzare la qualità:
 - [x] Prompt engineering avanzato (System/Human separati, lettura tabelle, formattazione adattiva)
 - [x] Interfaccia utente Streamlit (`src/app/app.py`) — sidebar con selezione env e chunk_size
 - [x] Debug chunk a schermo (anteprima testi e metadati recuperati per ogni query)
-- [ ] Configurazione LangSmith per tracing della pipeline (aggiungere variabili `.env`)
+- [x] Configurazione LangSmith per tracing della pipeline (variabili `.env` configurate)
+- [x] Configurazione motore Cloud (OpenRouter) come predefinito per il Chatbot
+- [x] Streaming in tempo reale delle risposte dell'assistente (real-time chat response streaming)
 - [ ] Costruzione dataset di test (15-20 casi d'uso di manutenzione reale)
 - [ ] Valutazione quantitativa (RAGAS / LLM-as-a-judge)
 
