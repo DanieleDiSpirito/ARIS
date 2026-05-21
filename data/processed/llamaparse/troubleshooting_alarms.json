@@ -1,0 +1,1466 @@
+[
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "21",
+        "section": "Generale",
+        "title": "Introduzione",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "21",
+        "section": "3.5",
+        "title": "TROUBLESHOOTING USING THE ALARM CODE",
+        "text": "| SRVO-001      | Operator panel E-stop                                                                                                                                                                                                                  |\n| ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | The emergency stop button on the operator's panel is pressed.                                                                                                                                                                          |\n| (Action 1)    | Release the emergency stop button pressed on the operator's panel.                                                                                                                                                                     |\n| (Action 2)    | Check the wires connecting between the emergency stop button and the emergency stop board (CRT30) for continuity. If an open wire is found, replace the entire harness.                                                                |\n| (Action 3)    | Check the wires connecting between the teach pendant and the emergency stop board (CRS36) for continuity. If an open wire is found, replace the entire harness.                                                                        |\n| (Action 4)    | With the emergency stop in the released position, check for continuity across the terminals of the switch. If continuity is not found, the emergency stop button is broken. Replace the emergency stop button or the operator's panel. |\n| (Action 5)    | Replace the teach pendant.                                                                                                                                                                                                             |\n| (Action 6)    | Replace the emergency stop board.                                                                                                                                                                                                      |\n| (Action 7)    | Before executing the action, perform a complete controller back-up to save all your programs and settings. Replace the main board.                                                                                                     |\n\nNOTE: If SRVO-001 is issued together with SRVO-213, a fuse may have blown. Take the same actions as for SRVO-213.\n\nEmergency stop button\n\nT D DA e + P e 2 0M0B aw2 a EFANUC WI U. IYPE M 4CRMBZ2 CRMR FANUC 8 UL TYPE P a CRT30 T80P19 CRMB22 CRT30 180P19 CREST CRT30 OV88 KA5 S 1E5 TBO KAT KAE ] 21 +22 FUSET Is 2\n\nCRS36 CR536 sMai 8 CPIA CRS36 RS16 1 OM92 DA D B1011 7H e A20B- A208-2005-015 2103-0 (R-30iB Mate) (R-30iB Mate Plus)\n\nFig.3.5 (a) SRVO-001 Operator panel E-stop\n\n- 21 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "22",
+        "section": "3.5",
+        "title": "TROUBLESHOOTING USING THE ALARM CODE",
+        "text": "3. TROUBLESHOOTING                MAINTENANCE                                         B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "22",
+        "section": "3.5",
+        "title": "SRVO-002        Teach pendant E-stop",
+        "text": "(Explanation)  The emergency stop button on the teach pendant was pressed.\n\n(Action 1)     Release the emergency stop button on the teach pendant.\n\n(Action 2)     Replace the teach pendant."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "22",
+        "section": "3.5",
+        "title": "SRVO-003        Deadman switch released",
+        "text": "(Explanation)  The teach pendant is enabled, but the deadman switch is not pressed.  Alternatively,\n\n(Action 1)     the deadman switch is pressed strongly.\n\n(Action 2)     Check the intermediate position of the deadman switch on the teach pendant.\n\nCheck that the mode switch on the operator's panel and the enable/disable switch on\n\n(Action 3)     the teach pendant are at the correct positions.\n\n(Action 4)     Replace the teach pendant.\n\nCheck the mode switch connection and operation. If trouble is found, replace the\n\n(Action 5)     mode switch.\n\nReplace the emergency stop board.\n\nEnable/disable             Emergency stop\n\nbutton\n\nDeadman switch\n(Teach pendant)\n\n&#x3C;250mm/s\nAUTO  &#x3C;250mm/s  AUTO  100%\n\nT1               T2\n\n2 mode switch    3 mode switch\n\n(Mode switch)\n\nEmergency stop board\n\nFig.3.5 (b)     SRVO-002 Teach pendant E-stop\n\nSRVO-003 Deadman switch released\n\n- 22 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "23",
+        "section": "3.5",
+        "title": "SRVO-003        Deadman switch released",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "23",
+        "section": "3",
+        "title": "SRVO-004 Fence open",
+        "text": "(Explanation) In the automatic operation mode, the safety fence contact connected to EAS1-EAS11 or EAS2-EAS21 of TBOP20 is open.\n\n(Action 1) When a safety fence is connected, close the safety fence.\n\n(Action 2) Check the cables and switches connected between EAS1 and EAS11 and between EAS2 and EAS21 of the terminal block TBOP20 on the emergency stop board.\n\n(Action 3) If the safety fence signal is not used, make a connection between EAS1 and EAS11 and between EAS2 and EAS21 of the terminal block TBOP20 on the emergency stop board.\n\n(Action 4) Check the mode switch. If trouble is found, replace the mode switch.\n\n(Action 5) Replace the emergency stop board.\n\nNOTE If SRVO-004 is issued together with SRVO-213, a fuse may have blown. Take the same actions as for SRVO-213.\n\n| <250mm/s      | AUTO          | <250mm/s      | AUTO | 100% |\n| ------------- | ------------- | ------------- | ---- | ---- |\n| 2 mode switch | 3 mode switch | (Mode switch) |      |      |\n\n| DO - 02 M D | CRM98FANUC W ULTYPE₂ |       |     |\n| ----------- | -------------------- | ----- | --- |\n| TB0P19      | CRMB22               | DA1 p |     |\n| TBOP20      | ov88                 | B     | KA5 |\n\n| No. | Name   | TBOP20 | M             | + 9K1 FLSE8 9 |\n| --- | ------ | ------ | ------------- | ------------- |\n| 12  | E-STOP | 21     | ME            |               |\n| 11  | (ESPB) | 2      | KA7           | KAB FUSET     |\n| 10  | 11     | L      | \\[]           | 81            |\n| 9   | FENCE  | 1      | SHONT         | CPIA          |\n| 8   | 21     | I      |               |               |\n| 7   | (EAS)  | 2      | CRS36         | CRMA92        |\n| 6   | 11     | m      |               |               |\n| 5   | 1      | PVt    |               |               |\n| 4   | EMGIN  | 21     | DAZA          |               |\n| 3   | (EES)  | 2      | 0             |               |\n| 2   | 11     | jTM1   | ④             |               |\n| 1   | 1      | B13    | A20B-2005-015 | (R-30iB Mate) |\n\n- 23 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "24",
+        "section": "3",
+        "title": "SRVO-004 Fence open",
+        "text": "3. TROUBLESHOOTING                      MAINTENANCE                                  B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "24",
+        "section": "3",
+        "title": "MAINTENANCE",
+        "text": "| D      | P ④           | 24EX1- | 247 CRMB22 CRM98 FANUC UL TYPE² |\n| ------ | ------------- | ------ | ------------------------------- |\n| T80P19 | CRMB272VCRT30 | 02     | p                               |\n| TBOP20 | DO            |        | KA5                             |\n\n| No. | Name   |    |         |\n| --- | ------ | -- | ------- |\n| 12  | E-STOP | 21 | E       |\n| 11  | (ESPB) | 2  | KA7 KA6 |\n| 10  |        | 11 |         |\n| 9   | FENCE  | 1  | E       |\n| 8   | (EAS)  | 21 | CRS36   |\n| 7   |        | 2  |         |\n| 6   |        | 11 |         |\n| 5   | EMGIN  | 1  | CRS40   |\n| 4   | (EES)  | 21 | 0       |\n| 3   |        | 2  |         |\n| 2   |        | 11 |         |\n| 1   |        | 1  | \\*      |\n\n(R-30iB Mate Plus)\n\nFig.3.5 (c)             SRVO-004 Fence open"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "24",
+        "section": "3",
+        "title": "WARNING",
+        "text": "In a system using the safety fence signal, it is very dangerous to disable the signal when a connection is made between EAS1 and EAS11 and between EAS2 and EAS21. Never make such an attempt. If a temporary connection is needed for operation, separate safety measures must be taken."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "24",
+        "section": "3",
+        "title": "SRVO-005 Robot overtravel",
+        "text": "(Explanation)  The robot has moved beyond a hardware limit switch on the axes."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "24",
+        "section": "3",
+        "title": "(Action 1)",
+        "text": "1. Select [System OT release] on the overtravel release screen to release each robot axis from the overtravel state.\n2. Hold down the shift key, and press the alarm release key to reset the alarm condition."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "24",
+        "section": "3",
+        "title": "(Action 2)",
+        "text": "Still hold down the shift key, and jog to bring all axes into the movable range."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "24",
+        "section": "3",
+        "title": "(Action 3)",
+        "text": "Replace the limit switch."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "24",
+        "section": "3",
+        "title": "(Action 4)",
+        "text": "Check the FS2 fuse on the servo amplifier. If the SRVO-214 6ch amplifier fuse blown alarm is also generated, the FS2 fuse has blown."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "24",
+        "section": "3",
+        "title": "(Action 5)",
+        "text": "Check the EE connector."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "24",
+        "section": "3",
+        "title": "(Action 6)",
+        "text": "Replace the 6-Axis servo amplifier.\n\nVerify the following for connector RMP1, RP1 at the base of the robot:\n\n1. There are no bent or dislocated pins in the male or female connectors.\n2. The connector is securely connected.\n\nThen verify that connectors CRF8 and CRM68 on the servo amplifier are securely connected. Also, verify that the robot connection cable (RMP1, RP1) is in good condition, and there are no cuts or kinks visible. Check the internal cable of the robot for a short circuit or connection to ground."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "24",
+        "section": "3",
+        "title": "NOTE",
+        "text": "It is factory-placed in the overtravel state for packing purposes. If the Overtravel signal is not in use, it may have been disabled by short-circuiting in the mechanical unit.\n\n- 24 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "25",
+        "section": "3",
+        "title": "NOTE",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "25",
+        "section": "3",
+        "title": "SRVO-006 Hand broken",
+        "text": "(Explanation) The safety joint (if in use) might have been broken. Alternatively, the HBK signal on the robot connection cable might be a ground fault or a cable disconnection.\n\n(Action 1) Hold down the shift key, and press the alarm release key to reset the alarm condition. Still hold down the shift key, and jog the tool to the work area.\n\n1. Replace the safety joint.\n\n(Action 2) Check the safety joint cable.\n\n1. Replace the 6-Axis servo amplifier.\n\nVerify the following for connector RMP1, RP1 at the base of the robot:\n\n1. There are no bent or dislocated pins in the male or female connectors.\n2. The connector is securely connected.\n\nThen verify that connectors CRF8 and CRM68 on the servo amplifier are securely connected. Also, verify that the robot connection cable (RMP1, RP1) is in good condition, and there are no cuts or kinks visible. Check the internal cable of the robot for a short circuit or connection to ground.\n\nNOTE If the Hand broken signal is not in use, it can be disabled by software setting. Refer to Subsection 5.6.3 in CONNECTIONS to disable the Hand broken signal.\n\n6-Axis servo amplifier\n\n- 25 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "26",
+        "section": "3",
+        "title": "B-83525EN/07",
+        "text": "| Connector(CRM68)         |   |\n| ------------------------ | - |\n| Connector(CRF8)          |   |\n| 3 8 FS2 (3.2A)           |   |\n| CAA                      |   |\n| (6-Axis servo amplifier) |   |\n\nFig.3.5 (d) SRVO-005 Robot overtravel\n\nSRVO-006 Hand broken\n\n- 26 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "27",
+        "section": "3",
+        "title": "B-83525EN/07",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "27",
+        "section": "3",
+        "title": "SRVO-007 External emergency stops",
+        "text": "(Explanation) On the terminal block TBOP20 of the emergency stop board, no connection of external emergency stop is made between EES1 and EES11, EES2 and EES21.\n\n(Action 1) If an external emergency stop switch is connected, release the switch.\n\n(Action 2) Check the switch and cable connected to EES1-EES11 and EES2-EES21 on TBOP20 of the emergency stop board.\n\n(Action 3) When this signal is not used, make a connection between EES1 and EES11, EES2 and EES21.\n\n(Action 4) Replace the emergency stop board.\n\nNOTE If SRVO-007 is issued together with SRVO-213, a fuse may have blown. Take the same actions as for SRVO-213.\n\n| No. | Name   | TBOP20 | M             | +    | SK1 FUSEB     |\n| --- | ------ | ------ | ------------- | ---- | ------------- |\n| 12  | E-STOP | 21     |               |      | o             |\n| 11  | (ESPB) | 2      | KA7           | KA6  | FUSET         |\n| 10  |        | 11     |               | 1    | oA            |\n| 9   |        | 1      |               | SVON | Mm CP1A       |\n| 8   | FENCE  | 21     | I             | 8    |               |\n| 7   | (EAS)  | 2      | CRS36         |      |               |\n| 6   |        | 11     |               |      | CRMA92        |\n| 5   |        | 1      |               |      | PI            |\n| 4   | EMGIN  | 21     | PA A          | a    | 0             |\n| 3   | (EES)  | 2      | N             |      |               |\n| 2   |        | 11     |               | TMI  | 4             |\n| 1   |        | 1      | A20B-2005-015 |      | (R-30iB Mate) |\n\nFig.3.5 (e) (Emergency stop board)\n\nSRVO-007 External emergency stops\n\n- 27 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "28",
+        "section": "3",
+        "title": "SRVO-007 External emergency stops",
+        "text": "3. TROUBLESHOOTING                      MAINTENANCE                     B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "28",
+        "section": "3",
+        "title": "WARNING",
+        "text": "In a system using the external emergency stop signal, it is very dangerous to disable the signal when a connection is made between EES1 and EES11 and between EES2 and EES21. Never make such an attempt. If a temporary connection is needed for operation, separate safety measures must be taken."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "28",
+        "section": "3",
+        "title": "SRVO-009 Pneumatic pressure alarm",
+        "text": "(Explanation) An abnormal air pressure was detected. The input signal is located on the end EE interface of the robot.\n\n(Action 1) Refer to the manual of your robot.\n\n(Action 2) If an abnormal air pressure is detected, check the cause.\n\n(Action 3) Check the EE connector.\n\nCheck the robot connection cable (RMP1, RP1) and the internal cable of the robot for a ground fault or a cable disconnection. If a fault or a disconnection is detected,\n\n(Action 4) replace the cable.\n\n(Action 5) Replace the 6-Axis servo amplifier. Replace the internal cables of the robot."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "28",
+        "section": "3",
+        "title": "NOTE",
+        "text": "Pneumatic pressure alarm input is on the EE interface. Please refer to the manual of your robot."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "28",
+        "section": "3",
+        "title": "6-Axis servo amplifier",
+        "text": "Fig.3.5 (f) SRVO-009 Pneumatic pressure alarm\n\n- 28 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "29",
+        "section": "3",
+        "title": "6-Axis servo amplifier",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "29",
+        "section": "3",
+        "title": "SRVO-014 Fan motor abnormal (n), CPU STOP",
+        "text": "(Explanation) When a fan motor stops on backplane unit, Teach pendant shows the following message. In one minute from occurring of alarm, robot stops and cannot be operated from TP. The robot can be recovered by replacing a fan motor. Number in the bracket indicates which fan is abnormal.\n\n- (1): FAN0\n- (2): FAN1\n- (3): both fans\n\n(Action 1) Check the fan motor and its cables. Replace them if necessary.\n\nBefore executing the (Action 3), perform a complete controller back up to save all your programs and settings.\n\n(Action 3) Replace the main board.\n\nNOTE The controller will stop operation after 1 minute of this alarm.\n\nFan motor (FAN0)\n\nFan motor (FAN1)\n\nMain board\n\nFig.3.5 (g) SRVO-014 Fan motor abnormal\n\n- 29 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "30",
+        "section": "3",
+        "title": "SRVO-015 System over heat",
+        "text": "(Explanation) The temperature in the controller exceeds the specified value. In one minute from occurring of alarm, robot stops and cannot be operated from TP.\n\n(Action 1) If the ambient temperature is higher than specified (45°C), cool down the ambient temperature.\n\n(Action 2) If the fan motor is not running, check it, its cables and related fuses. Replace them if necessary.\n\nBefore executing the (Action 3), perform a complete controller backup to save all your programs and settings.\n\n(Action 3) Replace the main board. (The thermostat on the main board may be faulty.)\n\nNOTE The controller will stop operation after 1 minute of this alarm.\n\na\n\nDoor fan\n\nRear fan\n\nFan motor\n\nMain board\n\nHeat exchanger\n\nFig.3.5 (h) SRVO-015 System over heat"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "31",
+        "section": "3",
+        "title": "SRVO-015 System over heat",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "31",
+        "section": "3",
+        "title": "SRVO-018        Brake abnormal (G:i A:j)",
+        "text": "(Explanation)  An excessive brake current is detected. The ALM LED (SVALM) on the 6-Axis servo amplifier is lit.\n\n(Action 1)     Check the robot connection cable (RMP1, RP1) and the internal cable of the robot and motor brakes connected to CRR88 connector on the 6-Axis servo amplifier.\n\n(Action 2)     If a short-circuit or grounding fault is found, replace the failed part. Check the cables and motor brakes connected to CRR65A, CRR65B connector on the 6-Axis servo amplifier. If a short-circuit or grounding fault is found, replace the failed part.\n\n(Action 3)     Replace the 6-Axis servo amplifier.\n\nCAUTION\nThis error can be caused by the optional brake release unit if the on/off switch is left in on position while the operator attempts to jog the robot. To recover, turn the brake release unit off and cycle the controller power."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "31",
+        "section": "3",
+        "title": "SRVO-021        SRDY off (Group:i Axis:j)",
+        "text": "(Explanation)  The HRDY is on and the SRDY is off, although there is no other cause of an alarm. (HRDY is a signal with which the host detects the servo system whether to turn on or off the servo amplifier magnetic contactor. SRDY is a signal with which the servo system informs the host whether the magnetic contactor is turned on.) If the servo amplifier magnetic contactor cannot be turned on when directed so, it is most likely that a servo amplifier alarm has occurred. If a servo amplifier alarm has been detected, the host will not issue this alarm (SRDY off). Therefore, this alarm indicates that the magnetic contactor cannot be turned on for an unknown reason.\n\n(Action 1)     Make sure that the emergency stop board connectors CP5A, CRMA92, CRMB22, and 6-Axis servo amplifier CRMA91 are securely attached to the servo amplifier. In case of using aux. axis amplifier, make sure that the connectors CXA2A (6-axis amplifier) or CXA2B (aux. axis amplifier) are securely attached to the servo amplifier.\n\n(Action 2)     It is possible that an instant disconnection of power source causes this alarm. Check whether an instant disconnection occurred.\n\n(Action 3)     Replace the E-stop unit.\n\n(Action 4)     Replace the servo amplifier."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "31",
+        "section": "3",
+        "title": "SRVO-022        SRDY on (Group:i Axis:j)",
+        "text": "(Explanation)  When the HRDY is about to go on, the SRDY is already on. (HRDY is a signal with which the host directs the servo system whether to turn on or off the servo amplifier magnetic contactor. SRDY is a signal with which the servo system informs the host whether the magnetic contactor is turned on.)\n\n(Action 1)     Replace the servo amplifier as the alarm message."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "31",
+        "section": "3",
+        "title": "SRVO-023        Stop error excess (G:i A:j)",
+        "text": "(Explanation)  When the servo is at stop, the position error is abnormally large. Check whether the brake is released through the clack sound of the brake or the vibration.\n\n(Action 1)     In case that the brake is not released, check the continuity of the brake line in the robot connection cable and the mechanical unit cable. If the disconnection is not found, replace the 6-Axis servo amplifier or the servo motor.\n\n(Action 2)     In case that the brake is released, check whether the obstacle disturbs the robot motion.\n\n- 31 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "32",
+        "section": "3",
+        "title": "SRVO-023        Stop error excess (G:i A:j)",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "32",
+        "section": "3",
+        "title": "MAINTENANCE",
+        "text": "- (Action 2) Make sure that connectors CNJ1A-CNJ6 are securely attached to the 6-Axis servo amplifier.\n- (Action 3) Check the continuity of the robot connection cable and the internal robot power cable.\n- (Action 4) Check to see if the load is greater than the rating. If greater, reduce it to within the rating. (If the load is too great, the torque required for acceleration / deceleration becomes higher than the capacity of the motor. As a result, the motor becomes unable to follow the command, and an alarm is issued.)\n- (Action 5) Check the input voltage to the controller is within the rated voltage and no phase is lack.\n- Check each phase voltage of the CRR38A or CRR38B connector of the three-phase power (200 VAC) input to the 6-Axis servo amplifier. If it is 210 VAC or lower, check the line voltage. (If the voltage input to the 6-Axis servo amplifier becomes low, the torque output also becomes low. As a result, the motor may become unable to follow the command, hence possibly causing an alarm.)\n- (Action 6) Replace the servo amplifier.\n- (Action 7) Replace the motor of the alarm axis.\n\nNOTE: Incorrect setting of the brake number causes this alarm."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "32",
+        "section": "3",
+        "title": "6-Axis servo amplifier",
+        "text": "| Fig.3.5 (i) | SRVO-018 Brake abnormal     |\n| ----------- | --------------------------- |\n|             | SRVO-021 SRDY off           |\n|             | SRVO-022 SRDY on            |\n|             | SRVO-023 Stop error excess  |\n| SRVO-024    | Move error excess (G:i A:j) |\n\n(Explanation) When the robot is running, its position error is greater than a specified value ($PARAM _ GROUP. $MOVER _ OFFST). It is likely that the robot cannot follow the speed specified by program.\n\n- (Action 1) Take the same actions as SRVO-023.\n\nSRVO-027 Robot not mastered (Group:i)\n\n(Explanation) An attempt was made to calibrate the robot, but the necessary adjustment had not been completed. Check whether the mastering is valid. If the mastering is invalid, master the robot.\n\n- 32 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "33",
+        "section": "3",
+        "title": "6-Axis servo amplifier",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "33",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "WARNING\n\nIf the position data is incorrect, the robot or additional axis can operate abnormally, set the position data correctly. Otherwise, you could injure personnel or damage equipment.\n\n| SRVO-030      | Brake on hold (Group:i)                                                                                                                                 |\n| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | If the temporary halt alarm function is enabled ($SCR.$BRKHOLD ENB=1), SRVO-030 is issued when a temporary halt occurs. When this function is not used, |\n| (Action)      | disable the setting. Disable \\[Servo-off in temporary halt] on the general item setting screen \\[6 General Setting Items].                              |\n\n| SRVO-033      | Robot not calibrated (Group:i)                                                                                                  |\n| ------------- | ------------------------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | An attempt was made to set up a reference point for quick mastering, but the robot had not been calibrated.                     |\n| (Action)      | 1. Calibrate the robot. 2. Supply power. Set up a quick mastering reference point using \\[Positioning] on the positioning menu. |\n\n| SRVO-034      | Ref pos not set (Group:i)                                                                    |\n| ------------- | -------------------------------------------------------------------------------------------- |\n| (Explanation) | An attempt was made to perform quick mastering, but the reference point had not been set up. |\n| (Action)      | Set up a quick mastering reference point on the positioning menu.                            |\n\n| SRVO-036      | Inpos time over (G:i A:j)                                                                                                                                        |\n| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | The robot did not get to the effective area ($PARAM \\_ GROUP.$ STOPTOL) even after the position check monitoring time ($PARAM \\_ GROUP. $INPOS \\_ TIME) elapsed. |\n| (Action)      | Take the same actions as for SRVO-023 (large position error at a stop).                                                                                          |\n\n| SRVO-037      | IMSTP input (Group:i)                                           |\n| ------------- | --------------------------------------------------------------- |\n| (Explanation) | The \\*IMSTP signal for a peripheral device interface was input. |\n| (Action)      | Turn on the \\*IMSTP signal.                                     |\n\n| SRVO-038      | Pulse mismatch (Group:i Axis:j)                                                                                                                                                                                                                                                         |\n| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | The pulse count obtained when power is turned off does not match the pulse count obtained when power is applied. This alarm is asserted after exchange the Pulsecoder or battery for back up of the Pulsecoder data or loading back up data to the Main Board. Check the alarm history. |\n| (Action 1)    | If the brake number is set to the non-brake motors, this alarm may occur. Check the software setting of the brake number.                                                                                                                                                               |\n| (Action 2)    | In case the robot has been moved by using the brake release unit while the power is off or when restoring the back-up data to the main board, this alarm may occur.                                                                                                                     |\n| (Action 3)    | Remaster the robot.                                                                                                                                                                                                                                                                     |\n| (Action 4)    | If the robot has been moved because the brake failed, this alarm may occur. Check the cause of the brake trouble. Then remaster the robot. Replace the Pulsecoder and master the robot.                                                                                                 |\n\n| SRVO-043      | DCAL alarm (Group:i Axis:j)                                                                                                                                       |\n| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | The regenerative discharge energy was too high to be dissipated as heat. (To run the robot, the servo amplifier supplies energy to the robot. When going down the |\n\n- 33 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "34",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "34",
+        "section": "3",
+        "title": "MAINTENANCE",
+        "text": "Vertical axis, the robot operates from the potential energy. If a reduction in the potential energy is higher than the energy needed for acceleration, the servo amplifier receives energy from the motor. A similar phenomenon occurs even when no gravity is applied, for example, at deceleration on a horizontal axis. The energy that the servo amplifier receives from the motor is called the regenerative energy. The servo amplifier dissipates this energy as heat. If the regenerative energy is higher than the energy dissipated as heat, the difference is stored in the servo amplifier, causing an alarm.\n\nThis alarm may occur if the axis is subjected to frequent acceleration/deceleration or if the axis is vertical and generates a large amount of regenerative energy."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "34",
+        "section": "3",
+        "title": "(Action 1)",
+        "text": "If this alarm has occurred, relax the service conditions."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "34",
+        "section": "3",
+        "title": "(Action 2)",
+        "text": "Check fuse (FS3) in the 6-Axis servo amplifier. If it has blown, remove the cause, and replace the fuse."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "34",
+        "section": "3",
+        "title": "(Action 3)",
+        "text": "The ambient temperature is excessively high. Or the regenerative resistor can't be cooled effectively. Check the external fan unit and related fuses. Clean up the fan unit, the regenerative resistor and the louver if they are dirty."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "34",
+        "section": "3",
+        "title": "(Action 4)",
+        "text": "Make sure that the 6-Axis servo amplifier CRR63A and CRR63B connectors are connected tightly. Then detach the cable from CRR63A and CRR63B connectors on the 6-Axis servo amplifier, and check for continuity between pins 1 and 2 of the cable-end connector. If there is no continuity between the pins, replace the regenerative resistor."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "34",
+        "section": "3",
+        "title": "(Action 5)",
+        "text": "Make sure that the 6-Axis servo amplifier CRRA11A and CRRA11B are connected tightly, then detach the cables from CRRA11A and CRRA11B on the 6-Axis servo amplifier and check the resistance between pins 1 and 3 of each cable end connector. If the resistance is not 6.5Ω, replace the regenerative resistor. CRRA11B may not be used depending on the robot model."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "34",
+        "section": "3",
+        "title": "(Action 6)",
+        "text": "Replace the 6-Axis servo amplifier.\n\nRegenerative resistor\n\n(Small size) Fig.3.5 (ja) SRVO-043 DCAL (Middle/Large size) alarm\n\n6-Axis servo amplifier E-stop unit Fig.3.5 (jb) SRVO-043 DCAL alarm\n\n- 34 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "35",
+        "section": "3",
+        "title": "(Action 6)",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "35",
+        "section": "3",
+        "title": "SRVO-044 DCHVAL%s alarm (G:i A:j)",
+        "text": "(Explanation) The DC voltage (DC link voltage) of the main circuit power supply is abnormally high.\n\n(Action 1) Check the input voltage to the controller is within the rated voltage. And check the setting of the transformer is correct.\n\n(Action 2) Check the three-phase input voltage at the 6-Axis servo amplifier. If it is 240 VAC or higher, check the line voltage. (If the three-phase input voltage is higher than 240 VAC, high acceleration/deceleration can cause in this alarm.)\n\n(Action 3) Check that the load weight is within the rating. If it is higher than the rating, reduce it to within the rating. (If the machine load is higher than the rating, the accumulation of regenerative energy might result in the HVAL alarm even when the three-phase input voltage is within the rating.)\n\n(Action 4) Check that the CRRA11A and CRRA11B connectors of the 6-Axis servo amplifier are attached firmly. Next, detach the cables then check the continuity between pins. If the resistance is not 6.5Ω, replace the regenerative resistor. CRRA11B may not be used depending on the robot model.\n\n(Action 5) Replace the 6-Axis servo amplifier."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "35",
+        "section": "3",
+        "title": "SRVO-045 HCAL alarm (Group:i Axis:j)",
+        "text": "(Explanation) Abnormally high current flowed in the main circuit of the servo amplifier.\n\n(Action 1) Turn off the power, and disconnect the power cable from the servo amplifier indicated by the alarm message. (And disconnect the brake cable (CRR88 on the 6-Axis servo amplifier) to avoid the axis falling unexpectedly.) Supply power and see if the alarm occurs again. If the alarm occurs again, replace the servo amplifier.\n\n(Action 2) Turn off the power and disconnect the power cable from the servo amplifier indicated by the alarm message, and check the insulation of their U, V, W and the GND lines each other. If there is a short-circuit, replace the power cable.\n\n(Action 3) Turn off the power and disconnect the power cable from the servo amplifier by the alarm message, and measure the resistance between their U and V, V and W and W and U with an ohmmeter that has a very low resistance range. If the resistances at the three places are different from each other, the motor, the power cable is defective. Check each item in detail and replace it if necessary."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "35",
+        "section": "3",
+        "title": "SRVO-046 OVC alarm (Group:i Axis:j)",
+        "text": "(Explanation) This alarm is issued to prevent the motor from thermal damage that might occur when the root meant square current calculated within the servo system is out of the allowable range.\n\n(Action 1) Check the operating condition for the robot and relax the service condition if possible.\n\n(Action 2) If the load or operating condition has exceeded the rating, reduce the load or relax the operating condition to meet the rating.\n\n(Action 3) Check whether the voltage input to the controller is within the rated voltage.\n\n(Action 4) Check whether the brake of the corresponding axis is released.\n\n(Action 5) Check whether there is a factor that has increased the mechanical load on the corresponding axis.\n\n(Action 6) Replace the servo amplifier.\n\n(Action 7) Replace the motor of the corresponding axis.\n\n(Action 8) Replace the E-stop unit.\n\n(Action 9) Replace the motor power line (robot connection cable) of the corresponding axis. Replace the motor power line and brake line (internal cable of the robot) of the corresponding axis.\n\n- 35 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "36",
+        "section": "3",
+        "title": "SRVO-046 OVC alarm (Group:i Axis:j)",
+        "text": "3. TROUBLESHOOTING    MAINTENANCE    B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "36",
+        "section": "3",
+        "title": "6-Axis servo amplifier",
+        "text": "| Fig.3.5(k) | SRVO-044 HVAL alarm | SRVO-045 HCAL alarm | SRVO-046 OVC alarm |\n| ---------- | ------------------- | ------------------- | ------------------ |\n\n- 36 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "37",
+        "section": "3",
+        "title": "6-Axis servo amplifier",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "37",
+        "section": "3",
+        "title": "Overview",
+        "text": "This section points out the differences among the OVC, OHAL, and HC alarms and describes the purpose of each alarm."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "37",
+        "section": "3",
+        "title": "Alarm detection section",
+        "text": "| Abbreviation | Designation        | Detection section                                   |\n| ------------ | ------------------ | --------------------------------------------------- |\n| OVC          | Overcurrent alarm  | Servo software                                      |\n| OHAL         | Overheat alarm     | Thermal relay in the motor                          |\n|              |                    | Thermal relay in the servo amplifier                |\n|              |                    | Thermal relay in the separate regenerative resistor |\n| HC           | High current alarm | Servo amplifier                                     |"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "37",
+        "section": "3",
+        "title": "Purpose of each alarm",
+        "text": "1. HC alarm (high current alarm)\n\nIf high current flow in a power transistor momentarily due to abnormality or noise in the control circuit, the power transistor and rectifier diodes might be damaged, or the magnet of the motor might be degaussed. The HC alarm is intended to prevent such failures.\n2. OVC and OHAL alarms (overcurrent and overload alarms)\n\nThe OVC and OHAL alarms are intended to prevent overheat that may lead to the burnout of the motor winding, the breakdown of the servo amplifier transistor, and the separate regenerative resistor.\n\nThe OHAL alarm occurs when each built-in thermal relay detects a temperature higher than the rated value. However, this method is not necessarily perfect to prevent these failures. For example, if the motor frequently repeats to start and stop, the thermal time constant of the motor, which has a large mass, becomes higher than the time constant of the thermal relay, because these two components are different in material, structure, and dimension. Therefore, if the motor continues to start and stop within a short time as shown in Fig. 3.5 (l), the temperature rise in the motor is steeper than that in the thermal relay, thus causing the motor to burn before the thermal relay detects an abnormally high temperature.\n\nTo prevent the above defects, software is used to monitor the current in the motor constantly in order to estimate the temperature of the motor. The OVC alarm is issued based on this estimated temperature. This method estimates the motor temperature with substantial accuracy, so it can prevent the failures described above.\n\n- 37 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "38",
+        "section": "3",
+        "title": "Purpose of each alarm",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "38",
+        "section": "3",
+        "title": "MAINTENANCE",
+        "text": "To sum up, a double protection method is used; the OVC alarm is used for protection from a short-time overcurrent, and the OHAL alarm is used for protection from long-term overload. The relationship between the OVC and OHAL alarms is shown in Fig.3.5 (m).\n\n| Current                  | Protection area for the motor and servo amplifier | Protection by the OHAL |\n| ------------------------ | ------------------------------------------------- | ---------------------- |\n| Limit current            | Protection by the OVC                             |                        |\n| Rated continuous current |                                                   |                        |\n\nTime\n\nFig.3.5 (m) Relationship between the OVC and OHAL alarms"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "38",
+        "section": "3",
+        "title": "NOTE",
+        "text": "- The relationship shown in Fig.3.5 (m) is taken into consideration for the OVC alarm.\n- The motor might not be hot even if the OVC alarm has occurred. In this case, do not change the parameters to relax protection."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "38",
+        "section": "3",
+        "title": "SRVO-047 LVAL alarm (Group:i Axis:j)",
+        "text": "(Explanation) The control power supply voltage (+5 V, etc.) supplied from the power supply circuit in the servo amplifier is abnormally low.\n\n- (Action 1) Replace the servo amplifier.\n- (Action 2) Replace the power supply unit."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "38",
+        "section": "3",
+        "title": "Power supply unit",
+        "text": "Fig.3.5 (n) SRVO-047 LVAL alarm\n\n- 38 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "39",
+        "section": "3",
+        "title": "Power supply unit",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "39",
+        "section": "3",
+        "title": "SRVO-049 OHAL1 alarm (Grp:i Ax:j)",
+        "text": "(Explanation) The 6-Axis servo amplifier detects transformer overheat signal.\n\n- (Action 1) Check that a connection is made between the 6-Axis servo amplifier CRMA91.\n- (Action 2) Check whether no phase occurs.\n- (Action 3) Replace the E-stop unit.\n- (Action 4) Replace the 6-Axis servo amplifier."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "39",
+        "section": "3",
+        "title": "SRVO-050 Collision Detect alarm (G:i A:j)",
+        "text": "(Explanation) The disturbance torque estimated by the servo software is abnormally high. (A collision has been detected.)\n\n- (Action 1) Check whether the robot has collided and also check whether there is a factor that has increased the mechanical load on the corresponding axis.\n- (Action 2) Check whether the load settings are valid.\n- (Action 3) Check whether the brake of the corresponding axis is released.\n- (Action 4) If the load weight exceeds the rated range, decrease it to within the limit.\n- (Action 5) Check whether the voltage input to the controller is within the rated voltage.\n- (Action 6) Replace the servo amplifier.\n- (Action 7) Replace the motor of the corresponding axis.\n- (Action 8) Replace the E-stop unit.\n- (Action 9) Replace the motor power line (robot connection cable) of the corresponding axis.\n- (Action 10) Replace the motor power line and brake line (internal cable of the robot) of the corresponding axis."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "39",
+        "section": "3",
+        "title": "SRVO-051 CUER alarm (Group:i Axis:j)",
+        "text": "(Explanation) The offset of the current feedback value is abnormally high.\n\n- (Action) Replace the servo amplifier.\n\n6-Axis servo amplifier E-stop unit\n\nFig.3.5 (o) SRVO-049 OHAL1 alarm\n\nSRVO-050 CLALM alarm\n\nSRVO-051 CUER alarm"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "39",
+        "section": "3",
+        "title": "SRVO-055 FSSB com error 1 (G:i A:j)",
+        "text": "(Explanation) A communication error has occurred between the main board and servo amplifier.\n\n- (Action 1) Check the optical fiber cable between the axis control card and servo amplifier.\n- (Action 2) Replace it if it is faulty.\n- (Action 3) Replace the axis control card on the main board.\n- Replace the servo amplifier.\n\n- 39 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "40",
+        "section": "3",
+        "title": "SRVO-056 FSSB com error 2 (G:i A:j)",
+        "text": "(Explanation) A communication error has occurred between the main board and servo amplifier.\n\n(Action 1) Check the optical fiber cable between the axis control card and servo amplifier.\n\n(Action 2) Replace it if it is faulty.\n\n(Action 3) Replace the axis control card on the main board.\n\n(Action 4) Replace the servo amplifier."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "40",
+        "section": "3",
+        "title": "SRVO-057 FSSB disconnect (G:i A:j)",
+        "text": "(Explanation) Communication was interrupted between the main board and servo amplifier.\n\n(Action 1) Check whether fuse (FS1) on the 6-Axis servo amplifier has blown. If the fuse has blown, replace the 6-Axis servo amplifier including the fuse.\n\n(Action 2) Check the optical fiber cable between the axis control card and servo amplifier.\n\n(Action 3) Replace it if it is faulty.\n\n(Action 4) Replace the axis control card on the main board.\n\n(Action 5) Replace the servo amplifier.\n\nCheck for a point where the robot connection cable (RMP1, RP1) or an internal cable running to each Pulsecoder through the robot mechanical section is grounded.\n\nBefore continuing to the next step, perform a complete controller back up to save all your programs and settings.\n\n(Action 6) Replace the main board."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "40",
+        "section": "3",
+        "title": "SRVO-058 FSSB xx init error (yy)",
+        "text": "(Explanation) Communication was interrupted between the main board and servo amplifier.\n\n(Action 1) Check whether fuse (FS1) on the 6-Axis servo amplifier has blown. If the fuse has blown, replace the 6-Axis servo amplifier including the fuse.\n\nTurn off the power and disconnect the CRF8 connector on the 6-Axis servo amplifier. Then check whether this alarm occurs again. (Ignore the alarm SRVO-068 because of disconnecting the CRF8 connector.)\n\nIf this alarm does not occur, the robot connection cable (RMP1, RP1) or the internal cable of the robot may be short-circuited to the ground. Check the cables and replace it if necessary.\n\n(Action 2) Check whether the LED (P5V and P3.3V) on the 6-Axis servo amplifier is lit. If they are not lit, the DC power is not supplied to the 6-Axis servo amplifier.\n\nMake sure the connector CP5 on the power supply unit and the connector CXA2B on the 6-Axis servo amplifier are connected tightly. If they are connected tightly, (Action 3) replace the 6-Axis servo amplifier.\n\n(Action 4) Check the optical fiber cable between the axis control card and servo amplifier.\n\n(Action 5) Replace it if it is faulty.\n\n(Action 6) Replace the axis control card on the main board.\n\n(Action 7) Replace the 6-Axis servo amplifier.\n\nIf the other units (the servo amplifier for the auxiliary axis and the line tracking interface) are connected in the FSSB optical communication, disconnect these units and connect only 6-Axis servo amplifier for the robot. Then turn on the power. If this alarm does not occur, search the failed unit and replace it.\n\nBefore executing the (Action 8), perform a complete controller back up to save all your programs and settings.\n\n(Action 8) Replace the main board."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "41",
+        "section": "3",
+        "title": "SRVO-058 FSSB xx init error (yy)",
+        "text": "B-83525EN/07    MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "41",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "Main board\n\n6-Axis servo amplifier\n\nAxis control card\n\n(R-30iB Mate)\n\nAxis control card\n\n(R-30iB Mate Plus)\n\n(Main board)\n\nFig.3.5 (p)\n\n| SRVO-055 | FSSB com error 1 |\n| -------- | ---------------- |\n| SRVO-056 | FSSB com error 2 |\n| SRVO-057 | FSSB disconnect  |\n| SRVO-058 | FSSB init error  |\n\n- 41 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "42",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "3. TROUBLESHOOTING                    MAINTENANCE                                       B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "42",
+        "section": "3",
+        "title": "SRVO-059        Servo amp init error (G:i A:j)",
+        "text": "(Explanation)  Servo amplifier initialization is failed.\n\n(Action 1)     Check the optical fiber cable between the axis control card on the main board servo amplifier. Replace it if it is faulty.\n\nTurn off the power and disconnect the CRF8 connector on the 6-Axis servo amplifier. Then check whether this alarm occurs again. (Ignore the alarm SRVO-068 because of disconnecting the CRF8 connector.)\n\nIf this alarm does not occur, the robot connection cable (RMP1, RP1) or the internal cable of the robot (Pulsecoder cable) may be short-circuited to the ground. Check the cables and replace it if necessary.\n\n(Action 3)     Check whether the LED (P5V and P3.3V) on the 6-Axis servo amplifier is lit. If they are not lit, the DC power is not supplied to the servo amplifier. Make sure the connector CP5 on the power supply unit and the connector CXA2B on the 6-Axis servo amplifier are connected tightly. If they are connected tightly,\n\n(Action 4)     replace the 6-Axis servo amplifier.\n\n(Action 5)     Replace the servo amplifier.\n\n(Action 6)     Replace the line tracking board (If installed). Replace the Pulsecoder."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "42",
+        "section": "3",
+        "title": "SRVO-062        BZAL alarm (Group:i Axis:j)",
+        "text": "(Explanation)  This alarm occurs if battery for Pulsecoder absolute-position backup is empty.\n\n(Action 1)     A probable cause is a broken battery cable or no batteries in the robot.\n\n(Action 2)     Replace the battery in the battery box of the robot base.\n\n(Action 3)     Replace the Pulsecoder with which an alarm has been issued. Check whether the mechanical unit cable for feeding power from the battery to the Pulsecoder is not disconnected and grounded. If an abnormality is found, replace the cable.\n\nCAUTION\n\nAfter correcting the cause of this alarm, set the system variable ($MCR.$SPC_RESET) to TRUE then turn on the power again. Mastering is needed."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "42",
+        "section": "3",
+        "title": "SRVO-064        PHAL alarm (Group:i Axis:j)",
+        "text": "(Explanation)  This alarm occurs if the phase of the pulses generated in the Pulsecoder is abnormal.\n\n(Action)       Replace the Pulsecoder with which an alarm has been issued.\n\nNOTE\n\nThis alarm might accompany the DTERR, CRCERR, or STBERR alarm. In this case, however, there may be no actual condition for this alarm."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "42",
+        "section": "3",
+        "title": "SRVO-065        BLAL alarm (Group:i Axis:j)",
+        "text": "(Explanation)  The battery voltage for the Pulsecoder is lower than the rating.\n\n(Action)       Replace the battery. (If this alarm occurs, turn on the power and replace the battery as soon as possible. A delay in battery replacement may result in the BZAL alarm being detected. In this case, the position data will be lost. Once the position data is lost, mastering will become necessary.)"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "42",
+        "section": "3",
+        "title": "SRVO-067        OHAL2 alarm (Grp:i Ax:j)",
+        "text": "(Explanation)  The temperature inside the Pulsecoder or motor is abnormally high, and the built-in thermostat has operated.\n\n- 42 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "43",
+        "section": "3",
+        "title": "SRVO-067        OHAL2 alarm (Grp:i Ax:j)",
+        "text": "B-83525EN/07          MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "43",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "(Action 1) Check the robot operating conditions. If a condition such as the duty cycle and load weight has exceeded the rating, relax the robot load condition to meet the allowable range.\n\n(Action 2) When power is supplied to the motor after it has become sufficiently cool, if the alarm still occurs, replace the motor."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "43",
+        "section": "3",
+        "title": "SRVO-068        DTERR alarm (Grp:i Ax:j)",
+        "text": "(Explanation) The serial Pulsecoder does not return serial data in response to a request signal.\n\n(Action 1) Make sure that the robot connection cable (RMP1, RP1) connector (CRF8) of 6-Axis servo amplifier and the connector (motor side) are connected tightly.\n\n(Action 2) Check that the shielding of the robot connection cable (RMP1, RP1) is grounded securely in the cabinet.\n\n(Action 3) Replace the Pulsecoder.\n\n(Action 4) Replace the servo amplifier.\n\n(Action 5) Replace the robot connection cable (RMP1, RP1, RM1).\n\n(Action 6) Replace the internal cable of the robot (for the Pulsecoder, For the Motor)."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "43",
+        "section": "3",
+        "title": "SRVO-069        CRCERR alarm (Grp:i Ax:j)",
+        "text": "(Explanation) The serial data has disturbed during communication.\n\n(Action) See actions on SRVO-068"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "43",
+        "section": "3",
+        "title": "SRVO-070        STBERR alarm (Grp:i Ax:j)",
+        "text": "(Explanation) The start and stop bits of the serial data are abnormal.\n\n(Action) See actions on SRVO-068"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "43",
+        "section": "3",
+        "title": "6-Axis servo amplifier",
+        "text": "Fig.3.5 (q) SRVO-059 Servo amp init error\n\nSRVO-070 STBERR alarm"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "43",
+        "section": "3",
+        "title": "SRVO-071     SPHAL alarm (Grp:i Ax:j)",
+        "text": "(Explanation) The feedback speed is abnormally high.\n\n(Action) Action as same as the SRVO-068.\n\nNOTE: If this alarm occurs together with the PHAL alarm (SRVO-064), this alarm does not correspond to the major cause of the failure."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "43",
+        "section": "3",
+        "title": "SRVO-072     PMAL alarm (Group:i Axis:j)",
+        "text": "(Explanation) It is likely that the Pulsecoder is abnormal.\n\n(Action) Replace the Pulsecoder and remaster the robot.\n\n- 43 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "44",
+        "section": "3",
+        "title": "SRVO-072     PMAL alarm (Group:i Axis:j)",
+        "text": "3. TROUBLESHOOTING                      MAINTENANCE                                  B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "44",
+        "section": "3",
+        "title": "SRVO-073        CMAL alarm (Group:i Axis:j)",
+        "text": "(Explanation) It is likely that the Pulsecoder is abnormal or the Pulsecoder has malfunctioned due to noise.\n\n- (Action 1) Check whether the connection of the controller earth is good. Check the earth cable connection between controller and robot connection cables are connected securely to the grounding plate.\n- (Action 2) Reinforce the earth of the motor flange. (In case of Auxiliary axis)\n- (Action 3) Reset the Pulse count.\n- (Action 4) Replace the Pulsecoder.\n- (Action 5) Replace the robot connection cable (RMP1, RM1, RP1).\n- (Action 6) Replace the internal cable of the robot (for the Pulsecoder, For the Motor)."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "44",
+        "section": "3",
+        "title": "SRVO-074        LDAL alarm (Group:i Axis:j)",
+        "text": "(Explanation) The LED in the Pulsecoder is broken.\n\n(Action) Replace the Pulsecoder, and remaster the robot."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "44",
+        "section": "3",
+        "title": "SRVO-075        Pulse not established (G:i A:j)",
+        "text": "(Explanation) The absolute position of the Pulsecoder cannot be established.\n\n(Action) Reset the alarm, and jog the axis on which the alarm has occurred until the same alarm will not occur again."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "44",
+        "section": "3",
+        "title": "SRVO-076        Tip Stick Detection (G:i A:j)",
+        "text": "(Explanation) An excessive disturbance was assumed in servo software at the start of operation.\n\n- (Action 1) (An abnormal load was detected. The cause may be welding.) Check whether the robot has collided. Or check whether the machinery load of the corresponding axis is increased.\n- (Action 2) Check whether the load settings are valid.\n- (Action 3) Check whether the brake of the corresponding axis is released.\n- (Action 4) Check whether the load weight is within the rated range. If the weight exceeds the upper limit, decrease it to the limit.\n- (Action 5) Check whether the voltage input to the controller is within the rated voltage.\n- (Action 6) Replace the servo amplifier.\n- (Action 7) Replace the corresponding servo motor.\n- (Action 8) Replace the E-stop unit.\n- (Action 9) Replace the power cable of the robot connection cable in which the corresponding axis is connected.\n- (Action 10) Replace the internal cable of the robot (power/brake) in which the corresponding axis is connected.\n\n6-Axis servo amplifier    E-stop unit\n\nFig.3.5 (r)   SRVO-076 Tip stick detection\n\n- 44 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "45",
+        "section": "3",
+        "title": "SRVO-076        Tip Stick Detection (G:i A:j)",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "45",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "| SRVO-081      | EROFL alarm (Track enc:i)                                                |\n| ------------- | ------------------------------------------------------------------------ |\n| (Explanation) | The pulse counter for line tracking has overflowed.                      |\n| (Action 1)    | Check whether the condition of the line tracking exceeds the limitation. |\n| (Action 2)    | Replace the Pulsecoder.                                                  |\n| (Action 3)    | Replace the line tracking board.                                         |\n\n| SRVO-082      | DAL alarm (Track encoder:i)                                                         |\n| ------------- | ----------------------------------------------------------------------------------- |\n| (Explanation) | The line tracking Pulsecoder has not been connected.                                |\n| (Action 1)    | Check the connection cable at each end (the line tracking board and the motor side) |\n| (Action 2)    | Check whether the shielding of the connection cable is connected securely to the    |\n| (Action 3)    | grounding plate.                                                                    |\n| (Action 4)    | Replace the line tracking cable.                                                    |\n| (Action 5)    | Replace the Pulsecoder.                                                             |\n|               | Replace the line tracking board.                                                    |\n\n| SRVO-084      | BZAL alarm (Track enc:i)                                                                                                                                         |\n| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | This alarm occurs if the backup battery for the absolute position of the Pulsecoder has not been connected. See the description about the BZAL alarm (SRVO-062). |\n\n| SRVO-087      | BLAL alarm (Track enc:i)                                                                                                                                        |\n| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | This alarm occurs if the voltage of the backup battery for the absolute position of the Pulsecoder is low. See the description about the BLAL alarm (SRVO-065). |\n\n| SRVO-089      | OHAL2 alarm (Track enc:i)                                                                                                                                                                  |\n| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| (Explanation) | The motor has overheated. When power is supplied to the Pulsecoder after it has become sufficiently cool, if the alarm still occurs. See the description about the OHAL2 alarm (SRVO-067). |\n\n| SRVO-090      | DTERR alarm (Track enc:i)                                                           |\n| ------------- | ----------------------------------------------------------------------------------- |\n| (Explanation) | Communication between the Pulsecoder and line tracking board is abnormal. See       |\n| (Action 1)    | the SRVO-068 DTERR alarm.                                                           |\n| (Action 2)    | Check the connection cable at each end (the line tracking board and the Pulsecoder) |\n| (Action 3)    | Check whether the shielding of the connection cable is connected securely to the    |\n| (Action 4)    | Replace the Pulsecoder.                                                             |\n| (Action 5)    | Replace the line tracking cable.                                                    |\n|               | Replace the line tracking board.                                                    |\n\n| SRVO-091      | CRCERR alarm (Track enc:i)                                                |\n| ------------- | ------------------------------------------------------------------------- |\n| (Explanation) | Communication between the Pulsecoder and line tracking board is abnormal. |\n| (Action)      | Action as same as the SRVO-090.                                           |\n\n| SRVO-092      | STBERR alarm (Track enc:i)                                                |\n| ------------- | ------------------------------------------------------------------------- |\n| (Explanation) | Communication between the Pulsecoder and line tracking board is abnormal. |\n| (Action)      | Action as same as the SRVO-090.                                           |\n\n| SRVO-093      | SPHAL alarm (Track enc:i)                                                                                     |\n| ------------- | ------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | This alarm occurs if the current position data from the Pulsecoder is higher than the previous position data. |\n| (Action)      | Action as same as the SRVO-090.                                                                               |\n\n- 45 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "46",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "3. TROUBLESHOOTING                     MAINTENANCE                                B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "46",
+        "section": "3",
+        "title": "SRVO-094 PMAL alarm (Track enc:i)",
+        "text": "(Explanation) It is likely that the Pulsecoder is abnormal. See the description about the PMAL alarm (SRVO-072).\n\n(Action) Replace the Pulsecoder."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "46",
+        "section": "3",
+        "title": "SRVO-095 CMAL alarm (Track enc:i)",
+        "text": "(Explanation) It is likely that the Pulsecoder is abnormal or the Pulsecoder has malfunctioned due to noise. See the description about the CMAL alarm (SRVO-073).\n\n(Action 1) Reinforce the earth of the flange of the Pulsecoder.\n\n(Action 2) Reset the Pulse count.\n\nReplace the Pulsecoder."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "46",
+        "section": "3",
+        "title": "SRVO-096 LDAL alarm (Track enc:i)",
+        "text": "(Explanation) The LED in the Pulsecoder is broken. See the description about the LDAL alarm (SRVO-074)."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "46",
+        "section": "3",
+        "title": "SRVO-097 Pulse not established (Enc:i)",
+        "text": "(Explanation) The absolute position of the Pulsecoder cannot be established. See the description about (SRVO-075). Pulse not established.\n\n(Action 1) Reset the alarm, and jog the axis on which the alarm has occurred until the same alarm does not occur again. (Jog one motor revolution)"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "46",
+        "section": "3",
+        "title": "SRVO-105 Door open or E.Stop",
+        "text": "(Explanation) The cabinet door is open.\n\n- When the door switch is not mounted skip Action 1 and 2 and start from Action 3\n\n(Action 1) If the auxiliary cabinet (option) is installed, check whether the door of the auxiliary cabinet is open. When the door is open, close it.\n\n(Action 2) If the auxiliary cabinet (option) is installed, check the door switch and its wiring. If the switch or wiring is faulty, replace it.\n\n(Action 3) Check that the CRMA92, CRMB8 connectors on the E-STOP unit and CRMA91 on the 6-Axis servo amplifier are connected securely.\n\n(Action 4) Replace the emergency stop board.\n\nReplace the 6-Axis servo amplifier.\n\n6-Axis servo amplifier    E-stop unit\n\n(Emergency stop board)\n\nFig.3.5 (s)   SRVO-105 Door open or E-stop\n\n- 46 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "47",
+        "section": "3",
+        "title": "SRVO-105 Door open or E.Stop",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "47",
+        "section": "3",
+        "title": "SRVO-123 Fan motor rev slow down(i)",
+        "text": "(Explanation) The rotation speed of fan motor is slow down.\n\n(Action 1) Check the fan motor and its cables. Replace them if necessary.\n\n(Action 2) Replace the backplane unit.\n\nBefore executing the (Action 3), perform a complete controller back up to save all your programs and settings.\n\n(Action 3) Replace the main board.\n\nFan motor\n\nMain board\n\nFig.3.5 (t) SRVO-123 Fan motor rev slow down(i)"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "47",
+        "section": "3",
+        "title": "SRVO-134 DCLVAL alarm (G:i A:j)",
+        "text": "(Explanation) The DC voltage (DC link voltage) of the main circuit power supply for the servo amplifier is abnormally low.\n\n(Action 1) It is possible that an instant disconnection of power source causes this alarm. Check whether an instant disconnection occurred.\n\n(Action 2) Check the input voltage to the controller is within the rated voltage.\n\n(Action 3) Modify the program in order that robot and the auxiliary axis do not accelerate simultaneously in the system with the auxiliary axis.\n\n(Action 4) Replace the E-stop unit.\n\n(Action 5) Replace the servo amplifier."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "47",
+        "section": "3",
+        "title": "SRVO-156 IPMAL alarm (G:i A:j)",
+        "text": "(Explanation) Abnormally high current flowed through the main circuit of the servo amplifier.\n\n(Action 1) Turn off the power, and disconnect the power cable from the servo amplifier indicated by the alarm message. (And disconnect the brake cable (CRR88 on the servo amplifier) to avoid the axis falling unexpectedly.) Turn on the power, and if the alarm occurs again, replace the servo amplifier.\n\n(Action 2) Turn off the power and disconnect the power cable from the servo amplifier indicated by the alarm message, and check the insulation of their U, V, W and the GND lines each other. If there is a short-circuit, replace the power cable.\n\n(Action 3) Turn off the power and disconnect the power cable from the servo amplifier by the alarm message, and measure the resistance between their U and V, V and W and W and U with an ohmmeter that has a very low resistance range. If the resistances at the three places are different from each other, the motor, the power cable is defective. Check each item in detail and replace it if necessary.\n\n- 47 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "48",
+        "section": "3",
+        "title": "SRVO-157 CHGAL alarm (G:i A:j)",
+        "text": "(Explanation) The capacitor on the servo amplifier was not charged properly within the specified\n\n(Action 1) time when the servo power is on.\n\n(Action 2) Check the input voltage to the controller is within the rated voltage.\n\nMake sure that the 6-axis servo amplifier CRRA12 and emergency stop board CRRA12 connector are connected tightly.\n\n(Action 3) In case of single phase, make sure that the connectors CRRB14 is securely attached to the servo amplifier.\n\n(Action 4) Replace the E-stop unit.\n\nReplace the 6 axis servo amplifier.\n\n| 6-Axis servo amplifier | E-stop unit |\n| ---------------------- | ----------- |\n| (Emergency stop board) |             |\n\nFig.3.5 (u) SRVO-156 IPMAL alarm\n\nSRVO-157 CHGAL alarm\n\n- 48 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "49",
+        "section": "3",
+        "title": "SRVO-157 CHGAL alarm (G:i A:j)",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "49",
+        "section": "3",
+        "title": "SRVO-204 External (SVEMG abnormal) E-stop",
+        "text": "(Explanation) The switch connected across EES1 – EES11 and EES2 – EES21 on the TBOP20 on the emergency stop board was pressed, but the EMERGENCY STOP line was not disconnected.\n\n(Action 1) Check the switch and cable connected to EES1 – EES11 and EES2 – EES21 on the TBOP20. If the cable is abnormal, replace it.\n\nBefore executing the (Action 2), perform a complete controller back up to save all your programs and settings.\n\n(Action 2) Replace the main board.\n\n(Action 3) Replace the emergency stop board.\n\n(Action 4) Replace the 6-Axis servo amplifier.\n\n6-Axis servo amplifier E-stop unit (Emergency stop board)\n\n- 49 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "50",
+        "section": "3",
+        "title": "SRVO-204 External (SVEMG abnormal) E-stop",
+        "text": "3. TROUBLESHOOTING    MAINTENANCE    B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "50",
+        "section": "3",
+        "title": "3CRM98FANUC  UTYPET",
+        "text": "| TB0P19 | CRMB22 | l | p   |\n| ------ | ------ | - | --- |\n| TBOP20 | Ov88   | B | KA5 |\n\n| No. | Name   | TBOP20        | M     | +      | 9K1 FLSEB9    |\n| --- | ------ | ------------- | ----- | ------ | ------------- |\n| 12  | E-STOP | 21            | M     |        |               |\n| 11  | (ESPB) | 2             | KA7   | KA6    | FUSET         |\n| 10  |        | 11            | C     | \\[]    | 81            |\n| 9   | 1      | EVON          | CP1A  |        |               |\n| 8   | FENCE  | 21            | 2     |        |               |\n| 7   | (EAS)  | 2             | CRS36 | CRMA92 |               |\n| 6   | 11     | M             |       |        |               |\n| 5   | EMGIN  | 1             | Pet   |        |               |\n| 4   | (EES)  | 21            | PA    |        |               |\n| 3   | 2      | 0             |       |        |               |\n| 2   | 11     | TM1           | ④     |        |               |\n| 1   | 1      | A20B-2005-015 |       |        | (R-30iB Mate) |"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "50",
+        "section": "3",
+        "title": "AZ2143Y CRMB77 4VCRT30",
+        "text": "| TBOP20 | No.    | Name |          |          |\n| ------ | ------ | ---- | -------- | -------- |\n| 12     | E-STOP | 21   |          | =        |\n| 11     | (ESPB) | 2    | K47      | KA5      |\n| 10     |        | 11   |          |          |\n| 9      |        | 1    | Jon      |          |\n| 8      | FENCE  | 21   | CR536    |          |\n| 7      | (EAS)  | 2    |          |          |\n| 6      |        | 11   |          |          |\n| 5      | EMGIN  | 1    | CR54011E | P        |\n| 4      | (EES)  | 21   |          | CPI CP1A |\n| 3      |        | 2    |          | LJ ④     |\n| 2      |        | 11   | 0        | A208-    |\n| 1      |        | 1    |          | 2103-017 |\n\n(R-30iB Mate Plus)\n\n(Emergency stop board)\n\nFig.3.5 (v) SRVO-204 External (SVEMG abnormal) E-stop\n\n- 50 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "51",
+        "section": "3",
+        "title": "AZ2143Y CRMB77 4VCRT30",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "51",
+        "section": "3",
+        "title": "SRVO-205        Fence open (SVEMG abnormal)",
+        "text": "(Explanation) The switch connected across EAS1 – EAS11 and EAS2 – EAS21 on the TBOP20 on the emergency stop board was opened, but the EMERGENCY STOP line was not disconnected.\n\n(Action 1) Check the switch and cable connected to EAS1 – EAS11 and EAS2 – EAS21 on the TBOP20. If the cable is abnormal, replace it.\n\nBefore executing the (Action 2), perform a complete controller back up to save all your programs and settings.\n\n(Action 2) Replace the main board.\n\n(Action 3) Replace the emergency stop board.\n\n(Action 4) Replace the 6-Axis servo amplifier.\n\n6-Axis servo amplifier    E-stop unit\n\n(Emergency stop board)\n\n- 51 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "52",
+        "section": "3",
+        "title": "SRVO-205        Fence open (SVEMG abnormal)",
+        "text": "3. TROUBLESHOOTING    MAINTENANCE    B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "52",
+        "section": "3",
+        "title": "3CRM98FANUC  UTYPET",
+        "text": "| TB0P19 | CRMB22 | l | p   |\n| ------ | ------ | - | --- |\n| TBOP20 | Ov88   | B | KA5 |\n\n| No. | Name   | TBOP20 | M             | +             | 9K1 FLSEB9 |\n| --- | ------ | ------ | ------------- | ------------- | ---------- |\n| 12  | E-STOP | 21     | M             |               | 9K1 FLSEB9 |\n| 11  | (ESPB) | 2      | KA7           | KA6           | FUSET      |\n| 10  |        | 11     | C             | \\[]           | 81         |\n| 9   | FENCE  | 1      | EVON          | CP1A          |            |\n| 8   |        | 21     | I             | 2             |            |\n| 7   | (EAS)  | 2      | CRS36         | CMA92         |            |\n| 6   |        | 11     | M             |               |            |\n| 5   |        | 1      | Pvt           |               |            |\n| 4   | EMGIN  | 21     | P             | Z             |            |\n| 3   | (EES)  | 2      | 0             |               |            |\n| 2   |        | 11     | m3            | TM1           | ④          |\n| 1   |        | 1      | A20B-2005-015 | (R-30iB Mate) |            |"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "52",
+        "section": "3",
+        "title": "(Emergency stop board)",
+        "text": "Fig.3.5 (w) SRVO-205 Fence open (SVEMG abnormal)\n\n- 52 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "53",
+        "section": "3",
+        "title": "(Emergency stop board)",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "53",
+        "section": "3",
+        "title": "SRVO-206 Deadman switch (SVEMG abnormal)",
+        "text": "(Explanation) When the teach pendant was enabled, the DEADMAN switch was released or pressed strongly, but the emergency stop line was not disconnected.\n\n- (Action 1) Replace the teach pendant.\n- Check the teach pendant cable. If it is inferior, replace the cable.\n- Before executing the (Action 3), perform a complete controller back up to save all your programs and settings.\n- (Action 3) Replace the main board.\n- (Action 4) Replace the emergency stop board.\n- (Action 5) Replace the 6-Axis servo amplifier."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "53",
+        "section": "3",
+        "title": "SRVO-213 E-STOP Board FUSE2 blown",
+        "text": "(Explanation) A fuse (FUSE2) on the emergency stop board has blown, or no voltage is supplied to EXT24V.\n\n- (Action 1) Check whether the fuse (FUSE2) on the emergency stop board has blown. If the fuse has blown, 24EXT may be short-circuited to 0EXT. Take Action 2. If FUSE2 has not blown, take Action 3 and up.\n- Disconnect the connection destinations of 24EXT that can cause grounding then check that the fuse (FUSE2) does not blow. Disconnect the following on the emergency stop board then turn on the power:\n- - CRS36\n- CRT30\n- TBOP20: EES1, EES11, EAS1, EAS11\n\nIf the fuse (FUSE2) does not blow in this state, 24EXT and 0EXT may be short-circuited at any of the connection destinations above. Isolate the faulty location then take action.\n- If the fuse (FUSE2) blows even when the connection destinations above are detached, (Action 3) replace the emergency stop board.\n- Check whether 24 V is applied to between EXT24V and EXT0V of TBOP19. If not, check the external power supply circuit.\n- If no external power supply is used, check whether the terminals above are connected to the INT24V and INT0V terminals, respectively.\n- (Action 5) Replace the emergency stop board.\n- (Action 6) Replace the teach pendant cable.\n- (Action 7) Replace the teach pendant.\n- Replace the operator’s panel cable (CRT30).\n\n- 53 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "54",
+        "section": "3",
+        "title": "FUSE2",
+        "text": "| No. | Name   | CRT30 |\n| --- | ------ | ----- |\n| 4   | EXT0V  |       |\n| 3   | INT0V  |       |\n| 2   | INT24V |       |\n| 1   | EXT24V |       |"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "54",
+        "section": "3",
+        "title": "TBOP20",
+        "text": "| No. | E Name |\n| --- | ------ |\n| 12  | -STOP  |\n| 11  | (ESPB) |\n| 10  |        |\n| 9   | FENCE  |\n| 8   | (EAS)  |\n| 7   |        |\n| 6   |        |\n| 5   | EMGIN  |\n| 4   | (EES)  |\n| 3   |        |\n| 2   |        |\n| 1   |        |"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "54",
+        "section": "3",
+        "title": "FUSE2",
+        "text": "| No. | Name   | e          | CRT30               |\n| --- | ------ | ---------- | ------------------- |\n| 4   | EXTOV  | 24EX7-     | 2443                |\n| 3   | INTOV  | 24v2CRMB22 | CRM98 FANUC UL TYPE |\n| 2   | INT24V |            |                     |\n| 1   | EXT24V |            |                     |"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "54",
+        "section": "3",
+        "title": "TBOP20",
+        "text": "| No. | Name   | KA5 |\n| --- | ------ | --- |\n| 12  | E-STOP | 21  |\n| 11  | (ESPB) | 2   |\n| 10  |        | 11  |\n| 9   | FENCE  | 1   |\n| 8   | (EAS)  | 21  |\n| 7   |        | 2   |\n| 6   |        | 11  |\n| 5   |        | 1   |\n| 4   | EMGIN  | 21  |\n| 3   | (EES)  | 2   |\n| 2   |        | 11  |\n| 1   |        | 1   |"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "55",
+        "section": "3",
+        "title": "(Emergency stop board)",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "55",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "| 6-Axis servo amplifier            | E-stop unit (Emergency stop board)                                                                                                                                                                                                       |\n| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| Fig.3.5 (x)                       | SRVO-206 DEADMAN switch (SVEMG abnormal)                                                                                                                                                                                                 |\n| SRVO-213 E-STOP Board FUSE2 blown | SRVO-214 6ch amplifier fuse blown (Robot:i)                                                                                                                                                                                              |\n| (Explanation)                     | A fuse (FS2 or FS3) in the 6-Axis servo amplifier has blown.                                                                                                                                                                             |\n| (Action 1)                        | A fuse (FS2 or FS3) is blown, eliminate the cause, and then replace the fuse. (See Section 3.6)                                                                                                                                          |\n| (Action 2)                        | Replace the 6-Axis servo amplifier.                                                                                                                                                                                                      |\n| SRVO-216 OVC (total) (Robot:i)    |                                                                                                                                                                                                                                          |\n| (Explanation)                     | The current (total current for six axes) flowing through the motor is too large.                                                                                                                                                         |\n| (Action 1)                        | Slow the motion of the robot where possible. Check the robot operation conditions. If the robot is used with a condition exceeding the duty or load weight robot rating,                                                                 |\n| (Action 2)                        | reduce the load condition value to the specification range.                                                                                                                                                                              |\n| (Action 3)                        | Check the input voltage to the controller is within the rated voltage. Replace the 6-Axis servo amplifier.                                                                                                                               |\n| SRVO-221 Lack of DSP (G:i A:j)    |                                                                                                                                                                                                                                          |\n| (Explanation)                     | A controlled axis card corresponding to the set number of axes is not mounted.                                                                                                                                                           |\n| (Action 1)                        | Check whether the set number of axes is valid. If the number is invalid, set the correct number.                                                                                                                                         |\n| (Action 2)                        | Replace the axis control card with a card corresponding to the set number of axes.                                                                                                                                                       |\n| SRVO-223 DSP dry run (a,b)        |                                                                                                                                                                                                                                          |\n| (Explanation)                     | A servo DSP initialization failure occurred due to hardware failure or wrong software setting. Then, the software entered DSP dry run mode. The first number indicates the cause of the failure. The second number is extra information. |\n| (Action)                          | Perform an action according to the first number that is displayed in the alarm message.                                                                                                                                                  |\n| 1:                                | This is a warning due to $scr.$startup\\_cnd=12.                                                                                                                                                                                          |\n| 2,3,4,7:                          | Replace a servo card.                                                                                                                                                                                                                    |\n| 5:                                | Invalid ATR setting. Software axis config (FSSB line number, hardware start axis number, amplifier number, and amplifier type) might be wrong.                                                                                           |\n| 6:                                | SRVO-180 occurs simultaneously. Controllable axis does not exist on any group. Execute aux axis setting to add axis at controlled start.                                                                                                 |\n| 8,10:                             | SRVO-058 (FSSB init error) occurs simultaneously. Follow the remedy of SRVO-058.                                                                                                                                                         |\n| 9:                                | There is no amplifier that is connected to the servo card.                                                                                                                                                                               |\n|                                   | •Check the hardware connection.                                                                                                                                                                                                          |\n\n- 55 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "56",
+        "section": "3",
+        "title": "MAINTENANCE",
+        "text": "B-83525EN/07\n\n- Check the optical fiber cable.\n- In case of using aux. axis amplifier, make sure that the connectors CXA2A (6-axis amplifier) or CXA2B (aux. axis amplifier) are securely attached to the servo amplifier.\n- Check whether the servo amplifier power is supplied.\n- Check whether the fuse on the servo amplifier has blown.\n- Replace the optical fiber cable.\n\n11: Replace the servo amplifier\n\nInvalid axis order setting. Non-existing axis number is specified. Software axis config (FSSB line number) might be wrong or auxiliary axis board is necessary.\n\n12: SRVO-059 (Servo amp init error) occurs simultaneously. Follow the remedy of SRVO-059.\n\n13,14,15: Document the events that led to the error, and contact your FANUC technical representative."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "56",
+        "section": "3",
+        "title": "(Main board)",
+        "text": "Fig.3.5 (y) SRVO-214 6ch amplifier fuse blown (Panel PCB)\n\nSRVO-216 OVC (total)\n\nSRVO-221 Lack of DSP\n\nSRVO-223 DSP dry run (a,b)\n\n- 56 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "57",
+        "section": "3",
+        "title": "(Main board)",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "57",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "SRVO-230 Chain 1 abnormal a, b\n\nSRVO-231 Chain 2 abnormal a, b\n\n(Explanation) A mismatch occurred between duplicate safety signals. SRVO-230 is issued if such a mismatch that a contact connected on the chain 1 side (between EES1 and EES11, between EAS1 and EAS11, and so forth) is closed, and a contact on the chain 2 side (between EES2 and EES21, between EAS2 and EAS21, and so forth) is open occurs. SRVO-231 is issued if such a mismatch that a contact on the chain 1 side is open, and a contact on the chain 2 side is closed occurs. If a chain error is detected, correct the cause of the alarm then reset the alarm according to the method described later.\n\n(Action) Check the alarms issued at the same time in order to identify with which signal the mismatch occurred. SRVO-266 through SRVO-275 and SRVO-370 through SRVO-385 are issued at the same time. Take the action(s) described for each item.\n\nWARNING\n\nIf this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails.\n\nCAUTION\n\nThe state of this alarm is preserved by software. After correcting the cause of the alarm, reset the chain error alarm according to the chain error reset procedure described later. Until a chain error is reset, no ordinary reset operation must be performed. If an ordinary reset operation is performed before chain error resetting, the message \"SRVO-237 Chain error cannot be reset\" is displayed on the teach pendant.\n\n6-Axis servo amplifier E-stop unit (Emergency stop board)\n\nFig.3.5 (z) SRVO-230 Chain 1 (+24V) abnormal a, b\n\nSRVO-231 Chain 2 (0V) abnormal a, b\n\n- 57 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "58",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "3. TROUBLESHOOTING                             MAINTENANCE                              B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "58",
+        "section": "3",
+        "title": "Alarm history display method",
+        "text": "1. Press the screen selection key on the teach pendant.\n2. Select [4 ALARM] on the teach pendant.\n3. Press F3 [HIST] on the teach pendant."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "58",
+        "section": "3",
+        "title": "Chain error reset procedure",
+        "text": "CAUTION\n\nDo not perform this operation until the cause of the alarm is corrected."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "58",
+        "section": "3",
+        "title": "Method 1",
+        "text": "1. Press the emergency stop button.\n2. Press the screen selection key on the teach pendant.\n3. Select [0 NEXT PAGE] on the teach pendant.\n4. Press [6 SYSTEM] on the teach pendant.\n5. Press [7 SYSTEM SETTING] on the teach pendant.\n6. Find \"28\" Chain Error Reset Execution.\n7. Press F3 on the teach pendant to reset \"Chain Error\"."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "58",
+        "section": "3",
+        "title": "Method 2",
+        "text": "1. Press the screen selection key on the teach pendant.\n2. Select [4 ALARM] on the teach pendant.\n3. Press F4 [CHAIN RESET] on the teach pendant."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "58",
+        "section": "3",
+        "title": "SRVO-233",
+        "text": "TP OFF in T1/ T2\n\n- Explanation: Teach pendant is disabled when the mode switch is T1 or T2.\n- Action 1: Or controller door is opened.\n- Action 2: Enable the teach pendant in teaching operation. In other case the mode switch should be AUTO mode.\n- Action 3: Close the controller door, if open.\n- Action 4: Replace the teach pendant.\n- Action 5: Replace the teach pendant cable.\n- Action 6: Replace the mode switch.\n- Action 7: Replace the emergency stop board.\n- Replace the 6-Axis servo amplifier."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "58",
+        "section": "3",
+        "title": "SRVO-235",
+        "text": "Short term Chain abnormal\n\n- Explanation: Short term single chain failure condition is detected.\n- Cause of this alarm is:\n- Half release of DEADMAN switch\n- Action 1: Half operation of emergency stop switch.\n- Action 2: Cause the same error to occur again, and then perform resetting.\n- Action 3: Replace the emergency stop board.\n- Replace the 6-Axis servo amplifier."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "58",
+        "section": "3",
+        "title": "SRVO-251",
+        "text": "DB relay abnormal (G:i A:j)\n\n- Explanation: An abnormality was detected in the internal relay (DB relay) of the servo amplifier.\n- Action 1: Replace the servo amplifier.\n- Action 2: Replace the E-stop unit.\n\n- 58 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "59",
+        "section": "3",
+        "title": "SRVO-251",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "59",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "| SRVO-252      | Current detect abnl (G:i A:j)                                                            |\n| ------------- | ---------------------------------------------------------------------------------------- |\n| (Explanation) | An abnormality was detected in the current detection circuit inside the servo amplifier. |\n| (Action)      | Replace the servo amplifier.                                                             |\n\n| SRVO-253      | Amp internal over heat (G:i A:j)                     |\n| ------------- | ---------------------------------------------------- |\n| (Explanation) | An overheat was detected inside the servo amplifier. |\n| (Action)      | Replace the servo amplifier.                         |"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "59",
+        "section": "3",
+        "title": "E-stop unit",
+        "text": "(Emergency stop board)\n\n&#x3C;250mm/s\n\nAUTO &#x3C;250mm/s AUTO 100%\n\nT1 T2"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "59",
+        "section": "3",
+        "title": "mode switch",
+        "text": "(Mode switch)\n\nFig.3.5 (aa)\n\n- SRVO-233 TP OFF in T1, T2\n- SRVO-235 Short term Chain abnormal\n- SRVO-251 DB relay abnormal\n- SRVO-252 Current detect abnl\n- SRVO-253 Amp internal over heat\n\n- 59 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "60",
+        "section": "3",
+        "title": "mode switch",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "60",
+        "section": "3",
+        "title": "MAINTENANCE",
+        "text": "SRVO-266     FENCE1 status abnormal\n\nSRVO-267     FENCE2 status abnormal\n\n(Explanation)  A chain alarm was detected with the EAS (FENCE) signal.\n\n(Action 1)     Check whether the circuitry connected to the dual input signal (EAS) is faulty.\n\n(Action 2)     Check whether the timing of the dual input signal (EAS) satisfies the timing specification (See Subsection 3.2.5, Table 3.2.5 in CONNECTIONS).\n\nBefore executing the (Action 3), perform a complete controller back up to save all your programs and settings.\n\n(Action 3)     Replace the main board.\n\n(Action 4)     Replace the emergency stop board."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "60",
+        "section": "3",
+        "title": "WARNING",
+        "text": "If this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "60",
+        "section": "3",
+        "title": "NOTE",
+        "text": "For the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231.\n\n- 60 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "61",
+        "section": "3",
+        "title": "NOTE",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "61",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "| No. | Name   | TBOP20 | M             | + 9K1 FLSEB9 |\n| --- | ------ | ------ | ------------- | ------------ |\n| 12  | E-STOP | 21     | M             |              |\n| 11  | (ESPB) | 2      | KA7           | KA6 FUSET    |\n| 10  |        | 11     | C             | \\[] 81 DA    |\n| 9   | FENCE  | 1      | EVON          | CP1A         |\n| 8   |        | 21     | I             | 2            |\n| 7   | (EAS)  | 2      | CRS36         | CMA92        |\n| 6   |        | 11     | M             |              |\n| 5   |        | 1      | Pvt           |              |\n| 4   | EMGIN  | 21     | P             | Z            |\n| 3   | (EES)  | 2      | 0             |              |\n| 2   |        | 11     | m3            | TM1 ④        |\n| 1   |        | 1      | A20B-2005-015 |              |\n\n(R-30iB Mate)\n\ne P 24EX1- 2472 24V3\n\nCRM822 CRM98 FANUC UL_TYPE P p\n\nTB0P19 KAT2EAT! CRMB?7²⁴ᵂCRT30 02\n\n| TBOP20 | Name   | KA5 | 20                    |\n| ------ | ------ | --- | --------------------- |\n| No.    | E-STOP | E   |                       |\n| 12     | (ESPB) | 21  |                       |\n| 11     |        | 2   | KA7 KAS               |\n| 10     |        | 11  | P²⁴                   |\n| 9      | FENCE  | 1   | (o A                  |\n| 8      | (EAS)  | 21  | CRS36 p               |\n| 7      |        | 2   |                       |\n| 6      |        | 11  | CRS40                 |\n| 5      |        | 1   |                       |\n| 4      | EMGIN  | 21  | M A CP CPTA           |\n| 3      | (EES)  | 2   |                       |\n| 2      |        | 11  | m0−0000□□0□□ \\* A20B- |\n| 1      |        | 1   | 2103-017/             |\n\n(R-30iB Mate Plus)\n\n(Emergency stop board)\n\nFig.3.5 (ab) SRVO-266 FENCE1 status abnormal\n\nSRVO-267 FENCE2 status abnormal\n\n- 61 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "62",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "3. TROUBLESHOOTING                MAINTENANCE                                      B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "62",
+        "section": "3",
+        "title": "SRVO-270",
+        "text": "EXEMG1 status abnormal"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "62",
+        "section": "3",
+        "title": "SRVO-271",
+        "text": "EXEMG2 status abnormal\n\nExplanation: A chain alarm was detected with the EES (EXEMG) signal.\n\nActions:\n\n1. Check whether the circuitry connected to the dual input signal (EES) is faulty.\n2. Check whether the timing of the dual input signal (EES) satisfies the timing specification (See Subsection 3.2.5, Fig 3.2.5(c) in CONNECTIONS).\n3. Replace the teach pendant cable.\n4. Replace the teach pendant.\n5. Replace the emergency stop board.\n6. Replace the emergency stop switch on the operator's panel (or replace entire operator’s panel).\n7. Before executing the Action 7, perform a complete controller back up to save all your programs and settings.\n8. Replace the main board.\n\nWARNING: If this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails.\n\nNOTE: For the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231.\n\n- 62 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "63",
+        "section": "3",
+        "title": "SRVO-271",
+        "text": "B-83525EN/07 MAINTENANCE 3. TROUBLESHOOTING"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "63",
+        "section": "3",
+        "title": "Table 2: Troubleshooting",
+        "text": "| No. | Name   | TBOP20        | M     | + 9K1 FLSEB9 |\n| --- | ------ | ------------- | ----- | ------------ |\n| 12  | E-STOP | 21            | M     |              |\n| 11  | (ESPB) | 2             | KA7   | KA6 FUSET    |\n| 10  |        | 11            | C     | \\[]          |\n| 9   | 1      | EVON          | CP1A  |              |\n| 8   | FENCE  | 21            | 2     |              |\n| 7   | (EAS)  | 2             | CRS36 | CRMA92       |\n| 6   |        | 11            | M     |              |\n| 5   | EMGIN  | 1             | Pet   |              |\n| 4   | (EES)  | 21            | PA    |              |\n| 3   | 2      | 0             |       |              |\n| 2   | 11     | TM1           | ④     |              |\n| 1   | 1      | A20B-2005-015 |       |              |\n\n(R-30iB Mate)\n\ne P D\n\n24EX1- 2472 24V3\n\nCRM822 CRM98 FANUC UL_TYPE P C\n\nTB0P19 MAT2A1 CRMB?7²⁴ᵂCRT30\n\n17"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "63",
+        "section": "3",
+        "title": "Table 2: Emergency Stop Board",
+        "text": "| TBOP20 | Name  | KA5 | 20                    |\n| ------ | ----- | --- | --------------------- |\n| E-STOP | E     | 12  | (ESPB)                |\n| 11     |       | 2   | KA7 KAS               |\n| 10     |       | 11  |                       |\n| 9      | 1     | (o  | A                     |\n| 8      | FENCE | 21  | CRS36                 |\n| 7      | (EAS) | 2   |                       |\n| 6      |       | 11  | CRS40                 |\n| 5      |       | 1   |                       |\n| 4      | EMGIN | 21  | N A                   |\n| 3      | (EES) | 2   |                       |\n| 2      |       | 11  | =W−□0□□0□0□□ \\* A20B- |\n| 1      |       | 1   | 2103-017/             |\n\n(R-30iB Mate Plus)\n\n(Emergency stop board)\n\nFig.3.5 (ac) SRVO-270 EXEMG1 status abnormal\n\nSRVO-271 EXEMG2 status abnormal\n\n- 63 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "64",
+        "section": "3",
+        "title": "Table 2: Emergency Stop Board",
+        "text": "3. TROUBLESHOOTING            MAINTENANCE                           B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "64",
+        "section": "3",
+        "title": "SRVO-275     NTED2 status abnormal",
+        "text": "(Explanation)  A chain alarm was detected with the NTED signal.\n\n(Action 1)     This alarm may be issued when the DEADMAN switch is pressed to a proper position or is operated very slowly.  In such a case, release the DEADMAN switch once completely then press the DEADMAN switch again.\n\n(Action 2)     Check whether the circuitry connected to the dual input signal (NTED) is faulty. Check whether the timing of the dual input signal (NTED) satisfies the timing specification.\n\n(Action 3)     (See Subsection 3.2.5, Fig 3.2.5(c) in CONNECTIONS).\n\n(Action 4)     Replace the teach pendant cable.\n\n(Action 5)     Replace the teach pendant.\n\n(Action 6)     Replace the emergency stop board. Replace the mode switch on the operator's panel.\n\nBefore executing the (Action 7), perform a complete controller back up to save all your programs and settings.\n\n(Action 7)     Replace the main board.\n\nWARNING\n\nIf this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails.\n\nNOTE\n\nFor the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "64",
+        "section": "3",
+        "title": "SRVO-277        Panel E-stop (SVEMG abnormal)",
+        "text": "(Explanation)  The emergency stop line was not disconnected although the emergency stop button on the operator's panel was pressed.\n\nBefore executing the (Action 1), perform a complete controller back up to save all your programs and settings.\n\n(Action 1)     Replace the main board.\n\n(Action 2)     Replace the emergency stop board.\n\n(Action 3)     Replace the 6-Axis servo amplifier.\n\n- 64 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "65",
+        "section": "3",
+        "title": "SRVO-277        Panel E-stop (SVEMG abnormal)",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "65",
+        "section": "3",
+        "title": "SRVO-278 TP E-stop (SVEMG abnormal)",
+        "text": "(Explanation) The emergency stop line was not disconnected although the emergency stop button on the teach pendant was pressed.\n\n(Action 1) Replace the teach pendant.\n\n(Action 2) Replace the teach pendant cable.\n\nBefore executing the (Action 3), perform a complete controller back up to save all your programs and settings.\n\n(Action 3) Replace the main board.\n\n(Action 4) Replace the emergency stop board.\n\n(Action 5) Replace the 6-Axis servo amplifier.\n\nNOTE This alarm may be issued if the emergency stop button is pressed very slowly.\n\n| 6-Axis servo amplifier | E-stop unit   |\n| ---------------------- | ------------- |\n| (Emergency stop board) |               |\n| <250mm/s               | AUTO <250mm/s |\n| AUTO                   | 100%          |\n| T1                     | T2            |\n| 2 mode switch          | 3 mode switch |\n| (Mode switch)          |               |\n\nFig.3.5 (ad) SRVO-274 NTED1 status abnormal\n\nSRVO-275 NTED2 status abnormal\n\nSRVO-277 Panel E-stop (SVEMG abnormal)\n\nSRVO-278 TP E-stop (SVEMG abnormal)\n\n- 65 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "66",
+        "section": "3",
+        "title": "B-83525EN/07",
+        "text": "| SRVO-291      | IPM over heat (G:i A:j)                                                                                                                         |\n| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | IPM on the servo amplifier is overheated.                                                                                                       |\n| (Action 1)    | Check whether the vent hole is clogged. If necessary, clean them.                                                                               |\n| (Action 2)    | If SRVO-291 is issued when the robot operating condition is severe, check the robot operating condition then relax the condition when possible. |\n| (Action 3)    | If SRVO-291 is issued frequently, replace the servo amplifier.                                                                                  |\n\n| SRVO-295      | Amp com error (G:i A:j)                                       |\n| ------------- | ------------------------------------------------------------- |\n| (Explanation) | A communication error occurred in the 6-axis servo amplifier. |\n| (Action 1)    | Replace the 6-axis servo amplifier.                           |\n\n| SRVO-297      | Improper input power (G:i A:j)                                                                                             |\n| ------------- | -------------------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | The 6-axis servo amplifier has detected the input voltage phase lack.                                                      |\n| (Action 1)    | Check the input voltage of the controller whether phase is not lack.                                                       |\n| (Action 2)    | Measure the secondary voltage between each phase at the main breaker, if phase lack is detected, replace the main breaker. |\n| (Action 3)    | Replace the E-stop unit.                                                                                                   |\n| (Action 4)    | Replace the 6-axis servo amplifier.                                                                                        |\n\n| SRVO-300      | Hand broken/HBK disabled                                                                                                              |\n| ------------- | ------------------------------------------------------------------------------------------------------------------------------------- |\n| SRVO-302      | Set Hand broken to ENABLE                                                                                                             |\n| (Explanation) | Although HBK was disabled, the HBK signal was input.                                                                                  |\n| (Action 1)    | Press RESET on the teach pendant to release the alarm.                                                                                |\n| (Action 2)    | Check whether the hand broken signal is connected to the robot. When the hand broken signal circuit is connected, enable hand broken. |\n\n| SRVO-335      | DCS OFFCHK alarm a, b                                                                                          |\n| ------------- | -------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | A failure was detected in the safety signal input circuit.                                                     |\n|               | Before executing the (Action 1), perform a complete controller back up to save all your programs and settings. |\n| (Action 1)    | Replace the main board.                                                                                        |\n\n| SRVO-348      | DCS MCC OFF alarm a, b                                                                                                                                                                                                 |\n| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | A command was issued to turn off the magnetic contactor, but the magnetic contactor was not turned off.                                                                                                                |\n| (Action 1)    | If a signal is connected to the E-stop unit CRMB8, check whether there is a problem in the connection destination. Make sure that the connector CRMB16 (6-axis amplifier) is securely attached to the servo amplifier. |\n| (Action 2)    | Replace the E-stop unit (included the magnetic contactor).                                                                                                                                                             |\n|               | Before executing the (Action 3), perform a complete controller back up to save all your programs and settings.                                                                                                         |\n| (Action 3)    | Replace the main board.                                                                                                                                                                                                |\n| (Action 4)    | Replace the 6-Axis servo amplifier.                                                                                                                                                                                    |"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "67",
+        "section": "3",
+        "title": "B-83525EN/07",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "67",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "| SRVO-349      | DCS MCC ON alarm a, b                                                                                          |\n| ------------- | -------------------------------------------------------------------------------------------------------------- |\n| (Explanation) | A command was issued to turn on the magnetic contactor, but the magnetic contactor was not turned on.          |\n| (Action 1)    | Replace the E-stop unit (included the magnetic contactor).                                                     |\n|               | Before executing the (Action 2), perform a complete controller back up to save all your programs and settings. |\n| (Action 2)    | Replace the main board.                                                                                        |\n| (Action 3)    | Replace the 6-Axis servo amplifier.                                                                            |\n\n| SRVO-370      | SVON1 status abnormal                                                                                          |\n| ------------- | -------------------------------------------------------------------------------------------------------------- |\n| SRVO-371      | SVON2 status abnormal                                                                                          |\n| (Explanation) | A chain alarm was detected with the main board internal signal (SVON).                                         |\n|               | Before executing the (Action 1), perform a complete controller back up to save all your programs and settings. |\n| (Action 1)    | Replace the main board.                                                                                        |\n| (Action 2)    | Replace the 6-Axis servo amplifier.                                                                            |\n| (Action 3)    | Replace the emergency stop board.                                                                              |"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "67",
+        "section": "3",
+        "title": "WARNING",
+        "text": "If this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "67",
+        "section": "3",
+        "title": "NOTE",
+        "text": "For the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231.\n\n6-Axis servo amplifier E-stop unit\n\nMain board (Emergency stop board)\n\nFig.3.5 (ae) SRVO-291 IPM over heat\n\nSRVO-295 Amp com error\n\nSRVO-297 Improper input power\n\nSRVO-335 DCS OFFCHK alarm a, b\n\nSRVO-348 DCS MCC OFF alarm a, b\n\nSRVO-349 DCS MCC ON alarm a, b\n\nSRVO-370 SVON1 status abnormal\n\nSRVO-371 SVON2 status abnormal\n\n- 67 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "68",
+        "section": "3",
+        "title": "NOTE",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "68",
+        "section": "3",
+        "title": "SRVO-373     OPEMG2 status abnormal",
+        "text": "(Explanation) A chain alarm was detected with the emergency stop button on the operator's panel.\n\n(Action 1) Replace the emergency stop board.\n\n(Action 2) Replace the teach pendant cable.\n\n(Action 3) Replace the teach pendant.\n\n(Action 4) Replace the emergency stop button on the operator's panel.\n\nBefore executing the (Action 5), perform a complete controller back up to save all your programs and settings.\n\n(Action 5) Replace the main board.\n\nWARNING\n\nIf this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails.\n\nNOTE\n\nFor the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "68",
+        "section": "3",
+        "title": "SRVO-377     MODE22 status abnormal",
+        "text": "(Explanation) A chain alarm was detected with the mode switch signal.\n\n(Action 1) Check the mode switch and its cable. Replace them if a defect is found.\n\n(Action 2) Replace the emergency stop board.\n\nBefore executing the (Action 3), perform a complete controller back up to save all your programs and settings.\n\n(Action 3) Replace the main board.\n\nWARNING\n\nIf this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails.\n\nNOTE\n\nFor the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231.\n\n- 68 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "69",
+        "section": "3",
+        "title": "SRVO-377     MODE22 status abnormal",
+        "text": "B-83525EN/07    MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "69",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "E-stop unit (Emergency stop board)\n\n| <250mm/s      | AUTO          | <250mm/s | AUTO | 100% |\n| ------------- | ------------- | -------- | ---- | ---- |\n| 2 mode switch | 3 mode switch |          |      |      |\n\n(Mode switch)\n\n(Red)\n\n(Yellow)\n\n(Emergency stop button)\n\nFig.3.5 (af)\n\n- SRVO-372 OPEMG1 status abnormal\n- SRVO-373 OPEMG2 status abnormal\n- SRVO-374 MODE11 status abnormal\n- SRVO-375 MODE12 status abnormal\n- SRVO-376 MODE21 status abnormal\n- SRVO-377 MODE22 status abnormal\n\n- 69 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "70",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "70",
+        "section": "3",
+        "title": "SRVO-378 SFDIxx status abnormal",
+        "text": "(Explanation) A chain alarm was detected with the SFDI signal. xx shows signal name.\n\n(Action 1) Check whether the circuitry connected to the dual input signal (SFDI) is faulty.\n\n(Action 2) Check whether the timing of the dual input signal (SFDI) satisfies the timing specification. (See Subsection 3.3.4, Fig 3.3.4(c) in CONNECTIONS).\n\nWARNING\n\nIf this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails.\n\nNOTE\n\nFor the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231.\n\nFig.3.5 (ag) SRVO-378 SFDIxx status abnormal"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "70",
+        "section": "3",
+        "title": "SRVO-450 Drvoff circuit fail(G:i A:j)",
+        "text": "(Explanation) The two drive off inputs are not in the same status.\n\n(Action 1) Check the line of the two drive off inputs.\n\n(Action 2) Make sure that the connector CRMB16 (6-axis amplifier) is securely attached to the servo amplifier.\n\n(Action 3) Replace the servo amplifier."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "70",
+        "section": "3",
+        "title": "SRVO-451 Internal S-BUS fail(G:i A:j)",
+        "text": "(Explanation) An error is found in the serial bus communication in the servo amplifier.\n\n(Action 1) Replace the servo amplifier."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "70",
+        "section": "3",
+        "title": "SRVO-452 ROM data failure (G:i A:j)",
+        "text": "(Explanation) An error is found in the ROM data in the servo amplifier.\n\n(Action 1) Replace the servo amplifier."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "70",
+        "section": "3",
+        "title": "SRVO-453 Low volt driver (G:i A:j)",
+        "text": "(Explanation) Driver supply voltage in the servo amplifier is low.\n\n(Action 1) Replace the servo amplifier.\n\n- 70 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "71",
+        "section": "3",
+        "title": "SRVO-453 Low volt driver (G:i A:j)",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "71",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "| SRVO-454 | CPU BUS failure (G:i A:j)        | (Explanation) | An error was found in CPU bus data in the amplifier.                          | (Action 1) | Replace the servo amplifier.                                                                                                                                                                                                        |\n| -------- | -------------------------------- | ------------- | ----------------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| SRVO-455 | CPU watch dog (G:i A:j)          | (Explanation) | An error occurred in CPU operation in the amplifier.                          | (Action 1) | Replace the servo amplifier.                                                                                                                                                                                                        |\n| SRVO-456 | Ground fault (G:i A:j)           | (Explanation) | An error is found in the motor current detection data in the servo amplifier. | (Action 1) | Replace the servo amplifier.                                                                                                                                                                                                        |\n| SRVO-459 | Excess regeneration2%s (G:i A:j) | (Explanation) | An error is found in the discharge circuit in the servo amplifier.            | (Action 1) | Replace the servo amplifier.                                                                                                                                                                                                        |\n| SRVO-460 | Illegal parameter%s (G:i A:j)    | (Explanation) | An error is found in the setting of the parameters in the servo amplifier.    | (Action 1) | Replace the servo amplifier.                                                                                                                                                                                                        |\n| SRVO-461 | Hardware error%s (G:i A:j)       | (Explanation) | An error is found in the circuit in the servo amplifier.                      | (Action 1) | Replace the servo amplifier.                                                                                                                                                                                                        |\n| SRVO-473 | DCS CLLB CC\\_EXTF alarm          | (Explanation) | The result is different in 2 CPU for Collaborative Robot.                     | (Action)   | Check the other alarms for more information. Note: You need to cycle power to release this alarm.                                                                                                                                   |\n| SRVO-476 | CLLB alarm %x,%x                 | (Explanation) | Internal error of the collaborative robot function.                           | (Action)   | Restart the controller. If the error is not cleared, document the events that led to the error and contact your local FANUC representative.                                                                                         |\n| SRVO-477 | Calibration data error           | (Explanation) | The force sensor calibration data are wrong.                                  | (Action)   | Please load correct force sensor calibration data and apply them again.                                                                                                                                                             |\n| SRVO-478 | Temperature difference too large | (Explanation) | The force sensor temperature difference is too large.                         | (Action)   | Please make sure that the environment temperature does not change greatly, and then restart the controller. If the error is not cleared, document the events that led to the error and contact your FANUC technical representative. |\n| SRVO-479 | Temperature changes too fast     | (Explanation) | The force sensor temperature changes too fast.                                | (Action)   | Please make sure that the environment temperature does not change greatly, and then restart the controller. If the error is not cleared, document the events that led to the error and contact your FANUC technical representative. |\n\n- 71 -"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "72",
+        "section": "3",
+        "title": "TROUBLESHOOTING",
+        "text": "3. TROUBLESHOOTING                     MAINTENANCE                          B-83525EN/07"
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "72",
+        "section": "3",
+        "title": "SRVO-480 FORCE alarm %x,%x",
+        "text": "(Explanation)  Force sensor error.\n\n(Action1)      Restart the controller.\n\n(Action2)      Replace the sensor cable.\n\nIf the error is not cleared, document the events that led to the error and contact your FANUC technical representative."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "72",
+        "section": "3",
+        "title": "SRVO-486 Hand Guidance E-stop",
+        "text": "(Explanation)  The EMERGENCY STOP button on the Hand Guidance device was pressed.\n\n(Action1)      Release EMERGENCY STOP on the Hand Guidance device, then press the\n\n(Action2)      [RESET] key.\n\nCheck setting and connection to Safety I/O board."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "72",
+        "section": "3",
+        "title": "SRVO-487 Hand Guidance Deadman switch",
+        "text": "(Explanation)  The deadman switch on the Hand Guidance device was released.\n\n(Action1)      Grip the deadman switch, then press the [RESET] key.\n\n(Action2)      Enable Contact stop, when Collaborative robot is used.\n\n(Action3)      Set Hand Guidance disable I/O to ON if you do not use Hand Guidance function."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "72",
+        "section": "3",
+        "title": "SRVO-489 Force sensor type error %x, %x",
+        "text": "(Explanation)  Force sensor type error.\n\n(Action1)      Restart the controller.\n\nIf the error is not cleared, document the events that led to the error and contact your local FANUC representative."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "72",
+        "section": "3",
+        "title": "SRVO-490 FORCE alarm 2 %x, %x",
+        "text": "(Explanation)  Force sensor error.\n\n(Action1)      Restart the controller.\n\n(Action2)      Replace the force sensor cable.\n\nIf the error is not cleared, document the events that led to the error and contact your local FANUC representative."
+    },
+    {
+        "document_id": "04",
+        "file_name": "troubleshooting_alarms.pdf",
+        "page": "72",
+        "section": "3",
+        "title": "PRIO-095 Overload &#x3C;Connector>",
+        "text": "(Explanation)  The DO of the specified connector might be grounded.\n\n(Action 1)     Check the connection of the DO of the specified connector.\n\nBefore executing the (Action 2), perform a complete controller back-up to save all your programs and settings.\n\n(Action 2)     Replace the main board.\n\nMain board\n\nFig.3.5 (ah) PRIO-095 Overload\n\n- 72 -"
+    }
+]

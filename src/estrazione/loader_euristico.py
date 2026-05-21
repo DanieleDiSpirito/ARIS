@@ -263,6 +263,10 @@ if __name__ == "__main__":
     cartella_dati = "../../data/raw/" + argv[1]
     file_csv = "../../data/raw/metadata/document_index.csv"
     
+    # 🆕 MODIFICA: Indirizziamo l'output nella nuova cartella specifica del metodo
+    cartella_output = "../../data/processed/euristico/"
+    os.makedirs(cartella_output, exist_ok=True)
+    
     pattern_ricerca = os.path.join(cartella_dati, "*.pdf")
     lista_pdf = glob.glob(pattern_ricerca)
     
@@ -276,11 +280,13 @@ if __name__ == "__main__":
         
         if dati_pdf:
             nome_file_output = nome_file.replace(".pdf", ".json")
+            percorso_output = os.path.join(cartella_output, nome_file_output)
             
-            with open("../../data/processed/" + nome_file_output, "w", encoding="utf-8") as f:
+            # 🆕 MODIFICA: Salvataggio nel nuovo percorso
+            with open(percorso_output, "w", encoding="utf-8") as f:
                 json.dump(dati_pdf, f, indent=4, ensure_ascii=False)
                 
-            print(f"    ✓ Finito. Creato '{nome_file_output}' con {len(dati_pdf)} record.\n")
+            print(f"    ✓ Finito. Creato '{nome_file_output}' in data/processed/euristico con {len(dati_pdf)} record.\n")
         else:
             print(f"    ⚠️ Nessun dato estratto da {nome_file} o file saltato.\n")
             

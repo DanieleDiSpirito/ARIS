@@ -1,0 +1,442 @@
+[
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "Generale",
+        "title": "Printed Circuit Boards",
+        "text": "The printed circuit boards are factory-set for operation. Usually, you do not need to set or adjust them. This chapter describes the standard settings and adjustment required if a defective printed circuit board is replaced. It also describes the test pins and the LED indications.\n\nThe controller printed circuit board includes the main unit printed circuit board and one or more cards or modules installed horizontally to the main-unit printed-circuit board.\n\nThese PC boards have interface connectors, LED indicators, and a plastic panel at the front. At the rear, there is a backplane connector."
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.1",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.2",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.3",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.4",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.5",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.6",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.7",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.8",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.9",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.10",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.11",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.12",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.13",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.14",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.15",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.16",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.17",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.18",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.19",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.20",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.21",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control card | Control axis movement |\n| CPU card | Control CPU functions |\n| FROM/SRAM module | Store and retrieve data |\n| Fan board | Provide cooling to the main board |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.22",
+        "title": "Card and Modules",
+        "text": "| Card or Module | Function |\n| --- | --- |\n| Axis control"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "94",
+        "section": "4",
+        "title": "MAINTENANCE",
+        "text": "| Name | Ordering Specification | Board Specification | Note |\n|------|------------------------|-------------------|------|\n| Main board | A05B-2650-H001 | A20B-8200-0790 | Standard, Ethernet:1ch |\n| Main board | A05B-2650-H002 | A20B-8200-0791 | Ethernet:2ch, Vision I/F, Force sensor I/F |\n| Main board | A05B-2650-H003 | A20B-8200-0792 | Ethernet:2ch, Vision I/F, Force sensor I/F, PMC, HDI |\n| Main board | A05B-2650-H004 | A20B-8201-0420 | Standard, Ethernet:1ch For I/O Link i slave |\n| Main board | A05B-2650-H005 | A20B-8201-0421 | Ethernet:2ch, Vision I/F, Force sensor I/F For I/O Link i slave |\n| Main board | A05B-2650-H006 | A20B-8201-0422 | Ethernet:2ch, Vision I/F, Force sensor I/F, PMC, HDI For I/O Link i slave |\n| Main board | A05B-2680-H001 (R-30iB Mate Plus) | A20B-8201-0750 | Standard, Ethernet:2ch For I/O Link i slave |\n| Main board | A05B-2680-H002 (R-30iB Mate Plus) | A20B-8201-0751 | Ethernet:3ch, Vision I/F, Force sensor I/F For I/O Link i slave |\n| Main board | A05B-2680-H003 (R-30iB Mate Plus) | A20B-8201-0752 | Ethernet:3ch, Vision I/F, Force sensor I/F, PMC, HDI For I/O Link i slave |\n| CPU card | A05B-2600-H020 | A20B-3300-0686 | Standard / SDRAM 32Mbyte |\n| CPU card | A05B-2600-H021 | A20B-3300-0687 | Standard / SDRAM 64Mbyte |\n| CPU card | A05B-2600-H022 | A20B-3300-0688 | Standard / SDRAM 128Mbyte |\n| CPU card | A05B-2600-H023 | A20B-3300-0683 | High speed / SDRAM 32Mbyte |\n| CPU card | A05B-2600-H024 | A20B-3300-0684 | High speed / SDRAM 64Mbyte |\n| CPU card | A05B-2600-H025 | A20B-3300-0685 | High speed / SDRAM 128Mbyte |\n| CPU card | A05B-2600-H026 | A17B-3301-0106 | Standard / SDRAM 32Mbyte For I/O Link i slave |\n| CPU card | A05B-2600-H027 | A17B-3301-0107 | Standard / SDRAM 64Mbyte For I/O Link i slave |\n| CPU card | A05B-2600-H028 | A17B-3301-0111 | Standard / SDRAM 128Mbyte For I/O Link i slave |\n| CPU card | A05B-2600-H029 | A17B-3301-0112 | High speed / SDRAM 32Mbyte For I/O Link i slave |\n| CPU card | A05B-2600-H030 | A17B-3301-0113 | High speed / SDRAM 64Mbyte For I/O Link i slave |\n| CPU card | A05B-2600-H031 | A17B-3301-0114 | High speed / SDRAM 128Mbyte For I/O Link i slave |\n| CPU card | A05B-2670-H020 (R-30iB Mate Plus) | A17B-3301-0250 | Standard / DRAM 1GB For I/O Link I slave |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "95",
+        "section": "4",
+        "title": "MAINTENANCE",
+        "text": "| Name | Ordering Specification | Board Specification | Note |\n|------|------------------------|-------------------|------|\n| Axis control card | A05B-2600-H040 | A20B-3300-0664 | 6-axis |\n| Axis control card | A05B-2600-H041 | A20B-3300-0663 | 12-axis |\n| Axis control card | A05B-2600-H042 | A20B-3300-0662 | 18-axis |\n| Axis control card | A05B-2600-H043 | A20B-3300-0661 | 24-axis |\n| Axis control card | A05B-2600-H044 | A20B-3300-0660 | 36-axis |\n| Axis control card | A05B-2670-H040 (R-30iB Mate Plus) | A20B-3300-0819 | 6-axis |\n| Axis control card | A05B-2670-H041 (R-30iB Mate Plus) | A20B-3300-0818 | 12-axis |\n| Axis control card | A05B-2670-H042 (R-30iB Mate Plus) | A20B-3300-0817 | 18-axis |\n| Axis control card | A05B-2670-H043 (R-30iB Mate Plus) | A20B-3300-0816 | 24-axis |\n| Axis control card | A05B-2670-H044 (R-30iB Mate Plus) | A20B-3300-0815 | 36-axis |\n| FROM/SRAM module | A05B-2600-H060 | A20B-3900-0283 | FROM 32M/ SRAM 1M |\n| FROM/SRAM module | A05B-2600-H061 | A20B-3900-0284 | FROM 32M/ SRAM 2M |\n| FROM/SRAM module | A05B-2600-H062 | A20B-3900-0285 | FROM 32M/ SRAM 3M |\n| FROM/SRAM module | A05B-2600-H063 | A20B-3900-0286 | FROM 64M/ SRAM 1M |\n| FROM/SRAM module | A05B-2600-H064 | A20B-3900-0287 | FROM 64M/ SRAM 2M |\n| FROM/SRAM module | A05B-2600-H065 | A20B-3900-0288 | FROM 64M/ SRAM 3M |\n| FROM/SRAM module | A05B-2600-H066 | A20B-3900-0280 | FROM 128M/ SRAM 1M |\n| FROM/SRAM module | A05B-2600-H067 | A20B-3900-0281 | FROM 128M/ SRAM 2M |\n| FROM/SRAM module | A05B-2600-H068 | A20B-3900-0282 | FROM 128M/ SRAM 3M |\n| FROM/SRAM module | A05B-2600-H069 (R-30iB Mate Plus) | A20B-3900-0293 | FROM 256M/ SRAM 1M |\n| FROM/SRAM module | A05B-2600-H070 (R-30iB Mate Plus) | A20B-3900-0295 | FROM 256M/ SRAM 2M |\n| FROM/SRAM module | A05B-2600-H071 (R-30iB Mate Plus) | A20B-3900-0296 | FROM 256M/ SRAM 3M |\n| Fan board | A05B-2650-H001 | A20B-8200-0669 |\n| Fan board | A05B-2650-H002 | - |\n| Fan board | A05B-2650-H003 | - |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "96",
+        "section": "4",
+        "title": "Maintenance",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "96",
+        "section": "4",
+        "title": "NOTE",
+        "text": "In case of using the function of I/O Link \\( i \\) slave, the combination of the specification of mainboard, CPU card and software is limited as below.\n\n[Main board (For I/O Link \\( i \\) slave)] + [CPU card (For I/O Link \\( i \\) slave)]\n+ [Software (V8.30P14 or later)]\n\nExcept for the above condition, the system does not work correctly as followings.\n\na) [Main board] + [CPU card (For I/O Link \\( i \\) slave)]\nNeither the function of I/O Link slave nor I/O Link \\( i \\) slave work correctly. And the alarm regarding I/O Link or I/O Link \\( i \\) occur on the master side.\nAnd in case the software version is not correct, system does not work correctly.\n\nb) [Main board (For I/O Link \\( i \\) slave)] + [CPU card]\nThe system does not work correctly.\n\nIn case of using the R-30iB Mate Plus, the combination of the specification of mainboard, CPU card and software is limited as below.\n\n[Main board (R-30iB Mate Plus)] + [CPU card (R-30iB Mate Plus)]\n+ [Software (V9.00P03 or later)]\n\nExcept for the above condition, the system does not work correctly. And CPU card (R-30iB Mate Plus) may be broken."
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "96",
+        "section": "4",
+        "title": "LEDs",
+        "text": "| LED | Color |\n|------|-------|\n| RLED1 | Red   |\n| LEDG1 | Green |\n| LEDG2 | Green |\n| LEDG3 | Green |\n| LEDG4 | Green |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "97",
+        "section": "4.1.1",
+        "title": "MAIN BOARD",
+        "text": "| Seven Segment LED | Description |\n|------------------|-------------|\n| LEDD1(LINK)     | When the alarm condition has occurred in the main board, this LED is turned on. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |\n| LEDD2(COM)     | When the alarm condition has occurred in the main board, this LED is turned on. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "97",
+        "section": "4.1.2",
+        "title": "CPU CARD",
+        "text": "| ALARM LED | Color | Description |\n|------------------|-------------|\n| RLED1 | Red | When the alarm condition has occurred in the CPU card, this LED is turned on. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "97",
+        "section": "4.1.3",
+        "title": "STATUS LED",
+        "text": "| LEDG1 | Green | These LEDs show the operating status of the system. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |\n| LEDG2 | Green | These LEDs show the operating status of the system. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |\n| LEDG3 | Green | These LEDs show the operating status of the system. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |\n| LEDG4 | Green | These LEDs show the operating status of the system. Please see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS. |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "97",
+        "section": "4.1.4",
+        "title": "ETHERNET LED",
+        "text": "| RX/TX | Green | Blink during data transmission of Ethernet TP |\n| LINK | Green | Light when a link of Ethernet is established |\n\nNote. TP:For Ethernet TP, CAMERA: For camera"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "98",
+        "section": "4",
+        "title": "EMERGENCY STOP BOARD (A20B-2005-0150, A20B-2103-0170)",
+        "text": "| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n|---|---|---|---|---|\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 24T (Red) |\n| FUSE3 (1A) | | | | |\n| TBOP19 | TBOP20 | | | |\n| FUSE2 (1A) | FUSE4 (2A) | 24V2(Red)FUSE5 (5A) | 24V3(Red) | 2"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "99",
+        "section": "4.4",
+        "title": "(1) Test pins",
+        "text": "| Name | Use |\n|------|------|\n| P24V | +24V |\n| P5V | +5V |\n| GND | GND |\n| P33V | +3.3V |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "99",
+        "section": "4.4",
+        "title": "(1) Test pins",
+        "text": "| Name | Use |\n|------|------|\n| P24V | +24V |\n| P5V | +5V |\n| GND | GND |\n| P33V | +3.3V |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "99",
+        "section": "4.4",
+        "title": "(1) Test pins",
+        "text": "| Name | Use |\n|------|------|\n| P24V | +24V |\n| P5V | +5V |\n| GND | GND |\n| P33V | +3.3V |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "100",
+        "section": "4",
+        "title": "(2) Settings",
+        "text": "| Name | Standard setting | Description |\n|------|------------------|-------------|\n| ICOM1 | UDI1- 10 (Connector CRMA52A) | Side A: +24V common |\n| ICOM2 | UDI11- 20 (Connector CRMA52B) | Side B: 0V common |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "100",
+        "section": "4",
+        "title": "(3) LEDs",
+        "text": "| Name | Color | Description |\n|------|------|-------------|\n| ALM1 | Red | A communication alarm occurred between the main board and process I/O board. |\n| FALM | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| LINK | Green | Blink (1:3) Communication in progress ON = approx. 0.5 sec, OFF = approx. 1.5 sec |\n| ALM | Red | Not used |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "100",
+        "section": "4.5",
+        "title": "(1) Test pins and pads",
+        "text": "| Name | Use |\n|------|------|\n| 24V | +24V |\n| 5V | +5V |\n| GND | GND |\n| 3R3V | +3.3V |\n| P24VF | +24V |\n| P5VF | +5V |\n| GNDF | GND |\n| AOUT1 | Channel 1 |\n| AOUT2 | Channel 2 |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "100",
+        "section": "4.5",
+        "title": "(2) Process I/O Board MB (A20B-2101-0731)",
+        "text": "| Name | Color | Description |\n|------|------|-------------|\n| LED:FALM (Red) | Red | A communication alarm occurred between the main board and process I/O board. |\n| LED:ALM1 (Red) | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| LED:LINK (Green) | Green | Blink (1:3) Communication in progress ON = approx. 0.5 sec, OFF = approx. 1.5 sec |\n| LED:ALM (Not used) | Not used | Not used |\n\n| Name | Color | Description |\n|------|------|-------------|\n| JD1B | Red | A communication alarm occurred between the main board and process I/O board. |\n| JD1A | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| 3R3V | Red | A communication alarm occurred between the main board and process I/O board. |\n| LED:FALM (Red) | Red | A communication alarm occurred between the main board and process I/O board. |\n| LED:ALM1 (Red) | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| LED:LINK (Green) | Green | Blink (1:3) Communication in progress ON = approx. 0.5 sec, OFF = approx. 1.5 sec |\n| LED:ALM (Not used) | Not used | Not used |\n\n| Name | Color | Description |\n|------|------|-------------|\n| JD1B | Red | A communication alarm occurred between the main board and process I/O board. |\n| JD1A | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| 3R3V | Red | A communication alarm occurred between the main board and process I/O board. |\n| LED:FALM (Red) | Red | A communication alarm occurred between the main board and process I/O board. |\n| LED:ALM1 (Red) | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| LED:LINK (Green) | Green | Blink (1:3) Communication in progress ON = approx. 0.5 sec, OFF = approx. 1.5 sec |\n| LED:ALM (Not used) | Not used | Not used |\n\n| Name | Color | Description |\n|------|------|-------------|\n| JD1B | Red | A communication alarm occurred between the main board and process I/O board. |\n| JD1A | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| 3R3V | Red | A communication alarm occurred between the main board and process I/O board. |\n| LED:FALM (Red) | Red | A communication alarm occurred between the main board and process I/O board. |\n| LED:ALM1 (Red) | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| LED:LINK (Green) | Green | Blink (1:3) Communication in progress ON = approx. 0.5 sec, OFF = approx. 1.5 sec |\n| LED:ALM (Not used) | Not used | Not used |\n\n| Name | Color | Description |\n|------|------|-------------|\n| JD1B | Red | A communication alarm occurred between the main board and process I/O board. |\n| JD1A | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| 3R3V | Red | A communication alarm occurred between the main board and process I/O board. |\n| LED:FALM (Red) | Red | A communication alarm occurred between the main board and process I/O board. |\n| LED:ALM1 (Red) | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| LED:LINK (Green) | Green | Blink (1:3) Communication in progress ON = approx. 0.5 sec, OFF = approx. 1.5 sec |\n| LED:ALM (Not used) | Not used | Not used |\n\n| Name | Color | Description |\n|------|------|-------------|\n| JD1B | Red | A communication alarm occurred between the main board and process I/O board. |\n| JD1A | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| 3R3V | Red | A communication alarm occurred between the main board and process I/O board. |\n| LED:FALM (Red) | Red | A communication alarm occurred between the main board and process I/O board. |\n| LED:ALM1 (Red) | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| LED:LINK (Green) | Green | Blink (1:3) Communication in progress ON = approx. 0.5 sec, OFF = approx. 1.5 sec |\n| LED:ALM (Not used) | Not used | Not used |\n\n| Name | Color | Description |\n|------|------|-------------|\n| JD1B | Red | A communication alarm occurred between the main board and process I/O board. |\n|"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "101",
+        "section": "4.6",
+        "title": "CONNECTOR CONVERTER BOARD (A20B-2004-0411)",
+        "text": "| Name | Color | Description |\n|------|------|-------------|\n| ALM1 | Red | A communication alarm occurred between the main CPU and process I/O board. |\n| FALM | Red | The fuse (FUSE1) on the process I/O board has blown. |\n| LINK | Green | Blink (1:3) Communication in progress ON = approx. 0.5 sec, OFF = approx. 1.5 sec |\n| Blink (1:1) Communication not in progress ON = approx. 0.25 sec, OFF = approx. 0.25 sec |\n| ALM | Red | Not used |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "101",
+        "section": "4.6",
+        "title": "CONNECTOR CONVERTER BOARD (A20B-2004-0411)",
+        "text": "| Column 1 | Column 2 |\n|----------|----------|\n| CRMA58 | CRMA59 |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "102",
+        "section": "4.6",
+        "title": "TERMINAL CONVERTER BOARD (A20B-1009-0690)",
+        "text": "| Column 1 | Column 2 | Column 3 |\n|---|---|---|\n| CRMA15 | CRMA16 | TBCV1 |\n| TBCV2 | TBCV3 | TBCV4 |\n| TBCV5 | TBCV6 | TBCV7 |\n| TBCV8 | |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "103",
+        "section": "4.6",
+        "title": "6-AXIS SERVO AMPLIFIERS",
+        "text": "The 6-axis servo amplifiers are factory-set for operation. Usually, you do not need to set or adjust them. This chapter describes the standard settings and adjustment required if a defective 6-axis servo amplifier is replaced. It also describes the use of test pins and meanings of the LED indications."
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "103",
+        "section": "4.6",
+        "title": "Table 5 6-axis servo amplifier specification (Power supply regeneration)",
+        "text": "| ROBOT | 6-AXIS SERVO AMPLIFIER | REGENERATIVE RESISTOR |\n|-------|------------------------|------------------------|\n| ARC Mate 120iC, M-20iA, M-20iB | A06B-6400-H102 | A05B-2650-C101 |\n| M-710iC, R-1000iA | A06B-6400-H002 | A05B-2650-C101 |\n| R-2000iC, M-2iA, M-3iA | A06B-6400-H003 | A05B-2650-C101 |\n| ARC Mate 100iC | A06B-6400-H003 | A05B-2650-C101 |\n| M-10iA | A06B-6400-H005 | A05B-2650-C101 |\n| ARC Mate 50iD | A06B-6400-H005 | A05B-2650-C101 |\n| LR Mate 200iD, M-1iA | A06B-6400-H005 | A05B-2650-C100 |\n| ARC Mate 50iD (Limited type) | A06B-6400-H005 | A05B-2650-C100 |\n| CR-4iA, CR-7iA | - | - |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "103",
+        "section": "4.6",
+        "title": "WARNING",
+        "text": "Before touching the servo amplifier, for example, for maintenance purposes, check the voltage at the screw above the LED “V4” with a DC voltage tester to see if the remaining voltage is not higher than 50V."
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "104",
+        "section": "5.1",
+        "title": "LEDs OF 6-AXIS SERVO AMPLIFIER",
+        "text": "| LED | Color | Description |\n|---|---|---|\n| V4 | Red | Lights when the DCLINK circuit inside the servo amplifier is charged to reach a specific voltage. |\n| SVALM | Red | Lights when the servo amplifier detects an alarm. |\n| SVEMG | Red | Lights when an emergency stop signal is input to the servo amplifier. |\n| DRDY | Green | Lights when the servo amplifier is ready to drive the servo motor. |\n| OPEN | Green | Lights when the communication between the servo amplifier and the main board is normal. |\n| P5V | Green | Lights when the power supply circuit inside the servo amplifier outputs a voltage of +5 V normally. |\n| P3.3V | Green | Lights when the power supply circuit inside the servo amplifier outputs a voltage of +3.3 V normally. |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "105",
+        "section": "5.2",
+        "title": "SETTING OF 6-AXIS SERVO AMPLIFIER",
+        "text": "| Name | Standard setting | Description |\n|------|------------------|-------------|\n| COM1 | Side A          | Robot Digital Input (RI) device common voltage. Side A: +24V common Side B: 0V common |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "105",
+        "section": "5.2",
+        "title": "SETTING OF 6-AXIS SERVO AMPLIFIER",
+        "text": "| Name | Standard setting | Description |\n|------|------------------|-------------|\n| COM1 | Side A          | Robot Digital Input (RI) device common voltage. Side A: +24V common Side B: 0V common |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "105",
+        "section": "5.2",
+        "title": "SETTING OF 6-AXIS SERVO AMPLIFIER",
+        "text": "| Name | Standard setting | Description |\n|------|------------------|-------------|\n| COM1 | Side A          | Robot Digital Input (RI) device common voltage. Side A: +24V common Side B: 0V common |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "105",
+        "section": "5.2",
+        "title": "SETTING OF 6-AXIS SERVO AMPLIFIER",
+        "text": "| Name | Standard setting | Description |\n|------|------------------|-------------|\n| COM1 | Side A          | Robot Digital Input (RI) device common voltage. Side A: +24V common Side B: 0V common |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "105",
+        "section": "5.2",
+        "title": "SETTING OF 6-AXIS SERVO AMPLIFIER",
+        "text": "| Name | Standard setting | Description |\n|------|------------------|-------------|\n| COM1 | Side A          | Robot Digital Input (RI) device common voltage. Side A: +24V common Side B: 0V common |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "105",
+        "section": "5.2",
+        "title": "SETTING OF 6-AXIS SERVO AMPLIFIER",
+        "text": "| Name | Standard setting | Description |\n|------|------------------|-------------|\n| COM1 | Side A          | Robot Digital Input (RI) device common voltage. Side A: +24V common Side B: 0V common |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "106",
+        "section": "5.3",
+        "title": "SPECIFICATIONS TABLE : (A06B-6400-H)",
+        "text": "| UNIT | A06B-6400-H102 | A06B-6400-H002 | A06B-6400-H003 |\n|------|----------------|----------------|----------------|\n| INPUT | VOLTAGE | AC200~AC240V ( +10% / -15% ), 50/60Hz, 3phase | VOLTAGE | AC200~AC240V ( +10% / -15% ), 50/60Hz, 3phase |\n| POWER CAPACITY | 5.1KVA | 5.1KVA | 2.7KVA |\n| MAXIMUM OUTPUT | 240V ~ | | |\n| CURRENT : J1 | 80Ap / 23.0Arms | 80Ap / 23.0Arms | 40Ap / 13.4Arms |\n| CURRENT : J2 | 80Ap / 23.0Arms | 80Ap / 23.0Arms | 40Ap / 13.4Arms |\n| CURRENT : J3 | 80Ap / 23.0Arms | 80Ap / 23.0Arms | 20Ap / 6.5Arms |\n| CURRENT : J4 | 40Ap / 13.4Arms | 40Ap / 13.4Arms | 20Ap / 6.5Arms |\n| CURRENT : J5 | 40Ap / 13.4Arms | 40Ap / 13.4Arms | 20Ap / 6.5Arms |\n| CURRENT : J6 | 40Ap / 13.4Arms | 40Ap / 13.4Arms | 20Ap / 6.5Arms |\n| TOTAL CURRENT | 70Arms | 70Arms | 30Arms |"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "106",
+        "section": "5.3",
+        "title": "SPECIFICATIONS TABLE : (A06B-6400-H005)",
+        "text": "| UNIT | A06B-6400-H005 |\n|------|----------------|\n| INPUT | VOLTAGE | AC200~AC240V ( +10% / -15% ), 50/60Hz, 3/1phase |\n| POWER CAPACITY | 1.3/1.4 ( 3/1phase ) |\n| MAXIMUM OUTPUT | 240V ~ |\n| CURRENT : J1 | 20Ap / 3.6Arms |\n| CURRENT : J2 | 20Ap / 3.6Arms |\n| CURRENT : J3 | 20Ap / 3.6Arms |\n| CURRENT : J4 | 20Ap / 3.6Arms |\n| CURRENT : J5 | 10Ap / 2.0Arms |\n| CURRENT : J6 | 10Ap / 2.0Arms |\n| TOTAL CURRENT | 18.4Arms |"
+    }
+]

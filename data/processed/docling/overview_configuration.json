@@ -1,0 +1,98 @@
+[
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "3",
+        "section": "Generale",
+        "title": "Introduzione",
+        "text": "1"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "3",
+        "section": "Generale",
+        "title": "OVERVIEW",
+        "text": "## OVERVIEW\n\nThis manual is applied to R-30 i B Mate/ R-30 i B Mate Plus controller (called R-30 i B Mate/ R-30 i B Mate Plus).\n\nR-30 i B Mate/ R-30 i B Mate Plus has different controller    depending on the required standards.\n\nNRTL controller  :\n\nTo meet UL/CSA standard\n\nCE controller :\n\nTo meet Machinery Directive, Low voltage Directive, EMC Directive to cover the requirement of CE mark\n\nThis manual covers these controllers of the R-30 i B Mate/ R-30 i B Mate Plus.\n\nThe difference of NRTL and CE controller from the Basic controller is small as shown in Table 1 (ex. EMC parts, Breakers).\n\nAnd the specific descriptions of CE and NRTL controller have notifications in this manual.\n\nTable 1. Applied standards\n\n|                  | Functional Safety     | EMC Standard                       | Robot Standard Electrical Standard   | Requirement                               | Difference                                    |\n|------------------|-----------------------|------------------------------------|--------------------------------------|-------------------------------------------|-----------------------------------------------|\n| Basic controller | ISO 13849-1 IEC 61508 | -                                  | -                                    | -                                         | -                                             |\n| NRTL controller  | ISO 13849-1 IEC 61508 | -                                  | UL1740 CAN/CSA Z434 NFPA79           | UL standard CSA standard • USA and Canada | • UL listed main breaker                      |\n| CE controller    | ISO 13849-1 IEC 61508 | EN 55011 EN 61000-6-2 EN 61000-6-4 | EN/ISO 10218-1 EN 60204-1            | CE Marking • Europe                       | • Noise filter • EMC Cabinet • Shielded cable |\n\nThis manual describes the maintenance and connection of R-30 i B Mate/ R-30 i B Mate Plus.\n\n- ･ Maintenance Part:  Troubleshooting, and the setting, adjustment, and replacement of units\n\nB  Mate  Plus  to  the  robot  mechanical  unit\n\n- ･ Connection Part: Connection  of  R-30 i B  Mate/  R-30 i and peripheral devices, and installation of the controller"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "3",
+        "section": "Generale",
+        "title": "WARNING",
+        "text": "## WARNING\n\nBefore you enter the robot working area, be sure to turn off the power to the controller or press the EMERGENCY STOP button on the operator's panel or teach pendant.\n\nOtherwise, you could injure personnel or damage equipment."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "4",
+        "section": "2",
+        "title": "CONFIGURATION",
+        "text": "## 2 CONFIGURATION"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "4",
+        "section": "2.1",
+        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "text": "## 2.1 EXTERNAL VIEW OF THE CONTROLLER\n\nThe appearance and components might slightly differ depending on the controlled robot, application, and options used.\n\n- Fig.2.1 (a) to (b) show the view of R-30 i B Mate/ R-30 i B Mate Plus.\n\n- Fig.2.1 (c) to (g) show the construction of the R-30 i B Mate/ R-30 i B Mate Plus controller.\n\n- Fig.2.1 (h) to (j) show the external view of the operator's panel and teach pendant.\n\nFig.2.1 (a) External view of the R-30 i B Mate/ R-30 i B Mate Plus controller\n\n<!-- image -->"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "4",
+        "section": "2.1",
+        "title": "NOTE",
+        "text": "## NOTE\n\nBe sure to lock the key.\n\nFig.2.1 (b) External view of the R-30 i B Mate/ R-30 i B Mate Plus controller (Middle/Large size) (Rear)\n\n<!-- image -->"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "5",
+        "section": "2.1",
+        "title": "NOTE",
+        "text": "Fig.2.1 (c) R-30 i B Mate/ R-30 i B Mate Plus cabinet interior (Front-1)\n\n<!-- image -->\n\nFig.2.1 (d) R-30 i B Mate/ R-30 i B Mate Plus cabinet interior (Front-2)\n\n<!-- image -->"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "6",
+        "section": "2.1",
+        "title": "NOTE",
+        "text": "<!-- image -->\n\nFig.2.1 (e) R-30 i B Mate/ R-30 i B Mate Plus cabinet interior (Front-3) (CR-4 i A, CR-7 i A)\n\n<!-- image -->\n\n6-Axis Servo amplifier (Rear side)\n\nFig.2.1 (f) R-30 i B Mate/ R-30 i B Mate Plus cabinet interior (Rear)\n\n<!-- image -->"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1",
+        "title": "NOTE",
+        "text": "## NOTE\n\nThe number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n<!-- image -->\n\nFig.2.1 (h) R-30 i B Mate/ R-30 i B Mate Plus operator's panel\n\nFig.2.1 (i) Mode switch\n\n<!-- image -->\n\nFig.2.1 (g) R-30 i B Mate/ R-30 i B Mate Plus cabinet interior (Middle/Large size) (Rear)\n\n<!-- image -->"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "8",
+        "section": "2.",
+        "title": "CONFIGURATION",
+        "text": "## 2. CONFIGURATION\n\nFig.2.1 (j) Teach pendant ( i Pendant)\n\n<!-- image -->"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "9",
+        "section": "2.2",
+        "title": "COMPONENT FUNCTIONS",
+        "text": "## 2.2 COMPONENT FUNCTIONS\n\nFig.2.2    Block diagram of the R-30 i B Mate/ R-30 i B Mate Plus\n\n<!-- image -->"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "COMPONENT FUNCTIONS",
+        "text": "- -Main board\n\nThe  main  board  contains  a  microprocessor,  its  peripheral  circuits,  memory,  and  operator's  panel control circuit.    The main CPU controls servo mechanism positioning.\n\n- -I/O printed circuit board\n\nVarious types of printed circuit boards are provided for applications including process I/O board. These are connected with FANUC I/O Link.\n\n- -E-stop unit\n\nThis  unit  controls  the  emergency  stop  system  of  the  robot  controller.  It  also  has  user  interface terminals of safety relevant signals, external on/off signals etc.\n\n- -Power supply unit\n\nThe power supply unit converts the AC power to various levels of DC power.\n\n- -Backplane printed circuit board\n\nThe various control printed circuit boards are mounted on the backplane printed circuit board.\n\n- -Teach pendant\n\nAll operations including robot programming are performed with this unit.    The controller status and data are indicated on the liquid-crystal display (LCD) on the pendant.\n\n- -6-Axis Servo amplifier\n\nThe  servo  amplifier  controls  servomotor,  Pulsecoder  signal,  brake  control,  overtravel  and  hand broken.\n\n- -Operator's panel\n\nButtons and LEDs on the operator's panel are used to start the robot and to indicate the robot status.\n\n- -Fan unit, heat exchanger\n\nThese components cool the inside of the controller.\n\n- -Circuit breaker\n\nIf the electric system in the controller malfunctions, or if abnormal input power causes high current in the system, the input power is connected to the circuit breaker to protect the equipment.\n\n- -Regenerative resistor\n\nTo discharge the counter electromotive force from the servomotor, connect a regenerative resistor to the servo amplifier."
+    }
+]

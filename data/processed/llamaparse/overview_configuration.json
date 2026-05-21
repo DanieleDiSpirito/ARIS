@@ -1,0 +1,242 @@
+[
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "3",
+        "section": "Generale",
+        "title": "Introduzione",
+        "text": "B-83525EN/07                                      MAINTENANCE"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "3",
+        "section": "1",
+        "title": "OVERVIEW",
+        "text": "This manual is applied to R-30iB Mate/ R-30iB Mate Plus controller (called R-30iB Mate/ R-30iB Mate Plus).\n\nR-30iB Mate/ R-30iB Mate Plus has different controller depending on the required standards.\n\n- NRTL controller: To meet UL/CSA standard\n- CE controller: To meet Machinery Directive, Low voltage Directive, EMC Directive to cover the requirement of CE mark\n\nThis manual covers these controllers of the R-30iB Mate/ R-30iB Mate Plus.\n\nThe difference of NRTL and CE controller from the Basic controller is small as shown in Table 1 (ex. EMC parts, Breakers).\n\nAnd the specific descriptions of CE and NRTL controller have notifications in this manual.\n\n| Functional Safety | EMC Standard    |   | Robot Standard | Electrical Requirement | Difference     |                         |                 |               |\n| ----------------- | --------------- | - | -------------- | ---------------------- | -------------- | ----------------------- | --------------- | ------------- |\n| Basic controller  | NRTL controller |   |                |                        |                |                         |                 |               |\n|                   | -               | - | -              | ISO 13849-1            | UL1740         | •UL listed main breaker |                 |               |\n|                   |                 | - | -              | -                      | IEC 61508      | CAN/CSA Z434            | •USA and Canada |               |\n|                   |                 |   | -              | EN 55011               | EN/ISO 10218-1 | CE Marking              | -               | •Noise filter |\n|                   |                 | - | EN 61000-6-2   | EN 60204-1             | -              | -                       | •Europe         |               |\n|                   |                 | - | EN 61000-6-4   | -                      | -              | -                       | •EMC Cabinet    |               |\n|                   |                 | - | -              | -                      | -              | -                       | •Shielded cable |               |\n\nThis manual describes the maintenance and connection of R-30iB Mate/ R-30iB Mate Plus.\n\n- Maintenance Part: Troubleshooting, and the setting, adjustment, and replacement of units\n- Connection Part: Connection of R-30iB Mate/ R-30iB Mate Plus to the robot mechanical unit and peripheral devices, and installation of the controller"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "3",
+        "section": "1",
+        "title": "WARNING",
+        "text": "Before you enter the robot working area, be sure to turn off the power to the controller or press the EMERGENCY STOP button on the operator's panel or teach pendant. Otherwise, you could injure personnel or damage equipment.\n\n- 3 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "4",
+        "section": "2.1",
+        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "text": "The appearance and components might slightly differ depending on the controlled robot, application, and options used.\n\nFig.2.1 (a) to (b) show the view of R-30 B Mate/ R-30 B Mate Plus.\n\nFig.2.1 (c) to (g) show the construction of the R-30iB Mate/ R-30iB Mate Plus controller.\n\nFig.2.1 (h) to (j) show the external view of the operator’s panel and teach pendant.\n\n| Teach pendant hook       | Operator’s panel  | Breaker (Option) |\n| ------------------------ | ----------------- | ---------------- |\n| Teach pendant (iPendant) | USB port (Option) |                  |\n\nFig.2.1 (a) External view of the R-30iB Mate/ R-30iB Mate Plus controller\n\nNOTE\nBe sure to lock the key.\n\nFig.2.1 (b) External view of the R-30iB Mate/ R-30iB Mate Plus controller (Middle/Large size) (Rear)"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "5",
+        "section": "2.1",
+        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "text": "B-83525EN/07    MAINTENANCE    2. CONFIGURATION"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "5",
+        "section": "2.1",
+        "title": "E-stop unit",
+        "text": "Fig.2.1 (c) R-30iB Mate/ R-30iB Mate Plus cabinet interior (Front-1)"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "5",
+        "section": "2.1",
+        "title": "(Option)",
+        "text": "Fig.2.1 (d) R-30iB Mate/ R-30iB Mate Plus cabinet interior (Front-2)\n\n- 5 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "6",
+        "section": "2.1",
+        "title": "(Option)",
+        "text": "2. CONFIGURATION    MAINTENANCE    B-83525EN/07"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "6",
+        "section": "2.1",
+        "title": "Aux. axis cabinet(Integrated)",
+        "text": "Fig.2.1 (e) R-30iB Mate/ R-30iB Mate Plus cabinet interior (Front-3) (CR-4iA, CR-7iA)\n\nRegenerative resistor"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "6",
+        "section": "2.1",
+        "title": "6-Axis Servo amplifier (Rear side)",
+        "text": "(Small size)\n\nLine filter\n\nLine filter"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "6",
+        "section": "2.1",
+        "title": "6-Axis Servo amplifier (Rear side)",
+        "text": "6-Axis Servo amplifier (Rear side)\n\n(Middle size)\n\n(Large size)\n\nFig.2.1 (f) R-30iB Mate/ R-30iB Mate Plus cabinet interior (Rear)\n\n-  6 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1",
+        "title": "6-Axis Servo amplifier (Rear side)",
+        "text": "B-83525EN/07    MAINTENANCE    2. CONFIGURATION"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1",
+        "title": "Rear fan unit",
+        "text": "Fig.2.1 (g) R-30iB Mate/ R-30iB Mate Plus cabinet interior (Middle/Large size) (Rear)\n\nNOTE\n\nThe number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| <250mm/s= | AUTO | 100 % | T |\n| --------- | ---- | ----- | - |\n|           |      |       |   |\n|           |      |       |   |\n\nICYCLE\n\nSTART\n\nMode switch (In case of 3-mode switch)\n\nEmergency Stop button\n\nCYCLE START button with LED(Green)\n\nFig.2.1 (h) R-30iB Mate/ R-30iB Mate Plus operator’s panel\n\n| <250mm/s | AUTO | <250mm/s | AUTO | 100% |\n| -------- | ---- | -------- | ---- | ---- |\n| T1       |      | T2       |      |      |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "3",
+        "title": "mode switch",
+        "text": "Fig.2.1 (i) Mode switch\n\n- 7 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "8",
+        "section": "3",
+        "title": "mode switch",
+        "text": "2. CONFIGURATION    MAINTENANCE    B-83525EN/07"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "8",
+        "section": "2",
+        "title": "Fig.2.1 (j) Teach pendant (iPendant)",
+        "text": "- 8 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "9",
+        "section": "2",
+        "title": "Fig.2.1 (j) Teach pendant (iPendant)",
+        "text": "B-83525EN/07 MAINTENANCE"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "9",
+        "section": "2.2",
+        "title": "COMPONENT FUNCTIONS",
+        "text": "| Backplane board         | FAN Main board        | Peripheral                                          |\n| ----------------------- | --------------------- | --------------------------------------------------- |\n| Fan                     | 20                    | 20                                                  |\n| Device                  | N0                    | USB Memory (1/0)                                    |\n| Peripheral              | Device                | E-stop unit                                         |\n| Operator's panel        | Peripheral device     | Switch (Ethernet)                                   |\n| Teach pendant           | Servo amplifier       | External                                            |\n| 200V (6-axis amplifier) | E-s                   | 200 V -> 24V                                        |\n| 200 V                   | EMG signal            | Pulsecoder signals. Robot DI/DO signals             |\n| Robot                   | Noise Filter          | Motor power supply, Brake power supply (EMC option) |\n| Circuit breaker         | Regenerative resistor | AC input                                            |\n\nFig.2.2 Block diagram of the R-30iB Mate/ R-30iB Mate Plus\n\n- 9 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "COMPONENT FUNCTIONS",
+        "text": "2. CONFIGURATION                     MAINTENANCE                                B-83525EN/07"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "Main board",
+        "text": "The main board contains a microprocessor, its peripheral circuits, memory, and operator's panel control circuit. The main CPU controls servo mechanism positioning."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "I/O printed circuit board",
+        "text": "Various types of printed circuit boards are provided for applications including process I/O board. These are connected with FANUC I/O Link."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "E-stop unit",
+        "text": "This unit controls the emergency stop system of the robot controller. It also has user interface terminals of safety relevant signals, external on/off signals etc."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "Power supply unit",
+        "text": "The power supply unit converts the AC power to various levels of DC power."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "Backplane printed circuit board",
+        "text": "The various control printed circuit boards are mounted on the backplane printed circuit board."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "Teach pendant",
+        "text": "All operations including robot programming are performed with this unit. The controller status and data are indicated on the liquid-crystal display (LCD) on the pendant."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "6-Axis Servo amplifier",
+        "text": "The servo amplifier controls servomotor, Pulsecoder signal, brake control, overtravel and hand broken."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "Operator's panel",
+        "text": "Buttons and LEDs on the operator's panel are used to start the robot and to indicate the robot status."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "Fan unit, heat exchanger",
+        "text": "These components cool the inside of the controller."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "Circuit breaker",
+        "text": "If the electric system in the controller malfunctions, or if abnormal input power causes high current in the system, the input power is connected to the circuit breaker to protect the equipment."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "Regenerative resistor",
+        "text": "To discharge the counter electromotive force from the servomotor, connect a regenerative resistor to the servo amplifier.\n\n- 10 -"
+    }
+]

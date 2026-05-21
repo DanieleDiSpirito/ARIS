@@ -1,8 +1,19 @@
 import json
 import os
 import re
+import sys
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from transformers import AutoTokenizer
+
+# Configura console Windows per supportare emoji ed encoding UTF-8 senza crash
+if sys.platform.startswith("win"):
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+
+# Determina la root del repository ARIS in base alla posizione dello script
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+REPO_ROOT = os.path.abspath(os.path.join(SCRIPT_DIR, "..", ".."))
 
 def clean_text_for_chunking(text):
     """
@@ -36,16 +47,16 @@ def extract_table_header(text):
                 return f"{line1}\n{line2}"
     return None
 
-def genera_dataset_chunks(input_file, chunk_size, chunk_overlap, tipo_modello, nome_modello):
+def genera_dataset_chunks(input_file, chunk_size, chunk_overlap, tipo_modello, nome_modello, metodo_estrazione):
     """
     Legge il JSON pulito, divide il testo usando il tokenizer corretto (Cloud o Locale)
-    e salva un nuovo file JSON.
+    e salva un nuovo file JSON nella cartella specifica per il metodo.
     """
-    output_dir = os.path.join("data", "chunks")
+    output_dir = os.path.join(REPO_ROOT, "data", "chunks", metodo_estrazione)
     os.makedirs(output_dir, exist_ok=True)
     output_file = os.path.join(output_dir, f"dataset_chunks_{tipo_modello}_{chunk_size}.json")
     
-    print(f"🔪 Avvio chunking per {tipo_modello} ({chunk_size} token, Overlap: {chunk_overlap})...")
+    print(f"🔪 Avvio chunking per metodo '{metodo_estrazione}' - modello '{tipo_modello}' ({chunk_size} token, Overlap: {chunk_overlap})...")
     
     with open(input_file, "r", encoding="utf-8") as f:
         dati_puliti = json.load(f)
@@ -105,7 +116,7 @@ def genera_dataset_chunks(input_file, chunk_size, chunk_overlap, tipo_modello, n
             testo_finale = re.sub(r'^[\s\|:\-]+$\n?', '', frammento, flags=re.MULTILINE).strip()
 
             chunk_record = {
-                "chunk_id": f"{item['document_id']}_{section_safe}_{item['page']}_{i}_{tipo_modello}",
+                "chunk_id": f"{item['document_id']}_{section_safe}_{item['page']}_{i}_{tipo_modello}_{metodo_estrazione}",
                 "document_id": item["document_id"],
                 "file_name": item["file_name"],
                 "page": item["page"],
@@ -126,39 +137,68 @@ def genera_dataset_chunks(input_file, chunk_size, chunk_overlap, tipo_modello, n
     print(f"✅ Fatto! Creato {output_file} con {len(chunks_finali)} chunks.\n")
 
 if __name__ == "__main__":
-    os.chdir("../..")
-    file_input = os.path.join("data", "processed", "knowledge_base.json")
+    import argparse
     
-    config_esperimenti_cloud = [
-        {"size": 300, "overlap": 40},
-        {"size": 700, "overlap": 100},
-        {"size": 1000, "overlap": 150}
-    ]
+    parser = argparse.ArgumentParser(description="Chunking universale per la pipeline ARIS.")
+    parser.add_argument(
+        "--metodo", "-m", 
+        type=str, 
+        choices=["euristico", "docling", "llamaparse", "qwen", "all"],
+        default="docling",
+        help="Metodo di estrazione da elaborare (euristico, docling, llamaparse, qwen, all)."
+    )
+    args = parser.parse_args()
     
-    print("--- ☁️ PREPARAZIONE DATI PER MODELLO CLOUD ---")
-    for config in config_esperimenti_cloud:
-        genera_dataset_chunks(
-            input_file=file_input, 
-            chunk_size=config["size"], 
-            chunk_overlap=config["overlap"],
-            tipo_modello="cloud",
-            nome_modello="text-embedding-3-small"
-        )
+    metodi_disponibili = ["euristico", "docling", "llamaparse", "qwen"]
+    
+    if args.metodo == "all":
+        metodi_da_elaborare = metodi_disponibili
+    else:
+        metodi_da_elaborare = [args.metodo]
         
-    config_esperimenti_locale = [
-        {"size": 300, "overlap": 40},
-        {"size": 700, "overlap": 100},
-        {"size": 1000, "overlap": 150}
-    ]
-    
-    print("\n--- 💻 PREPARAZIONE DATI PER MODELLO LOCALE ---")
-    for config in config_esperimenti_locale:
-        genera_dataset_chunks(
-            input_file=file_input, 
-            chunk_size=config["size"], 
-            chunk_overlap=config["overlap"],
-            tipo_modello="locale",
-            nome_modello="BAAI/bge-m3"
-        )
+    for metodo in metodi_da_elaborare:
+        input_file = os.path.join(REPO_ROOT, "data", "processed", "knowledge", f"kb_{metodo}.json")
         
-    print("🎉 Tutti i dataset (Cloud e Locali) sono pronti per gli esperimenti!")
+        if not os.path.exists(input_file):
+            print(f"⚠️  File di input non trovato per '{metodo}': {input_file}. Salto.")
+            continue
+            
+        print(f"\n📂 =========================================")
+        print(f"📂 ELABORAZIONE CHUNKING METODO: {metodo.upper()}")
+        print(f"📂 =========================================")
+        
+        config_esperimenti_cloud = [
+            {"size": 300, "overlap": 40},
+            {"size": 700, "overlap": 100},
+            {"size": 1000, "overlap": 150}
+        ]
+        
+        print("\n--- ☁️ PREPARAZIONE DATI PER MODELLO CLOUD ---")
+        for config in config_esperimenti_cloud:
+            genera_dataset_chunks(
+                input_file=input_file, 
+                chunk_size=config["size"], 
+                chunk_overlap=config["overlap"],
+                tipo_modello="cloud",
+                nome_modello="text-embedding-3-small",
+                metodo_estrazione=metodo
+            )
+            
+        config_esperimenti_locale = [
+            {"size": 300, "overlap": 40},
+            {"size": 700, "overlap": 100},
+            {"size": 1000, "overlap": 150}
+        ]
+        
+        print("\n--- 💻 PREPARAZIONE DATI PER MODELLO LOCALE ---")
+        for config in config_esperimenti_locale:
+            genera_dataset_chunks(
+                input_file=input_file, 
+                chunk_size=config["size"], 
+                chunk_overlap=config["overlap"],
+                tipo_modello="locale",
+                nome_modello="BAAI/bge-m3",
+                metodo_estrazione=metodo
+            )
+            
+    print("🎉 Elaborazione di chunking completata con successo per tutti i metodi richiesti!")

@@ -1,0 +1,290 @@
+[
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "3",
+        "section": "Generale",
+        "title": "OVERVIEW",
+        "text": "This manual is applied to R-30iB Mate/ R-30iB Mate Plus controller (called R-30iB Mate/ R-30iB Mate Plus).\n\nR-30iB Mate/ R-30iB Mate Plus has different controller depending on the required standards.\n\nNRTL controller: To meet UL/CSA standard\n\nCE controller: To meet Machinery Directive, Low voltage Directive, EMC Directive to cover the requirement of CE mark\n\nThis manual covers these controllers of the R-30iB Mate/ R-30iB Mate Plus.\n\nThe difference of NRTL and CE controller from the Basic controller is small as shown in Table 1 (ex. EMC parts, Breakers).\n\nAnd the specific descriptions of CE and NRTL controller have notifications in this manual."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "3",
+        "section": "Generale",
+        "title": "Table 1. Applied standards",
+        "text": "| Functional Safety | EMC Standard | Robot Standard Electrical Standard | Requirement | Difference |\n|---|---|---|---|---|\n| Basic controller | - | - | - | - |\n| NRTL controller | ISO 13849-1 IEC 61508 | - | UL1740 CAN/CSA Z434 NFPA79 | UL standard CSA standard •USA and Canada | •UL listed main breaker |\n| CE controller | EN 55011 EN 61000-6-2 EN 61000-6-4 | EN/ISO 10218-1 EN 60204-1 | CE Marking •Europe | •Noise filter •EMC Cabinet •Shielded cable |\n\nThis manual describes the maintenance and connection of R-30iB Mate/ R-30iB Mate Plus.\n\nMaintenance Part: Troubleshooting, and the setting, adjustment, and replacement of units\n\nConnection Part: Connection of R-30iB Mate/ R-30iB Mate Plus to the robot mechanical unit and peripheral devices, and installation of the controller"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "3",
+        "section": "Generale",
+        "title": "WARNING",
+        "text": "Before you enter the robot working area, be sure to turn off the power to the controller or press the EMERGENCY STOP button on the operator's panel or teach pendant. Otherwise, you could injure personnel or damage equipment."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "4",
+        "section": "2.1",
+        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "text": "The appearance and components might slightly differ depending on the controlled robot, application, and options used.\n\nFig.2.1 (a) to (b) show the view of R-30iB Mate/ R-30iB Mate Plus.\n\nFig.2.1 (c) to (g) show the construction of the R-30iB Mate/ R-30iB Mate Plus controller.\n\nFig.2.1 (h) to (j) show the external view of the operator's panel and teach pendant.\n\n| Column 1 | Column 2 |\n|---|---|\n| Teach pendant hook (Option) | Operator's panel |\n| Key | USB port (Option) |\n| Teach pendant (iPendant) | Rear fan unit |\n\nFig.2.1 (a) External view of the R-30iB Mate/ R-30iB Mate Plus controller"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "4",
+        "section": "2.1",
+        "title": "NOTE",
+        "text": "Be sure to lock the key.\n\n| Column 1 | Column 2 |\n|---|---|\n| Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "5",
+        "section": "2.1",
+        "title": "CABINET INTERIOR",
+        "text": "| Part Name | Description |\n| --- | --- |\n| Emergency stop button | Button used to stop the robot's operation. |\n| Battery | Power source for the robot's electronics. |\n| Mode switch | Switch used to select the robot's operating mode. |\n| Breaker | Circuit breaker for the robot's power supply. |\n| Main board | Main control board for the robot's electronics. |\n| Back plane unit | Unit responsible for the robot's backplane connections. |\n| Heat exchanger | Heat exchanger for cooling the robot's electronics. |\n| 6-Axis Servo amplifier | Amplifier for the robot's six-axis servo motors. |\n| E-stop unit | Unit used to stop the robot's operation. |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "5",
+        "section": "2.2",
+        "title": "CABINET INTERIOR (Front-1)",
+        "text": "| Part Name | Description |\n| --- | --- |\n| Noise Filter | Noise filter for the robot's electronics. |\n| Power supply unit | Power supply unit for the robot's electronics. |\n| Process I/O board (Option) | Option for the robot's process input/output board. |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "5",
+        "section": "2.3",
+        "title": "CABINET INTERIOR (Front-2)",
+        "text": "| Part Name | Description |\n| --- | --- |\n| Process I/O board (Option) | Option for the robot's process input/output board. |\n| Power supply unit | Power supply unit for the robot's electronics. |\n| Noise Filter (EMC Option) | Noise filter for the robot's electronics. |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "6",
+        "section": "2",
+        "title": "Fig.2.1 (e) R-30iB Mate/ R-30iB Mate Plus cabinet interior (Front-3) (CR-4iA, CR-7iA)",
+        "text": "| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | 6-Axis Servo amplifier (Rear side) |\n| 6-Axis Servo amplifier (Rear side) |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "6",
+        "section": "2",
+        "title": "(Small size)",
+        "text": "| Column 1 | Column 2 |\n|---|---|\n| Line filter | 6-Axis Servo amplifier (Rear side) |\n| 6-Axis Servo amplifier (Rear side) |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "6",
+        "section": "2",
+        "title": "(Middle size)",
+        "text": "| Column 1 | Column 2 |\n|---|---|\n| Line filter | 6-Axis Servo amplifier (Rear side) |\n| 6-Axis Servo amplifier (Rear side) |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "6",
+        "section": "2",
+        "title": "Fig.2.1 (e) R-30iB Mate/ R-30iB Mate Plus cabinet interior (Front-3) (CR-4iA, CR-7iA)",
+        "text": "| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | 6-Axis Servo amplifier (Rear side) |\n| 6-Axis Servo amplifier (Rear side) |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "6",
+        "section": "2",
+        "title": "(Small size)",
+        "text": "| Column 1 | Column 2 |\n|---|---|\n| Line filter | 6-Axis Servo amplifier (Rear side) |\n| 6-Axis Servo amplifier (Rear side) |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "6",
+        "section": "2",
+        "title": "(Middle size)",
+        "text": "| Column 1 | Column 2 |\n|---|---|\n| Line filter | 6-Axis Servo amplifier (Rear side) |\n| 6-Axis Servo amplifier (Rear side) |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1",
+        "title": "CABINET INTERIOR (MIDDLE/LARGE SIZE) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.1",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.2",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.3",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.4",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.5",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.6",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.7",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.8",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.9",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.10",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.11",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.12",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.13",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.14",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.15",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.16",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,2) will vary depending on the robot type.\n\n| Column 1 | Column 2 |\n|---|---|\n| Regenerative resistor | Rear fan unit |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1.17",
+        "title": "R-30iB Mate/ R-30iB Mate Plus Cabinet Interior (Middle/Large Size) (Rear)",
+        "text": "**NOTE** The number of fans on the fan unit (0,1,"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "8",
+        "section": "2",
+        "title": "CONFIGURATION",
+        "text": "B-83525EN/07"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "8",
+        "section": "2.1",
+        "title": "Teach pendant (iPendant)",
+        "text": "| Column 1 | Column 2 |\n|---|---|\n| Enable/disable switch | Emergency Stop button |\n| USB port | Deadman switch |"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "9",
+        "section": "2",
+        "title": "BLOCK DIAGRAM OF THE R-30iB Mate/ R-30iB Mate Plus",
+        "text": "- **Backplane Board**\n  - **Battery**\n  - **Main Board**\n  - **Fan Board**\n  - **Operator's Panel**\n  - **E-stop Unit**\n  - **Servo Amplifier (6-axis amplifier)**\n  - **Servo Signal (FSSB)**\n  - **24VDC**\n  - **200V**\n  - **EMG Signal**\n  - **200V -> 24V**\n  - **200V**\n  - **Noise Filter (EMC option)**\n  - **Circuit Breaker**\n  - **AC Input**\n  - **Regenerative Resistor**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **External E-stop**\n  - **Teach Pendant**\n  - **Peripheral Device (Serial)**\n  - **Peripheral Device (Ethernet)**\n  - **Peripheral Device (I/O)**\n  - **Peripheral Device (Teach Pendant)**\n  - **Robot**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **Regenerative Resistor**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **External E-stop**\n  - **Teach Pendant**\n  - **Peripheral Device (Serial)**\n  - **Peripheral Device (Ethernet)**\n  - **Peripheral Device (I/O)**\n  - **Peripheral Device (Teach Pendant)**\n  - **Robot**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **Regenerative Resistor**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **External E-stop**\n  - **Teach Pendant**\n  - **Peripheral Device (Serial)**\n  - **Peripheral Device (Ethernet)**\n  - **Peripheral Device (I/O)**\n  - **Peripheral Device (Teach Pendant)**\n  - **Robot**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **Regenerative Resistor**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **External E-stop**\n  - **Teach Pendant**\n  - **Peripheral Device (Serial)**\n  - **Peripheral Device (Ethernet)**\n  - **Peripheral Device (I/O)**\n  - **Peripheral Device (Teach Pendant)**\n  - **Robot**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **Regenerative Resistor**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **External E-stop**\n  - **Teach Pendant**\n  - **Peripheral Device (Serial)**\n  - **Peripheral Device (Ethernet)**\n  - **Peripheral Device (I/O)**\n  - **Peripheral Device (Teach Pendant)**\n  - **Robot**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **Regenerative Resistor**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **External E-stop**\n  - **Teach Pendant**\n  - **Peripheral Device (Serial)**\n  - **Peripheral Device (Ethernet)**\n  - **Peripheral Device (I/O)**\n  - **Peripheral Device (Teach Pendant)**\n  - **Robot**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **Regenerative Resistor**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **External E-stop**\n  - **Teach Pendant**\n  - **Peripheral Device (Serial)**\n  - **Peripheral Device (Ethernet)**\n  - **Peripheral Device (I/O)**\n  - **Peripheral Device (Teach Pendant)**\n  - **Robot**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **Regenerative Resistor**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **External E-stop**\n  - **Teach Pendant**\n  - **Peripheral Device (Serial)**\n  - **Peripheral Device (Ethernet)**\n  - **Peripheral Device (I/O)**\n  - **Peripheral Device (Teach Pendant)**\n  - **Robot**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **Regenerative Resistor**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **External E-stop**\n  - **Teach Pendant**\n  - **Peripheral Device (Serial)**\n  - **Peripheral Device (Ethernet)**\n  - **Peripheral Device (I/O)**\n  - **Peripheral Device (Teach Pendant)**\n  - **Robot**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **Regenerative Resistor**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **External E-stop**\n  - **Teach Pendant**\n  - **Peripheral Device (Serial)**\n  - **Peripheral Device (Ethernet)**\n  - **Peripheral Device (I/O)**\n  - **Peripheral Device (Teach Pendant)**\n  - **Robot**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **Regenerative Resistor**\n  - **Pulsecode Signal: Robot DI/DO Signals**\n  - **Motor Power Supply**\n  - **Brake Power Supply**\n  - **External E-stop**\n  - **Teach Pendant**\n  - **Peripheral Device (Serial)**\n  - **Peripheral Device (Ethernet)**\n  - **Peripheral Device (I/O)**\n  - **Peripheral Device (Teach Pendant)**\n  - **"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2",
+        "title": "CONFIGURATION MAINTENANCE",
+        "text": "- **Main board**\n  The main board contains a microprocessor, its peripheral circuits, memory, and operator's panel control circuit. The main CPU controls servo mechanism positioning.\n\n- **I/O printed circuit board**\n  Various types of printed circuit boards are provided for applications including process I/O board. These are connected with FANUC I/O Link.\n\n- **E-stop unit**\n  This unit controls the emergency stop system of the robot controller. It also has user interface terminals of safety relevant signals, external on/off signals etc.\n\n- **Power supply unit**\n  The power supply unit converts the AC power to various levels of DC power.\n\n- **Backplane printed circuit board**\n  The various control printed circuit boards are mounted on the backplane printed circuit board.\n\n- **Teach pendant**\n  All operations including robot programming are performed with this unit. The controller status and data are indicated on the liquid-crystal display (LCD) on the pendant.\n\n- **6-Axis Servo amplifier**\n  The servo amplifier controls servomotor, Pulsecoder signal, brake control, overtravel and hand broken.\n\n- **Operator's panel**\n  Buttons and LEDs on the operator's panel are used to start the robot and to indicate the robot status.\n\n- **Fan unit, heat exchanger**\n  These components cool the inside of the controller.\n\n- **Circuit breaker**\n  If the electric system in the controller malfunctions, or if abnormal input power causes high current in the system, the input power is connected to the circuit breaker to protect the equipment.\n\n- **Regenerative resistor**\n  To discharge the counter electromotive force from the servomotor, connect a regenerative resistor to the servo amplifier."
+    }
+]
