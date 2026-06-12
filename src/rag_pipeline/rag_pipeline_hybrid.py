@@ -154,18 +154,63 @@ def setup_rag_chain(retriever, env="locale"):
     else:
         raise ValueError("Il parametro env deve essere 'locale' o 'cloud'")
 
+    # Normalizza l'input in un dizionario con chiavi 'question' e 'history'
+    normalize_input = RunnableLambda(
+        lambda x: {"question": x, "history": ""} if isinstance(x, str) else {
+            "question": x.get("question", ""),
+            "history": x.get("history", "")
+        }
+    )
+
+    # Classifica l'intento della domanda
+    def classify_intent(inputs):
+        question = inputs.get("question", "")
+        
+        # Controllo rapido a regole per evitare chiamate LLM su saluti semplici
+        q_clean = question.strip().lower().rstrip("!?.,")
+        greetings = {
+            "ciao", "buongiorno", "buonasera", "salve", "hello", "hi", "hey",
+            "grazie", "grazie mille", "thank you", "thanks", "prego"
+        }
+        if q_clean in greetings:
+            return "GENERAL"
+            
+        # Classificazione semantica tramite LLM
+        classification_prompt = (
+            "Classifica la seguente domanda dell'operatore per un assistente di manutenzione di robot Fanuc.\n"
+            "Rispondi ESCLUSIVAMENTE con una delle due parole: 'TECHNICAL' o 'GENERAL'.\n\n"
+            "- TECHNICAL: domande su allarmi (es. SRVO-004), cablaggi, specifiche hardware, procedure, diagnostica o manutenzione.\n"
+            "- GENERAL: saluti, domande di cortesia, presentazioni, o argomenti non inerenti ai robot (es. ricette, meteo, sport, opinioni).\n\n"
+            f"Domanda dell'operatore: {question}\n"
+            "Risposta:"
+        )
+        try:
+            res = llm.invoke(classification_prompt)
+            intent = res.content.strip().upper()
+            return "TECHNICAL" if "TECHNICAL" in intent else "GENERAL"
+        except Exception as e:
+            print(f"⚠️ Errore durante la classificazione dell'intento: {e}. Fallback su TECHNICAL.")
+            return "TECHNICAL"
+
+    # Decide se invocare il retriever o saltarlo
+    def retrieve_or_skip(inputs):
+        if inputs.get("intent") == "GENERAL":
+            print("🔀 Query non pertinente rilevata: Salto il retrieval dei chunk.")
+            return []
+        
+        question = inputs["question"]
+        return retriever.invoke(question)
+
     prompt = build_prompt()
 
-    # Estrae la sola domanda dal dict di input per il retriever
-    get_question = RunnableLambda(lambda x: x["question"] if isinstance(x, dict) else x)
-    get_history  = RunnableLambda(lambda x: x.get("history", "") if isinstance(x, dict) else "")
-
-    # Pipeline RAG: retriever usa solo {question}, il prompt riceve context + question + history
+    # Pipeline RAG con Query Routing:
     rag_chain = (
-        {
-            "context":  get_question | retriever | format_docs_with_sources,
-            "question": get_question,
-            "history":  get_history,
+        normalize_input
+        | RunnablePassthrough.assign(intent=RunnableLambda(classify_intent))
+        | {
+            "context":  RunnableLambda(retrieve_or_skip) | format_docs_with_sources,
+            "question": lambda x: x["question"],
+            "history":  lambda x: x["history"],
         }
         | prompt
         | llm
