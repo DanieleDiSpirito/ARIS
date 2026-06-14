@@ -35,12 +35,19 @@ def main():
                         help="Scegli tra 'locale' (BGE-M3) o 'cloud' (OpenAI)")
     parser.add_argument("--chunk_size", type=int, choices=[300, 700, 1000], default=700, 
                         help="Dimensione in token dei chunk da vettorizzare")
+    parser.add_argument(
+        "--metodo", "-m", 
+        type=str, 
+        choices=["euristico", "docling", "llamaparse", "qwen"],
+        default="docling",
+        help="Metodo di estrazione da elaborare (euristico, docling, llamaparse, qwen)."
+    )
     args = parser.parse_args()
     
-    file_path = os.path.join("data", "chunks", f"dataset_chunks_{args.env}_{args.chunk_size}.json")
+    file_path = os.path.join("data", "chunks", args.metodo, f"dataset_chunks_{args.env}_{args.chunk_size}.json")
     if not os.path.exists(file_path):
         print(f"❌ File non trovato: {file_path}")
-        print("Assicurati di aver prima eseguito: python src/chuncking/chuncking.py")
+        print("Assicurati di aver prima eseguito: python src/chunking/chunking.py")
         return
         
     print(f"📄 Caricamento chunk da: {file_path}")
@@ -55,7 +62,7 @@ def main():
             model_kwargs={'device': 'cpu'},
             encode_kwargs={'normalize_embeddings': True}
         )
-        persist_dir = os.path.join("vector_db", f"chroma_locale_{args.chunk_size}")
+        persist_dir = os.path.join("vector_db", args.metodo, f"chroma_locale_{args.chunk_size}")
     else:
         print("☁️ Inizializzazione modello cloud: text-embedding-3-small...")
         if "OPENAI_API_KEY" not in os.environ:
@@ -66,7 +73,7 @@ def main():
             openai_api_key=os.getenv("OPENAI_API_KEY"),
             openai_api_base="https://openrouter.ai/api/v1"
         )
-        persist_dir = os.path.join("vector_db", f"chroma_cloud_{args.chunk_size}")
+        persist_dir = os.path.join("vector_db", args.metodo, f"chroma_cloud_{args.chunk_size}")
 
     print(f"🗄️ Generazione embeddings e salvataggio DB in: {persist_dir}")
     print("⏳ L'operazione potrebbe richiedere alcuni minuti...")
