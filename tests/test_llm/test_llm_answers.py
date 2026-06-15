@@ -44,8 +44,10 @@ from rag_pipeline_hybrid import setup_rag_chain, get_db_path, get_embeddings, bu
 from langchain_chroma import Chroma
 
 load_dotenv()
+# Disabilita il tracing di LangSmith per evitare errori di limite di quota nei benchmark
+os.environ["LANGCHAIN_TRACING_V2"] = "false"
 
-def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = None, tolleranza: int = 1):
+def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = None, tolleranza: int = 1, model: str = None, rag_type: str = "ibrido"):
     test_file = os.path.join(TESTS_DIR, f"test_questions_{lang}.csv")
     if not os.path.exists(test_file):
         print(f"❌ File di test non trovato: {test_file}")
@@ -53,25 +55,32 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
 
     df = pd.read_csv(test_file)
     if max_questions:
-        df = df.head(max_questions)
+        # Campiona casualmente in modo riproducibile e ordina per indice originale
+        df = df.sample(n=min(max_questions, len(df)), random_state=42).sort_index()
 
     db_path = os.path.join(PROJECT_ROOT, get_db_path(env, chunk_size))
     if not os.path.exists(db_path):
         print(f"❌ Database non trovato in: {db_path}")
         return
 
-    print(f"🗄️ Caricamento DB e Retriever ({env}, chunk: {chunk_size}, lingua: {lang})...")
+    print(f"🗄️ Caricamento DB e Retriever ({env}, chunk: {chunk_size}, lingua: {lang}, RAG: {rag_type})...")
     embedder = get_embeddings(env)
     lc_chroma = Chroma(
         persist_directory=db_path,
         collection_name=COLLECTION_NAME,
         embedding_function=embedder
     )
-    retriever = build_hybrid_retriever(lc_chroma, k=3)
-    rag_chain = setup_rag_chain(retriever, env=env)
+    if rag_type == "puro":
+        retriever = lc_chroma.as_retriever(search_kwargs={"k": 3})
+    else:  # ibrido
+        retriever = build_hybrid_retriever(lc_chroma, k=3)
+        
+    rag_chain = setup_rag_chain(retriever, env=env, model_name=model)
 
     risultati = []
     hit_count = 0
+    no_page_count = 0
+    miss_count = 0
     total_valid = 0
     
     print(f"\n🚀 Inizio test su {len(df)} domande (Tolleranza pagina: ±{tolleranza})...\n")
@@ -108,10 +117,14 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
             total_valid += 1
             if not file_llm or not pag_llm:
                 match_status = "NO PAGE"
+                no_page_count += 1
             elif match_file and match_page:
                 is_hit = True
                 match_status = "SI"
                 hit_count += 1
+            else:
+                match_status = "MISS"
+                miss_count += 1
         
         risultati.append({
             "id": row.get('id', index),
@@ -129,9 +142,10 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
         icon = "✅" if match_status == "SI" else ("⚠️" if match_status == "NO PAGE" else "❌")
         print(f"   ⏱️ Tempo: {tempo}s | Stato: {stato} | Match: {icon} {match_status} (Estratto: {file_llm} p.{pag_llm})\n")
 
-    out_dir = os.path.join(TESTS_DIR, "risultati_llm")
+    model_suffix = model.replace('/', '_').replace(':', '_') if model else ("default_local" if env == "locale" else "default_cloud")
+    out_dir = os.path.join(TESTS_DIR, "results_llm", "logs")
     os.makedirs(out_dir, exist_ok=True)
-    out_file = os.path.join(out_dir, f"llm_results_{env}_{lang}_{chunk_size}.csv")
+    out_file = os.path.join(out_dir, f"llm_results_{env}_{lang}_{chunk_size}_{rag_type}_{model_suffix}.csv")
     
     df_out = pd.DataFrame(risultati)
     df_out.to_csv(out_file, index=False, encoding='utf-8')
@@ -139,9 +153,38 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
     
     if total_valid > 0:
         hit_rate = (hit_count / total_valid) * 100
+        no_page_rate = (no_page_count / total_valid) * 100
+        miss_rate = (miss_count / total_valid) * 100
+        
+        # Salva il report in quick_eval
+        quick_eval_dir = os.path.join(TESTS_DIR, "results_llm", "quick_eval")
+        os.makedirs(quick_eval_dir, exist_ok=True)
+        quick_eval_file = os.path.join(quick_eval_dir, f"llm_results_summary_{env}_{lang}_{chunk_size}_{rag_type}_{model_suffix}.md")
+        
+        summary_md = f"""# Report Risultati LLM Summary ({env}, {lang}, chunk: {chunk_size})
+
+| Metric | Value |
+| :--- | :--- |
+| **RAG Algorithm** | {rag_type.capitalize()} |
+| **LLM Model** | {model if model else 'Default'} |
+| **Domande valutate** | {total_valid} |
+| **Risposte corrette (SI)** | {hit_count} ({hit_rate:.1f}%) |
+| **Pagine mancanti (NO PAGE)** | {no_page_count} ({no_page_rate:.1f}%) |
+| **Pagine errate (MISS)** | {miss_count} ({miss_rate:.1f}%) |
+| **Hit Rate (LLM Accuracy)** | {hit_rate:.1f}% |
+"""
+        with open(quick_eval_file, "w", encoding="utf-8") as f:
+            f.write(summary_md)
+
+        print(f"⚡ Report di sintesi salvato in:\n{quick_eval_file}")
+        
         print(f"\n📊 --- REPORT RISULTATI ---")
+        print(f"   RAG Algorithm: {rag_type.capitalize()}")
+        print(f"   LLM Model: {model if model else 'Default'}")
         print(f"   Domande valutate: {total_valid}")
-        print(f"   Risposte corrette (File + Pagina ±{tolleranza}): {hit_count}")
+        print(f"   Risposte corrette (SI): {hit_count} ({hit_rate:.1f}%)")
+        print(f"   Pagine mancanti (NO PAGE): {no_page_count} ({no_page_rate:.1f}%)")
+        print(f"   Pagine errate (MISS): {miss_count} ({miss_rate:.1f}%)")
         print(f"   Hit Rate (LLM Accuracy): {hit_rate:.1f}%")
         print(f"---------------------------\n")
 
@@ -152,6 +195,10 @@ if __name__ == "__main__":
     parser.add_argument("--chunk_size", type=int, default=700, help="Dimensione dei chunk")
     parser.add_argument("--limit", type=int, default=None, help="Limita il numero di domande da testare (es. 5 per test veloci)")
     parser.add_argument("--tolleranza", type=int, default=1, help="Tolleranza di pagina ±N")
+    parser.add_argument("--model", type=str, default=None,
+                        help="Modello LLM da usare (es. openai/gpt-4o-mini, google/gemini-2.5-flash, google/gemini-3.5-flash, meta-llama/llama-3.3-70b-instruct, qwen/qwen-2.5-72b-instruct, deepseek/deepseek-chat)")
+    parser.add_argument("--rag_type", type=str, choices=["puro", "ibrido"], default="ibrido",
+                        help="Algoritmo RAG da usare: 'puro' (solo Vector Search) o 'ibrido' (BM25 + Vector Search)")
     args = parser.parse_args()
 
-    valuta_llm(args.env, args.lang, args.chunk_size, args.limit, args.tolleranza)
+    valuta_llm(args.env, args.lang, args.chunk_size, args.limit, args.tolleranza, args.model, args.rag_type)

@@ -119,7 +119,7 @@ def format_docs_with_sources(docs):
     return "\n".join(formatted_chunks)
 
 
-def setup_rag_chain(retriever, env="locale"):
+def setup_rag_chain(retriever, env="locale", model_name=None):
     """Configura la pipeline RAG collegando retriever, prompt e LLM.
 
     La chain accetta un dict: {"question": str, "history": str}
@@ -127,22 +127,23 @@ def setup_rag_chain(retriever, env="locale"):
     - history  : ultimi scambi formattati come stringa (può essere vuota)
     """
     if env == "locale":
-        print(f"🤖 LLM: Locale (server su localhost:1234)")
-        local_model = os.getenv("LOCAL_LLM_MODEL", None)
+        model = model_name if model_name else os.getenv("LOCAL_LLM_MODEL", None)
+        print(f"🤖 LLM: Locale (server su localhost:1234) | Modello: {model}")
         base_url = os.getenv("LOCAL_LLM_URL", "http://localhost:1234/v1")
         llm = ChatOpenAI(
-            model=local_model,
+            model=model,
             base_url=base_url,
             api_key="lm-studio",
             temperature=0.1,
             streaming=True
         )
     elif env == "cloud":
-        print("☁️ LLM: Cloud (OpenRouter)")
+        model = model_name if model_name else "openai/gpt-3.5-turbo"
+        print(f"☁️ LLM: Cloud (OpenRouter) | Modello: {model}")
         if "OPENAI_API_KEY" not in os.environ:
             raise ValueError("❌ ERRORE: Variabile OPENAI_API_KEY non trovata nel file .env")
         llm = ChatOpenAI(
-            model="openai/gpt-3.5-turbo",
+            model=model,
             openai_api_base="https://openrouter.ai/api/v1",
             openai_api_key=os.getenv("OPENAI_API_KEY"),
             temperature=0.1,

@@ -193,11 +193,6 @@ Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni p
             "motivo": motivo,
             "categoria_errore": cat_errore
         })
-
-    # Salva il report
-    out_dir = os.path.join(TESTS_DIR, "risultati_llm")
-    os.makedirs(out_dir, exist_ok=True)
-    out_file = os.path.join(out_dir, f"test_questions_validation_{lang}.csv")
     
     df_out = pd.DataFrame(risultati_validazione)
     df_out.to_csv(out_file, index=False, encoding='utf-8')

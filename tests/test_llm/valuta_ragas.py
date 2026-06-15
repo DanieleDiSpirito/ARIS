@@ -20,6 +20,8 @@ from langchain_chroma import Chroma
 from langchain_huggingface import HuggingFaceEmbeddings
 
 load_dotenv()
+# Disabilita il tracing di LangSmith per evitare errori di limite di quota nei benchmark
+os.environ["LANGCHAIN_TRACING_V2"] = "false"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TESTS_DIR = os.path.dirname(BASE_DIR)
@@ -31,7 +33,7 @@ sys.path.append(os.path.join(PROJECT_ROOT, "src", "rag_pipeline"))
 from rag_pipeline_hybrid import setup_rag_chain, get_db_path, get_embeddings, build_hybrid_retriever, COLLECTION_NAME
 
 
-def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None, k: int = 3):
+def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None, k: int = 3, model: str = None, rag_type: str = "ibrido"):
     test_file = os.path.join(TESTS_DIR, f"test_questions_{lang}.csv")
     if not os.path.exists(test_file):
         print(f"❌ File di test non trovato: {test_file}")
@@ -39,22 +41,27 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
 
     df = pd.read_csv(test_file)
     if limit:
-        df = df.head(limit)
+        # Campiona casualmente in modo riproducibile e ordina per indice originale
+        df = df.sample(n=min(limit, len(df)), random_state=42).sort_index()
 
     db_path = os.path.join(PROJECT_ROOT, get_db_path(env, chunk_size))
     if not os.path.exists(db_path):
         print(f"❌ Database non trovato in: {db_path}")
         return
 
-    print(f"🗄️ Caricamento DB e Retriever ({env}, chunk: {chunk_size}, lingua: {lang})...")
+    print(f"🗄️ Caricamento DB e Retriever ({env}, chunk: {chunk_size}, lingua: {lang}, RAG: {rag_type})...")
     embedder = get_embeddings(env)
     lc_chroma = Chroma(
         persist_directory=db_path,
         collection_name=COLLECTION_NAME,
         embedding_function=embedder
     )
-    retriever = build_hybrid_retriever(lc_chroma, k=k)
-    rag_chain = setup_rag_chain(retriever, env=env)
+    if rag_type == "puro":
+        retriever = lc_chroma.as_retriever(search_kwargs={"k": k})
+    else:  # ibrido
+        retriever = build_hybrid_retriever(lc_chroma, k=k)
+        
+    rag_chain = setup_rag_chain(retriever, env=env, model_name=model)
 
     questions = []
     answers = []
@@ -210,21 +217,51 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
         print(f"❌ Errore durante l'esecuzione di Ragas: {e}")
         return
 
+    model_suffix = model.replace('/', '_').replace(':', '_') if model else ("default_local" if env == "locale" else "default_cloud")
     # Salva e visualizza i risultati
-    out_dir = os.path.join(TESTS_DIR, "risultati_llm")
+    out_dir = os.path.join(TESTS_DIR, "results_llm", "logs")
     os.makedirs(out_dir, exist_ok=True)
-    out_file = os.path.join(out_dir, f"ragas_eval_{env}_{lang}_{chunk_size}.csv")
+    out_file = os.path.join(out_dir, f"ragas_eval_{env}_{lang}_{chunk_size}_{rag_type}_{model_suffix}.csv")
 
     df_result = pd.DataFrame(results_list)
     df_result.to_csv(out_file, index=False, encoding='utf-8')
 
     print(f"\n✅ Valutazione completata con successo! Risultati salvati in:\n{out_file}")
     
+    # Calcola le medie delle metriche per il report rapido
+    faithfulness_mean = df_result['faithfulness'].mean()
+    answer_relevancy_mean = df_result['answer_relevancy'].mean()
+    context_precision_mean = df_result['context_precision'].mean()
+    context_recall_mean = df_result['context_recall'].mean()
+
+    # Salva il report in quick_eval
+    quick_eval_dir = os.path.join(TESTS_DIR, "results_llm", "quick_eval")
+    os.makedirs(quick_eval_dir, exist_ok=True)
+    quick_eval_file = os.path.join(quick_eval_dir, f"ragas_eval_summary_{env}_{lang}_{chunk_size}_{rag_type}_{model_suffix}.md")
+    
+    summary_md = f"""# Report RAGAS Summary ({env}, {lang}, chunk: {chunk_size})
+
+| Metric | Value |
+| :--- | :--- |
+| **RAG Algorithm** | {rag_type.capitalize()} |
+| **LLM Model** | {model if model else 'Default'} |
+| **Faithfulness (Fedeltà)** | {faithfulness_mean:.4f} |
+| **Answer Relevancy (Pertinenza)** | {answer_relevancy_mean:.4f} |
+| **Context Precision (Prec. Contesto)** | {context_precision_mean:.4f} |
+| **Context Recall (Richiamo Contesto)** | {context_recall_mean:.4f} |
+"""
+    with open(quick_eval_file, "w", encoding="utf-8") as f:
+        f.write(summary_md)
+
+    print(f"⚡ Report di sintesi salvato in:\n{quick_eval_file}")
+    
     print("\n📊 --- REPORT FINALE RAGAS ---")
-    print(f"  Faithfulness (Fedeltà)           : {df_result['faithfulness'].mean():.4f}")
-    print(f"  Answer Relevancy (Pertinenza)     : {df_result['answer_relevancy'].mean():.4f}")
-    print(f"  Context Precision (Prec. Contesto): {df_result['context_precision'].mean():.4f}")
-    print(f"  Context Recall (Richiamo Contesto): {df_result['context_recall'].mean():.4f}")
+    print(f"  RAG Algorithm                    : {rag_type.capitalize()}")
+    print(f"  LLM Model                        : {model if model else 'Default'}")
+    print(f"  Faithfulness (Fedeltà)           : {faithfulness_mean:.4f}")
+    print(f"  Answer Relevancy (Pertinenza)     : {answer_relevancy_mean:.4f}")
+    print(f"  Context Precision (Prec. Contesto): {context_precision_mean:.4f}")
+    print(f"  Context Recall (Richiamo Contesto): {context_recall_mean:.4f}")
     print("------------------------------\n")
 
 
@@ -235,6 +272,10 @@ if __name__ == "__main__":
     parser.add_argument("--chunk_size", type=int, default=700, help="Dimensione dei chunk usata per caricare il DB")
     parser.add_argument("--limit", type=int, default=None, help="Limita il numero di domande da valutare")
     parser.add_argument("--k", type=int, default=3, help="Numero di chunk da recuperare")
+    parser.add_argument("--model", type=str, default=None,
+                        help="Modello LLM da usare per la generazione (es. openai/gpt-4o-mini, google/gemini-2.5-flash, google/gemini-3.5-flash, meta-llama/llama-3.3-70b-instruct, qwen/qwen-2.5-72b-instruct, deepseek/deepseek-chat)")
+    parser.add_argument("--rag_type", type=str, choices=["puro", "ibrido"], default="ibrido",
+                        help="Algoritmo RAG da usare: 'puro' (solo Vector Search) o 'ibrido' (BM25 + Vector Search)")
     args = parser.parse_args()
 
-    run_ragas_evaluation(args.env, args.lang, args.chunk_size, args.limit, args.k)
+    run_ragas_evaluation(args.env, args.lang, args.chunk_size, args.limit, args.k, args.model, args.rag_type)

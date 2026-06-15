@@ -1,0 +1,213 @@
+id,domanda,risposta_llm,llm_file_trovato,llm_pag_trovata,expected_file,expected_page,match,tempo_sec,stato
+Q001,Quali controlli devono essere effettuati prima e dopo l'operazione quotidiana del robot secondo il manuale tecnico del controller Fanuc R-30iB?,"Secondo il manuale tecnico del controller Fanuc, prima e dopo l'operazione quotidiana del robot, devono essere effettuati i seguenti controlli:
+
+Prima dell'operazione:
+1. Pulire ogni parte del sistema e controllare le parti del sistema per eventuali danni o crepe.
+2. Controllare il cavo collegato al teach pendant per eccessivo intreccio.
+3. Controllare il controller e i dispositivi periferici per anomalie.
+
+Dopo l'operazione:
+1. Riportare il robot alla posizione specificata e spegnere il controller.
+2. Pulire ogni parte e controllare per eventuali danni o crepe.
+3. Se il porto di ventilazione del controller è polveroso, pulirlo.
+
+Fonte documentale: checks_maintenance.pdf (Pagina: 11)",checks_maintenance.pdf,11,checks_maintenance.pdf,11,SI,8.99,OK
+Q005,Qual è la tensione comune per il dispositivo di ingresso digitale del robot sul lato A?,"La tensione comune per il dispositivo di ingresso digitale del robot sul lato A è di +24V.
+
+Fonte documentale: connections.pdf (Pagina: 180)",connections.pdf,180,circuit_boards_amplifiers.pdf,105,MISS,2.56,OK
+Q010,Qual è la capacità dell'isolato trasformatore fornito dal cliente secondo il testo?,"La capacità dell'isolato trasformatore fornito dal cliente è di 3kVA.
+
+Fonte documentale: connections.pdf (Pagina: 142)",connections.pdf,142,connections.pdf,142,SI,3.14,OK
+Q011,Cosa deve essere fatto se l'uscita di emergenza non deve influenzare l'alimentazione del controller?,"Per evitare che l'uscita di emergenza influenzi l'alimentazione del controller, è necessario separare i relais per l'ingresso e l'uscita di emergenza dall'alimentazione del controller. Ciò può essere fatto collegando una fonte di alimentazione esterna a 24V invece di utilizzare l'alimentazione interna a 24V del controller.
+
+In particolare, per il modello R-30 iB Mate e R-30 iB Mate Plus, è possibile separare i relais per l'uscita di emergenza dall'alimentazione del controller e collegare una fonte di alimentazione esterna a 24V.
+
+Fonte documentale: connections.pdf (Pagina: 146)",connections.pdf,146,connections.pdf,146,SI,12.41,OK
+Q013,Quali schede possono essere montate secondo il testo e come si collegano al dispositivo periferico?,"Secondo il testo, le schede che possono essere montate sono:
+
+- Process I/O MB CRW11
+- Connector converter board (CRMA58, CRMA59)
+- Terminal converter board (TBCV1, TBCV2, TBCV5, TBCV6, TBCV3, TBCV4, TBCV7, TBCV8)
+
+Queste schede si collegano al dispositivo periferico attraverso il cavo del dispositivo periferico, come mostrato nella Fig.4 del documento connections.pdf.
+
+In particolare, il documento mostra le interfacce dei connettori per i cavi dei dispositivi periferici opzionali sul lato del dispositivo periferico, con specifiche come ad esempio:
+
+- DI102, DI103, DI114, DI115 per i segnali di ingresso
+- DO102, DO103, DO114, DO115 per i segnali di uscita
+- SDICOM1, SDICOM2, SDICOM3 per le comunicazioni seriali
+- DOSRC1, DOSRC2 per i segnali di controllo
+
+Fonte documentale: connections.pdf (Pagina: 155, 166)",connections.pdf,155,connections.pdf,154,SI,24.64,OK
+Q016,Qual è la tensione comune dei dispositivi di ingresso secondo il diagramma fornito?,"Per determinare la tensione comune dei dispositivi di ingresso secondo il diagramma fornito, dobbiamo analizzare le informazioni disponibili nel contesto tecnico recuperato. Tuttavia, il contesto tecnico fornito si concentra principalmente sui diagrammi di connessione per il R-30 iB Mate e il R-30 iB Mate Plus, senza fornire direttamente le specifiche sulla tensione dei dispositivi di ingresso.
+
+Dai diagrammi di connessione AC power line per R-30 iB Mate e R-30 iB Mate Plus in caso di ingresso a singola fase, non possiamo dedurre direttamente la tensione comune dei dispositivi di ingresso, poiché queste informazioni non sono esplicitamente menzionate nel contesto fornito.
+
+La documentazione disponibile non contiene informazioni sufficienti. Si consiglia di consultare un tecnico qualificato.
+Fonte documentale: connections.pdf (Pagina: 224-226)",connections.pdf,224,connections.pdf,164,MISS,36.84,OK
+Q019,Qual è la tensione comune dei dispositivi di input secondo il diagramma fornito?,"Il diagramma di connessione fornito non specifica direttamente la tensione comune dei dispositivi di input. Tuttavia, possiamo dedurre che si tratta di dispositivi progettati per funzionare con alimentazione a corrente alternata (AC) in caso di ingresso a fase singola.
+
+Per quanto riguarda le specifiche tecniche dei dispositivi R-30 iB Mate e R-30 iB Mate Plus, il contesto tecnico non fornisce informazioni dirette sulla tensione di input. 
+
+Fonte documentale: connections.pdf (Pagina: 226)",connections.pdf,226,connections.pdf,176,MISS,14.47,OK
+Q023,Quali sono le dimensioni del connettore del dispositivo periferico MR-50RM+?,"Le dimensioni del connettore del dispositivo periferico MR-50RM+ sono 61.4 e 56.4.
+
+Fonte documentale: connections.pdf (Pagina: 189)",connections.pdf,189,connections.pdf,189,SI,16.81,OK
+Q027,Qual è la lunghezza massima consentita per il cavo fino all'hub secondo le specifiche elettriche?,"La lunghezza massima consentita per il cavo di collegamento a un dispositivo periferico è di 30 m, come specificato per il cavo di collegamento del dispositivo periferico. 
+
+Fonte documentale: connections.pdf (Pagina: 189)",connections.pdf,189,connections.pdf,200,MISS,3.11,OK
+Q031,Come devono essere collegati i segnali XHOLD e ENBL se non vengono utilizzati nel sistema Fanuc R-30iB?,"Per i segnali XHOLD e ENBL non utilizzati nel sistema Fanuc R-30iB, la procedura di collegamento è la seguente:
+
+1. **Collegamento dei segnali**: Se i segnali XHOLD e ENBL non vengono utilizzati, devono essere collegati secondo le specifiche del manuale.
+2. **Riferimento alla tabella**: La tabella riportata nel manuale di connections.pdf (Pagina: 213) indica che i segnali XHOLD e ENBL devono essere collegati come segue:
+   - +24F CRMA16 
+   - A5 
+   - B6 
+3. **Importanza della configurazione**: È fondamentale seguire le istruzioni per evitare problemi di funzionamento o danni al sistema.
+4. **Verifica delle specifiche**: Assicurarsi che le specifiche dei segnali soddisfino i requisiti del robot Fanuc R-30iB.
+5. **Consultazione del manuale**: Per ulteriori informazioni, consultare il manuale connections.pdf.
+
+Fonte documentale: connections.pdf (Pagina: 213)",connections.pdf,213,connections.pdf,213,SI,18.75,OK
+Q032,Quali sono le conseguenze dell'abilitazione e disabilitazione del sistema HBK in base alle diverse configurazioni indicate nella tabella?,"Mi dispiace, ma non riesco a trovare informazioni specifiche sul sistema HBK e le sue conseguenze di abilitazione e disabilitazione nelle configurazioni indicate nella tabella nel contesto tecnico fornito. La documentazione disponibile si concentra principalmente sulle specifiche dei componenti e sulla connessione degli HDI, senza menzionare direttamente il sistema HBK o le sue implicazioni.
+
+La documentazione disponibile non contiene informazioni sufficienti. Si consiglia di consultare un tecnico qualificato.
+
+Fonte documentale: connections.pdf (Pagina: 217)",connections.pdf,217,connections.pdf,214,MISS,5.64,OK
+Q034,Qual è il tipo di connessione elettrica illustrato nel diagramma della figura B(f)?,"Il tipo di connessione elettrica illustrato nel diagramma della figura B(f) è la connessione della linea di alimentazione AC (in caso di ingresso a fase singola) per il modello R-30 iB Mate Plus.
+
+Fonte documentale: connections.pdf (Pagina: 226)",connections.pdf,226,connections.pdf,226,SI,6.75,OK
+Q040,Cosa succede quando il segnale CSTOPI è attivato con il parametro $SHELL_CFG.$USE_ABORT impostato su ENABLED?,"Quando il segnale CSTOPI è attivato con il parametro $SHELL_CFG.$USE_ABORT impostato su ENABLED, il segnale CSTOPI annulla immediatamente l'esecuzione del programma corrente. Il programma torna allo stato in cui si trovava prima dell'esecuzione, e le informazioni relative al sottoprogramma per tornare al programma principale vengono perse. Inoltre, questo segnale rilascia anche il programma dallo stato di attesa causato da RSR.
+
+1. **Significato**: Il segnale CSTOPI, quando $SHELL_CFG.$USE_ABORT è ENABLED, annulla l'esecuzione del programma corrente.
+2. **Possibili cause**: L'attivazione del segnale CSTOPI mentre $SHELL_CFG.$USE_ABORT è ENABLED.
+3. **Controlli**: Verificare lo stato del parametro $SHELL_CFG.$USE_ABORT e il segnale CSTOPI.
+4. **Azioni**: Il programma corrente viene annullato, e il robot torna allo stato precedente.
+5. **Fonte documentale**: connections.pdf (Pagina: 256)",connections.pdf,256,connections.pdf,256,SI,8.38,OK
+Q041,Cosa indica il segnale di stato dell'allarme FAULT nel sistema R-30iB?,"Il segnale di stato dell'allarme FAULT nel sistema R-30iB indica che è stato rilevato un errore o un'anomalia nel sistema. Tuttavia, per fornire una risposta più precisa, avrei bisogno di ulteriori informazioni sull'allarme specifico che si è verificato.
+
+Tuttavia, posso dirti che il sistema R-30iB ha una serie di allarmi e segnali di stato che possono essere visualizzati sul pannello di emergenza, come mostrato nella Fig. 3.7.3 del documento ""troubleshooting_visual.pdf"" (Pagina 88). 
+
+Inoltre, il documento ""troubleshooting_alarms.pdf"" (Pagina 70) descrive l'allarme SRVO-378, che si verifica quando il segnale SFDI è anormale. In questo caso, il sistema richiede di controllare se il circuito connesso al segnale SFDI è difettoso e se il timing del segnale SFDI soddisfa le specifiche.
+
+Per una risposta più dettagliata, potresti fornirmi ulteriori informazioni sull'allarme FAULT che si è verificato?
+
+Fonte documentale: troubleshooting_visual.pdf (Pagina: 88) 
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 70)",troubleshooting_alarms.pdf,70,connections.pdf,259,MISS,16.03,OK
+Q043,Qual è la lunghezza massima consentita per un cavo ottico all'esterno del cabinet?,"La lunghezza massima consentita per un cavo ottico all'esterno del cabinet è di 50m, con una specifica eccezione per la configurazione Slave to Slave, dove la lunghezza massima è di 40m.
+
+Fonte documentale: connections.pdf (Pagina: 265)",connections.pdf,265,connections.pdf,265,SI,9.7,OK
+Q045,Qual è il nome del connettore utilizzato per il cavo di alimentazione del freno nella connessione dell'unità di rilascio?,"Il connettore utilizzato per il cavo di alimentazione del freno nella connessione dell'unità di rilascio è il CRR56A.
+
+Fonte documentale: connections.pdf (Pagina: 272)",connections.pdf,272,connections.pdf,272,SI,16.45,OK
+Q046,Quali componenti sono menzionati nel testo riguardo alla funzione di disconnessione del teach pendant?,"Nel testo sono menzionati i seguenti componenti relativi alla funzione di disconnessione del teach pendant:
+- Operator’s panel con teach pendant disconnect
+- Jumper connector
+- Connector for teach pendant disconnect
+- Teach pendant disconnect switch
+
+Fonte documentale: connections.pdf (Pagina: 275)",connections.pdf,275,connections.pdf,275,SI,15.54,OK
+Q054,Quali sono i passaggi per sostituire l'unità di arresto di emergenza nel controller Fanuc R-30iB?,"Per sostituire l'unità di arresto di emergenza nel controller Fanuc R-30iB, segui questi passaggi:
+
+1. **Spegni il sistema**: Assicurati che il sistema sia completamente spento e che non ci siano tensioni residue.
+2. **Rimuovi le connessioni**: Disconnetti i cavi di alimentazione e i cavi di segnale dall'unità di arresto di emergenza.
+3. **Rimuovi la scheda**: Rimuovi la scheda di arresto di emergenza (CRS36) dal main board (JRS27).
+4. **Installa la nuova scheda**: Installa la nuova scheda di arresto di emergenza (CRS36) nel main board (JRS27).
+5. **Ricollega le connessioni**: Ricollega i cavi di alimentazione e i cavi di segnale alla nuova unità di arresto di emergenza.
+6. **Verifica il funzionamento**: Verifica che il sistema funzioni correttamente e che l'unità di arresto di emergenza sia funzionante.
+
+Fonte documentale: connections.pdf (Pagina: 132)",connections.pdf,132,replacing_units.pdf,117,MISS,44.29,OK
+Q056,Quali sono i passaggi necessari per sostituire l'unità del ventilatore della porta prima di rimuovere il scambiatore di calore?,"Per sostituire l'unità del ventilatore della porta prima di rimuovere lo scambiatore di calore, segui questi passaggi:
+
+1. Rimuovi i 4 bulloni M4 che fissano l'unità del ventilatore della porta.
+2. Disconnetti il connettore al FAN.
+3. Sostituisci l'unità del ventilatore della porta con una nuova, seguendo la procedura inversa. Assicurati di non far inciampare il cavo nel ventilatore.
+
+Fonte documentale: replacing_units.pdf (Pagina: 124)",replacing_units.pdf,124,replacing_units.pdf,124,SI,5.73,OK
+Q070,Cosa deve essere fatto se si riceve l'allerta SRVO-033 riguardo al robot non calibrato durante il tentativo di impostare un punto di riferimento per il mastering rapido?,"Per risolvere l'allerta SRVO-033 relativa al robot non calibrato durante il tentativo di impostare un punto di riferimento per il mastering rapido, è necessario seguire questi passaggi:
+
+1. **Fornire alimentazione**: assicurarsi che il robot sia alimentato.
+2. **Calibrare il robot**: eseguire la calibrazione del robot secondo le procedure indicate.
+3. **Impostare un punto di riferimento per il mastering rapido**: utilizzare la funzione ""Positioning"" nel menu di posizionamento per impostare un punto di riferimento per il mastering rapido.
+
+Questi passaggi dovrebbero risolvere l'allerta SRVO-033 e permettere di proseguire con l'operazione di mastering rapido.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 33)",troubleshooting_alarms.pdf,33,troubleshooting_alarms.pdf,33,SI,11.36,OK
+Q071,Quali sono i primi tre passi da seguire per affrontare l'allarme SRVO-046 OVC secondo il manuale tecnico del controller Fanuc R-30iB?,"Per affrontare l'allarme SRVO-046 OVC, i primi tre passi da seguire secondo il manuale tecnico del controller Fanuc R-30iB sono:
+
+1. **Verifica delle condizioni operative**: Controllare le condizioni operative del robot e, se possibile, ridurre il carico o le condizioni operative per farle rientrare nei limiti consentiti. Se il carico o le condizioni operative superano le specifiche, ridurre il carico o le condizioni operative per soddisfare le specifiche.
+2. **Controllo della tensione di ingresso**: Verificare se la tensione di ingresso al controller è all'interno della tensione nominale.
+3. **Controllo del freno dell'asse corrispondente**: Controllare se il freno dell'asse corrispondente è rilasciato.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 35)",troubleshooting_alarms.pdf,35,troubleshooting_alarms.pdf,35,SI,12.21,OK
+Q073,Quali sono i primi tre passi da seguire se si verifica l'allerta SRVO-050 Collision Detect nel controller Fanuc R-30iB?,"Per l'allerta SRVO-050 Collision Detect, i primi tre passi da seguire sono:
+
+1. **Verifica collisioni e carichi**: Controlla se il robot ha subito una collisione e se ci sono fattori che hanno aumentato il carico meccanico sull'asse corrispondente.
+2. **Verifica impostazioni carico**: Controlla se le impostazioni del carico sono valide.
+3. **Verifica freno asse**: Controlla se il freno dell'asse corrispondente è rilasciato.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 39)",troubleshooting_alarms.pdf,39,troubleshooting_alarms.pdf,39,SI,6.2,OK
+Q074,Quali sono i passaggi da seguire se il LED P5V e P3.3V sul servo amplificatore a 6 assi non sono accesi?,"Per risolvere il problema dei LED P5V e P3.3V non accesi sul servo amplificatore a 6 assi, segui questi passaggi:
+
+1. **Verifica del LED P5V**: Se il LED P5V non è acceso, significa che il circuito di alimentazione all'interno del servo amplificatore non sta fornendo una tensione di +5 V in modo normale. 
+   - **Azioni**: 
+     - Controlla il cavo di connessione del robot (RP1/RMP1) per verificare se ci sono problemi di massa nella linea del +5V.
+     - Se il problema persiste, sostituisci il servo amplificatore.
+
+2. **Verifica del LED P3.3V**: Se il LED P3.3V non è acceso, indica che il circuito di alimentazione all'interno del servo amplificatore non sta fornendo una tensione di +3.3 V in modo normale.
+   - **Azione**: Sostituisci il servo amplificatore.
+
+In entrambi i casi, se i LED non si accendono, potrebbe essere necessario sostituire il servo amplificatore, poiché questi LED indicano problemi con l'output della tensione del circuito di alimentazione interno.
+
+Fonte documentale: troubleshooting_visual.pdf (Pagina: 86)",troubleshooting_visual.pdf,86,troubleshooting_alarms.pdf,40,MISS,20.84,OK
+Q077,Quali sono le azioni da intraprendere se si verifica l'allerta SRVO-073 CMAL a causa di un malfunzionamento del Pulsecoder?,"Per l'allerta SRVO-073 CMAL a causa di un malfunzionamento del Pulsecoder, le azioni da intraprendere sono le seguenti:
+1. Controllare se la connessione della messa a terra del controller è buona e se i cavi di connessione tra il controller e il robot sono collegati in modo sicuro alla piastra di messa a terra.
+2. Rinforzare la messa a terra del flangia del motore (nel caso di un asse ausiliario).
+3. Reset del contatore di impulsi.
+4. Sostituire il Pulsecoder.
+5. Sostituire il cavo di connessione del robot (RMP1, RM1, RP1).
+6. Sostituire il cavo interno del robot (per il Pulsecoder o per il motore).
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 44)",troubleshooting_alarms.pdf,44,troubleshooting_alarms.pdf,44,SI,18.82,OK
+Q078,Cosa indica l'allerta SRVO-081 EROFL nel controller Fanuc R-30iB?,"Mi dispiace, ma non ho trovato informazioni specifiche sull'allerta SRVO-081 EROFL nel contesto tecnico recuperato. 
+
+La documentazione disponibile non contiene informazioni sufficienti. Si consiglia di consultare un tecnico qualificato.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 71-72)",troubleshooting_alarms.pdf,71,troubleshooting_alarms.pdf,45,MISS,11.93,OK
+Q081,"Quali sono i passaggi da seguire se si riceve l'allerta SRVO-105 relativa alla porta aperta o all'emergenza stop, considerando che l'armadio ausiliario è installato?","Per risolvere l'allerta SRVO-105 relativa alla porta aperta o all'emergenza stop, considerando che l'armadio ausiliario è installato, segui questi passaggi:
+
+1. **Verifica della porta dell'armadio ausiliario**: Controlla se la porta dell'armadio ausiliario è aperta. Se lo è, chiudila.
+2. **Controllo del commutatore della porta e dei cavi**: Verifica il commutatore della porta e i cavi dell'armadio ausiliario. Se il commutatore o i cavi sono difettosi, sostituiscili.
+3. **Controllo delle connessioni dei connettori**: Assicurati che i connettori CRMA92, CRMB8 sull'unità di emergenza stop e CRMA91 sull'amplificatore del servosistema a 6 assi siano connessi in modo sicuro.
+4. **Sostituzione della scheda di emergenza stop**: Se i passaggi precedenti non risolvono il problema, sostituisci la scheda di emergenza stop.
+5. **Sostituzione dell'amplificatore del servosistema a 6 assi**: Se il problema persiste, sostituisci l'amplificatore del servosistema a 6 assi.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 46)",troubleshooting_alarms.pdf,46,troubleshooting_alarms.pdf,46,SI,37.11,OK
+Q084,Quali sono i nomi delle connessioni presenti nel terminale TBOP19?,"Mi dispiace, ma non ho trovato informazioni specifiche sul terminale TBOP19 nel contesto tecnico recuperato. La documentazione disponibile non contiene informazioni sufficienti sulle connessioni presenti in TBOP19.
+
+Fonte documentale: connections.pdf (Pagina: 236)",connections.pdf,236,troubleshooting_alarms.pdf,54,MISS,2.48,OK
+Q089,Quali sono le azioni da intraprendere se l'allarme SRVO-278 TP E-stop viene emesso?,"Per l'allarme SRVO-278 TP E-stop (SVEMG abnormal), le azioni da intraprendere sono le seguenti:
+1. Sostituisci il teach pendant.
+2. Sostituisci il cavo del teach pendant.
+3. Prima di eseguire l'azione successiva, esegui un backup completo del controller per salvare tutti i programmi e le impostazioni. 
+4. Sostituisci la scheda principale.
+5. Sostituisci la scheda di arresto di emergenza.
+6. Sostituisci l'amplificatore servo a 6 assi.
+
+Nota che questo allarme potrebbe essere emesso se il pulsante di arresto di emergenza viene premuto molto lentamente.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 65)",troubleshooting_alarms.pdf,65,troubleshooting_alarms.pdf,65,SI,5.96,OK
+Q091,Cosa deve essere fatto prima di eseguire la sostituzione della scheda principale in caso di allerta SRVO-377?,"Per l'allerta SRVO-377, non ho trovato informazioni specifiche nel contesto tecnico fornito. Tuttavia, per l'allerta SRVO-335, che potrebbe essere simile o avere procedure analoghe, è consigliato di eseguire un backup completo del controller per salvare tutti i programmi e le impostazioni prima di procedere con la sostituzione della scheda principale.
+
+Tuttavia, poiché non ci sono informazioni dirette sull'allerta SRVO-377, ti consiglio di consultare la documentazione specifica per questo codice di allarme o di contattare un tecnico qualificato per assistenza personalizzata.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 66)",troubleshooting_alarms.pdf,66,troubleshooting_alarms.pdf,68,MISS,6.15,OK
+Q097,Quali sono le azioni da intraprendere se il fusibile FUSE1 è saltato e viene visualizzato l'allarme SRVO-220 sul teach pendant?,"Se il fusibile FUSE1 è saltato e viene visualizzato l'allarme SRVO-220 sul teach pendant, le azioni da intraprendere sono le seguenti:
+
+1. Controllare se il cavo del dispositivo periferico presenta anomalie e sostituirlo se necessario, poiché potrebbe esserci un cortocircuito tra 24SDI e 0 V.
+2. Disconnettere CRS40 e verificare se il fusibile FUSE3 continua a saltare. Se sì, sostituire la scheda principale.
+3. Sostituire il cavo tra l'unità di arresto d'emergenza e l'amplificatore del servomotore.
+4. Sostituire il cavo tra la scheda principale e l'unità di arresto d'emergenza.
+5. Sostituire l'unità di arresto d'emergenza.
+6. Sostituire l'amplificatore del servomotore.
+
+Fonte documentale: troubleshooting_visual.pdf (Pagina: 73)",troubleshooting_visual.pdf,73,troubleshooting_visual.pdf,73,SI,17.03,OK
