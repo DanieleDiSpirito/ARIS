@@ -143,13 +143,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "--metodo", "-m", 
         type=str, 
-        choices=["euristico", "docling", "llamaparse", "qwen", "all"],
+        choices=["euristico", "docling", "llamaparse", "qwen", "pdf4llm", "all"],
         default="docling",
-        help="Metodo di estrazione da elaborare (euristico, docling, llamaparse, qwen, all)."
+        help="Metodo di estrazione da elaborare (euristico, docling, llamaparse, qwen, pdf4llm, all)."
     )
     args = parser.parse_args()
     
-    metodi_disponibili = ["euristico", "docling", "llamaparse", "qwen"]
+    metodi_disponibili = ["euristico", "docling", "llamaparse", "qwen", "pdf4llm"]
     
     if args.metodo == "all":
         metodi_da_elaborare = metodi_disponibili

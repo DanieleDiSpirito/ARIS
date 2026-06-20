@@ -38,9 +38,9 @@ def main():
     parser.add_argument(
         "--metodo", "-m", 
         type=str, 
-        choices=["euristico", "docling", "llamaparse", "qwen"],
+        choices=["euristico", "docling", "llamaparse", "qwen", "pdf4llm"],
         default="docling",
-        help="Metodo di estrazione da elaborare (euristico, docling, llamaparse, qwen)."
+        help="Metodo di estrazione da elaborare (euristico, docling, llamaparse, qwen, pdf4llm)."
     )
     args = parser.parse_args()
     
@@ -55,14 +55,15 @@ def main():
     print(f"✅ Trovati {len(docs)} frammenti di testo pronti per l'embedding.")
     
     if args.env == "locale":
-        print("🧠 Inizializzazione modello locale: BAAI/bge-m3...")
-        # Usa 'cpu' di default. Cambialo in 'cuda' se hai una scheda video NVIDIA compatibile.
+        import torch
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        print(f"🧠 Inizializzazione modello locale: BAAI/bge-m3 su dispositivo '{device}'...")
         embeddings = HuggingFaceEmbeddings(
             model_name="BAAI/bge-m3",
-            model_kwargs={'device': 'cpu'},
+            model_kwargs={'device': device},
             encode_kwargs={'normalize_embeddings': True}
         )
-        persist_dir = os.path.join("vector_db", args.metodo, f"chroma_locale_{args.chunk_size}")
+        persist_dir = os.path.join("vector_db", f"chroma_{args.metodo}_locale_{args.chunk_size}")
     else:
         print("☁️ Inizializzazione modello cloud: text-embedding-3-small...")
         if "OPENAI_API_KEY" not in os.environ:
@@ -73,7 +74,7 @@ def main():
             openai_api_key=os.getenv("OPENAI_API_KEY"),
             openai_api_base="https://openrouter.ai/api/v1"
         )
-        persist_dir = os.path.join("vector_db", args.metodo, f"chroma_cloud_{args.chunk_size}")
+        persist_dir = os.path.join("vector_db", f"chroma_{args.metodo}_cloud_{args.chunk_size}")
 
     print(f"🗄️ Generazione embeddings e salvataggio DB in: {persist_dir}")
     print("⏳ L'operazione potrebbe richiedere alcuni minuti...")

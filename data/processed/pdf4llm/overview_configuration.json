@@ -1,0 +1,82 @@
+[
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "3",
+        "section": "1",
+        "title": "OVERVIEW",
+        "text": "MAINTENANCE \nB-83525EN/07 \n## **1** \n## **OVERVIEW** \nThis manual is applied to R-30 _**i**_ B Mate/ R-30 _**i**_ B Mate Plus controller (called R-30 _**i**_ B Mate/ R-30 _**i**_ B Mate Plus). \nR-30 _**i**_ B Mate/ R-30 _**i**_ B Mate Plus has different controller  depending on the required standards. \nNRTL controller : To meet UL/CSA standard CE controller : To meet Machinery Directive, Low voltage Directive, EMC Directive to cover the requirement of CE mark \nThis manual covers these controllers of the R-30 _**i**_ B Mate/ R-30 _**i**_ B Mate Plus. \nThe difference of NRTL and CE controller from the Basic controller is small as shown in Table 1 (ex. EMC parts, Breakers). \nAnd the specific descriptions of CE and NRTL controller have notifications in this manual. \n**Table 1. Applied standards** \n||**Functional**<br>**Safety**|**EMC**<br>**Standard**|**Robot Standard**<br>**Electrical**<br>**Standard**|<br>**Requirement**|**Difference**|\n|---|---|---|---|---|---|\n|Basic<br>controller|ISO 13849-1<br>IEC 61508|-|-|-|-|\n|NRTL<br>controller||-|UL1740<br>CAN/CSA Z434<br>NFPA79|UL standard<br>CSA standard<br>•USA and Canada|•UL listed main breaker|\n|CE<br>controller||EN 55011<br>EN 61000-6-2<br>EN 61000-6-4|EN/ISO 10218-1<br>EN 60204-1|CE Marking<br>•Europe|•Noise filter<br>•EMC Cabinet<br>•Shielded cable|\nThis manual describes the maintenance and connection of R-30 _**i**_ B Mate/ R-30 _**i**_ B Mate Plus. \n･Maintenance Part: Troubleshooting, and the setting, adjustment, and replacement of units \n- ･Connection Part: Connection of R-30 _**i**_ B Mate/ R-30 _**i**_ B Mate Plus to the robot mechanical unit and peripheral devices, and installation of the controller \n## **WARNING** \nBefore you enter the robot working area, be sure to turn off the power to the controller or press the EMERGENCY STOP button on the operator's panel or teach pendant. \nOtherwise, you could injure personnel or damage equipment. \n- 3 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "4",
+        "section": "2",
+        "title": "CONFIGURATION",
+        "text": "MAINTENANCE \nB-83525EN/07"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "4",
+        "section": "2.1",
+        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "text": "The appearance and components might slightly differ depending on the controlled robot, application, and options used. Fig.2.1 (a) to (b) show the view of R-30 _**i**_ B Mate/ R-30 _**i**_ B Mate Plus. \nFig.2.1 (c) to (g) show the construction of the R-30 _**i**_ B Mate/ R-30 _**i**_ B Mate Plus controller. \nFig.2.1 (h) to (j) show the external view of the operator’s panel and teach pendant. \n**==> picture [275 x 184] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nTeach pendant hook  Operator’s panel<br>(Option)  Breaker<br>Key<br>Teach pendant<br>( i Pendant) USB port (Option)<br>**----- End of picture text -----**<br>\n**Fig.2.1 (a) External view of the R-30** _**i**_ **B Mate/ R-30** _**i**_ **B Mate Plus controller** \n## **NOTE** \nBe sure to lock the key. \n**==> picture [243 x 196] intentionally omitted <==**\n**==> picture [67 x 9] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nRear fan unit<br>**----- End of picture text -----**<br>\n**Fig.2.1 (b) External view of the R-30** _**i**_ **B Mate/ R-30** _**i**_ **B Mate Plus controller (Middle/Large size) (Rear)** \n- 4 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "5",
+        "section": "2.1",
+        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "text": "2. CONFIGURATION \nB-83525EN/07 \n## MAINTENANCE \n**==> picture [439 x 226] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nEmergency stop button  Battery mode switch Breaker<br>Main board  Back plane unit  Heat exchanger 6-Axis Servo amplifier E-stop unit<br>**----- End of picture text -----**<br>\n**Fig.2.1 (c) R-30** _**i**_ **B Mate/ R-30** _**i**_ **B Mate Plus cabinet interior (Front-1)** \n**==> picture [360 x 261] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nNoise Filter<br>(EMC Option)<br>Power supply unit<br>Process I/O board<br>(Option)<br>**----- End of picture text -----**<br>\n**Fig.2.1 (d) R-30** _**i**_ **B Mate/ R-30** _**i**_ **B Mate Plus cabinet interior (Front-2)** \n- 5 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "6",
+        "section": "2.1",
+        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "text": "MAINTENANCE \nB-83525EN/07 \n## 2. CONFIGURATION \n**==> picture [321 x 227] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nSensor I/F unit<br>**----- End of picture text -----**<br>\n**==> picture [111 x 9] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nAux. axis cabinet(Integrated)<br>**----- End of picture text -----**<br>\n**Fig.2.1 (e) R-30** _**i**_ **B Mate/ R-30** _**i**_ **B Mate Plus cabinet interior (Front-3) (CR-4** _**i**_ **A, CR-7** _**i**_ **A)** \n**==> picture [434 x 395] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nRegenerative resistor<br>6-Axis Servo amplifier (Rear side)<br>(Small size)<br>Line filter  Line filter<br>6-Axis Servo amplifier (Rear side) 6-Axis Servo amplifier (Rear side)<br>(Middle size)  (Large size)<br>**----- End of picture text -----**<br>\n**Fig.2.1 (f) R-30** _**i**_ **B Mate/ R-30** _**i**_ **B Mate Plus cabinet interior (Rear)** \n- 6 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "7",
+        "section": "2.1",
+        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "text": "2. CONFIGURATION \nMAINTENANCE \nB-83525EN/07 \n**==> picture [108 x 11] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nRegenerative resistor<br>**----- End of picture text -----**<br>\n**==> picture [347 x 205] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nRear fan unit<br>**----- End of picture text -----**<br>\n**Fig.2.1 (g) R-30** _**i**_ **B Mate/ R-30** _**i**_ **B Mate Plus cabinet interior (Middle/Large size) (Rear)** \n## **NOTE** \nThe number of fans on the fan unit (0,1,2) will vary depending on the robot type. \n**==> picture [379 x 140] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nMode switch<br>(In case of 3-mode switch) Emergency Stop button<br>**----- End of picture text -----**<br>\n**==> picture [200 x 19] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nCYCLE START button with LED(Green)<br>**----- End of picture text -----**<br>\n**Fig.2.1 (h) R-30** _**i**_ **B Mate/ R-30** _**i**_ **B Mate Plus operator’s panel** \n**==> picture [269 x 111] intentionally omitted <==**\n**Fig.2.1 (i) Mode switch** \n- 7 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "8",
+        "section": "2.1",
+        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "text": "B-83525EN/07 \n## 2. CONFIGURATION \n## MAINTENANCE \nEnable/disable switch \n**==> picture [174 x 151] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nEmergency Stop button<br>USB port<br>Deadman switch<br>**----- End of picture text -----**<br>\n**Fig.2.1 (j) Teach pendant (** _**i**_ **Pendant)** \n- 8 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "9",
+        "section": "2.1",
+        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "text": "2. CONFIGURATION \nMAINTENANCE \nB-83525EN/07"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "9",
+        "section": "2.2",
+        "title": "COMPONENT FUNCTIONS",
+        "text": "**==> picture [483 x 578] intentionally omitted <==**\n**Fig.2.2  Block diagram of the R-30** _**i**_ **B Mate/ R-30** _**i**_ **B Mate Plus** \n- 9 -"
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "COMPONENT FUNCTIONS",
+        "text": "B-83525EN/07 \n## 2. CONFIGURATION \n## MAINTENANCE \n- Main board \n   - The main board contains a microprocessor, its peripheral circuits, memory, and operator's panel control circuit.  The main CPU controls servo mechanism positioning. \n- I/O printed circuit board \n   - Various types of printed circuit boards are provided for applications including process I/O board. These are connected with FANUC I/O Link. \n- E-stop unit \n   - This unit controls the emergency stop system of the robot controller. It also has user interface terminals of safety relevant signals, external on/off signals etc. \n- Power supply unit \n   - The power supply unit converts the AC power to various levels of DC power. \n- Backplane printed circuit board \n- The various control printed circuit boards are mounted on the backplane printed circuit board. \n- - Teach pendant All operations including robot programming are performed with this unit.  The controller status and data are indicated on the liquid-crystal display (LCD) on the pendant. \n- 6-Axis Servo amplifier \n   - The servo amplifier controls servomotor, Pulsecoder signal, brake control, overtravel and hand broken. \n- Operator's panel \n   - Buttons and LEDs on the operator's panel are used to start the robot and to indicate the robot status. \n- Fan unit, heat exchanger \n   - These components cool the inside of the controller. \n- Circuit breaker \n   - If the electric system in the controller malfunctions, or if abnormal input power causes high current in the system, the input power is connected to the circuit breaker to protect the equipment. \n- Regenerative resistor \n   - To discharge the counter electromotive force from the servomotor, connect a regenerative resistor to the servo amplifier. \n- 10 -"
+    }
+]

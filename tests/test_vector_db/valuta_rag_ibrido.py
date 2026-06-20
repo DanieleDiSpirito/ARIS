@@ -49,9 +49,11 @@ class LangchainEmbeddingAdapter:
 
 def get_embedding_function(env):
     if env == "locale":
+        import torch
+        device = "cuda" if torch.cuda.is_available() else "cpu"
         lc_embedder = HuggingFaceEmbeddings(
             model_name="BAAI/bge-m3",
-            model_kwargs={'device': 'cpu'},
+            model_kwargs={'device': device},
             encode_kwargs={'normalize_embeddings': True}
         )
         return LangchainEmbeddingAdapter(lc_embedder)
@@ -97,6 +99,27 @@ def _pagine_match_tol(found_p: str, exp_p: str, tolleranza: int = 1) -> bool:
     return False
 
 
+def trova_json_chunks(db_path: str) -> str:
+    db_basename = os.path.basename(db_path)
+    # Esempio: chroma_docling_locale_700
+    if db_basename.startswith("chroma_") and len(db_basename.split('_')) >= 4:
+        parts = db_basename.split('_')
+        metodo = parts[1]
+        env = parts[2]
+        chunk_size = parts[3]
+        return os.path.join(PROJECT_ROOT, "data", "chunks", metodo, f"dataset_chunks_{env}_{chunk_size}.json")
+    else:
+        # Fallback al vecchio stile: vector_db/docling/chroma_locale_700
+        parent_dir = os.path.basename(os.path.dirname(db_path))
+        parts = db_basename.split('_')
+        if len(parts) >= 3:
+            env = parts[1]
+            chunk_size = parts[2]
+            return os.path.join(PROJECT_ROOT, "data", "chunks", parent_dir, f"dataset_chunks_{env}_{chunk_size}.json")
+    # Ultimo fallback di sicurezza
+    return os.path.join(PROJECT_ROOT, "data", "chunks", "docling", "dataset_chunks_locale_700.json")
+
+
 def valuta_db(db_path: str, env: str, test_file: str, k: int = 3,
               tolleranza: int = 1, debug: bool = False) -> dict:
     """
@@ -111,9 +134,11 @@ def valuta_db(db_path: str, env: str, test_file: str, k: int = 3,
 
     # --- Embedding ---
     if env == "locale":
+        import torch
+        device = "cuda" if torch.cuda.is_available() else "cpu"
         lc_embedder = HuggingFaceEmbeddings(
             model_name="BAAI/bge-m3",
-            model_kwargs={'device': 'cpu'},
+            model_kwargs={'device': device},
             encode_kwargs={'normalize_embeddings': True}
         )
     elif env == "cloud":
@@ -143,11 +168,7 @@ def valuta_db(db_path: str, env: str, test_file: str, k: int = 3,
     retriever_vettoriale = lc_chroma.as_retriever(search_kwargs={"k": k + 2})
 
     # --- Retriever BM25 ---
-    db_basename  = os.path.basename(db_path)
-    parts        = db_basename.split('_')
-    json_filename = (f"dataset_chunks_{parts[1]}_{parts[2]}.json"
-                     if len(parts) >= 3 else "dataset_chunks_locale_700.json")
-    json_path = os.path.join(PROJECT_ROOT, "data/chunks", json_filename)
+    json_path = trova_json_chunks(db_path)
 
     if not os.path.exists(json_path):
         print(f"⚠️ JSON non trovato per BM25: {json_path}. Uso solo Chroma.")
@@ -231,9 +252,16 @@ def main():
     if args.db:
         db_list = args.db
     else:
-        db_list = [f"chroma_{args.env}_300", f"chroma_{args.env}_700", f"chroma_{args.env}_1000"]
-        if args.env == "locale":
-            db_list.extend(["db_nitro", "db_standard", "db_exacto"])
+        db_list = []
+        vector_db_dir = os.path.join(PROJECT_ROOT, "vector_db")
+        if os.path.exists(vector_db_dir):
+            for item in os.listdir(vector_db_dir):
+                if item.startswith("chroma_") and item.endswith(f"_{args.env}_700"):
+                    db_list.append(item)
+        if not db_list:
+            db_list = [f"chroma_{args.env}_300", f"chroma_{args.env}_700", f"chroma_{args.env}_1000"]
+            if args.env == "locale":
+                db_list.extend(["db_nitro", "db_standard", "db_exacto"])
 
     db_to_eval = [
         (db, os.path.join(PROJECT_ROOT, "vector_db", db))
@@ -252,6 +280,8 @@ def main():
         f"{' [DEBUG]' if args.debug else ''}\n"
     )
 
+    summary_results = []
+
     for db_name, db_path in db_to_eval:
         print(f"⏳ Valutazione DB: {db_name} ...")
         try:
@@ -261,10 +291,46 @@ def main():
             )
             if metriche:
                 stampa_report(db_name, metriche)
+                summary_results.append({
+                    "DB Name": db_name,
+                    "Hit Rate@k (%)": round(metriche.get("hit_rate_k", 0.0), 2),
+                    "Precision@k (%)": round(metriche.get("precision_k", 0.0), 2),
+                    "Recall@k (%)": round(metriche.get("recall_k", 0.0), 2),
+                    "MRR": round(metriche.get("mrr", 0.0), 4),
+                    "Tempo Medio (s)": round(metriche.get("tempo_medio_s", 0.0), 4)
+                })
             else:
                 print(f"⚠️ Nessuna metrica calcolata per {db_name}\n")
         except Exception as e:
             print(f"❌ Errore durante la valutazione di {db_name}: {e}\n")
+
+    if summary_results:
+        df_summary = pd.DataFrame(summary_results)
+        print("\n📊 TABELLA COMPARATIVA DI RETRIEVAL IBRIDO:")
+        print("=" * 90)
+        print(df_summary.to_string(index=False))
+        print("=" * 90)
+
+        # Salva in Markdown
+        metrics_dir = os.path.join(PROJECT_ROOT, "data", "metrics")
+        os.makedirs(metrics_dir, exist_ok=True)
+        report_path = os.path.join(metrics_dir, "benchmark_retrieval_ibrido.md")
+        
+        md_table = df_summary.to_markdown(index=False)
+        report_content = f"""# Benchmark Retrieval Ibrido (ARIS)
+
+Questo report riassume le metriche di accuratezza del **Retrieval Ibrido (BM25 + Vettoriale)** per i database estratti con i diversi metodi di parsing, valutati sul test set di domande.
+
+## Tabella Comparativa
+
+{md_table}
+
+---
+*Report generato automaticamente dallo script `valuta_rag_ibrido.py` il 20 Giugno 2026.*
+"""
+        with open(report_path, "w", encoding="utf-8") as f:
+            f.write(report_content)
+        print(f"✅ Report riassuntivo salvato in: {report_path}\n")
 
 
 if __name__ == "__main__":

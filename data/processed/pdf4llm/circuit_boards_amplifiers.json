@@ -1,0 +1,250 @@
+[
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4",
+        "title": "PRINTED CIRCUIT BOARDS",
+        "text": "MAINTENANCE \nB-83525EN/07 \n## **4** \n## **PRINTED CIRCUIT BOARDS** \nThe printed circuit boards are factory-set for operation.  Usually, you do not need to set or adjust them. This chapter describes the standard settings and adjustment required if a defective printed circuit board is replaced.  It also describes the test pins and the LED indications. \nThe controller printed circuit board includes the main unit printed circuit board and one or more cards or modules installed horizontally to the main-unit printed-circuit board. \nThese PC boards have interface connectors, LED indicators, and a plastic panel at the front.  At the rear, there is a backplane connector."
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "93",
+        "section": "4.1",
+        "title": "Card and Modules",
+        "text": "**==> picture [241 x 7] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nAxis control card  CPU card  FROM/SRAM module<br>**----- End of picture text -----**<br>\n**==> picture [45 x 8] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nFan board<br>**----- End of picture text -----**<br>\n**==> picture [180 x 141] intentionally omitted <==**\n**(R-30** _**i**_ **B Mate)** \nAxis control card CPU card FROM/SRAM module \n**==> picture [233 x 158] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nFan board<br>**----- End of picture text -----**<br>\n**(R-30** _**i**_ **B Mate Plus)** \n**Fig.4.1 Main board** \n- 93 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "94",
+        "section": "4.1",
+        "title": "Card and Modules",
+        "text": "B-83525EN/07 \n## 4. PRINTED CIRCUIT BOARDS \n## MAINTENANCE \n|PRINTED CIRCUIT|OARDS<br>MAINTE|NANCE|B-83525EN/07|\n|---|---|---|---|\n|**Name**|**Ordering Specification**|**Board Specification**|**Note**|\n|Main board|A05B-2650-H001|A20B-8200-0790|Standard, Ethernet:1ch|\n||A05B-2650-H002|A20B-8200-0791|Ethernet:2ch, Vision I/F, Force<br>sensor I/F|\n||A05B-2650-H003|A20B-8200-0792|Ethernet:2ch, Vision I/F, Force<br>sensor I/F, PMC, HDI|\n||A05B-2650-H004|A20B-8201-0420|Standard, Ethernet:1ch<br>For I/O Link**_i_**slave|\n||A05B-2650-H005|A20B-8201-0421|Ethernet:2ch, Vision I/F, Force<br>sensor I/F<br>For I/O Link**_i_**slave|\n||A05B-2650-H006|A20B-8201-0422|Ethernet:2ch, Vision I/F, Force<br>sensor I/F, PMC, HDI<br>For I/O Link**_i_**slave|\n||A05B-2680-H001<br>(R-30_i_B Mate Plus)|A20B-8201-0750|Standard, Ethernet:2ch<br>For I/O Link**_i_**slave|\n||A05B-2680-H002<br>(R-30_i_B Mate Plus)|A20B-8201-0751|Ethernet:3ch, Vision I/F, Force<br>sensor I/F<br>For I/O Link**_i_**slave|\n||A05B-2680-H003<br>(R-30_i_B Mate Plus)|A20B-8201-0752|Ethernet:3ch, Vision I/F, Force<br>sensor I/F, PMC, HDI<br>For I/O Link**_i_**slave|\n|CPU card|A05B-2600-H020|A20B-3300-0686|Standard / SDRAM 32Mbyte|\n|||A17B-3301-0106||\n||A05B-2600-H021|A20B-3300-0687|Standard / SDRAM 64Mbyte|\n|||A17B-3301-0107||\n||A05B-2600-H022|A20B-3300-0688|Standard / SDRAM 128Mbyte|\n|||A17B-3301-0108||\n||A05B-2600-H023|A20B-3300-0683|High speed / SDRAM 32Mbyte|\n|||A17B-3301-0103||\n||A05B-2600-H024|A20B-3300-0684|High speed / SDRAM 64Mbyte|\n|||A17B-3301-0104||\n||A05B-2600-H025|A20B-3300-0685|High speed / SDRAM 128Mbyte|\n|||A17B-3301-0105||\n||A05B-2600-H026|A17B-3301-0109|Standard / SDRAM 32Mbyte<br>For I/O Link**_i_**slave|\n||A05B-2600-H027|A17B-3301-0110|Standard / SDRAM 64Mbyte<br>For I/O Link**_i_**slave|\n||A05B-2600-H028|A17B-3301-0111|Standard / SDRAM 128Mbyte<br>For I/O Link**_i_**slave|\n||A05B-2600-H029|A17B-3301-0112|High speed / SDRAM 32Mbyte<br>For I/O Link**_i_**slave|\n||A05B-2600-H030|A17B-3301-0113|High speed / SDRAM 64Mbyte<br>For I/O Link**_i_**slave|\n||A05B-2600-H031|A17B-3301-0114|High speed / SDRAM 128Mbyte<br>For I/O Link**_i_**slave|\n||A05B-2670-H020<br>(R-30_i_B Mate Plus)|A17B-3301-0250|Standard / DRAM 1GB<br>For I/O Link I slave|\n- 94 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "95",
+        "section": "4.1",
+        "title": "Card and Modules",
+        "text": "B-83525EN/07 \n## MAINTENANCE \n## 4. PRINTED CIRCUIT BOARDS \n|3525EN/07|MAINTE|NANCE<br>4. PR|INTED CIRCUIT BOARDS|\n|---|---|---|---|\n|**Name**|**Ordering Specification**|**Board Specification**|**Note**|\n|Axis control card|A05B-2600-H040|A20B-3300-0664|6-axis|\n|||A20B-3300-0774||\n||A05B-2600-H041|A20B-3300-0663|12-axis|\n|||A20B-3300-0773||\n||A05B-2600-H042|A20B-3300-0662|18-axis|\n|||A20B-3300-0772||\n||A05B-2600-H043|A20B-3300-0661|24-axis|\n|||A20B-3300-0771||\n||A05B-2600-H044|A20B-3300-0660|36-axis|\n|||A20B-3300-0770||\n||A05B-2670-H040<br>(R-30_i_B Mate Plus)|A20B-3300-0819|6-axis|\n||A05B-2670-H041<br>(R-30_i_B Mate Plus)|A20B-3300-0818|12-axis|\n||A05B-2670-H042<br>(R-30_i_B Mate Plus)|A20B-3300-0817|18-axis|\n||A05B-2670-H043<br>(R-30_i_B Mate Plus)|A20B-3300-0816|24-axis|\n||A05B-2670-H044<br>(R-30_i_B Mate Plus)|A20B-3300-0815|36-axis|\n|FROM/SRAM module|A05B-2600-H060|A20B-3900-0283|FROM 32M/ SRAM 1M|\n|||A20B-3900-0297||\n||A05B-2600-H061|A20B-3900-0284|FROM 32M/ SRAM 2M|\n|||A20B-3900-0298||\n||A05B-2600-H062|A20B-3900-0285|FROM 32M/ SRAM 3M|\n|||A20B-3900-0299||\n||A05B-2600-H063|A20B-3900-0286|FROM 64M/ SRAM 1M|\n||A05B-2600-H064|A20B-3900-0287|FROM 64M/ SRAM 2M|\n||A05B-2600-H065|A20B-3900-0288|FROM 64M/ SRAM 3M|\n||A05B-2600-H066|A20B-3900-0280|FROM 128M/ SRAM 1M|\n||A05B-2600-H067|A20B-3900-0281|FROM 128M/ SRAM 2M|\n||A05B-2600-H068|A20B-3900-0282|FROM 128M/ SRAM 3M|\n||A05B-2600-H069<br>(R-30_i_B Mate Plus)|A20B-3900-0293|FROM 256M/ SRAM 1M|\n||A05B-2600-H070<br>(R-30_i_B Mate Plus)|A20B-3900-0295|FROM 256M/ SRAM 2M|\n||A05B-2600-H071<br>(R-30_i_B Mate Plus)|A20B-3900-0296|FROM 256M/ SRAM 3M|\n|Fan board|A05B-2650-H001|A20B-8200-0669||\n||A05B-2650-H002|||\n||A05B-2650-H003|||\n- 95 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "96",
+        "section": "4.1",
+        "title": "Card and Modules",
+        "text": "MAINTENANCE \nB-83525EN/07 \n## 4. PRINTED CIRCUIT BOARDS \n## **NOTE** \n- In case of using the function of I/O Link _**i**_ slave, the combination of the specification of mainboard, CPU card and software is limited as below. \n- [Main board (For I/O Link _**i**_ slave)] + [CPU card (For I/O Link _**i**_ slave)] + [Software (V8.30P14 or later)] \nExcept for the above condition, the system does not work correctly as followings. \n- a) [Main board] + [CPU card (For I/O Link _**i**_ slave)] Neither the function of I/O Link slave nor I/O Link _**i**_ slave work correctly. And the alarm regarding I/O Link or I/O Link _**i**_ occur on the master side. And in case the software version is not correct, system does not work correctly. \n- b) [Main board (For I/O Link _**i**_ slave)] + [CPU card] The system does not work correctly. \nIn case of using the R-30 _i_ B Mate Plus, the combination of the specification of mainboard, CPU card and software is limited as below. \n- [Main board (R-30 _i_ B Mate Plus)] + [CPU card (R-30 _i_ B Mate Plus)] + [Software (V9.00P03 or later)] \nExcept for the above condition, the system does not work correctly. And CPU card (R-30 _i_ B Mate Plus) may be broken."
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "96",
+        "section": "4.1",
+        "title": "LEDs",
+        "text": "**==> picture [384 x 208] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nSeven Segment LED<br>RLED1  (RED)<br>LEDG1<br>LEDG2<br>LEDG3  (GREEN)<br>LEDG4<br>CD38A  CD38B<br>TP  LEDC2(LINK) LEDC1(RX/TX)<br>CAMERA  LEDD2(LINK) LEDD1(RX/TX)<br>CD38B  LEDB2(LINK) LEDB1(RX/TX)<br>CD38A  LEDA2(LINK) LEDA1(RX/TX)<br>**----- End of picture text -----**<br>\n**(R-30** _**i**_ **B Mate)** \n- 96 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "97",
+        "section": "4.1",
+        "title": "LEDs",
+        "text": "MAINTENANCE \nB-83525EN/07 \n## 4. PRINTED CIRCUIT BOARDS \n**==> picture [350 x 213] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nSeven Segment LED<br>RLED1  (RED)<br>LEDG1<br>LEDG2<br>LEDG3  (GREEN)<br>LEDG4<br>CD38B<br>TP  LEDC2(LINK) LEDC1(RX/TX)  CD38A  LEDA1(RX/TX) LEDA2(LINK)<br>CAMERA  LEDD1(LINK) LEDD2(COM)<br>CD38B  LEDB2(LINK) LEDB1(RX/TX)<br>**----- End of picture text -----**<br>\n**(R-30** _**i**_ **B Mate Plus)** \n|**(R-30****_i_B Mate Plus)**|**(R-30****_i_B Mate Plus)**|**(R-30****_i_B Mate Plus)**|\n|---|---|---|\n||||\n|**Seven segment LED**|**Description**||\n|<br>P|When the alarm condition has occurred in the main board, this LED is turned on.<br>lease see the Section 3.7.TROUBLESHOOTING BASED ON LED INDICATIONS.||\n||||\n|**ALARM LED**|**Color**|**Description**|\n|RLED1|Red|When the alarm condition has occurred in the CPU card, this<br>LED is turned on.<br>Please see the Section 3.7.TROUBLESHOOTING BASED ON<br>LED INDICATIONS.|\n||||\n|**STATUS LED**|**Color**|**Description**|\n|LEDG1|Green<br> <br> <br> <br>Green<br>Green<br>Green|These LEDs show the operating status of the system.<br>Please see the Section 3.7.TROUBLESHOOTING BASED ON<br>LED INDICATIONS.|\n|LEDG2|||\n|LEDG3|||\n|LEDG4|||\n||||\n|**ETHERNET LED**|**Color**|**Description**|\n|RX/TX|Green<br>|Blink during data transmission of Ethernet TP|\n|LINK|Green<br>|Light when a link of Ethernet is established|\nNote. TP:For Ethernet TP, CAMERA: For camera \n- 97 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "98",
+        "section": "4.1",
+        "title": "LEDs",
+        "text": "MAINTENANCE \nB-83525EN/07 \n## 4. PRINTED CIRCUIT BOARDS"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "98",
+        "section": "4.2",
+        "title": "EMERGENCY STOP BOARD (A20B-2005-0150, A20B-2103-0170)",
+        "text": "**==> picture [409 x 285] intentionally omitted <==**\n**(R-30** _**i**_ **B Mate  A20B-2005-0150)** \n**==> picture [409 x 285] intentionally omitted <==**\n**(R-30** _**i**_ **B Mate Plus  A20B-2103-0170)** \n**Fig.4.2 Emergency stop board** \n- 98 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "99",
+        "section": "4.2",
+        "title": "EMERGENCY STOP BOARD (A20B-2005-0150, A20B-2103-0170)",
+        "text": "B-83525EN/07 \n## MAINTENANCE \n## 4. PRINTED CIRCUIT BOARDS"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "99",
+        "section": "4.3",
+        "title": "BACKPLANE",
+        "text": "**==> picture [250 x 141] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nBackplane  Mini slot(2slot)<br>**----- End of picture text -----**<br>\n**Fig.4.3 Backplane** \n|**Name**|**Ordering Specification**<br>**Pa**|**rts number**|**Board specification**|\n|---|---|---|---|\n|2 slot backplane|A05B-2650-H080<br>A05|B-2650-C040|A20B-8200-0680|"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "99",
+        "section": "4.4",
+        "title": "PROCESS I/O BOARD MA (A20B-2004-0381)",
+        "text": "**==> picture [440 x 191] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nLED:LINK (Green)  LED:ALM(Not used) ICOM1  ICOM2  P24V<br>CRMA52A<br>LED:FALM (Red)<br>LED:ALM1 (Red)  P33V<br>CRMA52B<br>JD1B  JD1A  GND  FUSE1 (1A)<br>P5V<br>**----- End of picture text -----**<br>\n**Fig.4.4 Process I/O Board MA**"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "99",
+        "section": "4.4",
+        "title": "(1) Test pins",
+        "text": "|(1)Testpins||||\n|---|---|---|---|\n||**Name**||**Use**|\n|P24V||+24V||\n|P5V||+5V|For measuring the DC supply voltage|\n|GND||GND||\n|P33V||+3.3V||\n- 99 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "100",
+        "section": "4.4",
+        "title": "(1) Test pins",
+        "text": "B-83525EN/07 \n## 4. PRINTED CIRCUIT BOARDS \n## MAINTENANCE \n(2) Settings \n|(2)Settings|(2)Settings|||\n|---|---|---|---|\n|**Name**||**Standard**<br>**setting**|**Description**|\n|ICOM1|UDI1- 10<br>(Connector CRMA52A)|Side A|For common voltage setting<br>Side A: +24V common<br>Side B:   0V common|\n|ICOM2|UDI11- 20<br>(Connector CRMA52B)|||"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "100",
+        "section": "4.4",
+        "title": "(3) LEDs",
+        "text": "|(3)LEDs|||\n|---|---|---|\n|**Name**|**Color**|**Description**|\n|ALM1|Red|A communication alarm occurred between the main<br>board andprocess I/O board.|\n|FALM|Red|Thefuse (FUSE1) on the processI/O boardhas blown.|\n|LINK|Green|Blink (1:3) Communication in progress<br>ON =approx.0.5 sec, OFF =approx. 1.5 sec|\n|||Blink (1:1) Communication not in progress<br>ON =approx.0.25 sec, OFF =approx.0.25 sec|\n|ALM|Red|Not used|"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "100",
+        "section": "4.5",
+        "title": "PROCESS I/O BOARD MB (A20B-2101-0731)",
+        "text": "**==> picture [440 x 196] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nLED:LINK (Green)<br>LED:FALM (Red)<br>CRW11<br>LED:ALM1 (Red)  24V<br>5V  VR3 AOUT1<br>LED:ALM (Not used)  VR4<br>P5VF<br>VR2<br>GND<br>JD1B  JD1A 3R3V  GNDF  FUSE1 (1A)<br>VR1<br>AOUT2  P24VF<br>**----- End of picture text -----**<br>\n**Fig.4.5 Process I/O Board MB**"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "100",
+        "section": "4.5",
+        "title": "(1) Test pins and pads",
+        "text": "|(1)Testpins andpads|||||\n|---|---|---|---|---|\n||**Name**|||**Use**|\n|24V||+24V|||\n|5V||+5V||For measuring the DC supply voltage|\n|GND||GND|||\n|3R3V||+3.3V|||\n|P24VF||+24V|||\n|P5VF||+5V||D/A converter power supply|\n|GNDF||GND|||\n|AOUT1||Channel|1|For analog output signal (D/A) voltage measurement|\n|AOUT2||Channel|2||\n- 100 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "101",
+        "section": "4.5",
+        "title": "(1) Test pins and pads",
+        "text": "B-83525EN/07 \n## MAINTENANCE \n## 4. PRINTED CIRCUIT BOARDS"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "101",
+        "section": "4.5",
+        "title": "(2) Adjustment",
+        "text": "VR1/VR2 Channel 1 gain and offset adjustment \nConnect the “+” and “-” terminals of a digital voltmeter, respectively, to the AOUT1 check pin and the GNDF check pin (not a general ground point). From the teach pendant, execute AOUT[1]=3413, using a robot program. While observing the voltage at the AOUT1 check pin with the digital voltmeter, adjust potentiometers VR1 and VR2 for 15.0V. \nVR3/VR4 Channel 2 gain and offset adjustment \nConnect the “+” and “-” terminals of a digital voltmeter, respectively, to the AOUT2 check pin and the GNDF check pin (not a general ground point). From the teach pendant, execute AOUT[2]=3413, using a robot program. While observing the voltage at the AOUT2 check pin with the digital voltmeter, adjust potentiometers VR3 and VR4 for 15.0V."
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "101",
+        "section": "4.5",
+        "title": "(3) LEDs",
+        "text": "|(3)LEDs||\n|---|---|\n|**Name**<br>**Colo**|**r**<br>**Description**|\n|ALM1<br>Red|<br>A communication alarm occurred between the main CPU and process<br>I/O board.|\n|FALM<br>Red|Thefuse (FUSE1) on the processI/O boardhas blown.|\n|LINK<br>Gree|n<br>Blink (1:3) Communication in progress<br>ON =approx.0.5 sec, OFF =approx. 1.5 sec<br>Blink (1:1) Communication not in progress<br>ON =approx.0.25 sec, OFF =approx.0.25 sec|\n|ALM<br>Red|<br>Not used|"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "101",
+        "section": "4.6",
+        "title": "CONNECTOR CONVERTER BOARD (A20B-2004-0411)",
+        "text": "**==> picture [358 x 118] intentionally omitted <==**\nCRMA58 CRMA59 \n**(Connector converter board)** \n- 101 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "102",
+        "section": "4.6",
+        "title": "CONNECTOR CONVERTER BOARD (A20B-2004-0411)",
+        "text": "MAINTENANCE \nB-83525EN/07 \n## 4. PRINTED CIRCUIT BOARDS"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "102",
+        "section": "4.7",
+        "title": "TERMINAL CONVERTER BOARD (A20B-1009-0690)",
+        "text": "**==> picture [287 x 114] intentionally omitted <==**\nCRMA15 CRMA16 TBCV1 TBCV3 TBCV5 TBCV7 TBCV2 TBCV4 TBCV6 TBCV8 \n(Terminal converter board) \n- 102 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "103",
+        "section": "5",
+        "title": "6-AXIS SERVO AMPLIFIERS",
+        "text": "MAINTENANCE \nB-83525EN/07"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "103",
+        "section": "5",
+        "title": "6-AXIS SERVO AMPLIFIERS",
+        "text": "The 6-axis servo amplifiers are factory-set for operation.  Usually, you do not need to set or adjust them. This chapter describes the standard settings and adjustment required if a defective 6-axis servo amplifier is replaced.  It also describes the use of test pins and meanings of the LED indications. \n**Table 5 6-axis servo amplifier specification (Power supply regeneration)** \n|**ROBOT**|**6-AXIS SERVO AMPLIFIER**|**REGENERATIVE RESISTOR**|\n|---|---|---|\n|ARC Mate 120**_i_**C, M-20**_i_**A, M-20**_i_**B<br>M-710**_i_**C,R-1000**_i_**A|A06B-6400-H102|A05B-2650-C101|\n|R-2000**_i_**C,M-2**_i_**A,M-3**_i_**A|A06B-6400-H002|A05B-2650-C101|\n|ARC Mate 100**_i_**C<br>M-10**_i_**A|A06B-6400-H003|A05B-2650-C101|\n|ARC Mate 50**_i_**D|A06B-6400-H005|A05B-2650-C101|\n|LR Mate 200**_i_**D, M-1**_i_**A<br>ARC Mate 50**_i_**D (Limited type)<br>CR-4**_i_**A,CR-7**_i_**A|A06B-6400-H005|A05B-2650-C100|\n**==> picture [285 x 380] intentionally omitted <==**\n## **WARNING** \nBefore touching the servo amplifier, for example, for maintenance purposes, check the voltage at the screw above the LED “V4” with a DC voltage tester to see if the remaining voltage is not higher than 50V. \n- 103 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "104",
+        "section": "5",
+        "title": "6-AXIS SERVO AMPLIFIERS",
+        "text": "MAINTENANCE \nB-83525EN/07"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "104",
+        "section": "5.1",
+        "title": "LEDS OF 6-AXIS SERVO AMPLIFIER",
+        "text": "**==> picture [375 x 355] intentionally omitted <==**\n|**LED**|**Color**|**Description**|\n|---|---|---|\n|V4|Red|Lights when the DCLINK circuit inside the servo amplifier is charged to reach a specific<br>voltage.|\n|SVALM|Red|Lights when the servo amplifier detects an alarm.|\n|SVEMG|Red|Lights when an emergency stop signal is input to the servo amplifier.|\n|DRDY|Green|Lights when the servo amplifier is ready to drive the servo motor.|\n|OPEN|Green|Lights when the communication between the servo amplifier and the main board is normal.|\n|P5V|Green|Lights when the power supply circuit inside the servo amplifier outputs a voltage of +5 V<br>normally.|\n|P3.3V|Green|Lights when the power supply circuit inside the servo amplifier outputs a voltage of +3.3 V<br>normally.|\n- 104 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "105",
+        "section": "5.1",
+        "title": "LEDS OF 6-AXIS SERVO AMPLIFIER",
+        "text": "5. 6-AXIS SERVO AMPLIFIERS \nMAINTENANCE \nB-83525EN/07"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "105",
+        "section": "5.2",
+        "title": "SETTING OF 6-AXIS SERVO AMPLIFIER",
+        "text": "## **Table 5.2  6-axis servo settings** \n|||**Table 5.2  6-axis servo settings **|\n|---|---|---|\n|**Name**|**Standard setting**|**Description**|\n|COM1|Side A|Robot Digital Input (RI) device common voltage.<br>Side A: +24V common<br>Side B: 0V common|\n**==> picture [408 x 327] intentionally omitted <==**\n**==> picture [283 x 193] intentionally omitted <==**\n**Fig.5.2 Circuit based on jumper pin location or setting of switch** \n- 105 -"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "106",
+        "section": "5.2",
+        "title": "SETTING OF 6-AXIS SERVO AMPLIFIER",
+        "text": "MAINTENANCE \nB-83525EN/07 \n## 5. 6-AXIS SERVO AMPLIFIERS"
+    },
+    {
+        "document_id": "06",
+        "file_name": "circuit_boards_amplifiers.pdf",
+        "page": "106",
+        "section": "5.3",
+        "title": "SPECIFICATIONS TABLE ：（ A06B-6400-H ）",
+        "text": "||**UNIT**|**A06B-6400-H102**|**A06B-6400-H002**|**A06B-6400-H003**|\n|---|---|---|---|---|\n|**INPUT**<br>**RATINGS**|**VOLTAGE**|AC200~AC240V(+10% / -15%),50/60Hz,3phase|||\n||**POWER CAPACITY**|5.1KVA|5.1KVA|2.7KVA|\n|**OUTPUT**<br>**RATINGS**|**MAXIMUM OUTPUT**||240V ~||\n||**CURRENT**：**J1**|80Ap/ 23.0Arms|80Ap/ 23.0Arms|40Ap/ 13.4Arms|\n||**CURRENT**：**J2**|80Ap/ 23.0Arms|80Ap/ 23.0Arms|40Ap/ 13.4Arms|\n||**CURRENT**：**J3**|80Ap/ 23.0Arms|80Ap/ 23.0Arms|20Ap/ 6.5Arms|\n||**CURRENT**：**J4**|40Ap/ 13.4Arms|40Ap/ 13.4Arms|20Ap/ 6.5Arms|\n||**CURRENT**：**J5**|40Ap/ 13.4Arms|40Ap/ 13.4Arms|20Ap/ 6.5Arms|\n||**CURRENT**：**J6**|40Ap/ 13.4Arms|40Ap/ 13.4Arms|20Ap/ 6.5Arms|\n||**TOTAL CURRENT**|70Arms|70Arms|30Arms|\n||**UNIT**|**A06B-6400-H005**|\n|---|---|---|\n|**INPUT**<br>**RATINGS**|**VOLTAGE**|AC200~AC240V(+10% / -15%),50/60Hz,3/1phase|\n||**POWER CAPACITY**|1.3/1.4(3/1phase)|\n|**OUTPUT**<br>**RATINGS**|**MAXIMUM OUTPUT**|240V ~|\n||**CURRENT**：**J1**|20Ap/ 3.6Arms|\n||**CURRENT**：**J2**|20Ap/ 3.6Arms|\n||**CURRENT**：**J3**|20Ap/ 3.6Arms|\n||**CURRENT**：**J4**|20Ap/ 3.6Arms|\n||**CURRENT**：**J5**|10Ap/ 2.0Arms|\n||**CURRENT**：**J6**|10Ap/ 2.0Arms|\n||**TOTAL CURRENT**|18.4Arms|\n- 106 -"
+    }
+]

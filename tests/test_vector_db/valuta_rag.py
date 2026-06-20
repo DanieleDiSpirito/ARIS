@@ -35,9 +35,11 @@ class LangchainEmbeddingAdapter:
 
 def get_embedding_function(env):
     if env == "locale":
+        import torch
+        device = "cuda" if torch.cuda.is_available() else "cpu"
         lc_embedder = HuggingFaceEmbeddings(
             model_name="BAAI/bge-m3",
-            model_kwargs={'device': 'cpu'},
+            model_kwargs={'device': device},
             encode_kwargs={'normalize_embeddings': True}
         )
         return LangchainEmbeddingAdapter(lc_embedder)
@@ -176,9 +178,16 @@ def main():
     if args.db:
         db_list = args.db
     else:
-        db_list = [f"chroma_{args.env}_300", f"chroma_{args.env}_700", f"chroma_{args.env}_1000"]
-        if args.env == "locale":
-            db_list.extend(["db_nitro", "db_standard", "db_exacto"])
+        db_list = []
+        vector_db_dir = os.path.join(PROJECT_ROOT, "vector_db")
+        if os.path.exists(vector_db_dir):
+            for item in os.listdir(vector_db_dir):
+                if item.startswith("chroma_") and item.endswith(f"_{args.env}_700"):
+                    db_list.append(item)
+        if not db_list:
+            db_list = [f"chroma_{args.env}_300", f"chroma_{args.env}_700", f"chroma_{args.env}_1000"]
+            if args.env == "locale":
+                db_list.extend(["db_nitro", "db_standard", "db_exacto"])
 
     db_to_eval = [
         (db, os.path.join(PROJECT_ROOT, "vector_db", db))
@@ -197,6 +206,8 @@ def main():
         f"{' [DEBUG]' if args.debug else ''}\n"
     )
 
+    summary_results = []
+
     for db_name, db_path in db_to_eval:
         print(f"⏳ Valutazione DB: {db_name} ...")
         try:
@@ -206,10 +217,46 @@ def main():
             )
             if metriche:
                 stampa_report(db_name, metriche)
+                summary_results.append({
+                    "DB Name": db_name,
+                    "Hit Rate@k (%)": round(metriche.get("hit_rate_k", 0.0), 2),
+                    "Precision@k (%)": round(metriche.get("precision_k", 0.0), 2),
+                    "Recall@k (%)": round(metriche.get("recall_k", 0.0), 2),
+                    "MRR": round(metriche.get("mrr", 0.0), 4),
+                    "Tempo Medio (s)": round(metriche.get("tempo_medio_s", 0.0), 4)
+                })
             else:
                 print(f"⚠️ Nessuna metrica calcolata per {db_name}\n")
         except Exception as e:
             print(f"❌ Errore durante la valutazione di {db_name}: {e}\n")
+
+    if summary_results:
+        df_summary = pd.DataFrame(summary_results)
+        print("\n📊 TABELLA COMPARATIVA DI RETRIEVAL VETTORIALE:")
+        print("=" * 90)
+        print(df_summary.to_string(index=False))
+        print("=" * 90)
+
+        # Salva in Markdown
+        metrics_dir = os.path.join(PROJECT_ROOT, "data", "metrics")
+        os.makedirs(metrics_dir, exist_ok=True)
+        report_path = os.path.join(metrics_dir, "benchmark_retrieval_vettoriale.md")
+        
+        md_table = df_summary.to_markdown(index=False)
+        report_content = f"""# Benchmark Retrieval Vettoriale (ARIS)
+
+Questo report riassume le metriche di accuratezza del **Retrieval Vettoriale** per i database estratti con i diversi metodi di parsing, valutati sul test set di domande.
+
+## Tabella Comparativa
+
+{md_table}
+
+---
+*Report generato automaticamente dallo script `valuta_rag.py` il 20 Giugno 2026.*
+"""
+        with open(report_path, "w", encoding="utf-8") as f:
+            f.write(report_content)
+        print(f"✅ Report riassuntivo salvato in: {report_path}\n")
 
 
 if __name__ == "__main__":
