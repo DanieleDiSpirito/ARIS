@@ -101,21 +101,21 @@ nest-asyncio==1.6.0
 networkx==3.6.1
 nltk==3.9.4
 numpy==2.4.4
-nvidia-cublas==13.1.0.3
-nvidia-cuda-cupti==13.0.85
-nvidia-cuda-nvrtc==13.0.88
-nvidia-cuda-runtime==13.0.96
-nvidia-cudnn-cu13==9.20.0.48
-nvidia-cufft==12.0.0.61
-nvidia-cufile==1.15.1.6
-nvidia-curand==10.4.0.35
-nvidia-cusolver==12.0.4.66
-nvidia-cusparse==12.6.3.3
-nvidia-cusparselt-cu13==0.8.1
-nvidia-nccl-cu13==2.29.7
-nvidia-nvjitlink==13.0.88
-nvidia-nvshmem-cu13==3.4.5
-nvidia-nvtx==13.0.85
+# nvidia-cublas==13.1.0.3
+# nvidia-cuda-cupti==13.0.85
+# nvidia-cuda-nvrtc==13.0.88
+# nvidia-cuda-runtime==13.0.96
+# nvidia-cudnn-cu13==9.20.0.48
+# nvidia-cufft==12.0.0.61
+# nvidia-cufile==1.15.1.6
+# nvidia-curand==10.4.0.35
+# nvidia-cusolver==12.0.4.66
+# nvidia-cusparse==12.6.3.3
+# nvidia-cusparselt-cu13==0.8.1
+# nvidia-nccl-cu13==2.29.7
+# nvidia-nvjitlink==13.0.88
+# nvidia-nvshmem-cu13==3.4.5
+# nvidia-nvtx==13.0.85
 oauthlib==3.3.1
 onnxruntime==1.25.1
 openai==2.35.1
@@ -189,7 +189,7 @@ torch==2.12.0
 torchvision==0.27.0
 tqdm==4.67.3
 transformers==5.8.0
-triton==3.7.0
+# triton==3.7.0
 typer==0.25.1
 typing-inspect==0.9.0
 typing-inspection==0.4.2
@@ -197,7 +197,7 @@ typing_extensions==4.15.0
 urllib3==2.6.3
 uuid_utils==0.14.1
 uvicorn==0.46.0
-uvloop==0.22.1
+# uvloop==0.22.1
 watchdog==6.0.0
 watchfiles==1.1.1
 websocket-client==1.9.0

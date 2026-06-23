@@ -1,0 +1,10 @@
+id,question,expected_file,expected_page,category,difficulty
+Q001,What does it mean if the gauge pressure is 0 to 0.098MPa in the stopped condition?,PQRY-P-YEM-A_SM-73-96.pdf,1,troubleshooting,medium
+Q002,What is the output voltage increment of the high pressure sensor per 0.098MPa?,PQRY-P-YEM-A_SM-73-96.pdf,1,consultazione,low
+Q003,For how many minutes is the bypass valve (SV1) ON when the compressor starts?,PQRY-P-YEM-A_SM-73-96.pdf,2,procedure,low
+Q004,How many pulses are needed for the LEV in the BC controller to be full opened?,PQRY-P-YEM-A_SM-73-96.pdf,22,consultazione,medium
+Q005,What is the normal resistance value when measuring between the LEV motor coils red and white?,PQRY-P-YEM-A_SM-73-96.pdf,6,consultazione,medium
+Q006,What should be replaced if a microcomputer driver circuit failure is diagnosed for the LEV?,PQRY-P-YEM-A_SM-73-96.pdf,6,procedure,low
+Q007,What value in microseconds per bit must the transmission wave shape have to be correct?,PQRY-P-YEM-A_SM-73-96.pdf,14,consultazione,hard
+Q008,What is the maximum distance allowed for transmission lines to prevent communication errors?,PQRY-P-YEM-A_SM-73-96.pdf,15,consultazione,medium
+Q010,How do you check if the LEV is fully closed during operation?,PQRY-P-YEM-A_SM-73-96.pdf,22,procedure,medium

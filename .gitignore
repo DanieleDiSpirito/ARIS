@@ -18,3 +18,10 @@ AI_INSTRUCTIONS.md
 
 # Ignora file __pycache__
 **/__pycache__/*
+
+# Ignora cartelle models
+models/
+data/models/
+
+# Ignora il vector db di general_pdf_pipeline
+general_pdf_pipeline/vector_db/

@@ -1,0 +1,1090 @@
+[
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "1",
+        "section": "7",
+        "title": "(1) Pressure sensor",
+        "text": "- 1) Check for failure by comparing the sensing pressure according to the high pressure/low pressure pressure sensor and the pressure gauge pressure. \nTurn on switches 1, 3, 5, 6 (High) and 2, 4, 5, 6 (Low) of the digital display select switch (SW1) as shown below, and the sensor pressure of the high pressure/low pressure sensors is displayed digitally by the light emitting diode LD1. \n**==> picture [145 x 51] intentionally omitted <==**\n**----- Start of picture text -----**<br>\n1 2 3 4 5 6 7 8 9 10<br>ON<br>High pressure<br>1 2 3 4 5 6 7 8 9 10<br>Low pressure ON<br>**----- End of picture text -----**<br>\n- 1 In the stopped condition, compare the pressure readings from the gauge and from the LD1 display. \n   - (a) If the gauge pressure is 0~0.098MPa the internal pressure is dropping due to gas leakage. \n   - (b) If the pressure according to the LD1 display is 0~0.098MPa there is faulty contact at the connector, or it is disconnected. Proceed to 4. \n   - (c) If the pressure according to the LD1 display is 3.14MPa or higher, proceed to 3. \n   - (d) If other than (a), (b) or (c), compare the pressure readings during operation. Proceed to 2. \n- 2 Compare the pressure readings from the gauge and from the LD1 display while in the running condition. \n   - (a) If the difference between the two pressures is within 0.098MPa, both the affected pressure sensor and the main MAIN board are normal. \n   - (b) If the difference between the two pressures exceeds 0.098MPa, the affected pressure sensor is faulty (deteriorating performance). \n   - (c) If the pressure reading in the LD1 display does not change, the affected pressure sensor is faulty. \n- 3 Disconnect the pressure sensor from the MAIN board and check the pressure according to the LD1 display. (a) If the pressure is 0~0.098MPa on the LD1 display, the affected pressure sensor is faulty. \n   - (b) If the pressure is 3.14MPa (in the case of the low pressure sensor, 0.98MPa) or higher, the MAIN board is faulty. \n- 4 Disconnect the pressure sensor from the MAIN board and short out the No. 2 and No. 3 pins of the connector (63HS, 63LS), then check the pressure by the LD1 display. \n   - (a) If the pressure according to the LD1 display is 3.14MPa (in the case of the low pressure sensor, 0.98MPa) or higher, the affected pressure sensor is faulty. \n   - (b) If other than (a), the MAIN board is faulty."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "1",
+        "section": "7",
+        "title": "2) Pressure sensor configuration.",
+        "text": "The pressure sensors are configured in the circuit shown in the figure at right. If DC 5 V is applied between the red and black wires, a voltage corresponding to the voltage between the white and black wires is output and this voltage is picked up by the microcomputer. Output voltages are as shown below. \nHigh pressure 0.1 V per 0.098MPa Low pressure 0.3 V per  0.098MPa \n**==> picture [163 x 112] intentionally omitted <==**\n**----- Start of picture text -----**<br>\n63HS/<br>63LS Vout 0.5~3.5 V<br>Connector<br>GND (Black)<br>Vout (White)<br>Vcc (DC5V) (Red)<br>**----- End of picture text -----**<br>\n–72–"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "2",
+        "section": "7",
+        "title": "❇ Connector connection specifications on the pressure sensor body side.",
+        "text": "The connector’s pin numbers on the pressure sensor body side differ from the pin numbers on the main circuit board side. \n||Sensor bodyside|MAIN board side|\n|---|---|---|\n|Vcc|Pin 1|Pin 3|\n|Vout|Pin 2|Pin 2|\n|GND|Pin 3|Pin 1|"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "2",
+        "section": "7",
+        "title": "(2)  Solenoid valve (SV1~6, SV71~73)",
+        "text": "Check if the control board’s output signals and the operation of the solenoid valves match. \nSetting the self-diagnosis switch (SW1) as shown in the figure below causes the ON signal of each relay to be output to the LED’s. \nEach LED shows whether the relays for the following parts are ON or OFF. When a LED lights up, it indicates that the relay is ON. \n|relay is ON.|||||||||\n|---|---|---|---|---|---|---|---|---|\n|SW1|LED||||||||\n||1|2|3|4|5|6|7|8|\n|1 2 3 4<br>5 6 7<br>8 9 10<br>ON||||SV1|SV2|SV3|SV4||\n|1 2 3 4<br>5 6 7<br>8 9 10<br>ON|SV5|SV6|SV71|SV72|SV73||||"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "2",
+        "section": "7",
+        "title": "1) In the case of SV1 (Bypass Valve)",
+        "text": "- (a) When the compressor starts, SV1 is ON for 4 minutes, so check operation by whether the solenoid valve is emitting an operating noise. \n- (b) Changes in the operating condition by solenoid valve operation can be confirmed by the temperature of the bypass circuit and the sound of the refrigerant."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "2",
+        "section": "7",
+        "title": "2) In the case of SV2 (Bypass)",
+        "text": "- (a) SV2 goes ON in accordance with the rise in the high pressure in the cooling mode and heating mode, so check its operation by the LED display and the operating noise emitted by the solenoid valve. (Conditions during operation: See **Control of Heat Source Unit.** ) \n   - (b) Changes in the operating condition by solenoid valve operation can be confirmed by the temperature of the bypass circuit and the sound of the refrigerant. \n- 3) SV3~6, SV71~73 (Control of heat exchanger capacity) \n   - (a) Operations can be confirmed by LED display and operating sound of solenoid valve, because one or more of SV3~5, SV71 are turned on depending on conditions during cooling-only operations. \n   - (b) Operation can be confirmed by LED display and operating sound of solenoid valve, because all of SV3~5, SV73 are turned on during heating-only operations. \n   - (c) Operations can be confirmed by LED display and operating sound of solenoid valve, because one or more of SV3~6, SV71~73 are turned on depending on conditions during cooling-principal and heating-principal operations. \n–73–"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 1: Verifica del Funzionamento del Solenoid Valve Block",
+        "text": "```markdown\n1. **Verifica del funzionamento del Solenoid Valve Block**:\n   - **SE [Solenoid Valve Block] non risponde correttamente**:\n     - **ALTRIMENTI**: Procedi con la verifica di ciascun solenoid valve singolarmente.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 2: Verifica dei Singoli Solenoid Valves",
+        "text": "```markdown\n2. **Verifica del funzionamento di ogni solenoid valve**:\n   - **SE [Solenoid Valve] non risponde correttamente**:\n     - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura e apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 3: Verifica della Condizione di Chiusura/Apertura del Solenoid Valve",
+        "text": "```markdown\n3. **Verifica della condizione di chiusura o apertura del solenoid valve**:\n   - **SE [Solenoid Valve] non si chiude completamente**:\n     - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 4: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n4. **Verifica dell'apertura del solenoid valve**:\n   - **SE [Solenoid Valve] non si apre completamente**:\n     - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 5: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n5. **Verifica della pressione di chiusura del solenoid valve**:\n   - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n     - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 6: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n6. **Verifica della pressione di apertura del solenoid valve**:\n   - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n     - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 7: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n7. **Verifica della condizione di chiusura del solenoid valve**:\n   - **SE [Solenoid Valve] non si chiude completamente**:\n     - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 8: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n8. **Verifica dell'apertura del solenoid valve**:\n   - **SE [Solenoid Valve] non si apre completamente**:\n     - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 9: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n9. **Verifica della pressione di chiusura del solenoid valve**:\n   - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n     - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 10: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n10. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 11: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n11. **Verifica della condizione di chiusura del solenoid valve**:\n    - **SE [Solenoid Valve] non si chiude completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 12: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n12. **Verifica dell'apertura del solenoid valve**:\n    - **SE [Solenoid Valve] non si apre completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 13: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n13. **Verifica della pressione di chiusura del solenoid valve**:\n    - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 14: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n14. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 15: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n15. **Verifica della condizione di chiusura del solenoid valve**:\n    - **SE [Solenoid Valve] non si chiude completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 16: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n16. **Verifica dell'apertura del solenoid valve**:\n    - **SE [Solenoid Valve] non si apre completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 17: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n17. **Verifica della pressione di chiusura del solenoid valve**:\n    - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 18: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n18. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 19: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n19. **Verifica della condizione di chiusura del solenoid valve**:\n    - **SE [Solenoid Valve] non si chiude completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 20: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n20. **Verifica dell'apertura del solenoid valve**:\n    - **SE [Solenoid Valve] non si apre completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 21: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n21. **Verifica della pressione di chiusura del solenoid valve**:\n    - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 22: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n22. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 23: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n23. **Verifica della condizione di chiusura del solenoid valve**:\n    - **SE [Solenoid Valve] non si chiude completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 24: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n24. **Verifica dell'apertura del solenoid valve**:\n    - **SE [Solenoid Valve] non si apre completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 25: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n25. **Verifica della pressione di chiusura del solenoid valve**:\n    - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 26: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n26. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 27: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n27. **Verifica della condizione di chiusura del solenoid valve**:\n    - **SE [Solenoid Valve] non si chiude completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 28: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n28. **Verifica dell'apertura del solenoid valve**:\n    - **SE [Solenoid Valve] non si apre completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 29: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n29. **Verifica della pressione di chiusura del solenoid valve**:\n    - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 30: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n30. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 31: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n31. **Verifica della condizione di chiusura del solenoid valve**:\n    - **SE [Solenoid Valve] non si chiude completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 32: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n32. **Verifica dell'apertura del solenoid valve**:\n    - **SE [Solenoid Valve] non si apre completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 33: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n33. **Verifica della pressione di chiusura del solenoid valve**:\n    - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 34: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n34. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 35: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n35. **Verifica della condizione di chiusura del solenoid valve**:\n    - **SE [Solenoid Valve] non si chiude completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 36: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n36. **Verifica dell'apertura del solenoid valve**:\n    - **SE [Solenoid Valve] non si apre completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 37: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n37. **Verifica della pressione di chiusura del solenoid valve**:\n    - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 38: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n38. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 39: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n39. **Verifica della condizione di chiusura del solenoid valve**:\n    - **SE [Solenoid Valve] non si chiude completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 40: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n40. **Verifica dell'apertura del solenoid valve**:\n    - **SE [Solenoid Valve] non si apre completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 41: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n41. **Verifica della pressione di chiusura del solenoid valve**:\n    - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 42: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n42. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 43: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n43. **Verifica della condizione di chiusura del solenoid valve**:\n    - **SE [Solenoid Valve] non si chiude completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 44: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n44. **Verifica dell'apertura del solenoid valve**:\n    - **SE [Solenoid Valve] non si apre completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 45: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n45. **Verifica della pressione di chiusura del solenoid valve**:\n    - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 46: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n46. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 47: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n47. **Verifica della condizione di chiusura del solenoid valve**:\n    - **SE [Solenoid Valve] non si chiude completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 48: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n48. **Verifica dell'apertura del solenoid valve**:\n    - **SE [Solenoid Valve] non si apre completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 49: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n49. **Verifica della pressione di chiusura del solenoid valve**:\n    - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 50: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n50. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 51: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n51. **Verifica della condizione di chiusura del solenoid valve**:\n    - **SE [Solenoid Valve] non si chiude completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 52: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n52. **Verifica dell'apertura del solenoid valve**:\n    - **SE [Solenoid Valve] non si apre completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 53: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n53. **Verifica della pressione di chiusura del solenoid valve**:\n    - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 54: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n54. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica della condizione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 55: Verifica della Condizione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n55. **Verifica della condizione di chiusura del solenoid valve**:\n    - **SE [Solenoid Valve] non si chiude completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 56: Verifica dell'Apertura del Solenoid Valve",
+        "text": "```markdown\n56. **Verifica dell'apertura del solenoid valve**:\n    - **SE [Solenoid Valve] non si apre completamente**:\n      - **ALTRIMENTI**: Procedi con la verifica della pressione di chiusura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 57: Verifica della Pressione di Chiusura del Solenoid Valve",
+        "text": "```markdown\n57. **Verifica della pressione di chiusura del solenoid valve**:\n    - **SE [Pressione di chiusura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI**: Procedi con la verifica dell'apertura del solenoid valve.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "3",
+        "section": "7",
+        "title": "Passo 58: Verifica della Pressione di Apertura del Solenoid Valve",
+        "text": "```markdown\n58. **Verifica della pressione di apertura del solenoid valve**:\n    - **SE [Pressione di apertura del solenoid valve] non è corretta**:\n      - **ALTRIMENTI"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "4",
+        "section": "7",
+        "title": "• Heat source unit",
+        "text": "The valve opening angle changes in proportion to the number of pulses. (Connections between the heat source unit’s MAIN board and SLEV, LEV2) \n**==> picture [289 x 124] intentionally omitted <==**\nPulse signal output and valve operation \n|Output (phase)|Output states|Output states|Output states|Output states|Output states|Output states|Output states|Output states|\n|---|---|---|---|---|---|---|---|---|\n||1|2|3|4|5|6|7|8|\n|_ø_1|ON|OFF|OFF|OFF|OFF|OFF|ON|ON|\n|_ø_2|ON|ON|ON|OFF|OFF|OFF|OFF|OFF|\n|_ø_3|OFF|OFF|ON|ON|ON|OFF|OFF|OFF|\n|_ø_4|OFF|OFF|OFF|OFF|ON|ON|ON|OFF|\nOutput pulses change in the following orders when the Valve is Closed 1→2→3→4→5→6→7→8→1 Valve is Open 8→7→6→5→4→3→2→1→8 \n- ❇1. When the LEV opening angle does not change, all the output phases are off. \n2. When the output is out of phase or remains ON continuously, the motor cannot run smoothly, but move jerkily and vibrates. \nLEV valve closing and valve opening operations \n**==> picture [179 x 172] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nValve Closing<br>Valve Opening<br>Fully Open<br>480 pulses<br>Pulse Count<br>Valve Opening Angle (Flow Rate)<br>**----- End of picture text -----**<br>\n- ❇ When the power is switched ON, a 520 pulse valve opening signal is output to make sure the valve’s position, so that it is definitely at point A. (The pulse signal is output for approximately 17 seconds.) \n- ❇ When the valve operates smoothly, there is no sound from the LEV and no vibration occurs, but when the valve is locked, it emits a noise. \n- ❇ Whether a sound is being emitted or not can be determined by holding a screwdriver, etc. against it, then placing your ear against the handle. \n- ❇ If there is liquid refrigerant inside the LEV, the sound may become lower. \n–75–"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "5",
+        "section": "7",
+        "title": "Pulse Signal Output and Valve Operations",
+        "text": "1. **Output (phase)**\n   - **No.** | **Output states**\n     - φ1: ON → OFF → OFF → ON\n     - φ2: ON → ON → OFF → OFF\n     - φ3: OFF → ON → ON → OFF\n     - φ4: OFF → OFF → ON → ON"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "5",
+        "section": "7",
+        "title": "Closing and Opening Operations of Valve",
+        "text": "- **When turning on power source, issue valve closing signal of 2,200 pulses**, so that the valve opening is located at point A.\n- **When valve runs smoothly, no sound or vibration is generated from LEV. However, a big sound is observed when valve opening changes from point E to A or valve is locked**."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "5",
+        "section": "7",
+        "title": "Diagram Analysis",
+        "text": "1. **BC Controller and Indoor Unit**\n   - **LEV receives pulse signal from microcomputer**, and operates the valve with a stepping motor.\n   - **Valve opening changes in proportion to the number of pulses**.\n2. **Connection of Microcomputer Circuit Board and LEV**\n```markdown\n- **Microcomputer circuit board**\n  - DC12V\n  - Operation circuit\n- **Intermediate connector (mounted on outdoor unit only)**\n  - Brown → Red → Blue → Orange → Yellow → White\n- **Connector**\n  - In the case of indoor board: CN60\n  - In the case of multi board: CNLV\nNote:\n- Pay attention to colors of lead wires because numbers of intermediate connectors are different from those of circuit board side connectors.\n```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "5",
+        "section": "7",
+        "title": "Troubleshooting Steps",
+        "text": "1. **Check Pulse Signal Output**\n   - Verify that the output phases φ1, φ2, φ3, and φ4 follow the sequence provided in the table.\n2. **Valve Opening and Closing Operations**\n   - Ensure that when power is turned on, a valve closing signal of 2,200 pulses is issued to position the valve at point A.\n   - Confirm smooth operation with no sound or vibration from LEV. If not, check for any locking issues.\n3. **Valve Opening Proportionality**\n   - The valve opening should change in proportion to the number of pulses received by the stepping motor controlled by the microcomputer circuit board.\n4. **Intermediate Connector and Circuit Board Connection**\n   - Ensure that the intermediate connector is correctly connected on the outdoor unit.\n   - Verify the connection points for both indoor and multi-board configurations as indicated (CN60, CNLV).\n5. **Color Coding of Lead Wires**\n   - Pay attention to the color coding of lead wires since they differ between intermediate connectors and circuit board side connectors."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "5",
+        "section": "7",
+        "title": "Conclusion",
+        "text": "- If the valve does not operate correctly or if there are issues with sound generation during operation, check the pulse signal output phases φ1 through φ4.\n- Ensure that the valve is positioned at point A when power is turned on by issuing a 2,200 pulse valve closing signal.\n- Verify smooth operation and absence of vibration or sound from LEV. If not, investigate for locking issues.\nBy following these steps, you can systematically troubleshoot and resolve any issues related to the BC controller and indoor unit's valve operations."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "6",
+        "section": "7",
+        "title": "• Judgment methods and likely failure mode",
+        "text": "## Caution: \nThe specifications of the heat source unit (heat source LEV) and indoor unit (indoor LEV) differ. For this reason, there are cases where the treatment contents differ, so follow the treatment specified for the appropriate LEV as indicated in the right column. \n|Failure Mode|Judgment Method|Treatment|Affected LEV|\n|---|---|---|---|\n|Microcomputer<br>driver circuit<br>failure|1 Disconnect the control board connector and connect<br>the check LED as shown in the figure below.<br>When the base power supply is turned on, the indoor LEV<br>outputs pulse signals for 10 seconds, the heat source LEV<br>outputs pulse signals for 17 seconds, and BC controller<br>outputs pulse signals for 10-20 seconds.<br>If the LED does not light up, or lights up and remains on,<br>the driver circuit is abnormal.<br>Indoor, BC controller<br>Heat source|In the case of driver circuit<br>failure, replace the control<br>board.|Indoor<br>BC controller<br>Heat source|\n|LEV mechanism<br>is locked.|1If the LEV is locked up, the drive motor turns with no<br>load and a small clicking sound is generated.<br>Generation of this sound when the LEV is fully closed<br>or fully open is abnormal.|Replace the LEV.|Indoor<br>BC controller<br>Heat source|\n|The LEV motor<br>coils have a<br>disconnected wire<br>or is shorted.|Measure the resistance between the coils (red - white, red<br>- orange, brown - yellow, brown - blue) using a tester. They<br>are normal if the resistance is within 150Ω ±10%.|Replace the LEV coils.|Indoor<br>BC controller|\n||Measure the resistance between the coils (gray - orange,<br>gray - red, gray - yellow, gray - black) using a tester. They<br>are normal if the resistance is within 46Ω ±3%.|Replace the LEV coils.|Heat source|\n|Fully closed<br>failure (valve<br>leaks)|1 If you are checking the indoor unit’s LEV, operate the<br>indoor unit’s blower and the other indoor units in the<br>cooling mode, then check the piping temperatures<br>(liquid pipe temperatures) of the indoor units by the<br>operation monitor through the heat source unit’s<br>control board. When the fan is running, the linear<br>expansion valve is fully closed, so if there is leakage,<br>the temperature sensed by the<br>thermistor (liquid pipe temperature<br>sensor) will become low. If the<br>temperature is considerably low<br>compared to the remote control’s<br>intake temperature display, it can<br>be judged that there is a fully<br>closed failure. In the case of<br>minimal leakage, it is not necessary to replace the<br>LEV if there are no other effects.<br>Thermistor<br>liquid pipe<br>(tempera-<br>ture sensor)<br>Linear<br>Expansion<br>Valve|If there is a large amount of<br>leakage, replace the LEV.|Indoor<br>BC controller|\n|Faulty wire<br>connections in<br>the connector or<br>faulty contact.|1 Check for pins not fully inserted on the connector and<br>check the colors of the lead wires visually.<br>2 Disconnect the control board’s connector and conduct<br>a continuity check using a tester.|Check the continuity at the<br>places where trouble is found.|Indoor<br>BC controller<br>Heat source|\n–77–"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "7",
+        "section": "7",
+        "title": "• Heat source LEV (SLEV) coil removal procedure (configuration)",
+        "text": "As shown in the figure, the heat source LEV is made in such a way that the coils and the body can be separated. \n**==> picture [413 x 353] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nBody<br>Coils Stopper<br>Indentation for<br>Stopper<br>(12 places around<br>the circumference)<br>Lead wires<br>Fasten the body tightly at the bottom (Part A in the figure) so<br>that the body will not move, then pull out the coils toward the<br>top. If they catch on the stopper and are difficult to take out,<br>turn the coils left and right until the stoppers are free from the<br>stopper indentations, then pull the coils out.<br>If you take out the coils only without gripping the body, undue<br>force will be applied to the piping and the pipe may be bent<br>over, so be sure to fasten the body in such a way that it will not<br>Part A<br>**----- End of picture text -----**<br>"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "7",
+        "section": "7",
+        "title": "<Removing the coils>",
+        "text": "Fasten the body tightly at the bottom (Part A in the figure) so that the body will not move, then pull out the coils toward the top. If they catch on the stopper and are difficult to take out, turn the coils left and right until the stoppers are free from the stopper indentations, then pull the coils out. \nIf you take out the coils only without gripping the body, undue force will be applied to the piping and the pipe may be bent over, so be sure to fasten the body in such a way that it will not move."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "7",
+        "section": "7",
+        "title": "<Installing the coils>",
+        "text": "Fasten the body tightly at the bottom (Part A in the figure) so that the body will not move, then insert the coils from the top, inserting the coils’ stopper securely in one of the indentations on the body. (There are four indentations for the stopper on the body around its circumference, and it doesn’t matter which indentation is used. However, be careful not to apply undue force to the lead wires or twist them around inside the body.) If the coils are inserted without gripping the body, it may exert undue force on the piping, causing it to become bent, so be sure to hold the body firmly so that it won’t move when installing the coils. \n**==> picture [23 x 7] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nPart A<br>**----- End of picture text -----**<br>\n**==> picture [116 x 216] intentionally omitted <==**\n–78–"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "8",
+        "section": "7",
+        "title": "Descrizione",
+        "text": "Il diagramma illustra il flusso del refrigerante attraverso un blocco di valvole controllate da diversi solenoidi (SV3, SV4, SV5 e SV6). Il flusso è regolato in base all'ON/OFF dei solenoidi specificati."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "8",
+        "section": "7",
+        "title": "Passaggi di Controllo",
+        "text": "1. **Verifica del Flusso Refrigerante:**\n   - **Step 1:** Verificare l'ON/OFF dei solenoidi SV3, SV4, SV5 e SV6.\n     ```markdown\n     SE [SV3 ON] ALLORA:\n       SE [SV4 ON] ALLORA:\n         SE [SV5 ON] ALLORA:\n           SE [SV6 ON] ALLORA:\n             Flusso del refrigerante è attivo.\n           ALTRIMENTI (SV6 OFF):\n             Verificare se i solenoidi SV3, SV4 e SV5 sono correttamente configurati.\n         ALTRIMENTI (SV5 OFF):\n           Verificare se i solenoidi SV3, SV4 e SV6 sono correttamente configurati.\n       ALTRIMENTI (SV4 OFF):\n         Verificare se i solenoidi SV3, SV5 e SV6 sono correttamente configurati.\n     ALTRIMENTI (SV3 OFF):\n       Verificare se i solenoidi SV4, SV5 e SV6 sono correttamente configurati.\n     ```\n2. **Verifica del Flusso Refrigerante in Condizionamento:**\n   - **Step 1:** Verificare il flusso refrigerante nei tubi (6), (7), (8) e (9).\n     ```markdown\n     SE [Flusso refrigerante nei tubi (6), (7), (8) e (9)] ALLORA:\n       Flusso del refrigerante è attivo.\n     ALTRIMENTI:\n       Verificare se i solenoidi SV3, SV4, SV5 e SV6 sono correttamente configurati.\n     ```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "8",
+        "section": "7",
+        "title": "Dettagli Tecnici",
+        "text": "- **Valvole A, B e C:** \n  - Si possono aprire con chiavi a scatto esagonali di tre tipi diversi (A, B e C).\n  - Torque chiuso: \n    ```markdown\n    * A : 1.7kg-m (0.17N·m)\n    * B : 20kg-m (2.0N·m)\n    * C : 13kg-m (1.3N·m)\n    ```\n- **Diagramma del Flusso Refrigerante:**\n   - **Flusso di refrigerante in raffreddamento:** \n     ```markdown\n     SE [SV3 ON] ALLORA:\n       SE [SV4 ON] ALLORA:\n         SE [SV5 ON] ALLORA:\n           SE [SV6 ON] ALLORA:\n             Flusso del refrigerante è attivo.\n           ALTRIMENTI (SV6 OFF):\n             Verificare se i solenoidi SV3, SV4 e SV5 sono correttamente configurati.\n         ALTRIMENTI (SV5 OFF):\n           Verificare se i solenoidi SV3, SV4 e SV6 sono correttamente configurati.\n       ALTRIMENTI (SV4 OFF):\n         Verificare se i solenoidi SV3, SV5 e SV6 sono correttamente configurati.\n     ALTRIMENTI (SV3 OFF):\n       Verificare se i solenoidi SV4, SV5 e SV6 sono correttamente configurati.\n     ```\n   - **Flusso di refrigerante in riscaldamento:**\n     ```markdown\n     SE [SV3 ON] ALLORA:\n       SE [SV4 OFF] ALLORA:\n         SE [SV5 ON] ALLORA:\n           SE [SV6 ON] ALLORA:\n             Flusso del refrigerante è attivo.\n           ALTRIMENTI (SV6 OFF):\n             Verificare se i solenoidi SV3, SV4 e SV5 sono correttamente configurati.\n         ALTRIMENTI (SV5 OFF):\n           Verificare se i solenoidi SV3, SV4 e SV6 sono correttamente configurati.\n       ALTRIMENTI (SV4 ON):\n         Verificare se i solenoidi SV3, SV5 e SV6 sono correttamente configurati.\n     ALTRIMENTI (SV3 OFF):\n       Verificare se i solenoidi SV4, SV5 e SV6 sono correttamente configurati.\n     ```"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "8",
+        "section": "7",
+        "title": "Connettori e Codici di Errore",
+        "text": "- **Connettori:** SV3, SV4, SV5, SV6\n- **Codici di Errore:** Non specificati nel diagramma fornito.\nQuesto testo logico e strutturato fornisce una panoramica delle procedure per controllare il flusso del refrigerante attraverso i solenoidi e le valvole, utilizzando un approccio dettagliato e sistemico."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "9",
+        "section": "7",
+        "title": "Diagramma di Troubleshooting per Solenoid Valves (SVA, SVB, SVC)",
+        "text": "#### Note:\n1. **Mode Control**: SVA, SVB, e SVC sono attivati o disattivati in base al modo di funzionamento.\n   - **Branch Port**:\n     - **Cooling**: SVA ON, SVB OFF, SVC ON\n     - **Heating**: SVA OFF, SVB ON, SVC OFF\n     - **Stopped**: SVA OFF, SVB OFF, SVC OFF\n     - **Defrosting**: SVA OFF, SVB OFF, SVC OFF\n2. **Misurazione della Temperatura**: Misurare la temperatura del tubo a sinistra e destra di:\n   - **SVA (1-A)**\n   - **SVB (1-B)**"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "9",
+        "section": "7",
+        "title": "Diagramma di Troubleshooting per BC Controller Transformer",
+        "text": "```markdown"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "9",
+        "section": "1",
+        "title": "Misurazione della Resistenza tra CNTR(1)-(3) e CN03(1)-(3)",
+        "text": "- **Misura**: Misurare la resistenza tra i connettori CNTR(1)-(3) e CN03(1)-(3)."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "9",
+        "section": "1",
+        "title": "Condizioni di Funzionamento Normale vs. Malfunction",
+        "text": "| Connessione | Resistenza Normale (Ω) | Malfunction |\n|-------------|------------------------|-------------|\n| CNTR(1)-(3) | Approssimativamente 90 Ω | Aperto o cortocircuitato |\n| CN03(1)-(3)| Approssimativamente 1.7 Ω | Aperto o cortocircuitato |"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "9",
+        "section": "1",
+        "title": "Procedura",
+        "text": "- **Prima della Misurazione**: Disconnettere il connettore prima di eseguire la misurazione."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "9",
+        "section": "2",
+        "title": "Analisi dei Rami SÌ/NO",
+        "text": "- **SE [Condizione]** **ALLORA** ... **ALTRIMENTI** ..."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "9",
+        "section": "2",
+        "title": "Esempio",
+        "text": "1. **Misura della Resistenza tra CNTR(1)-(3) e CN03(1)-(3)**:\n   - **SE [Resistenza] ≈ 90 Ω** **ALLORA**:\n     - **CNTR(1)-(3) è normale**\n   - **ALTRIMENTI**:\n     - **CNTR(1)-(3) è aperto o cortocircuitato**\n2. **Misura della Resistenza tra CNTR(1)-(3) e CN03(1)-(3)**:\n   - **SE [Resistenza] ≈ 1.7 Ω** **ALLORA**:\n     - **CN03(1)-(3) è normale**\n   - **ALTRIMENTI**:\n     - **CN03(1)-(3) è aperto o cortocircuitato**\n```\nQuesto diagramma fornisce una struttura logica per il controllo e la risoluzione dei problemi relativi ai solenoidi (SVA, SVB, SVC) e al trasformatore del controller BC. Ogni ramo SÌ/NO è evidenziato con le condizioni specifiche di misurazione e i possibili stati di funzionamento normale o di malfunzionamento."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "10",
+        "section": "2",
+        "title": "(1) Service Panel",
+        "text": "- **Procedure:**\n    - Remove the two screws securing the electric panel box.\n        * Loosen only the two screws securing the electric panel box and then remove the box.\n- **Illustrations:**\n    - ![Electric panel box](image_of_electric_panel_box.png)\n- **Procedure:**\n    - Remove the four screws securing the front panel and then remove the panel.\n- **Procedure:**\n    - Remove the nine screws securing the ceiling panel and then remove the panel."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "10",
+        "section": "2",
+        "title": "(2) Control Box",
+        "text": "- **Procedure:**\n    - Removing the two screws that secure the electric panel box cover provides access to the controller board and all of the relay board for checking. So it is not necessary to work according to above 2.\n        * Loosen only the two screws securing the electric panel box cover."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "10",
+        "section": "2",
+        "title": "Notes",
+        "text": "- Be careful on removing heavy parts."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "11",
+        "section": "2",
+        "title": "Notes",
+        "text": "**(3) Thermistor (Liquid and gas piping temperature detection)** \n**==> picture [162 x 15] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nBe careful when removing heavy parts.<br>**----- End of picture text -----**<br>\n**==> picture [482 x 350] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nProcedure Photos<br>1. Remove the front panel<br>1 Use the procedure under (1)-1.2.3 to check<br>TH11, TH12, TH15, and TH16.<br>2. Disconnect the piping sensor lead from the control- TH16<br>ler panel.<br>1 TH11 - TH12 (CN10)<br>2 TH15, TH16 (CN11)<br>TH11<br>3. Pull the temperature sensor from the temperature<br>sensor housing and replace it with a new sensor.<br>4. Connect the temperature sensor lead securely to<br>the controller board.<br>TH12<br>TH15<br>**----- End of picture text -----**<br>"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "11",
+        "section": "2",
+        "title": "(4) Pressure Sensor",
+        "text": "Procedure \nPhotos \n1. Remove the front panel. \n   - 1 Use the procedure under (1)-1.2 to check PS1 and PS3. \n2. Disconnect the connector of the applicable pressure sensor from the controller board and insulate the connector. \n   - 1 Liquid pressure sensor (CNP1) \n   - 2 Intermediate pressure sensor (CNP3) \n3. Install a new pressure sensor at the location shown in the photograph, and plug the connector into the controller board. \n## Important \n- 1 In the case of gas leakage from the pressure sensor, take actions to fix the leak before performing the above procedure. \n**==> picture [149 x 120] intentionally omitted <==**\n**==> picture [111 x 7] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nPS3 PS1<br>**----- End of picture text -----**<br>\n–82–"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "12",
+        "section": "2",
+        "title": "(5) LEV",
+        "text": "1. **Procedure:**\n   - Remove the service panel.\n     - See (1)-1.2.3.\n2. **Procedure:**\n   - Replace the applicable LEV.\n**Important!**\n- When performing the above procedure, be sure to allow for enough service space in the ceiling area for welding.\n- When conditions require, the unit can be lowered from the ceiling before starting work."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "12",
+        "section": "2",
+        "title": "(6) Solenoid Valve Coil",
+        "text": "1. **Procedure:**\n   - Remove the service panel.\n     - See (1)-1.2.3.\n2. **Procedure:**\n   - Disconnect the connector of the applicable solenoid valve.\n3. **Procedure:**\n   - Remove the solenoid valve coil.\n     - SVA, SVB solenoid valve coils can be serviced from the maintenance port.\n       - SVC can be serviced from the back if service space is available in the back. To remove the back panel, remove the four screws that secure it."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "12",
+        "section": "2",
+        "title": "(5) LEV",
+        "text": "1. **Procedure:**\n   - Remove the service panel.\n     - See (1)-1.2.3.\n2. **Procedure:**\n   - Replace the applicable LEV.\n**Important!**\n- When performing the above procedure, be sure to allow for enough service space in the ceiling area for welding.\n- When conditions require, the unit can be lowered from the ceiling before starting work."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "12",
+        "section": "2",
+        "title": "(6) Solenoid Valve Coil",
+        "text": "1. **Procedure:**\n   - Remove the service panel.\n     - See (1)-1.2.3.\n2. **Procedure:**\n   - Disconnect the connector of the applicable solenoid valve.\n3. **Procedure:**\n   - Remove the solenoid valve coil.\n     - SVA, SVB solenoid valve coils can be serviced from the maintenance port.\n       - SVC can be serviced from the back if service space is available in the back. To remove the back panel, remove the four screws that secure it."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "12",
+        "section": "2",
+        "title": "Immagine di Riferimento",
+        "text": "- **LEV1**: Indica la posizione del LEV1.\n- **LEV3**: Indica la posizione del LEV3.\n- **Solenoid Valve**: Indica la posizione della valvola solenoidale."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "13",
+        "section": "2",
+        "title": "(7)  Transmission Power Circuit (30 V) Check Procedure",
+        "text": "If “ ” is not displayed by the remote control, investigate the points of the trouble by the following procedure and correct it. \n|No.|Check Item|Judgment|Response|\n|---|---|---|---|\n|1|Disconnect the transmission line from TB3<br>and check the TB3 voltage.|DC24~30 V|Check the transmission line for the following, and<br>correct any defects.<br>Broken wire, short circuit, grounding, faulty<br>contact.|\n|||Except the above-mentioned|to No. 2|\n|2|Check if the following connectors are<br>disconnected in the outdoor unit’s control<br>box.<br>MAIN Board: CNS1, CNVCC3, CNVCC4<br>INV Board:  CNVCC2, CNVCC4, CNL2,<br>CNR, CNAC2|Connector disconnected|Connect the connectors as shown on the electric<br>wiring diagram plate.|\n|||Except the above-mentioned|to No. 3|\n|3|Disconnect the wires from CNVCC3 on the<br>Main board and check the voltage between<br>pins 1 and 3 on the wire side of the<br>CNVCC3.<br>Tester+ ..... 1 pin<br>Tester- ..... 3 pin|DC24~30 V|Check the wiring between CNS1 and TB3 for the<br>following, and correct any defects.<br>Broken wire, short circuit, grounding, faulty<br>contact.<br>If there is no trouble, replace the Main board.|\n|||Except the above-mentioned|to No. 4|\n|4|Disconnect the wiring from CNVCC2 on the<br>INV board and check the voltage between<br>pins 1 and 3 of CNVCC2.<br>Tester+ ..... 1 pin<br>Tester- ..... 3 pin|DC24~30 V|Check the wiring between CNVCC2 and<br>CNVCC3 for the following, and correct any<br>defects.<br>Broken wire, short circuit, grounding, faulty<br>contact.|\n|||Except the above-mentioned|to No. 5|\n|5|Disconnect the wiring from CNL2 on the<br>INV board, and check the resistance at<br>both ends of choke coil L2.|0.5~2.5Ω|to No. 6|\n|||Except the above-mentioned|Replace choke coil L2.|\n|6|Disconnect the wiring from CNR on the INV<br>board, and check the resistance at both<br>ends of R7.|19~25Ω|to No. 7|\n|||Except the above-mentioned|Replace R7.|\n|7|Check the resistance at both ends of F01<br>on the INV board.|0Ω|to No. 8|\n|||Except the above-mentioned|Replace F01|\n|8|Check the voltage between pins 1 and 3 of<br>CNAC2 on the INV board.|AC198~264 V|Replace the INV board.|\n|||Except the above-mentioned|to No. 9|\n|9|Check the voltage between L2 and N on<br>power supply terminal block TB1.|AC198~264 V|Check the wiring to CNAC2 for the following and<br>correct any defects.<br>Broken wire, faulty contact.|\n|||Except the above-mentioned|Check the power supply wiring and base power<br>supply, and correct any defects.|\n–84–"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "14",
+        "section": "2",
+        "title": "(8) Investigation of transmission wave shape/noise",
+        "text": "- Control is performed by exchanging signals between heat source unit, indoor unit and remote controller by M-NET transmission. If noise should enter into the transmission line, the normal transmission will be hindered causing erroneous operation. \n- 1) Symptom caused by the noise entered into transmission line \n|Cause|Erroneous operation|Error code|\n|---|---|---|\n|Noise entered into<br>transmission line|Signal changes and is misjudged as the signal of other<br>address.|6600|\n||Transmission wave shape changes to other signal due to<br>noise.|6602|\n||Transmission wave shape changes due to noise, and can<br>not be received normally thus providing no reply (ACK).|6607|\n||Transmission can not be made continuously due to the<br>entry of fine noise.|6603|\n||Transmission can be made normally, but reply (ACK) or<br>answer can not be issued normally due to noise.|6607<br>6608|\n- 2) Method to confirm wave shape \n**==> picture [344 x 167] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nNo fine noise allowed ❇1<br>VHL<br><With transmission><br>VBN<br>52 µs 52 µs 52 µs 52 µs 52 µs<br>Logical value “0” Logical value “1”<br>No fine noise allowed  [❇] 1<br>**----- End of picture text -----**<br>"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "14",
+        "section": "2",
+        "title": "<Without transmission>",
+        "text": "Check the wave shape of transmission line with an oscilloscope to confirm that the following conditions are being satisfied. \n- 1 The figure should be 104µs/bit ± 1%. \n- 2 No finer wave shape (noise) than the transmission signal (52µs ± 1%) should be allowed.[❇] 1 \n- 3 The sectional voltage level of transmission signal should be as follows. \n|3 The secti|onal voltage level of transmis|\n|---|---|\n|Logic value|Transmission  line voltage level|\n|0|VHL= 2.0V or more|\n|1|VBN= 1.3V or less|\n- ❇1 However, minute noise from the DC-DC converter or inverter operation may be picked up. \n–85–"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "15",
+        "section": "2",
+        "title": "(a) Measures against noise",
+        "text": "Check the items below when noise can be confirmed on wave shape or the error code in the item 1) is generated. \n||Items to be checked|Measures to be taken|\n|---|---|---|\n|Checking for wiring method|1Wiring of transmission and power lines in<br>crossing.|Isolate transmission line from power line (5cm or more).<br>Never put them in a same conduit.|\n||2Wiring of transmission line with that of other<br>system in bundle.|Wire transmission line isolating from other transmission line.<br>Wiring in bundle may cause erroneous operation like crosstalk.|\n||3Use of shield wire for transmission line (for<br>both indoor unit control and centralized<br>control).|Use specified transmission wire.<br>Type<br>:<br>Shield line CVVS/CPEVS<br>Wire diameter<br>:<br>1.25mm2or more|\n||4Repeating of shield at the repeating of<br>transmission line with indoor unit.|The transmission line is wired with 2-jumper system. Wire the shield<br>with jumper system as same for transmission line.<br>When the jumper wiring is not applied to the shield, the effect against<br>noise will be reduced.|\n||5Are the unit and transmission lines grounded<br>as instructed in the INSTALLATION MANUAL?|Connect to ground as shown in the INSTALLATION MANUAL.|\n|Check  for earthing|6Earthing of the shield of transmission line (for<br>indoor unit control) to heat source unit.|One point earthing should be made at heat source unit.<br>Without earthing, transmission signal may be changed as the noise on<br>the transmission line has no way to escape.|\n||7Arrangement for the shield of transmission line<br>(for centralized control).|For the shield earth of the transmission line for centralized control, the<br>effect of noise can be minimized if it is from one of the heat source units<br>in case of the group operation with different refrigerant systems, and<br>from the upper rank controller in case the upper rank controller is used.<br>However, the environment against noise such as the distance of trans-<br>mission line, the number of connecting sets, the type of connecting con-<br>troller, and the place of installation, is different for the wiring for central-<br>ized control. Therefore, the state of the work should be checked as fol-<br>lows.<br>a)<br>No earthing<br>•<br>Group operation with different refrigerant systems<br>One point earthing at heat source unit<br>•<br>Upper rank controller is used<br>Earthing at the upper rank controller<br>b)<br>Error is generated even though one point earth is being con-<br>nected.<br>Earth shield at all heat source units.<br>Connect to ground as shown in the user’s manual.|\n(b) When the wave height value of transmission wave shape is low, 6607 error is generated, or remote controller is under the state of “HO.” \n||Items to be checked|Measures to be taken|\n|---|---|---|\n||8The farthest distance of transmission line is<br>exceeding 200m.|Confirm that the farthest distance from heat source unit to indoor unit/<br>remote controller is less than 200m.|\n||9The types of transmission lines are different.|Use the transmission wire specified.<br>Type of transmission line<br>:<br>Shield wire CVVS/CPEVS<br>Wire dia. of transmission line<br>:<br>1.25mm2or more|\n||0No transmission power (30V) is being supplied<br>to the idoor unit or the remote control.|Refer to “Transmission Power Supply (30V) Circuit Check Procedure.”|\n||AFaulty indoor unit/remote controller.|Replace heat source unit circuit board or remote controller.|\n–86–"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "16",
+        "section": "2",
+        "title": "(9)  Troubleshooting at breaker tripping",
+        "text": "||Check items|Measures to be taken|\n|---|---|---|\n|1<br>|Check the breaker capacity.|The breaker’s capacity should be proper.|\n|2<br> <br>|Check the a short circuit or grounding in the electrical<br>system other than the inverter.|Correct any defects.|\n|3<br> <br>|Check the resistance between terminals on the terminal<br>block TB1A for power source.||\n||1 0 ~ several ohms or improper megohm value||\n|4<br>|Checking by powering again.||\n||1 Main power source circuit breaker tripping||\n||2 No display of remote controller||\n|5<br>|Operational check by operating air conditioner||\n||1 Normal operation without breaker tripping.|a)<br>As there is a possibility of instantaneous short<br>circuit generated, find the mark of the short circuit<br>for repair.<br>b)<br>When a) is not applicable, the compressor may be<br>faulty.|\n||2 Breaker tripping|The ground fault of inverter output/compressor can<br>be supposed.<br>Disconnect the wiring to the compressor and check<br>the insulation resistance of the following parts with<br>a megger.<br>a)<br>Compressor terminals.<br>b)<br>Inverter output.|\n–87–"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "17",
+        "section": "2",
+        "title": "1) Pressure Sensor Troubleshooting Flow",
+        "text": "```markdown"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "17",
+        "section": "2",
+        "title": "Pressure sensor troubleshooting flow",
+        "text": "**START**\n- Check pressure sensor, PS1, PS3, connectors for disconnection, looseness, or incorrect attachment."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "17",
+        "section": "2",
+        "title": "Step 1: Check Connections",
+        "text": "- **OK?**\n    - Yes: Take corrective action.\n    - No: Proceed to next step."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "17",
+        "section": "2",
+        "title": "Step 2: Unit Running?",
+        "text": "- **No**: Check on the LED monitor display:\n    - TH2 or LPS of heat source unit.\n    - HPS of heat source unit.\n    - PS1, PS3 of BC controller and confirm the following relationship: HPS > PS1 ≥ PS3 > LPS (pressure calculated value).\n- **Yes**: Stop the unit (compressor OFF)."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "17",
+        "section": "2",
+        "title": "Step 3: At least 10 minutes passed since stopping?",
+        "text": "- **No**: Check PS1, PS3 on LED monitor display and confirm that none of the detected pressure values is below 0.098MPa.\n- **Yes**:\n    - OK? \n        - Yes: HPS ≒ PS1 ≒ PS3 ≒ LPS (pressure calculated value) (The difference is less than 0.098MPa).\n        - No: Check for the faulty connector on applicable pressure sensor."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "17",
+        "section": "2",
+        "title": "Step 4: Faulty Connector?",
+        "text": "- **OK?**\n    - Yes:\n        - No board or pressure sensor abnormality.\n        - Yes: Check that refrigerant piping and transmission line connections are in agreement between heat source unit and BC controller.\n- **No**: Remove the pressure sensor connector from the board, and check the pressure."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "17",
+        "section": "2",
+        "title": "Step 5: Pressure Range?",
+        "text": "- **0 to 0.098MPa**:\n    - Yes: Short connectors 2 and 3 on the board and check the pressure.\n- **At least 3.14MPa indicated?**\n    - Yes: Replace the wrong pressure sensor by the correct pressure sensor, and confirm detected pressure is indicated correctly."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "17",
+        "section": "2",
+        "title": "Step 6: Correct Pressure?",
+        "text": "- **OK?**\n    - Yes: Change pressure sensor.\n    - No: Change board.\n```\n### Note:\n1. Check connections for disconnection, looseness, or incorrect attachment.\n2. Ensure that the LED monitor display shows correct relationships between HPS, PS1, PS3, and LPS (pressure calculated value).\n3. Verify refrigerant piping and transmission line connections are in agreement with the heat source unit and BC controller.\n4. Check for faulty connectors on applicable pressure sensors."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "17",
+        "section": "2",
+        "title": "Conclusion",
+        "text": "The troubleshooting flowchart is designed to systematically diagnose issues related to the pressure sensor within a BC controller system, ensuring that all potential causes of malfunction are identified and addressed."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "18",
+        "section": "2",
+        "title": "Note 1",
+        "text": "- **Sintomi di Connessione Errata del Sensore di Pressione del BC Controller al Pannello:**\n  - **Condizionamento Solo:** Normale.\n  - **Condizionamento Principale:** Insufficiente raffreddamento. SC11 grande, SC16 piccola, PHM <0.\n  - **Riscaldamento Solo:** SC11 piccola, SC16 piccola, PHM <0. SC16 piccola, termostato interno acceso in particolare con rumore.\n  - **Riscaldamento Principale:** Insufficiente riscaldamento. SC11 grande, SC16 piccola, PHM <0."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "18",
+        "section": "2",
+        "title": "Note 2",
+        "text": "- **Verifica utilizzando il Interruttore di Visualizzazione LED del Monitor (Pannello principale della Sorgente di Calore MAIN SW1):**\n  - **Dati Misurati:** Pressione Alta.\n    - **Segnale:** HPS\n    - **Impostazione SW1:** ON [1,2,3,4,5,6,7,8,9,10]\n  - **Dati Misurati:** Pressione Bassa.\n    - **Segnale:** LPS\n    - **Impostazione SW1:** ON [1,2,3,4,5,6,7,8,9,10]\n  - **Dati Misurati:** Sensore di Pressione del BC Controller (Misurazione Liquida) (Intermedia).\n    - **Segnale:** PS1\n    - **Impostazione SW1:** ON [1,2,3,4,5,6,7,8,9,10]\n  - **Dati Misurati:** Sensore di Pressione del BC Controller (Misurazione Liquida) (Intermedia).\n    - **Segnale:** PS3\n    - **Impostazione SW1:** ON [1,2,3,4,5,6,7,8,9,10]"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "18",
+        "section": "2",
+        "title": "Note 3",
+        "text": "- **Verifica i Connettori CNP1 e CMP3 (Misurazione Liquida) e Intermedia sul Pannello del BC Controller per Disconnessione o Vibrazione.**"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "18",
+        "section": "2",
+        "title": "Note 4",
+        "text": "- **Con il Sensore del Connettore Applicabile Rimesso dal Pannello, Utilizzare l’Interruttore di Visualizzazione LED del Monitor (Note 1) per Verificare il Valore della Pressione.**"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "18",
+        "section": "2",
+        "title": "Grafico: Tensione di Uscita del Sensore di Pressione",
+        "text": "- **Valori di Tensione (V):** Da 0 a circa 3,5 V.\n- **Valori di Pressione (MPa):** Da 0,98 a circa 2,94 MPa."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "19",
+        "section": "2",
+        "title": "Grafico: Tensione di Uscita del Sensore di Pressione",
+        "text": "2) Temperature sensor"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "19",
+        "section": "2",
+        "title": "Thermistor troubleshooting flow",
+        "text": "**==> picture [235 x 414] intentionally omitted <==**\n**----- Start of picture text -----**<br>\nStart<br>Note 1<br>Disconnect applicable thermistor<br>connector from the board.<br>Note 2<br>Measure temperature of applicable<br>thermistor (actual measured value).<br>Note 3<br>Check thermistor resistance value.<br>Compare temperature for thermistor<br>resistance value with actual mea-<br>sured valued.<br>No No<br>difference?<br>Note 5<br>Yes<br>Note 4 Change thermistor.<br>Insert applicable thermistor connector<br>into board, and check sensor input<br>temperature on LED monitor for differ-<br>ence.<br>No No<br>difference?<br>Yes Check for connection<br>problem.<br>No abnormality.<br>Change the controller<br>board.<br>**----- End of picture text -----**<br>\n–90–"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Passo 1: Preparazione",
+        "text": "- **Note**: \n    - CN10 corrisponde a TH11 attraverso TH12, mentre CN11 corrisponde a TH15 attraverso TH16. Rimuovere il connettore appropriato e verificare il sensore per ogni numero."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Passo 2: Estrazione del Connettore",
+        "text": "- **Note**: \n    - Togliere il connettore del sensore dal modulo I/O. Non tirare sul filo di collegamento.\n    - Misurare la resistenza utilizzando un tester o altro strumento."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Passo 3: Verifica della Resistenza",
+        "text": "1. **Misurazione della Resistenza**:\n   - Utilizzare il tester per misurare la resistenza del sensore, posizionando i punti di prova sulle aree ombreggiate.\n2. **Comparazione dei Valori**:\n   - Confrontare i valori misurati con quelli riportati nel grafico sotto. Un valore all'interno di un margine del ±10% è normale."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Passo 4: Verifica della Temperatura",
+        "text": "- **Note**: \n    - Utilizzare il commutatore di visualizzazione LED monitor (piastra principale esterna SW1) per verificare i dati misurati."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Grafico Resistenza del Sensore di Temperatura",
+        "text": "- **Thermistor R₀ = 15 kΩ**\n- **Equazione**: \n   \\[\n   R_t = 15 \\exp(3460 \\left\\{ -\\frac{1}{273 + t} + \\frac{1}{273t} \\right\\})\n   \\]"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Tabella di Verifica",
+        "text": "| Dati Misurati | Segnale | Impostazione SW1 |\n|---------------|---------|------------------|\n| Temperatura d'ingresso liquido | TH11    | ON                |\n| Temperatura d'uscita bypass | TH12    | ON                |\n| Temperatura d'uscita bypass | TH15    | ON                |\n| Temperatura d'ingresso bypass | TH16    | ON                |"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Logica Strutturata in Markdown",
+        "text": "```markdown"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Passo 1: Preparazione",
+        "text": "- **Note**:\n  - CN10 corrisponde a TH11 attraverso TH12, mentre CN11 corrisponde a TH15 attraverso TH16. Rimuovere il connettore appropriato e verificare il sensore per ogni numero."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Passo 2: Estrazione del Connettore",
+        "text": "- **Note**:\n  - Togliere il connettore del sensore dal modulo I/O. Non tirare sul filo di collegamento.\n  - Misurare la resistenza utilizzando un tester o altro strumento."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Passo 3: Verifica della Resistenza",
+        "text": "1. **Misurazione della Resistenza**:\n   - Utilizzare il tester per misurare la resistenza del sensore, posizionando i punti di prova sulle aree ombreggiate.\n2. **Comparazione dei Valori**:\n   - Confrontare i valori misurati con quelli riportati nel grafico sotto. Un valore all'interno di un margine del ±10% è normale."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Passo 4: Verifica della Temperatura",
+        "text": "- **Note**:\n  - Utilizzare il commutatore di visualizzazione LED monitor (piastra principale esterna SW1) per verificare i dati misurati."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Grafico Resistenza del Sensore di Temperatura",
+        "text": "- **Thermistor R₀ = 15 kΩ**\n- **Equazione**:\n   \\[\n   R_t = 15 \\exp(3460 \\left\\{ -\\frac{1}{273 + t} + \\frac{1}{273t} \\right\\})\n   \\]"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "20",
+        "section": "2",
+        "title": "Tabella di Verifica",
+        "text": "| Dati Misurati | Segnale | Impostazione SW1 |\n|---------------|---------|------------------|\n| Temperatura d'ingresso liquido | TH11    | ON                |\n| Temperatura d'uscita bypass | TH12    | ON                |\n| Temperatura d'uscita bypass | TH15    | ON                |\n| Temperatura d'ingresso bypass | TH16    | ON                |\n```\nQuesto testo strutturato in Markdown fornisce una panoramica chiara e organizzata del diagramma di troubleshoot, evidenziando i passaggi necessari per la verifica dei sensori di temperatura."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "21",
+        "section": "2",
+        "title": "Diagramma di Troubleshooting per LEV (Solenoid Valve)",
+        "text": "1. **Inizio**\n   - **No cooling No heating**: Verifica la presenza di disconnessioni o lenti di connettori.\n     ```markdown\n     IF Disconnessione o lente di connettore THEN\n       Correggi il problema.\n     ELSE\n       Procedi al passo successivo.\n     ENDIF\n     ```\n2. **Operazione di raffreddamento o riscaldamento?**\n   - **Raffreddamento**: Verifica se LEV 1 è completamente aperto.\n     ```markdown\n     IF LEV 1 completamente aperto THEN\n       Procedi al passo successivo.\n     ELSE\n       Verifica LEV 1.\n     ENDIF\n     ```\n   - **Riscaldamento**: Verifica se LEV 1 è completamente chiuso.\n     ```markdown\n     IF LEV 1 completamente chiuso THEN\n       Procedi al passo successivo.\n     ELSE\n       Verifica LEV 3.\n     ENDIF\n     ```\n3. **LEV 3 controllato da supercalore?**\n   - **No**: Verifica se SVA, SVC sono accesi.\n     ```markdown\n     IF SVA, SVC accesi THEN\n       Procedi al passo successivo.\n     ELSE\n       Verifica SVA, SVC.\n     ENDIF\n     ```\n   - **Yes**: Verifica se SVB è spento.\n     ```markdown\n     IF SVB spento THEN\n       Procedi al passo successivo.\n     ELSE\n       Verifica SVB.\n     ENDIF\n     ```\n4. **SVB acceso?**\n   - **No**: Conclusione.\n     ```markdown\n     IF SVB acceso THEN\n       Procedi al passo successivo.\n     ELSE\n       Conclusione.\n     ENDIF\n     ```\n   - **Yes**: Conclusione.\n5. **Fine del diagramma di troubleshoot**"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "22",
+        "section": "1",
+        "title": "Note 1",
+        "text": "- Symptoms of incorrect connection to BC controller LEV board \n|LEV No.|1|3|Cooling-only|Cooling-main|Heating-only|Heating-main|\n|---|---|---|---|---|---|---|\n|1)|1|3|Normal|←|←|←|\n|2)|3|1|Insufficient cooling<br>SH12 small,<br>SC11 small<br>SC16 small<br>Branch piping SC small|Insufficient cooling, insuf-<br>ficient heating<br>SH12 small, SC11 small<br>SC16 large,<br>Branch piping SC small<br>PHM large|Heating indoor SC small<br>PHM large|Insufficient cooling<br>Heating indoor SC small<br>PHM large|\nImproper installation is the same for 1 and 2 , so it is omitted here."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "22",
+        "section": "1",
+        "title": "Note 2 : Method for checking LEV full open, full closed condition",
+        "text": "- 1 Check LEV full opening (pulse) using the LED monitor display (outdoor controller board SW1). Full opened: 2000 pulses \nFull closed: 60 pulses (LEV 1 may be greater than 60 during full heating operation.) \n- 2 With LEV full opened, check for pressure differential by measuring temperature of piping on both sides. \n- 3 With LEV full closed, check for refrigerant noise."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "22",
+        "section": "1",
+        "title": "Note 3 :Use the following table to determine opening due to LEV differential pressure control and superheat control.",
+        "text": "- BC controller LEV basic operation characteristics \n|Region|Failure mode|Operating mode|Description|Normal range|\n|---|---|---|---|---|\n|LEV1<br>pulse|Small|Heating-only<br>Heating-main<br>Cooling-main|High pressure (PS1) - medium pressure (PS3) is large.|0.20~0.34MPa|\n||Large||High pressure (PS1) - medium pressure (PS3) is small.||\n|LEV3<br>pulse|Small|Cooling-only<br>Cooling-main|SH12 is large.|SH12<25|\n|||Heating-only<br>Heating-main|High pressure (PS1) - mid pressure (PS3) is small.|0.20~0.34MPa|\n||Large|Cooling-only<br>Cooling-main|SC16 and SH12 are small.|SC16>6<br>SH12>5|\n|||Heating-only<br>Heating-main|High pressure (PS1) - mid pressure (PS3) is large.|0.20~0.34MPa|\n–93–"
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "23",
+        "section": "1",
+        "title": "Step-by-Step Troubleshooting Procedure",
+        "text": "1. **Start**\n   - Visually check for disconnection between connectors and terminals, and confirm correct lead colors.\n2. **Intermediate Connector Check:**\n   - Connectors:\n     - Brown → 2\n     - Red → 5\n     - Blue → 1\n     - Orange → 3\n     - Yellow → 4\n     - White → 6\n3. **Visual Inspection:**\n   - If disconnections are found, proceed to the next step.\n   - If no disconnections are found:\n     - Remove connectors from the board and use a tester to check conduction.\n4. **Conduction Test:**\n   - Check between connectors 1-3-5 and 2-4-6.\n   - If conduction is OK, proceed to the next step.\n   - If not:\n     - Adjust or repair as necessary.\n5. **Resistance Measurement:**\n   - Use a tester to measure resistance between each coil (red-white, red-orange, brown-yellow, brown-blue).\n   - Correct value should be 150Ω±10%.\n6. **Resistance Test Results:**\n   - If the measured resistance is within the specified range:\n     - Proceed to the next step.\n   - If not:\n     - Change LEV.\n7. **LEV Functionality Check:**\n   - Check for the following:\n     - LEV full open: ticking sound\n     - LEV full closed: no sound\n8. **Sound Test:**\n   - If the sound test is OK, proceed to the next step.\n   - If not:\n     - Change LEV.\n9. **LEV Full Closure Check:**\n   - Confirm if LEV is fully closed.\n   - If it is not fully closed:\n     - Change LEV.\n10. **LED Test:**\n    - Attach check LEDs illustrated nearby to board connectors and confirm that LEDs light for 10 seconds.\n    - Correct LED values should be as follows (assuming the illustration shows correct connections):\n      - LED 6\n      - LED 5\n      - LED 4\n      - LED 3\n      - LED 2\n      - LED 1\n11. **LED Test Results:**\n    - If LEDs light for 10 seconds:\n      - Proceed to the next step.\n    - If not:\n      - Change the board."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "23",
+        "section": "1",
+        "title": "Conclusion",
+        "text": "- If all tests are successful, the process ends successfully.\n- If any test fails, replace the LEV or the board as indicated."
+    },
+    {
+        "document_id": "PQRY-P-YEM-A_SM-73-96",
+        "file_name": "PQRY-P-YEM-A_SM-73-96.pdf",
+        "page": "24",
+        "section": "1",
+        "title": "Diagramma di Troubleshooting per la Valvola Solenoide",
+        "text": "1. **Inizio**\n   - **Operazione OFF?**\n     - **Sì:** Correggere il problema.\n     - **No:**\n       - **Verifica la connessione della valvola solenoide e lo stato del connettore (disconnessione o debolezza).**\n         - **Sì:** Correggere il problema.\n         - **No:**\n           - **Operare il raffreddatore e il riscaldatore solo per il sistema refrigerante relativo alla valvola solenoide.**\n             - **Nota 1:**\n               - **Suono di clicking prodotto quando funzionante in tempo?**\n                 - **Sì:** Rimuovere la bobina e verificare se c'è una forza magnetica.\n                   - **Forza magnetica OK?**\n                     - **Sì:** Verificare la differenza di temperatura tra l'entrata e l'uscita della valvola solenoide. Se la differenza è zero, la valvola è normale; altrimenti, è difettosa.\n                       - **Valvola solenoide OK?**\n                         - **Sì:** Valvola solenoide normale.\n                         - **No:** Valvola solenoide difettosa.\n                   - **No:**\n                     - **Forza magnetica non presente.** Fermare l'unità e disconnettere il connettore della valvola solenoide dal pannello di controllo per verificare la conduttanza della bobina.\n                       - **Conduttanza presente?**\n                         - **Sì:** Con il connettore della valvola solenoide disconnesso, utilizzare un telecomando remoto per accendere l'unità e controllare l'uscita (220-240V) dal pannello di controllo.\n                           - **Uscita 220-240V OK?**\n                             - **Sì:** Cambiare il pannello di controllo.\n                             - **No:** Cambiare la valvola solenoide.\n                         - **No:**\n                           - **Valvola solenoide difettosa.**\n### Note:\n1. **Nota 1:** Operare il raffreddatore e il riscaldatore solo per il sistema refrigerante relativo alla valvola solenoide.\n2. **Nota 3:** Verificare la differenza di temperatura tra l'entrata e l'uscita della valvola solenoide. Se la differenza è zero, la valvola è normale; altrimenti, è difettosa."
+    }
+]

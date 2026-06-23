@@ -1,0 +1,26 @@
+[
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "3",
+        "section": "Generale",
+        "title": "Introduzione",
+        "text": "This manual is applied to R-30iB Mate/ R-30iB Mate Plus controller (called R-30iB Mate/ R-30iB Mate Plus).\nR-30iB Mate/ R-30iB Mate Plus has different controller  depending on the required standards.\nNRTL controller: To meet UL/CSA standard   \nCE controller To meet Machinery Directive, Low voltage Directive, EMC Directive to cover the requirement of CE mark This manual covers these controllers of the R-30iB Mate/ R-30iB Mate Plus.   \nThe difference of NRTL and CE controller from the Basic controller is small as shown in Table 1 (ex.   \nEMC parts, Breakers).   \nAnd the specific descriptions of CE and NRTL controller have notifications in this manual.\n**Table 1. Applied standards**\n|  | Functional Safety | EMC Standard | Robot Standard Electrical Standard | Requirement | Difference |\n| --- | --- | --- | --- | --- | --- |\n|  | Functional Safety | EMC Standard | Robot Standard Electrical Standard | Requirement | Difference |\n| Basic controller | ISO 13849-1 IEC61508 |  |  |  |  |\n| NRTL controller | ISO 13849-1 IEC61508 |  | UL1740 CAN/CSA Z434 NFPA79 | UL standard CSA standard ·USA and Canada | •UL listed main breaker |\n| CE controller | ISO 13849-1 IEC61508 | EN 55011 EN 61000-6-2 EN 61000-6-4 | EN/ISO 10218-1 EN 60204-1 | CE Marking ·Europe | ·Noise filter ·EMC Cabinet ·Shielded cable |\nThis manual describes the maintenance and connection of R-30iB Mate/ R-30iB Mate Plus.\n･Maintenance Part: Troubleshooting, and the setting, adjustment, and replacement of units ･Connection Part: Connection of R-30iB Mate/ R-30iB Mate Plus to the robot mechanical unit and peripheral devices, and installation of the controller\nWARNING\nBefore you enter the robot working area, be sure to turn off the power to the controller or press the EMERGENCY STOP button on the operator's panel or teach pendant. Otherwise, you could injure personnel or damage equipment."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "4",
+        "section": "2.1",
+        "title": "EXTERNAL VIEW OF THE CONTROLLER",
+        "text": "The appearance and components might slightly differ depending on the controlled robot, application, and options used.\nFig.2.1 (a) to (b) show the view of R-30iB Mate/ R-30iB Mate Plus.   \nFig.2.1 (c) to (g) show the construction of the R-30iB Mate/ R-30iB Mate Plus controller.   \nFig.2.1 (h) to (j) show the external view of the operator’s panel and teach pendant."
+    },
+    {
+        "document_id": "02",
+        "file_name": "overview_configuration.pdf",
+        "page": "10",
+        "section": "2.2",
+        "title": "COMPONENT FUNCTIONS",
+        "text": "Main board   \nThe main board contains a microprocessor, its peripheral circuits, memory, and operator's panel control circuit.  The main CPU controls servo mechanism positioning.   \nI/O printed circuit board   \nVarious types of printed circuit boards are provided for applications including process I/O board. These are connected with FANUC I/O Link.   \nE-stop unit   \nThis unit controls the emergency stop system of the robot controller. It also has user interface terminals of safety relevant signals, external on/off signals etc.   \nPower supply unit   \nThe power supply unit converts the AC power to various levels of DC power.   \nBackplane printed circuit board   \nThe various control printed circuit boards are mounted on the backplane printed circuit board. Teach pendant   \nAll operations including robot programming are performed with this unit.  The controller status and data are indicated on the liquid-crystal display (LCD) on the pendant.   \n6-Axis Servo amplifier   \nThe servo amplifier controls servomotor, Pulsecoder signal, brake control, overtravel and hand broken.   \nOperator's panel   \nButtons and LEDs on the operator's panel are used to start the robot and to indicate the robot status. Fan unit, heat exchanger   \nThese components cool the inside of the controller.   \nCircuit breaker   \nIf the electric system in the controller malfunctions, or if abnormal input power causes high current in the system, the input power is connected to the circuit breaker to protect the equipment.   \nRegenerative resistor   \nTo discharge the counter electromotive force from the servomotor, connect a regenerative resistor to the servo amplifier."
+    }
+]

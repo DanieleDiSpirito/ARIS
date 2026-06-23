@@ -18,6 +18,7 @@ Questo report mette a confronto la pulizia e la qualità testuale dei chunk gene
 | llamaparse |            583 |                           517 |                0.07 |                0.08 |              11.81 |                    1.03 |                       271 |
 | qwen       |            789 |                           367 |                0.03 |                0    |              17.75 |                    1.01 |                       154 |
 | pdf4llm    |            590 |                           528 |                0.04 |                0    |               6.16 |                    1.19 |                       331 |
+| mineru     |            319 |                           894 |                0.11 |                0    |               6.29 |                    0.94 |                       230 |
 
 ---
 *Report generato automaticamente dallo script `valuta_qualita_chunk.py` il 20 Giugno 2026.*

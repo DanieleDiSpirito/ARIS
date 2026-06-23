@@ -38,9 +38,9 @@ def main():
     parser.add_argument(
         "--metodo", "-m", 
         type=str, 
-        choices=["euristico", "docling", "llamaparse", "qwen", "pdf4llm"],
+        choices=["euristico", "docling", "llamaparse", "qwen", "pdf4llm", "mineru"],
         default="docling",
-        help="Metodo di estrazione da elaborare (euristico, docling, llamaparse, qwen, pdf4llm)."
+        help="Metodo di estrazione da elaborare (euristico, docling, llamaparse, qwen, pdf4llm, mineru)."
     )
     args = parser.parse_args()
     

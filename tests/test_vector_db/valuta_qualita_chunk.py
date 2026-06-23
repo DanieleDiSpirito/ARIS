@@ -108,7 +108,7 @@ def analizza_metodo(metodo: str) -> Dict[str, Any]:
     }
 
 def main():
-    metodi = ["euristico", "docling", "llamaparse", "qwen", "pdf4llm"]
+    metodi = ["euristico", "docling", "llamaparse", "qwen", "pdf4llm", "mineru"]
     results = []
     
     print("🔬 Avvio analisi della qualità e pulizia dei chunk...")
