@@ -30,10 +30,13 @@ PROJECT_ROOT = os.path.dirname(TESTS_DIR)
 # Aggiungi src/rag_pipeline al path
 sys.path.append(os.path.join(PROJECT_ROOT, "src", "rag_pipeline"))
 
-from rag_pipeline_hybrid import setup_rag_chain, get_db_path, get_embeddings, build_hybrid_retriever, COLLECTION_NAME
+import rag_pipeline_hybrid
+import rag_pipeline_rerank
+import rag_pipeline_graph
+from rag_pipeline_hybrid import get_db_path, get_embeddings, COLLECTION_NAME
 
 
-def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None, k: int = 3, model: str = None, rag_type: str = "ibrido"):
+def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None, k: int = 3, model: str = None, rag_type: str = "ibrido", metodo: str = "pdf4llm"):
     test_file = os.path.join(TESTS_DIR, f"test_questions_{lang}.csv")
     if not os.path.exists(test_file):
         print(f"❌ File di test non trovato: {test_file}")
@@ -44,7 +47,7 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
         # Campiona casualmente in modo riproducibile e ordina per indice originale
         df = df.sample(n=min(limit, len(df)), random_state=42).sort_index()
 
-    db_path = os.path.join(PROJECT_ROOT, get_db_path(env, chunk_size))
+    db_path = os.path.join(PROJECT_ROOT, get_db_path(env, chunk_size, metodo))
     if not os.path.exists(db_path):
         print(f"❌ Database non trovato in: {db_path}")
         return
@@ -58,10 +61,20 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
     )
     if rag_type == "puro":
         retriever = lc_chroma.as_retriever(search_kwargs={"k": k})
-    else:  # ibrido
-        retriever = build_hybrid_retriever(lc_chroma, k=k)
-        
-    rag_chain = setup_rag_chain(retriever, env=env, model_name=model)
+        rag_chain = rag_pipeline_hybrid.setup_rag_chain(retriever, env=env, model_name=model)
+    elif rag_type == "ibrido":
+        retriever = rag_pipeline_hybrid.build_hybrid_retriever(lc_chroma, k=k)
+        rag_chain = rag_pipeline_hybrid.setup_rag_chain(retriever, env=env, model_name=model)
+    elif rag_type == "rerank":
+        # Per Rerank, recuperiamo più candidati dal retriever (es. k * 2) per poi filtrarli col reranker
+        ensemble = rag_pipeline_rerank.build_hybrid_retriever(lc_chroma, k=max(k * 2, 6))
+        retriever = rag_pipeline_rerank.HybridRerankRetriever(ensemble, top_n=k)
+        rag_chain = rag_pipeline_rerank.setup_rag_chain(retriever, env=env, model_name=model)
+    elif rag_type == "graph":
+        retriever = rag_pipeline_graph.build_graph_retriever(lc_chroma, k_base=max(k - 1, 2), top_n=k)
+        rag_chain = rag_pipeline_graph.setup_rag_chain(retriever, env=env, model_name=model)
+    else:
+        raise ValueError(f"rag_type non valido: '{rag_type}'")
 
     questions = []
     answers = []
@@ -221,7 +234,7 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
     # Salva e visualizza i risultati
     out_dir = os.path.join(TESTS_DIR, "results_llm", "logs")
     os.makedirs(out_dir, exist_ok=True)
-    out_file = os.path.join(out_dir, f"ragas_eval_{env}_{lang}_{chunk_size}_{rag_type}_{model_suffix}.csv")
+    out_file = os.path.join(out_dir, f"ragas_eval_{env}_{lang}_{chunk_size}_{rag_type}_{metodo}_{model_suffix}.csv")
 
     df_result = pd.DataFrame(results_list)
     df_result.to_csv(out_file, index=False, encoding='utf-8')
@@ -237,9 +250,9 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
     # Salva il report in quick_eval
     quick_eval_dir = os.path.join(TESTS_DIR, "results_llm", "quick_eval")
     os.makedirs(quick_eval_dir, exist_ok=True)
-    quick_eval_file = os.path.join(quick_eval_dir, f"ragas_eval_summary_{env}_{lang}_{chunk_size}_{rag_type}_{model_suffix}.md")
+    quick_eval_file = os.path.join(quick_eval_dir, f"ragas_eval_summary_{env}_{lang}_{chunk_size}_{rag_type}_{metodo}_{model_suffix}.md")
     
-    summary_md = f"""# Report RAGAS Summary ({env}, {lang}, chunk: {chunk_size})
+    summary_md = f"""# Report RAGAS Summary ({env}, {lang}, chunk: {chunk_size}, metodo: {metodo})
 
 | Metric | Value |
 | :--- | :--- |
@@ -274,8 +287,15 @@ if __name__ == "__main__":
     parser.add_argument("--k", type=int, default=3, help="Numero di chunk da recuperare")
     parser.add_argument("--model", type=str, default=None,
                         help="Modello LLM da usare per la generazione (es. openai/gpt-4o-mini, google/gemini-2.5-flash, google/gemini-3.5-flash, meta-llama/llama-3.3-70b-instruct, qwen/qwen-2.5-72b-instruct, deepseek/deepseek-chat)")
-    parser.add_argument("--rag_type", type=str, choices=["puro", "ibrido"], default="ibrido",
-                        help="Algoritmo RAG da usare: 'puro' (solo Vector Search) o 'ibrido' (BM25 + Vector Search)")
+    parser.add_argument("--rag_type", type=str, choices=["puro", "ibrido", "rerank", "graph"], default="ibrido",
+                        help="Algoritmo RAG da usare: 'puro' (solo Vector Search), 'ibrido' (BM25 + Vector Search), 'rerank' (BM25 + Vector + Re-ranking) o 'graph' (GraphRAG leggero)")
+    parser.add_argument(
+        "--metodo", "-m", 
+        type=str, 
+        choices=["euristico", "pdf4llm", "docling", "llamaparse", "qwen"],
+        default="pdf4llm",
+        help="Metodo di estrazione dei PDF da testare."
+    )
     args = parser.parse_args()
 
-    run_ragas_evaluation(args.env, args.lang, args.chunk_size, args.limit, args.k, args.model, args.rag_type)
+    run_ragas_evaluation(args.env, args.lang, args.chunk_size, args.limit, args.k, args.model, args.rag_type, args.metodo)
