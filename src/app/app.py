@@ -7,9 +7,12 @@ rag_folder_path = os.path.join(current_dir, "..", "rag_pipeline")
 sys.path.append(rag_folder_path)
 
 try:
-    from rag_pipeline_hybrid import setup_rag_chain, get_db_path, get_embeddings, build_hybrid_retriever
-except ImportError:
-    st.error(f"❌ Impossibile trovare 'rag_pipeline_hybrid.py' in: {rag_folder_path}")
+    import rag_pipeline_hybrid
+    import rag_pipeline_rerank
+    import rag_pipeline_graph
+    from rag_pipeline_hybrid import get_db_path, get_embeddings
+except ImportError as e:
+    st.error(f"❌ Impossibile caricare i moduli RAG: {e}")
     st.stop()
 
 from langchain_chroma import Chroma
@@ -19,8 +22,10 @@ COLLECTION_NAME = "langchain"
 PROJECT_ROOT = os.path.abspath(os.path.join(current_dir, "..", ".."))
 
 @st.cache_resource
-def init_retriever(env: str, chunk_size: int):
-    """Inizializza il retriever ibrido (BM25 + Vector Search) per l'env scelto."""
+def init_rag_chain(env: str, chunk_size: int, rag_type: str):
+    """Inizializza l'intera chain RAG (retriever + LLM).
+    Cached per evitare di ricreare l'LLM ed il Reranker ad ogni rerun.
+    """
     db_path = os.path.join(PROJECT_ROOT, get_db_path(env, chunk_size))
 
     if not os.path.exists(db_path):
@@ -33,17 +38,23 @@ def init_retriever(env: str, chunk_size: int):
         collection_name=COLLECTION_NAME,
         embedding_function=embedder
     )
-    return build_hybrid_retriever(lc_chroma, k=3)
-
-
-@st.cache_resource
-def init_rag_chain(env: str, chunk_size: int):
-    """Inizializza l'intera chain RAG (retriever + LLM).
-    Cached per evitare di ricreare l'LLM ad ogni rerun della sidebar.
-    Si ricalcola solo se cambiano env o chunk_size.
-    """
-    retriever = init_retriever(env, chunk_size)
-    return setup_rag_chain(retriever, env=env)
+    
+    if rag_type == "puro":
+        retriever = lc_chroma.as_retriever(search_kwargs={"k": 3})
+        return rag_pipeline_hybrid.setup_rag_chain(retriever, env=env)
+    elif rag_type == "ibrido":
+        retriever = rag_pipeline_hybrid.build_hybrid_retriever(lc_chroma, k=3)
+        return rag_pipeline_hybrid.setup_rag_chain(retriever, env=env)
+    elif rag_type == "rerank":
+        ensemble = rag_pipeline_rerank.build_hybrid_retriever(lc_chroma, k=6)
+        retriever = rag_pipeline_rerank.HybridRerankRetriever(ensemble, top_n=3)
+        return rag_pipeline_rerank.setup_rag_chain(retriever, env=env)
+    elif rag_type == "graph":
+        retriever = rag_pipeline_graph.build_graph_retriever(lc_chroma, k_base=3, top_n=4)
+        return rag_pipeline_graph.setup_rag_chain(retriever, env=env)
+    else:
+        st.error(f"❌ Algoritmo RAG non riconosciuto: {rag_type}")
+        st.stop()
 
 
 st.set_page_config(page_title="ARIS - Assistente Fanuc", page_icon="🤖", layout="wide")
@@ -58,6 +69,13 @@ scelta_env = st.sidebar.radio(
     help="Cloud usa OpenRouter (richiede API Key nel .env). Locale usa LM Studio sul tuo PC."
 )
 
+scelta_rag_type = st.sidebar.radio(
+    "Algoritmo RAG:",
+    ["puro", "ibrido", "rerank", "graph"],
+    index=2,
+    help="Puro = Solo Vector Search. Ibrido = BM25 + Vector Search. Rerank = Ibrido + Cross-Encoder Reranking. Graph = GraphRAG leggero."
+)
+
 scelta_chunk_size = st.sidebar.selectbox(
     "Dimensione Chunk:",
     [300, 700, 1000],
@@ -68,21 +86,28 @@ scelta_chunk_size = st.sidebar.selectbox(
 st.sidebar.markdown("---")
 db_label = get_db_path(scelta_env, scelta_chunk_size)
 embedding_label = "bge-m3 (1024d, locale)" if scelta_env == "locale" else "text-embedding-3-small (1536d, OpenRouter)"
+retriever_label = {
+    "puro": "Solo Vector Search (k=3)",
+    "ibrido": "Ibrido BM25 + Vector Search (k=3)",
+    "rerank": "Ibrido + Rerank Cross-Encoder (k=12 -> top 3)",
+    "graph": "GraphRAG leggero (k=3 base -> k=4 espanso via Grafo)"
+}[scelta_rag_type]
+
 st.sidebar.info(f"""
 **Stato Sistema:**
 - DB: `{db_label}`
 - Collection: `{COLLECTION_NAME}`
 - Chunk Size: `{scelta_chunk_size} token`
 - Embedding: `{embedding_label}`
-- Retriever: `Ibrido BM25 + Vector Search (50/50)`
+- Retriever: `{retriever_label}`
 """)
 
 st.title("🤖  ARIS: Assistente per Manutenzione Industriale")
 st.caption("Supporto tecnico basato su RAG per Robot Fanuc R-30iB Mate")
 
-# Inizializza retriever + chain (entrambi cached per env+chunk_size)
+# Inizializza retriever + chain (entrambi cached per env+chunk_size+rag_type)
 try:
-    rag_chain = init_rag_chain(scelta_env, scelta_chunk_size)
+    rag_chain = init_rag_chain(scelta_env, scelta_chunk_size, scelta_rag_type)
 except Exception as e:
     st.error(f"Errore nella configurazione della pipeline: {e}")
     st.stop()

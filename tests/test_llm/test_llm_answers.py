@@ -23,8 +23,9 @@ def _pagine_match_tol(found_p: str, exp_p: str, tolleranza: int) -> bool:
     return False
 
 def _estrai_fonte_llm(risposta: str):
-    # Cerca un file .pdf e (opzionalmente) un indicatore di pagina entro i successivi 30 caratteri
-    pattern = r'([a-zA-Z0-9_\-\.]+\.pdf)(?:[^0-9]{0,30}?(?:pagina|page|pag|p)\.?\s*[:]?\s*(\d+))?'
+    # Cerca un file .pdf e (opzionalmente) un indicatore di pagina entro i successivi 30 caratteri.
+    # Gestisce anche pagine con prefisso alfanumerico come s-1, s-12, ecc.
+    pattern = r'([a-zA-Z0-9_\-\.]+\.pdf)(?:[^0-9]{0,30}?(?:pagina|page|pag|p)\.?\s*[:]?\s*([a-zA-Z0-9\-]*\d+))?'
     matches = re.findall(pattern, risposta, re.IGNORECASE)
     
     if matches:
@@ -40,14 +41,17 @@ TESTS_DIR = os.path.dirname(BASE_DIR)
 PROJECT_ROOT = os.path.dirname(TESTS_DIR)
 sys.path.append(os.path.join(PROJECT_ROOT, "src", "rag_pipeline"))
 
-from rag_pipeline_hybrid import setup_rag_chain, get_db_path, get_embeddings, build_hybrid_retriever, COLLECTION_NAME
+import rag_pipeline_hybrid
+import rag_pipeline_rerank
+import rag_pipeline_graph
+from rag_pipeline_hybrid import get_db_path, get_embeddings, COLLECTION_NAME
 from langchain_chroma import Chroma
 
 load_dotenv()
 # Disabilita il tracing di LangSmith per evitare errori di limite di quota nei benchmark
 os.environ["LANGCHAIN_TRACING_V2"] = "false"
 
-def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = None, tolleranza: int = 1, model: str = None, rag_type: str = "ibrido"):
+def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = None, tolleranza: int = 1, model: str = None, rag_type: str = "ibrido", metodo: str = "pdf4llm"):
     test_file = os.path.join(TESTS_DIR, f"test_questions_{lang}.csv")
     if not os.path.exists(test_file):
         print(f"❌ File di test non trovato: {test_file}")
@@ -58,7 +62,7 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
         # Campiona casualmente in modo riproducibile e ordina per indice originale
         df = df.sample(n=min(max_questions, len(df)), random_state=42).sort_index()
 
-    db_path = os.path.join(PROJECT_ROOT, get_db_path(env, chunk_size))
+    db_path = os.path.join(PROJECT_ROOT, get_db_path(env, chunk_size, metodo))
     if not os.path.exists(db_path):
         print(f"❌ Database non trovato in: {db_path}")
         return
@@ -72,10 +76,19 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
     )
     if rag_type == "puro":
         retriever = lc_chroma.as_retriever(search_kwargs={"k": 3})
-    else:  # ibrido
-        retriever = build_hybrid_retriever(lc_chroma, k=3)
-        
-    rag_chain = setup_rag_chain(retriever, env=env, model_name=model)
+        rag_chain = rag_pipeline_hybrid.setup_rag_chain(retriever, env=env, model_name=model)
+    elif rag_type == "ibrido":
+        retriever = rag_pipeline_hybrid.build_hybrid_retriever(lc_chroma, k=3)
+        rag_chain = rag_pipeline_hybrid.setup_rag_chain(retriever, env=env, model_name=model)
+    elif rag_type == "rerank":
+        ensemble = rag_pipeline_rerank.build_hybrid_retriever(lc_chroma, k=6)
+        retriever = rag_pipeline_rerank.HybridRerankRetriever(ensemble, top_n=3)
+        rag_chain = rag_pipeline_rerank.setup_rag_chain(retriever, env=env, model_name=model)
+    elif rag_type == "graph":
+        retriever = rag_pipeline_graph.build_graph_retriever(lc_chroma, k_base=3, top_n=4)
+        rag_chain = rag_pipeline_graph.setup_rag_chain(retriever, env=env, model_name=model)
+    else:
+        raise ValueError(f"rag_type non valido: '{rag_type}'")
 
     risultati = []
     hit_count = 0
@@ -145,7 +158,7 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
     model_suffix = model.replace('/', '_').replace(':', '_') if model else ("default_local" if env == "locale" else "default_cloud")
     out_dir = os.path.join(TESTS_DIR, "results_llm", "logs")
     os.makedirs(out_dir, exist_ok=True)
-    out_file = os.path.join(out_dir, f"llm_results_{env}_{lang}_{chunk_size}_{rag_type}_{model_suffix}.csv")
+    out_file = os.path.join(out_dir, f"llm_results_{env}_{lang}_{chunk_size}_{rag_type}_{metodo}_{model_suffix}.csv")
     
     df_out = pd.DataFrame(risultati)
     df_out.to_csv(out_file, index=False, encoding='utf-8')
@@ -159,9 +172,9 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
         # Salva il report in quick_eval
         quick_eval_dir = os.path.join(TESTS_DIR, "results_llm", "quick_eval")
         os.makedirs(quick_eval_dir, exist_ok=True)
-        quick_eval_file = os.path.join(quick_eval_dir, f"llm_results_summary_{env}_{lang}_{chunk_size}_{rag_type}_{model_suffix}.md")
+        quick_eval_file = os.path.join(quick_eval_dir, f"llm_results_summary_{env}_{lang}_{chunk_size}_{rag_type}_{metodo}_{model_suffix}.md")
         
-        summary_md = f"""# Report Risultati LLM Summary ({env}, {lang}, chunk: {chunk_size})
+        summary_md = f"""# Report Risultati LLM Summary ({env}, {lang}, chunk: {chunk_size}, metodo: {metodo})
 
 | Metric | Value |
 | :--- | :--- |
@@ -197,8 +210,15 @@ if __name__ == "__main__":
     parser.add_argument("--tolleranza", type=int, default=1, help="Tolleranza di pagina ±N")
     parser.add_argument("--model", type=str, default=None,
                         help="Modello LLM da usare (es. openai/gpt-4o-mini, google/gemini-2.5-flash, google/gemini-3.5-flash, meta-llama/llama-3.3-70b-instruct, qwen/qwen-2.5-72b-instruct, deepseek/deepseek-chat)")
-    parser.add_argument("--rag_type", type=str, choices=["puro", "ibrido"], default="ibrido",
-                        help="Algoritmo RAG da usare: 'puro' (solo Vector Search) o 'ibrido' (BM25 + Vector Search)")
+    parser.add_argument("--rag_type", type=str, choices=["puro", "ibrido", "rerank", "graph"], default="ibrido",
+                        help="Algoritmo RAG da usare: 'puro' (solo Vector Search), 'ibrido' (BM25 + Vector Search), 'rerank' (BM25 + Vector + Re-ranking) o 'graph' (GraphRAG leggero)")
+    parser.add_argument(
+        "--metodo", "-m", 
+        type=str, 
+        choices=["euristico", "pdf4llm", "docling", "llamaparse", "qwen"],
+        default="pdf4llm",
+        help="Metodo di estrazione dei PDF da testare."
+    )
     args = parser.parse_args()
 
-    valuta_llm(args.env, args.lang, args.chunk_size, args.limit, args.tolleranza, args.model, args.rag_type)
+    valuta_llm(args.env, args.lang, args.chunk_size, args.limit, args.tolleranza, args.model, args.rag_type, args.metodo)
