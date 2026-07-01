@@ -25,3 +25,13 @@ data/models/
 
 # Ignora il vector db di general_pdf_pipeline
 general_pdf_pipeline/vector_db/
+
+# Ignora i file .tex della tesi e i relativi file di compilazione ausiliari
+thesis_report/*.tex
+thesis_report/*.md
+thesis_report/*.aux
+thesis_report/*.log
+thesis_report/*.out
+thesis_report/*.toc
+thesis_report/*.synctex.gz
+thesis_report/*.pdf
