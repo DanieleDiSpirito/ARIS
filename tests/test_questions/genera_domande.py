@@ -67,6 +67,12 @@ def genera_domande(env: str, lang: str, metodo: str, target_count: int = 100, mo
 
     print(f"🎯 Selezionati {len(selezionati)} chunk per generare {target_count} domande.")
 
+    # Calcola la distribuzione delle difficoltà proporzionalmente (30% low, 50% medium, 20% hard)
+    low_target = int(0.3 * target_count)
+    hard_target = int(0.2 * target_count)
+    medium_target = target_count - low_target - hard_target
+    target_difficulties = ["low"] * low_target + ["medium"] * medium_target + ["hard"] * hard_target
+
     # 2. Configura l'LLM
     if env == "locale":
         print("🤖 Generatore LLM: Locale (localhost:1234)")
@@ -89,7 +95,8 @@ def genera_domande(env: str, lang: str, metodo: str, target_count: int = 100, mo
             openai_api_base="https://openrouter.ai/api/v1",
             openai_api_key=os.getenv("OPENAI_API_KEY"),
             temperature=0.3,
-            max_tokens=1000
+            max_tokens=1000,
+            model_kwargs={"response_format": {"type": "json_object"}}
         )
     else:
         raise ValueError("Il parametro env deve essere 'locale' o 'cloud'")
@@ -106,7 +113,9 @@ def genera_domande(env: str, lang: str, metodo: str, target_count: int = 100, mo
         title = chunk.get("title", "N/A")
         text = chunk.get("text", "")
 
-        print(f"[{idx+1}/{len(selezionati)}] Generazione da: {file_basename} (Pag: {page}, Sez: {section})...")
+        target_diff = target_difficulties[idx]
+
+        print(f"[{idx+1}/{len(selezionati)}] Generazione da: {file_basename} (Pag: {page}, Sez: {section}) | Difficoltà Target: {target_diff}...")
 
         # Prompt per la generazione delle domande
         prompt = f"""Dato il seguente testo estratto da un manuale tecnico del controller Fanuc R-30iB (File: {file_basename}, Pagina: {page}, Sezione: {section}, Titolo: {title}):
@@ -118,12 +127,18 @@ Genera una domanda di test realistica e la relativa risposta attesa dettagliata 
 La domanda deve basarsi ESCLUSIVAMENTE sulle informazioni contenute nel testo fornito. Non fare riferimento a informazioni esterne o non descritte nel testo.
 La risposta deve essere corretta, esatta e interamente deducibile dal testo fornito.
 
+IMPORTANTE: La domanda deve avere obbligatoriamente un livello di difficoltà pari a '{target_diff}'.
+Definizione dei livelli:
+- 'low': domande semplici su singoli parametri, definizioni o valori numerici diretti.
+- 'medium': domande che richiedono di seguire passaggi sequenziali o che richiedono comprensione di una procedura standard.
+- 'hard': domande complesse su schemi di collegamento elettrico, relazioni logiche o troubleshooting strutturato con backup e precauzioni.
+
 Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni prima o dopo il JSON. Il JSON deve avere questa struttura esatta:
 {{
   "question": "Una domanda tecnica chiara e specifica in italiano (es. 'Qual è la corrente di uscita massima per ogni punto DO?')",
   "expected_answer": "La risposta esatta e completa basata solo sul testo (es. 'La corrente di uscita massima è 0.2A.')",
   "category": "Una tra: 'Consultazione tecnica', 'Codici errore', 'Procedure', 'Troubleshooting'",
-  "difficulty": "Una tra: 'low', 'medium', 'hard'"
+  "difficulty": "{target_diff}"
 }}
 """
 
@@ -139,17 +154,8 @@ Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni p
                 if judgement and all(k in judgement for k in ["question", "expected_answer", "category", "difficulty"]):
                     qid = f"Q{generati_con_successo+1:03d}"
                     
-                    diff_val = str(judgement["difficulty"]).strip().lower()
-                    diff_map = {
-                        "bassa": "low",
-                        "low": "low",
-                        "media": "medium",
-                        "medium": "medium",
-                        "alta": "hard",
-                        "high": "hard",
-                        "hard": "hard"
-                    }
-                    difficulty = diff_map.get(diff_val, "medium")
+                    # Forziamo la difficoltà target calcolata per garantire la proporzione esatta richiesta
+                    difficulty = target_diff
 
                     nuove_domande.append({
                         "id": qid,
@@ -163,7 +169,7 @@ Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni p
                     generati_con_successo += 1
                     success = True
                     tempo = round(time.time() - t0, 2)
-                    print(f"   ✅ Generata: {judgement['question'][:60]}... ({tempo}s)")
+                    print(f"   ✅ Generata ({difficulty}): {judgement['question'][:60]}... ({tempo}s)")
                 else:
                     print(f"   ⚠️ Risposta JSON non conforme. Tentativi rimasti: {retry_count-1}")
                     retry_count -= 1
@@ -206,8 +212,8 @@ if __name__ == "__main__":
     parser.add_argument(
         "--metodo", "-m", 
         type=str, 
-        choices=["euristico", "docling", "llamaparse", "qwen"],
-        default="docling",
+        choices=["euristico", "pdf4llm", "docling", "llamaparse", "qwen"],
+        default="pdf4llm",
         help="Metodo di estrazione da cui prelevare i testi (euristico, docling, llamaparse, qwen)."
     )
     args = parser.parse_args()

@@ -14,14 +14,14 @@ TESTS_DIR = os.path.dirname(BASE_DIR)
 PROJECT_ROOT = os.path.dirname(TESTS_DIR)
 
 
-def carica_testo_pagina(expected_file: str, expected_page: str) -> str:
+def carica_testo_pagina(expected_file: str, expected_page: str, metodo: str = "pdf4llm") -> str:
     """Carica il testo della pagina specificata dal file JSON preelaborato."""
     expected_file = str(expected_file).strip()
     expected_page = str(expected_page).strip()
 
     # Mappa .pdf a .json
     json_filename = expected_file.replace(".pdf", ".json")
-    json_path = os.path.join(PROJECT_ROOT, "data", "processed", "euristico", json_filename)
+    json_path = os.path.join(PROJECT_ROOT, "data", "processed", metodo, json_filename)
 
     if not os.path.exists(json_path):
         return f"[ERRORE: File JSON non trovato per {expected_file}]"
@@ -44,18 +44,56 @@ def carica_testo_pagina(expected_file: str, expected_page: str) -> str:
 
 
 def estrai_json(testo: str) -> dict:
-    """Estrae l'oggetto JSON dal testo della risposta del modello."""
-    # Cerca il blocco di codice markdown ```json o semplicemente le parentesi graffe
+    """Estrae l'oggetto JSON dal testo della risposta del modello usando espressioni regolari."""
     match = re.search(r'\{.*\}', testo, re.DOTALL)
-    if match:
-        try:
-            return json.loads(match.group())
-        except Exception:
-            pass
+    if not match:
+        return None
+        
+    json_str = match.group().strip()
+    
+    # Estraiamo le chiavi e i valori con regex specifiche (estremamente robusto contro virgolette singole o doppie non scappate)
+    # in caso di virgolette doppie o singole errate o non scappate
+    try:
+        # Estrai "valido"
+        valido_match = re.search(r'[\'"]valido[\'"]\s*:\s*(true|false|[\'"][^\'"]*[\'"])', json_str, re.IGNORECASE)
+        valido = False
+        if valido_match:
+            val_val = valido_match.group(1).lower()
+            valido = "true" in val_val or "1" in val_val
+            
+        # Estrai "categoria_errore"
+        cat_match = re.search(r'[\'"]categoria_errore[\'"]\s*:\s*[\'"]([^\'"]*)[\'"]', json_str)
+        categoria_errore = cat_match.group(1) if cat_match else "Nessuna"
+        
+        # Estrai "motivo_del_giudizio" catturando il testo tra virgolette strutturali (singole o doppie)
+        motivo = "Nessun motivo fornito."
+        # Cerca fino a ', "categoria_errore"' o similar
+        motivo_match = re.search(r'[\'"]motivo_del_giudizio[\'"]\s*:\s*[\'"](.*)[\'"]\s*,\s*[\'"]categoria_errore[\'"]', json_str, re.DOTALL)
+        if not motivo_match:
+            # Magari categoria_errore è prima o motivo_del_giudizio è all'ultimo posto
+            motivo_match = re.search(r'[\'"]motivo_del_giudizio[\'"]\s*:\s*[\'"](.*)[\'"]\s*\}', json_str, re.DOTALL)
+            
+        if motivo_match:
+            motivo_raw = motivo_match.group(1).strip()
+            # Pulizia di eventuali virgolette di chiusura residue se il regex ha preso troppo
+            if motivo_raw.endswith('",') or motivo_raw.endswith("',"):
+                motivo_raw = motivo_raw[:-2]
+            elif motivo_raw.endswith('"') or motivo_raw.endswith("'"):
+                motivo_raw = motivo_raw[:-1]
+            motivo = motivo_raw
+            
+        return {
+            "valido": valido,
+            "motivo_del_giudizio": motivo,
+            "categoria_errore": categoria_errore
+        }
+    except Exception:
+        pass
+        
     return None
 
 
-def valida_domande(env: str, lang: str, limit: int = None, model_name: str = None):
+def valida_domande(env: str, lang: str, limit: int = None, model_name: str = None, metodo: str = "pdf4llm"):
     test_file = os.path.join(TESTS_DIR, f"test_questions_{lang}.csv")
     if not os.path.exists(test_file):
         print(f"❌ File di test non trovato: {test_file}")
@@ -63,7 +101,7 @@ def valida_domande(env: str, lang: str, limit: int = None, model_name: str = Non
 
     df = pd.read_csv(test_file)
     if limit:
-        df = df.head(limit)
+        df = df.sample(n=min(limit, len(df))).reset_index(drop=True)
 
     print(f"📋 Caricamento di {len(df)} domande per la validazione...")
 
@@ -90,7 +128,8 @@ def valida_domande(env: str, lang: str, limit: int = None, model_name: str = Non
             openai_api_base="https://openrouter.ai/api/v1",
             openai_api_key=os.getenv("OPENAI_API_KEY"),
             temperature=0.0,
-            max_tokens=1000
+            max_tokens=1000,
+            model_kwargs={"response_format": {"type": "json_object"}}
         )
     else:
         raise ValueError("Il parametro env deve essere 'locale' o 'cloud'")
@@ -110,7 +149,7 @@ def valida_domande(env: str, lang: str, limit: int = None, model_name: str = Non
         print(f"[{index+1}/{len(df)}] Verifica {qid}...")
 
         # Carica il contesto originale della pagina
-        page_text = carica_testo_pagina(expected_file, expected_page)
+        page_text = carica_testo_pagina(expected_file, expected_page, metodo)
 
         if "[ERRORE:" in page_text:
             print(f"   ⚠️ {page_text}")
@@ -144,7 +183,10 @@ Verifiche da fare:
 2. La risposta alla domanda è effettivamente e interamente supportata dal testo fornito? Non ci sono dettagli inventati (hallucination) o informazioni esterne non verificabili da questo testo?
 3. Il riferimento alla pagina del documento è appropriato (il testo contiene effettivamente l'argomento della domanda)?
 
-Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni prima o dopo il JSON. Il JSON deve avere questa struttura esatta:
+Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni prima o dopo il JSON.
+IMPORTANTE: Non inserire MAI virgolette doppie (") all'interno dei valori stringa (es. dentro 'motivo_del_giudizio'). Se devi fare citazioni o racchiudere parole, usa ESCLUSIVAMENTE virgolette singole (').
+
+Il JSON deve avere questa struttura esatta:
 {{
   "valido": true o false (scrivi in minuscolo true o false, senza virgolette),
   "motivo_del_giudizio": "Spiegazione sintetica del perché è valido o meno.",
@@ -161,7 +203,10 @@ Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni p
             if judgement is None:
                 # Fallback se non restituisce JSON
                 valido = False
-                motivo = f"Errore: Risposta del Judge non formattabile come JSON: {raw_content}"
+                # Pulisce sequenze ripetute di backslash e tronca la stringa per evitare righe giganti nell'MD/CSV
+                content_snippet = re.sub(r'\\+', r'\\', raw_content).strip()
+                content_snippet = content_snippet[:150] + ("..." if len(content_snippet) > 150 else "")
+                motivo = f"Errore: Risposta del Judge non formattabile come JSON: {content_snippet}"
                 cat_errore = "Errore di parsing del Judge"
             else:
                 valido = bool(judgement.get("valido", False))
@@ -195,14 +240,67 @@ Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni p
         })
     
     df_out = pd.DataFrame(risultati_validazione)
+    out_file = os.path.join(PROJECT_ROOT, "data", "metrics", f"questions_quality_{lang}.csv")
     df_out.to_csv(out_file, index=False, encoding='utf-8')
     print(f"📊 Validazione completata. Risultati salvati in:\n{out_file}")
     
-    print("\n--- REPORT DI VALIDAZIONE ---")
-    print(f"  Domande analizzate: {len(df)}")
-    print(f"  Domande VALIDE    : {validi} ({validi/len(df)*100:.1f}%)")
-    print(f"  Domande NON VALIDE: {non_validi} ({non_validi/len(df)*100:.1f}%)")
-    print("-----------------------------\n")
+    # Calcolo percentuali
+    totale = len(df)
+    pct_valide = (validi / totale) * 100 if totale > 0 else 0
+    pct_non_valide = (non_validi / totale) * 100 if totale > 0 else 0
+
+    # Creazione della tabella di sintesi
+    summary_data = [
+        {"Stato": "Risposte Corrette (Valide)", "Numero": validi, "Percentuale": f"{pct_valide:.1f}%"},
+        {"Stato": "Risposte Sbagliate (Non Valide)", "Numero": non_validi, "Percentuale": f"{pct_non_valide:.1f}%"},
+        {"Stato": "Totale", "Numero": totale, "Percentuale": "100.0%"}
+    ]
+    df_summary = pd.DataFrame(summary_data)
+
+    print("\n📊 TABELLA DI SINTESI QUALITÀ:")
+    print("=" * 60)
+    print(df_summary.to_string(index=False))
+    print("=" * 60)
+
+    # Filtraggio delle domande non valide per la stampa e salvataggio
+    df_invalid = df_out[df_out["valido"] == False]
+
+    print("\n❌ DETTAGLIO RISPOSTE SBAGLIATE (CON CATEGORIA ERRORE):")
+    if not df_invalid.empty:
+        print("=" * 100)
+        for _, row in df_invalid.iterrows():
+            print(f"ID: {row['id']} | Categoria Errore: {row['categoria_errore']}")
+            print(f"Domanda: {row['question']}")
+            print(f"Motivo: {row['motivo']}")
+            print("-" * 100)
+    else:
+        print("Nessuna risposta sbagliata riscontrata!")
+        print("=" * 60)
+
+    # Scrittura del file Markdown
+    out_file_md = os.path.join(PROJECT_ROOT, "data", "metrics", f"questions_quality_{lang}.md")
+    
+    md_summary_table = df_summary.to_markdown(index=False)
+    
+    if not df_invalid.empty:
+        md_details_table = df_invalid[["id", "question", "categoria_errore", "motivo"]].to_markdown(index=False)
+    else:
+        md_details_table = "_Nessuna risposta sbagliata riscontrata._"
+
+    md_content = f"""# Report Qualità Domande (Lingua: {lang.upper()})
+
+## Sintesi della Validazione
+
+{md_summary_table}
+
+## Dettaglio Errori delle Risposte Sbagliate
+
+{md_details_table}
+"""
+
+    with open(out_file_md, "w", encoding="utf-8") as f:
+        f.write(md_content)
+    print(f"📝 Report di qualità salvato in formato Markdown in:\n{out_file_md}\n")
 
 
 if __name__ == "__main__":
@@ -211,6 +309,13 @@ if __name__ == "__main__":
     parser.add_argument("--lang", type=str, choices=["it", "en"], default="it", help="Lingua del test")
     parser.add_argument("--limit", type=int, default=None, help="Limita il numero di domande da testare")
     parser.add_argument("--model", type=str, default=None, help="Modello OpenRouter da usare (es. openai/gpt-4o-mini)")
+    parser.add_argument(
+        "--metodo", "-m", 
+        type=str, 
+        choices=["euristico", "pdf4llm", "docling", "llamaparse", "qwen"],
+        default="pdf4llm",
+        help="Metodo di estrazione per caricare i testi delle pagine."
+    )
     args = parser.parse_args()
 
-    valida_domande(args.env, args.lang, args.limit, args.model)
+    valida_domande(args.env, args.lang, args.limit, args.model, args.metodo)

@@ -42,14 +42,116 @@ def carica_testo_pagina(expected_file: str, expected_page: str, metodo: str) -> 
 
     return f"[ERRORE: Pagina {expected_page} non trovata nel file {expected_file}]"
 
-def estrai_json(testo: str) -> dict:
-    """Estrae l'oggetto JSON dal testo della risposta del modello."""
+def estrai_json_judge(testo: str) -> dict:
+    """Estrae l'oggetto JSON del Judge usando espressioni regolari."""
     match = re.search(r'\{.*\}', testo, re.DOTALL)
-    if match:
-        try:
-            return json.loads(match.group())
-        except Exception:
-            pass
+    if not match:
+        return None
+        
+    json_str = match.group().strip()
+    
+    try:
+        # Prova standard
+        return json.loads(json_str)
+    except Exception:
+        pass
+        
+    try:
+        # Estrai "valido"
+        valido_match = re.search(r'[\'"]valido[\'"]\s*:\s*(true|false|[\'"][^\'"]*[\'"])', json_str, re.IGNORECASE)
+        valido = False
+        if valido_match:
+            val_val = valido_match.group(1).lower()
+            valido = "true" in val_val or "1" in val_val
+            
+        # Estrai "categoria_errore"
+        cat_match = re.search(r'[\'"]categoria_errore[\'"]\s*:\s*[\'"]([^\'"]*)[\'"]', json_str)
+        categoria_errore = cat_match.group(1) if cat_match else "Nessuna"
+        
+        # Estrai "motivo_del_giudizio" catturando il testo tra virgolette strutturali (singole o doppie)
+        motivo = "Nessun motivo fornito."
+        motivo_match = re.search(r'[\'"]motivo_del_giudizio[\'"]\s*:\s*[\'"](.*)[\'"]\s*,\s*[\'"]categoria_errore[\'"]', json_str, re.DOTALL)
+        if not motivo_match:
+            motivo_match = re.search(r'[\'"]motivo_del_giudizio[\'"]\s*:\s*[\'"](.*)[\'"]\s*\}', json_str, re.DOTALL)
+            
+        if motivo_match:
+            motivo_raw = motivo_match.group(1).strip()
+            if motivo_raw.endswith('",') or motivo_raw.endswith("',"):
+                motivo_raw = motivo_raw[:-2]
+            elif motivo_raw.endswith('"') or motivo_raw.endswith("'"):
+                motivo_raw = motivo_raw[:-1]
+            motivo = motivo_raw
+            
+        return {
+            "valido": valido,
+            "motivo_del_giudizio": motivo,
+            "categoria_errore": categoria_errore
+        }
+    except Exception:
+        pass
+        
+    return None
+
+
+def estrai_json_generatore(testo: str) -> dict:
+    """Estrae l'oggetto JSON del generatore usando espressioni regolari."""
+    match = re.search(r'\{.*\}', testo, re.DOTALL)
+    if not match:
+        return None
+        
+    json_str = match.group().strip()
+    
+    try:
+        # Prova standard
+        return json.loads(json_str)
+    except Exception:
+        pass
+        
+    try:
+        # Categoria
+        cat_match = re.search(r'[\'"]category[\'"]\s*:\s*[\'"]([^\'"]*)[\'"]', json_str)
+        category = cat_match.group(1) if cat_match else "Consultazione tecnica"
+        
+        # Difficoltà
+        diff_match = re.search(r'[\'"]difficulty[\'"]\s*:\s*[\'"]([^\'"]*)[\'"]', json_str)
+        difficulty = diff_match.group(1) if diff_match else "medium"
+        
+        # question
+        question = ""
+        q_match = re.search(r'[\'"]question[\'"]\s*:\s*[\'"](.*)[\'"]\s*,\s*[\'"]expected_answer[\'"]', json_str, re.DOTALL)
+        if not q_match:
+            q_match = re.search(r'[\'"]question[\'"]\s*:\s*[\'"](.*)[\'"]\s*(?:,|\})', json_str, re.DOTALL)
+        if q_match:
+            q_raw = q_match.group(1).strip()
+            if q_raw.endswith('",') or q_raw.endswith("',"):
+                q_raw = q_raw[:-2]
+            elif q_raw.endswith('"') or q_raw.endswith("'"):
+                q_raw = q_raw[:-1]
+            question = q_raw
+            
+        # expected_answer
+        expected_answer = ""
+        a_match = re.search(r'[\'"]expected_answer[\'"]\s*:\s*[\'"](.*)[\'"]\s*,\s*[\'"](?:category|difficulty)[\'"]', json_str, re.DOTALL)
+        if not a_match:
+            a_match = re.search(r'[\'"]expected_answer[\'"]\s*:\s*[\'"](.*)[\'"]\s*\}', json_str, re.DOTALL)
+        if a_match:
+            a_raw = a_match.group(1).strip()
+            if a_raw.endswith('",') or a_raw.endswith("',"):
+                a_raw = a_raw[:-2]
+            elif a_raw.endswith('"') or a_raw.endswith("'"):
+                a_raw = a_raw[:-1]
+            expected_answer = a_raw
+            
+        if question and expected_answer:
+            return {
+                "question": question,
+                "expected_answer": expected_answer,
+                "category": category,
+                "difficulty": difficulty
+            }
+    except Exception:
+        pass
+        
     return None
 
 def salva_csv_personalizzato(df, filepath):
@@ -81,8 +183,8 @@ def main():
     parser.add_argument(
         "--metodo", "-m", 
         type=str, 
-        choices=["euristico", "docling", "llamaparse", "qwen"],
-        default="euristico",
+        choices=["euristico", "pdf4llm", "docling", "llamaparse", "qwen"],
+        default="pdf4llm",
         help="Metodo di estrazione per il caricamento dei testi."
     )
     args = parser.parse_args()
@@ -142,14 +244,16 @@ def main():
             openai_api_base="https://openrouter.ai/api/v1",
             openai_api_key=os.getenv("OPENAI_API_KEY"),
             temperature=0.3,
-            max_tokens=500
+            max_tokens=500,
+            model_kwargs={"response_format": {"type": "json_object"}}
         )
         llm_judge = ChatOpenAI(
             model=args.model_judge,
             openai_api_base="https://openrouter.ai/api/v1",
             openai_api_key=os.getenv("OPENAI_API_KEY"),
             temperature=0.0,
-            max_tokens=400
+            max_tokens=400,
+            model_kwargs={"response_format": {"type": "json_object"}}
         )
         llm_trans = ChatOpenAI(
             model="openai/gpt-4o-mini",
@@ -200,7 +304,10 @@ Verifiche da fare:
 2. La risposta alla domanda è effettivamente e interamente supportata dal testo fornito? Non ci sono dettagli inventati (hallucination) o informazioni esterne non verificabili da questo testo?
 3. Il riferimento alla pagina del documento è appropriato (il testo contiene effettivamente l'argomento della domanda)?
 
-Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni prima o dopo il JSON. Il JSON deve avere questa struttura esatta:
+Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni prima o dopo il JSON.
+IMPORTANTE: Non inserire MAI virgolette doppie (") all'interno dei valori stringa (es. dentro 'motivo_del_giudizio'). Se devi fare citazioni o racchiudere parole, usa ESCLUSIVAMENTE virgolette singole (').
+
+Il JSON deve avere questa struttura esatta:
 {{
   "valido": true o false (scrivi in minuscolo true o false, senza virgolette),
   "motivo_del_giudizio": "Spiegazione sintetica del perché è valido o meno.",
@@ -209,10 +316,16 @@ Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni p
 """
             try:
                 judge_response = llm_judge.invoke(prompt_judge)
-                judge_decision = estrai_json(judge_response.content.strip())
+                raw_content = judge_response.content.strip()
+                judge_decision = estrai_json_judge(raw_content)
                 if judge_decision:
                     valido = bool(judge_decision.get("valido", False))
                     motivo = judge_decision.get("motivo_del_giudizio", "Nessun motivo fornito.")
+                else:
+                    valido = False
+                    content_snippet = re.sub(r'\\+', r'\\', raw_content).strip()
+                    content_snippet = content_snippet[:150] + ("..." if len(content_snippet) > 150 else "")
+                    motivo = f"Risposta del Judge non formattabile come JSON: {content_snippet}"
             except Exception as e:
                 print(f"   ⚠️ Errore chiamata Judge per verifica: {e}")
                 motivo = f"Errore chiamata Judge: {e}"
@@ -229,22 +342,36 @@ Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni p
         print(f"   🔄 Avvio rigenerazione per {qid} per lo stesso profilo e argomento...")
         
         # Trova il chunk corrispondente allo stesso argomento
-        chunk_candidati = [
+        # Raccogliamo i chunk candidati della pagina specifica e dell'intero file
+        chunk_pagina = [
             c for c in tutti_chunk 
             if os.path.basename(c.get("file_name", "")) == expected_file 
             and str(c.get("page", "")) == expected_page
         ]
+        chunk_file_raw = [
+            c for c in tutti_chunk 
+            if os.path.basename(c.get("file_name", "")) == expected_file
+        ]
         
-        if not chunk_candidati:
-            print(f"      ℹ️ Nessun chunk per pagina esatta {expected_page}. Cerco nello stesso file: {expected_file}")
-            chunk_candidati = [
-                c for c in tutti_chunk 
-                if os.path.basename(c.get("file_name", "")) == expected_file
+        # Filtro intelligente basato su parole chiave della categoria per evitare di selezionare chunk non pertinenti
+        keywords_categoria = {
+            "Codici errore": ["alarm", "allarme", "codice", "srvo-", "code", "errore"],
+            "Troubleshooting": ["risoluzione", "problema", "troubleshooting", "ripristino", "allarme", "errore"],
+            "Procedure": ["procedura", "passo", "step", "procedere", "collegamento", "sostituzione", "cavo", "connessione"],
+            "Consultazione tecnica": []
+        }
+        target_kws = keywords_categoria.get(target_category, [])
+        
+        chunk_file = []
+        if target_kws:
+            chunk_file = [
+                c for c in chunk_file_raw 
+                if any(kw in str(c.get("text", "")).lower() for kw in target_kws)
             ]
-            
-        if not chunk_candidati:
-            print(f"      ℹ️ File {expected_file} non trovato nei chunk elaborati. Uso un chunk casuale.")
-            chunk_candidati = tutti_chunk
+        
+        # Fallback se non ci sono chunk filtrati o se la categoria è generica
+        if not chunk_file:
+            chunk_file = chunk_file_raw
             
         success_gen = False
         attempts = 0
@@ -252,7 +379,19 @@ Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni p
         
         while not success_gen and attempts < max_attempts:
             attempts += 1
-            chunk = random.choice(chunk_candidati)
+            
+            # Nei primi 3 tentativi proviamo sulla pagina esatta, poi allarghiamo a tutto il file per evitare stalli
+            if attempts <= 3 and chunk_pagina:
+                chunk = random.choice(chunk_pagina)
+            elif chunk_file:
+                if attempts == 4:
+                    print(f"      ℹ️ Allargo la ricerca dei chunk a tutto il file {expected_file}...")
+                chunk = random.choice(chunk_file)
+            else:
+                if attempts == 4:
+                    print(f"      ℹ️ Allargo la ricerca a tutti i chunk disponibili...")
+                chunk = random.choice(tutti_chunk)
+                
             file_basename = os.path.basename(chunk.get("file_name", "manuale.pdf"))
             page = str(chunk.get("page", "N/A"))
             section = chunk.get("section", "N/A")
@@ -270,6 +409,9 @@ Genera una domanda di test tecnica realistica e la relativa risposta attesa dett
 La domanda deve basarsi ESCLUSIVAMENTE sulle informazioni contenute nel testo fornito. Non fare riferimento a informazioni esterne o non descritte nel testo.
 La risposta deve essere corretta, esatta e interamente deducibile dal testo fornito.
 
+ATTENZIONE CRITICA: Usa ESCLUSIVAMENTE i termini, numeri di pin e codici di errore (ad es. codici allarme come SRVO-074) presenti letteralmente nel testo. Non inventare, modificare o associare codici non citati (ad es. non generare domande su SRVO-096 se nel testo c'è scritto SRVO-074).
+Se il testo non contiene sufficienti informazioni o dettagli complessi per formulare una domanda '{target_difficulty}' o inerente a '{target_category}', semplifica la domanda rimanendo strettamente aderente e fedele al testo, piuttosto che inventare particolari inesistenti.
+
 La domanda DEVE avere le seguenti caratteristiche prefissate:
 - Categoria: '{target_category}'
 - Difficoltà: '{target_difficulty}' (dove 'low' indica una domanda diretta su specifiche o dati chiaramente visibili nel testo, 'medium' richiede il confronto o l'estrazione di informazioni da più frasi, e 'hard' richiede la comprensione di una procedura complessa o la risoluzione di un problema con più passi descritti).
@@ -284,7 +426,7 @@ Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni p
 """
             try:
                 response = llm_gen.invoke(prompt_gen)
-                judgement = estrai_json(response.content.strip())
+                judgement = estrai_json_generatore(response.content.strip())
                 
                 if not judgement or not all(k in judgement for k in ["question", "expected_answer"]):
                     continue
@@ -310,7 +452,10 @@ Verifiche da fare:
 2. La risposta alla domanda è effettivamente e interamente supportata dal testo fornito? Non ci sono dettagli inventati (hallucination) o informazioni esterne non verificabili da questo testo?
 3. Il riferimento alla pagina del documento è appropriato (il testo contiene effettivamente l'argomento della domanda)?
 
-Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni prima o dopo il JSON. Il JSON deve avere questa struttura esatta:
+Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni prima o dopo il JSON.
+IMPORTANTE: Non inserire MAI virgolette doppie (") all'interno dei valori stringa (es. dentro 'motivo_del_giudizio'). Se devi fare citazioni o racchiudere parole, usa ESCLUSIVAMENTE virgolette singole (').
+
+Il JSON deve avere questa struttura esatta:
 {{
   "valido": true o false (scrivi in minuscolo true o false, senza virgolette),
   "motivo_del_giudizio": "Spiegazione sintetica del perché è valido o meno.",
@@ -318,7 +463,7 @@ Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni p
 }}
 """
                 judge_response_new = llm_judge.invoke(prompt_judge_new)
-                judge_decision_new = estrai_json(judge_response_new.content.strip())
+                judge_decision_new = estrai_json_judge(judge_response_new.content.strip())
                 
                 if judge_decision_new and judge_decision_new.get("valido") == True:
                     print(f"      ✅ Nuova domanda approvata dal Judge! Motivo: {judge_decision_new.get('motivo_del_giudizio')}")
@@ -347,7 +492,13 @@ Rispondi ESCLUSIVAMENTE con un oggetto JSON valido. Non aggiungere spiegazioni p
                     success_gen = True
                     modificati += 1
                 else:
-                    motivo_new = judge_decision_new.get("motivo_del_giudizio", "Non specificato") if judge_decision_new else "JSON non valido"
+                    if judge_decision_new:
+                        motivo_new = judge_decision_new.get("motivo_del_giudizio", "Non specificato")
+                    else:
+                        raw_content_new = judge_response_new.content.strip()
+                        content_snippet_new = re.sub(r'\\+', r'\\', raw_content_new).strip()
+                        content_snippet_new = content_snippet_new[:150] + ("..." if len(content_snippet_new) > 150 else "")
+                        motivo_new = f"JSON non valido: {content_snippet_new}"
                     print(f"      ❌ Nuova domanda rifiutata dal Judge. Motivo: {motivo_new}")
             except Exception as e:
                 print(f"      ⚠️ Errore durante generazione/verifica: {e}")

@@ -14,8 +14,8 @@ load_dotenv()
 COLLECTION_NAME = "langchain"
 
 # Mappa env+chunk_size → cartella del vector DB
-def get_db_path(env: str, chunk_size: int) -> str:
-    return os.path.join("vector_db", f"chroma_{env}_{chunk_size}")
+def get_db_path(env: str, chunk_size: int, metodo: str = "pdf4llm") -> str:
+    return os.path.join("vector_db", f"chroma_{metodo}_{env}_{chunk_size}")
 
 
 def get_embeddings(env: str):
@@ -130,11 +130,25 @@ def setup_rag_chain(retriever, env="locale", model_name=None):
         model = model_name if model_name else os.getenv("LOCAL_LLM_MODEL", None)
         print(f"🤖 LLM: Locale (server su localhost:1234) | Modello: {model}")
         base_url = os.getenv("LOCAL_LLM_URL", "http://localhost:1234/v1")
-        llm = ChatOpenAI(
+        llm_classifier = ChatOpenAI(
             model=model,
             base_url=base_url,
             api_key="lm-studio",
-            temperature=0.1,
+            temperature=0.0,
+            streaming=False
+        )
+        llm_technical = ChatOpenAI(
+            model=model,
+            base_url=base_url,
+            api_key="lm-studio",
+            temperature=0.0,
+            streaming=True
+        )
+        llm_general = ChatOpenAI(
+            model=model,
+            base_url=base_url,
+            api_key="lm-studio",
+            temperature=0.7,
             streaming=True
         )
     elif env == "cloud":
@@ -142,11 +156,27 @@ def setup_rag_chain(retriever, env="locale", model_name=None):
         print(f"☁️ LLM: Cloud (OpenRouter) | Modello: {model}")
         if "OPENAI_API_KEY" not in os.environ:
             raise ValueError("❌ ERRORE: Variabile OPENAI_API_KEY non trovata nel file .env")
-        llm = ChatOpenAI(
+        base_url = "https://openrouter.ai/api/v1"
+        api_key = os.getenv("OPENAI_API_KEY")
+        llm_classifier = ChatOpenAI(
             model=model,
-            openai_api_base="https://openrouter.ai/api/v1",
-            openai_api_key=os.getenv("OPENAI_API_KEY"),
-            temperature=0.1,
+            openai_api_base=base_url,
+            openai_api_key=api_key,
+            temperature=0.0,
+            streaming=False
+        )
+        llm_technical = ChatOpenAI(
+            model=model,
+            openai_api_base=base_url,
+            openai_api_key=api_key,
+            temperature=0.0,
+            streaming=True
+        )
+        llm_general = ChatOpenAI(
+            model=model,
+            openai_api_base=base_url,
+            openai_api_key=api_key,
+            temperature=0.7,
             streaming=True
         )
     else:
@@ -183,7 +213,7 @@ def setup_rag_chain(retriever, env="locale", model_name=None):
             "Risposta:"
         )
         try:
-            res = llm.invoke(classification_prompt)
+            res = llm_classifier.invoke(classification_prompt)
             intent = res.content.strip().upper()
             return "TECHNICAL" if "TECHNICAL" in intent else "GENERAL"
         except Exception as e:
@@ -201,6 +231,15 @@ def setup_rag_chain(retriever, env="locale", model_name=None):
 
     prompt = build_prompt()
 
+    chain_technical = prompt | llm_technical | StrOutputParser()
+    chain_general = prompt | llm_general | StrOutputParser()
+
+    def route_by_intent(inputs):
+        if inputs.get("intent") == "GENERAL":
+            return chain_general
+        else:
+            return chain_technical
+
     # Pipeline RAG con Query Routing:
     rag_chain = (
         normalize_input
@@ -209,10 +248,9 @@ def setup_rag_chain(retriever, env="locale", model_name=None):
             "context":  RunnableLambda(retrieve_or_skip) | format_docs_with_sources,
             "question": lambda x: x["question"],
             "history":  lambda x: x["history"],
+            "intent":   lambda x: x["intent"]
         }
-        | prompt
-        | llm
-        | StrOutputParser()
+        | RunnableLambda(route_by_intent)
     )
 
     return rag_chain
@@ -232,13 +270,16 @@ def main():
     parser.add_argument("--chunk_size", type=int, default=700,
                         help="Dimensione dei chunk usata durante l'ingestion (default: 700). "
                              "Determina quale cartella del Vector DB viene caricata.")
+    parser.add_argument("--metodo", type=str, default="pdf4llm",
+                        choices=["euristico", "docling", "llamaparse", "qwen", "pdf4llm", "mineru"],
+                        help="Metodo di estrazione da utilizzare (default: pdf4llm)")
     parser.add_argument("--query", type=str, default="Cosa significa l'allarme SRVO-004?",
                         help="La domanda da porre al sistema")
     args = parser.parse_args()
 
-    db_path = get_db_path(args.env, args.chunk_size)
+    db_path = get_db_path(args.env, args.chunk_size, args.metodo)
 
-    print(f"🔄 Avvio test pipeline RAG (Puro) — env: {args.env.upper()} | chunk_size: {args.chunk_size}")
+    print(f"🔄 Avvio test pipeline RAG (Puro) — env: {args.env.upper()} | metodo: {args.metodo} | chunk_size: {args.chunk_size}")
 
     if not os.path.exists(db_path):
         print(f"❌ ERRORE: Database vettoriale non trovato in '{db_path}'.")

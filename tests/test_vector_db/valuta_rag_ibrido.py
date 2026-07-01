@@ -101,7 +101,6 @@ def _pagine_match_tol(found_p: str, exp_p: str, tolleranza: int = 1) -> bool:
 
 def trova_json_chunks(db_path: str) -> str:
     db_basename = os.path.basename(db_path)
-    # Esempio: chroma_docling_locale_700
     if db_basename.startswith("chroma_") and len(db_basename.split('_')) >= 4:
         parts = db_basename.split('_')
         metodo = parts[1]
@@ -117,7 +116,7 @@ def trova_json_chunks(db_path: str) -> str:
             chunk_size = parts[2]
             return os.path.join(PROJECT_ROOT, "data", "chunks", parent_dir, f"dataset_chunks_{env}_{chunk_size}.json")
     # Ultimo fallback di sicurezza
-    return os.path.join(PROJECT_ROOT, "data", "chunks", "docling", "dataset_chunks_locale_700.json")
+    return os.path.join(PROJECT_ROOT, "data", "chunks", "pdf4llm", "dataset_chunks_locale_700.json")
 
 
 def valuta_db(db_path: str, env: str, test_file: str, k: int = 3,
