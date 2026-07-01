@@ -1,0 +1,18 @@
+[
+    {
+        "document_id": "00",
+        "file_name": "test_telemetry.pdf",
+        "page": "0",
+        "section": "Generale",
+        "title": "Introduzione",
+        "text": "B-83525EN/07                                      MAINTENANCE"
+    },
+    {
+        "document_id": "00",
+        "file_name": "test_telemetry.pdf",
+        "page": "0",
+        "section": "2.3",
+        "title": "CHECKS AND MAINTENANCE",
+        "text": "Daily maintenance and periodic maintenance/inspection ensure reliable robot performance for extended periods of time.\n\n1. Daily maintenance\nBefore operating the system each day, clean each part of the system and check the system parts for any damage or cracks. Also, check the following:\n\n1. Before operation\nCheck the cable connected to the teach pendant for excessive twisting. Check the controller and peripheral devices for abnormalities.\n2. After operation\nAt the end of operation, return the robot to the specified position, and then turn off the controller. Clean each part, and check for any damage or cracks. If the ventilation port of the controller is dusty, clean it.\n2. Check after one month\nCheck that the fan is rotating normally. If the fan has dirt and dust built up, clean the fan according to step (3) described below for inspection to be performed every 6 months.\n3. Periodic inspection performed every six months\nRemove any dirt and dust from the inside of the cabinet. Wipe off dirt and dust from the fan.\n4. Battery daily check\nReplace the battery on the front panel of the main board every 4 years. Please refer to the Section 7.11.\n5. Maintenance tools\nThe following maintenance tools are recommended:\n\n1. Measuring instruments\n- AC/DC voltmeter (A digital voltmeter is sometimes required.)\n- Oscilloscope with a frequency range of 5 MHz or higher, two channels\n2. Tools\n- Cross-head screwdrivers: Large, medium, and small\n- Straight-head screwdrivers: Large, medium, and small\n- Nut driver set (Metric)\n- Pliers\n- Cutting pliers\n- Diagonal cutting pliers\n6. Automatic backup\nWhen the automatic backup area (FRA:) of F-ROM in the controller is specified as a backup copy destination and automatic backup is performed frequently, F-ROM may be damaged. If the automatic backup is performed frequently, use the external storage device.\n\n- 11 -"
+    }
+]

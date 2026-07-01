@@ -1,0 +1,10 @@
+[
+    {
+        "document_id": "00",
+        "file_name": "test_telemetry.pdf",
+        "page": "0",
+        "section": "Generale",
+        "title": "Checks and Maintenance",
+        "text": "Daily maintenance and periodic maintenance/inspection ensure reliable robot performance for extended periods of time.\n\n(1) Daily maintenance\n\nBefore operating the system each day, clean each part of the system and check the system parts for any damage or cracks. Also, check the following:\n\n(a) Before operation\n\nCheck the cable connected to the teach pendant for excessive twisting. Check the controller and peripheral devices for abnormalities.\n\n(b) After operation\n\nAt the end of operation, return the robot to the specified position, and then turn off the controller. Clean each part, and check for any damage or cracks. If the ventilation port of the controller is dusty, clean it.\n\n(2) Check after one month\n\nCheck that the fan is rotating normally. If the fan has dirt and dust built up, clean the fan according to step (3) described below for inspection to be performed every 6 months.\n\n(3) Periodic inspection performed every six months\n\nRemove any dirt and dust from the inside of the cabinet. Wipe off dirt and dust from the fan.\n\n(4) Battery daily check\n\nReplace the battery on the front panel of the main board every 4 years. Please refer to the Section 7.11.\n\n(5) Maintenance tools\n\nThe following maintenance tools are recommended:\n\n(a) Measuring instruments\n\nAC/DC voltmeter (A digital voltmeter is sometimes required.)\n\nOscilloscope with a frequency range of 5 MHz or higher, two channels\n\n(b) Tools\n\nCross-head screwdrivers: Large, medium, and small\n\nStraight-head screwdrivers: Large, medium, and small\n\nNut driver set (Metric)\n\nPliers\n\nCutting pliers\n\nDiagonal cutting pliers\n\n(6) Automatic backup\n\nWhen the automatic backup area (FRA:) of F-ROM in the controller is specified as a backup copy destination and automatic backup is performed frequently, F-ROM may be damaged. If the automatic backup is performed frequently, use the external storage device."
+    }
+]

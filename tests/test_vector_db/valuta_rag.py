@@ -4,7 +4,13 @@ import pandas as pd
 import chromadb
 import argparse
 import os
+import sys
 from dotenv import load_dotenv
+
+if sys.platform.startswith("win"):
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_openai import OpenAIEmbeddings

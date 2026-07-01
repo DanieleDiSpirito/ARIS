@@ -46,9 +46,19 @@ def misura_performance(metodo, output_csv=None):
                 end_time = time.perf_counter()
                 tempo_impiegato = end_time - start_time
 
-                # 5. Calcolo consumi (Delta)
-                ram_end = process.memory_info().rss / (1024 * 1024)
-                ram_usata = max(0, ram_end - ram_start)
+                # 5. Calcolo consumi (Peak RAM & Peak VRAM)
+                import sys
+                if sys.platform.startswith("win"):
+                    # Peak working set su Windows
+                    ram_usata = process.memory_info().peak_wset / (1024 * 1024)
+                else:
+                    # Peak RSS su Unix/Linux/macOS (in KB su Linux, bytes su macOS)
+                    import resource
+                    raw_rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+                    if sys.platform == 'darwin':
+                        ram_usata = raw_rss / (1024 * 1024)
+                    else:
+                        ram_usata = raw_rss / 1024
 
                 vram_usata = 0
                 if gpu_available:
@@ -83,7 +93,6 @@ def misura_performance(metodo, output_csv=None):
 
                 # 2. Fotografia iniziale della RAM di sistema
                 process = psutil.Process(os.getpid())
-                ram_start = process.memory_info().rss / (1024 * 1024) # Convertito in MB
 
                 # 3. Avvio Cronometro
                 start_time = time.perf_counter()
@@ -97,9 +106,17 @@ def misura_performance(metodo, output_csv=None):
                 end_time = time.perf_counter()
                 tempo_impiegato = end_time - start_time
 
-                # 5. Calcolo consumi (Delta)
-                ram_end = process.memory_info().rss / (1024 * 1024)
-                ram_usata = max(0, ram_end - ram_start)
+                # 5. Calcolo consumi (Peak RAM & Peak VRAM)
+                import sys
+                if sys.platform.startswith("win"):
+                    ram_usata = process.memory_info().peak_wset / (1024 * 1024)
+                else:
+                    import resource
+                    raw_rss = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+                    if sys.platform == 'darwin':
+                        ram_usata = raw_rss / (1024 * 1024)
+                    else:
+                        ram_usata = raw_rss / 1024
 
                 vram_usata = 0
                 if gpu_available:
@@ -119,4 +136,4 @@ def misura_performance(metodo, output_csv=None):
 
                 return risultato
             return wrapper
-    return decorator
+    return decorator
