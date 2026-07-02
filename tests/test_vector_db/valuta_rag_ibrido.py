@@ -333,7 +333,7 @@ Questo report riassume le metriche di accuratezza del **Retrieval Ibrido (BM25 +
 {md_table}
 
 ---
-*Report generato automaticamente dallo script `valuta_rag_ibrido.py` il 20 Giugno 2026.*
+*Report generato automaticamente dallo script `valuta_rag_ibrido.py`.*
 """
         with open(report_path, "w", encoding="utf-8") as f:
             f.write(report_content)

@@ -9,4 +9,4 @@ Questo report riassume le metriche di accuratezza del **Retrieval Ibrido (BM25 +
 | chroma_pdf4llm_cloud_700 |               68 |                35 |             68 | 0.5867 |            0.2077 |
 
 ---
-*Report generato automaticamente dallo script `valuta_rag_ibrido.py` il 20 Giugno 2026.*
+*Report generato automaticamente dallo script `valuta_rag_ibrido.py`.*

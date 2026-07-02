@@ -154,7 +154,7 @@ Questo report mette a confronto la pulizia e la qualità testuale dei chunk gene
 {md_table}
 
 ---
-*Report generato automaticamente dallo script `valuta_qualita_chunk.py` il 20 Giugno 2026.*
+*Report generato automaticamente dallo script `valuta_qualita_chunk.py`.*
 """
     
     with open(report_path, "w", encoding="utf-8") as f:

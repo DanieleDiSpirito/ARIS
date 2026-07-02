@@ -9,4 +9,4 @@ Questo report riassume le metriche di accuratezza del **Retrieval Vettoriale** p
 | chroma_pdf4llm_cloud_700 |               68 |             34.67 |             68 | 0.5733 |            0.3472 |
 
 ---
-*Report generato automaticamente dallo script `valuta_rag.py` il 20 Giugno 2026.*
+*Report generato automaticamente dallo script `valuta_rag.py`.*

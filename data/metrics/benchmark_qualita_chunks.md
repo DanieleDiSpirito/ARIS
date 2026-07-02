@@ -21,4 +21,4 @@ Questo report mette a confronto la pulizia e la qualità testuale dei chunk gene
 | mineru     |            319 |                           894 |                0.11 |                0    |               6.29 |                    0.94 |                       230 |
 
 ---
-*Report generato automaticamente dallo script `valuta_qualita_chunk.py` il 20 Giugno 2026.*
+*Report generato automaticamente dallo script `valuta_qualita_chunk.py`.*
