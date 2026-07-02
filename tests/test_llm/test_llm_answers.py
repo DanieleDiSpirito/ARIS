@@ -22,19 +22,15 @@ def _pagine_match_tol(found_p: str, exp_p: str, tolleranza: int) -> bool:
         pass
     return False
 
-def _estrai_fonte_llm(risposta: str):
-    # Cerca un file .pdf e (opzionalmente) un indicatore di pagina entro i successivi 30 caratteri.
-    # Gestisce anche pagine con prefisso alfanumerico come s-1, s-12, ecc.
+def _estrai_fonti_llm(risposta: str) -> list:
+    """Estrae tutte le coppie (file, pagina) dalla risposta dell'LLM."""
     pattern = r'([a-zA-Z0-9_\-\.]+\.pdf)(?:[^0-9]{0,30}?(?:pagina|page|pag|p)\.?\s*[:]?\s*([a-zA-Z0-9\-]*\d+))?'
     matches = re.findall(pattern, risposta, re.IGNORECASE)
     
-    if matches:
-        ultimo_match = matches[-1]
-        file_trovato = ultimo_match[0]
-        pag_trovata = ultimo_match[1] if ultimo_match[1] else ""
-        return file_trovato, pag_trovata
-        
-    return "", ""
+    fonti = []
+    for f_name, p_num in matches:
+        fonti.append((f_name.strip(), p_num.strip() if p_num else ""))
+    return fonti
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TESTS_DIR = os.path.dirname(BASE_DIR)
@@ -67,7 +63,15 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
         print(f"❌ Database non trovato in: {db_path}")
         return
 
-    print(f"🗄️ Caricamento DB e Retriever ({env}, chunk: {chunk_size}, lingua: {lang}, RAG: {rag_type})...")
+    # Determina il vero nome del modello
+    actual_model = model
+    if not actual_model:
+        if env == "locale":
+            actual_model = os.getenv("LOCAL_LLM_MODEL", "local_model")
+        elif env == "cloud":
+            actual_model = "openai/gpt-4o-mini"
+
+    print(f"🗄️ Caricamento DB e Retriever ({env}, chunk: {chunk_size}, lingua: {lang}, RAG: {rag_type}, Modello: {actual_model})...")
     embedder = get_embeddings(env)
     lc_chroma = Chroma(
         persist_directory=db_path,
@@ -75,17 +79,17 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
         embedding_function=embedder
     )
     if rag_type == "puro":
-        retriever = lc_chroma.as_retriever(search_kwargs={"k": 3})
+        retriever = lc_chroma.as_retriever(search_kwargs={"k": 5})
         rag_chain = rag_pipeline_hybrid.setup_rag_chain(retriever, env=env, model_name=model)
     elif rag_type == "ibrido":
-        retriever = rag_pipeline_hybrid.build_hybrid_retriever(lc_chroma, k=3)
+        retriever = rag_pipeline_hybrid.build_hybrid_retriever(lc_chroma, k=5)
         rag_chain = rag_pipeline_hybrid.setup_rag_chain(retriever, env=env, model_name=model)
     elif rag_type == "rerank":
-        ensemble = rag_pipeline_rerank.build_hybrid_retriever(lc_chroma, k=6)
-        retriever = rag_pipeline_rerank.HybridRerankRetriever(ensemble, top_n=3)
+        ensemble = rag_pipeline_rerank.build_hybrid_retriever(lc_chroma, k=10)
+        retriever = rag_pipeline_rerank.HybridRerankRetriever(ensemble, top_n=5)
         rag_chain = rag_pipeline_rerank.setup_rag_chain(retriever, env=env, model_name=model)
     elif rag_type == "graph":
-        retriever = rag_pipeline_graph.build_graph_retriever(lc_chroma, k_base=3, top_n=4)
+        retriever = rag_pipeline_graph.build_graph_retriever(lc_chroma, k_base=15, top_n=5)
         rag_chain = rag_pipeline_graph.setup_rag_chain(retriever, env=env, model_name=model)
     else:
         raise ValueError(f"rag_type non valido: '{rag_type}'")
@@ -95,6 +99,10 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
     no_page_count = 0
     miss_count = 0
     total_valid = 0
+    
+    # Per breakdown
+    cat_stats = {}
+    diff_stats = {}
     
     print(f"\n🚀 Inizio test su {len(df)} domande (Tolleranza pagina: ±{tolleranza})...\n")
     for index, row in df.iterrows():
@@ -119,32 +127,56 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
         expected_file = str(row.get('expected_file', '')).strip()
         expected_page = str(row.get('expected_page', '')).strip()
         
-        file_llm, pag_llm = _estrai_fonte_llm(risposta)
-        match_file = (file_llm.lower() == expected_file.lower()) if expected_file and file_llm else False
-        match_page = _pagine_match_tol(pag_llm, expected_page, tolleranza) if expected_page and pag_llm else False
+        fonti_llm = _estrai_fonti_llm(risposta)
         
+        # Controlla se almeno una delle fonti fa match con quella attesa
         is_hit = False
+        match_found = False
+        for file_llm, pag_llm in fonti_llm:
+            match_file = (file_llm.lower() == expected_file.lower()) if expected_file and file_llm else False
+            match_page = _pagine_match_tol(pag_llm, expected_page, tolleranza) if expected_page and pag_llm else False
+            if match_file and match_page:
+                match_found = True
+                break
+        
         match_status = "NO"
         
         if expected_file != 'nan' and expected_file != '':
             total_valid += 1
-            if not file_llm or not pag_llm:
+            if not fonti_llm:
                 match_status = "NO PAGE"
                 no_page_count += 1
-            elif match_file and match_page:
+            elif match_found:
                 is_hit = True
                 match_status = "SI"
                 hit_count += 1
             else:
                 match_status = "MISS"
                 miss_count += 1
+                
+            # Calcola breakdown per cat e diff
+            cat = row.get('category', 'Sconosciuta')
+            diff = row.get('difficulty', 'Sconosciuta')
+            if cat not in cat_stats:
+                cat_stats[cat] = {"hits": 0, "total": 0}
+            if diff not in diff_stats:
+                diff_stats[diff] = {"hits": 0, "total": 0}
+                
+            cat_stats[cat]["total"] += 1
+            diff_stats[diff]["total"] += 1
+            if is_hit:
+                cat_stats[cat]["hits"] += 1
+                diff_stats[diff]["hits"] += 1
+        
+        files_str = ", ".join([f for f, p in fonti_llm])
+        pags_str = ", ".join([p for f, p in fonti_llm])
         
         risultati.append({
             "id": row.get('id', index),
             "domanda": domanda,
             "risposta_llm": risposta,
-            "llm_file_trovato": file_llm,
-            "llm_pag_trovata": pag_llm,
+            "llm_file_trovato": files_str,
+            "llm_pag_trovata": pags_str,
             "expected_file": expected_file,
             "expected_page": expected_page,
             "match": match_status,
@@ -153,9 +185,9 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
         })
         
         icon = "✅" if match_status == "SI" else ("⚠️" if match_status == "NO PAGE" else "❌")
-        print(f"   ⏱️ Tempo: {tempo}s | Stato: {stato} | Match: {icon} {match_status} (Estratto: {file_llm} p.{pag_llm})\n")
+        print(f"   ⏱️ Tempo: {tempo}s | Stato: {stato} | Match: {icon} {match_status} (Estratto: {files_str} p.{pags_str})\n")
 
-    model_suffix = model.replace('/', '_').replace(':', '_') if model else ("default_local" if env == "locale" else "default_cloud")
+    model_suffix = actual_model.replace('/', '_').replace(':', '_')
     out_dir = os.path.join(TESTS_DIR, "results_llm", "logs")
     os.makedirs(out_dir, exist_ok=True)
     out_file = os.path.join(out_dir, f"llm_results_{env}_{lang}_{chunk_size}_{rag_type}_{metodo}_{model_suffix}.csv")
@@ -168,6 +200,23 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
         hit_rate = (hit_count / total_valid) * 100
         no_page_rate = (no_page_count / total_valid) * 100
         miss_rate = (miss_count / total_valid) * 100
+        avg_time = df_out["tempo_sec"].mean()
+        
+        # Genera tabelle breakdown in MD
+        cat_rows = []
+        for cat, s in sorted(cat_stats.items()):
+            hr = s["hits"] / s["total"] * 100 if s["total"] else 0
+            cat_rows.append(f"| {cat} | {s['hits']}/{s['total']} ({hr:.1f}%) |")
+        cat_table = "\n".join(cat_rows)
+
+        diff_rows = []
+        ordine = ["bassa", "media", "alta", "low", "medium", "high"]
+        chiavi = sorted(diff_stats.keys(), key=lambda x: ordine.index(x) if x in ordine else 99)
+        for diff in chiavi:
+            s = diff_stats[diff]
+            hr = s["hits"] / s["total"] * 100 if s["total"] else 0
+            diff_rows.append(f"| {diff} | {s['hits']}/{s['total']} ({hr:.1f}%) |")
+        diff_table = "\n".join(diff_rows)
         
         # Salva il report in quick_eval
         quick_eval_dir = os.path.join(TESTS_DIR, "results_llm", "quick_eval")
@@ -179,12 +228,23 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
 | Metric | Value |
 | :--- | :--- |
 | **RAG Algorithm** | {rag_type.capitalize()} |
-| **LLM Model** | {model if model else 'Default'} |
+| **LLM Model** | {actual_model} |
 | **Domande valutate** | {total_valid} |
 | **Risposte corrette (SI)** | {hit_count} ({hit_rate:.1f}%) |
 | **Pagine mancanti (NO PAGE)** | {no_page_count} ({no_page_rate:.1f}%) |
 | **Pagine errate (MISS)** | {miss_count} ({miss_rate:.1f}%) |
 | **Hit Rate (LLM Accuracy)** | {hit_rate:.1f}% |
+| **Tempo medio risposta** | {avg_time:.2f} s |
+
+## Breakdown per Categoria
+| Categoria | Accuratezza (SI/Totale) |
+| :--- | :--- |
+{cat_table}
+
+## Breakdown per Difficoltà
+| Difficoltà | Accuratezza (SI/Totale) |
+| :--- | :--- |
+{diff_table}
 """
         with open(quick_eval_file, "w", encoding="utf-8") as f:
             f.write(summary_md)
@@ -193,13 +253,26 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
         
         print(f"\n📊 --- REPORT RISULTATI ---")
         print(f"   RAG Algorithm: {rag_type.capitalize()}")
-        print(f"   LLM Model: {model if model else 'Default'}")
+        print(f"   LLM Model: {actual_model}")
         print(f"   Domande valutate: {total_valid}")
         print(f"   Risposte corrette (SI): {hit_count} ({hit_rate:.1f}%)")
         print(f"   Pagine mancanti (NO PAGE): {no_page_count} ({no_page_rate:.1f}%)")
         print(f"   Pagine errate (MISS): {miss_count} ({miss_rate:.1f}%)")
         print(f"   Hit Rate (LLM Accuracy): {hit_rate:.1f}%")
-        print(f"---------------------------\n")
+        print(f"   Tempo medio risposta: {avg_time:.2f} s/query")
+        print(f"---------------------------")
+        
+        print("\nBreakdown per CATEGORIA:")
+        for cat, s in sorted(cat_stats.items()):
+            hr = s["hits"] / s["total"] * 100 if s["total"] else 0
+            print(f"  {cat:<30}  {s['hits']:>3}/{s['total']:<3}  ({hr:.1f}%)")
+            
+        print("\nBreakdown per DIFFICOLTÀ:")
+        for diff in chiavi:
+            s = diff_stats[diff]
+            hr = s["hits"] / s["total"] * 100 if s["total"] else 0
+            print(f"  {diff:<10}  {s['hits']:>3}/{s['total']:<3}  ({hr:.1f}%)")
+        print(f"{'═' * 55}\n")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Testa la generazione dell'LLM (locale o cloud) sulle domande di test")

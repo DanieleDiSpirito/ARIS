@@ -187,8 +187,9 @@ FORMATTAZIONE per domande tecniche:
 - SPECIFICHE / COMPONENTI → risposta discorsiva.
 
 IMPORTANTE: Devi SEMPRE includere la fonte alla fine di QUALSIASI risposta tecnica. La pagina DEVE essere specificata sempre.
+Se usi informazioni provenienti da più pagine o file diversi, elencali tutti separandoli con una virgola.
 Scrivi ESATTAMENTE in questo formato su una nuova riga alla fine:
-"Fonte documentale: [nome_file.pdf] (Pagina: [numero_pagina])"
+"Fonte documentale: [nome_file.pdf] (Pagina: [numero_pagina]), [altro_file.pdf] (Pagina: [altro_numero])"
 """
 
     human_template = """Cronologia conversazione (ultimi scambi):
@@ -253,7 +254,7 @@ def setup_rag_chain(retriever, env="locale", model_name=None):
             streaming=True
         )
     elif env == "cloud":
-        model = model_name if model_name else "openai/gpt-3.5-turbo"
+        model = model_name if model_name else "openai/gpt-4o-mini"
         print(f"☁️ LLM: Cloud (OpenRouter) | Modello: {model}")
         if "OPENAI_API_KEY" not in os.environ:
             raise ValueError("❌ ERRORE: Variabile OPENAI_API_KEY non trovata nel file .env")
@@ -316,13 +317,30 @@ def setup_rag_chain(retriever, env="locale", model_name=None):
             print(f"⚠️ Errore durante la classificazione dell'intento: {e}. Fallback su TECHNICAL.")
             return "TECHNICAL"
 
+    def translate_query_if_needed(question):
+        translation_prompt = (
+            "Traduci la seguente domanda in inglese se è in italiano, altrimenti restituiscila identica senza alcun commento, spiegazione o introduzione.\n"
+            f"Domanda: {question}\n"
+            "Traduzione:"
+        )
+        try:
+            res = llm_classifier.invoke(translation_prompt)
+            translated = res.content.strip()
+            if translated and translated.lower() != question.lower():
+                print(f"🌐 Query tradotta in inglese per il retrieval: '{translated}' (originale: '{question}')")
+                return translated
+        except Exception as e:
+            print(f"⚠️ Errore durante la traduzione della query: {e}. Uso la query originale.")
+        return question
+
     def retrieve_or_skip(inputs):
         if inputs.get("intent") == "GENERAL":
             print("🔀 Query non pertinente rilevata: Salto il retrieval dei chunk.")
             return []
         
         question = inputs["question"]
-        return retriever.invoke(question)
+        search_query = translate_query_if_needed(question)
+        return retriever.invoke(search_query)
 
     prompt = build_prompt()
 

@@ -2,21 +2,21 @@
 
 | Metric | Value |
 | :--- | :--- |
-| **RAG Algorithm** | Ibrido |
+| **RAG Algorithm** | Rerank |
 | **LLM Model** | openai/gpt-4o-mini |
 | **Domande valutate** | 30 |
 | **Risposte corrette (SI)** | 21 (70.0%) |
 | **Pagine mancanti (NO PAGE)** | 3 (10.0%) |
 | **Pagine errate (MISS)** | 6 (20.0%) |
 | **Hit Rate (LLM Accuracy)** | 70.0% |
-| **Tempo medio risposta** | 8.29 s |
+| **Tempo medio risposta** | 9.11 s |
 
 ## Breakdown per Categoria
 | Categoria | Accuratezza (SI/Totale) |
 | :--- | :--- |
 | Codici errore | 2/2 (100.0%) |
-| Consultazione tecnica | 12/20 (60.0%) |
-| Procedure | 4/5 (80.0%) |
+| Consultazione tecnica | 11/20 (55.0%) |
+| Procedure | 5/5 (100.0%) |
 | Troubleshooting | 3/3 (100.0%) |
 
 ## Breakdown per Difficoltà

@@ -1,27 +1,27 @@
-# Report Risultati LLM Summary (cloud, it, chunk: 700, metodo: pdf4llm)
+# Report Risultati LLM Summary (cloud, en, chunk: 700, metodo: pdf4llm)
 
 | Metric | Value |
 | :--- | :--- |
-| **RAG Algorithm** | Ibrido |
+| **RAG Algorithm** | Graph |
 | **LLM Model** | openai/gpt-4o-mini |
 | **Domande valutate** | 30 |
-| **Risposte corrette (SI)** | 21 (70.0%) |
+| **Risposte corrette (SI)** | 22 (73.3%) |
 | **Pagine mancanti (NO PAGE)** | 3 (10.0%) |
-| **Pagine errate (MISS)** | 6 (20.0%) |
-| **Hit Rate (LLM Accuracy)** | 70.0% |
-| **Tempo medio risposta** | 8.29 s |
+| **Pagine errate (MISS)** | 5 (16.7%) |
+| **Hit Rate (LLM Accuracy)** | 73.3% |
+| **Tempo medio risposta** | 9.65 s |
 
 ## Breakdown per Categoria
 | Categoria | Accuratezza (SI/Totale) |
 | :--- | :--- |
 | Codici errore | 2/2 (100.0%) |
-| Consultazione tecnica | 12/20 (60.0%) |
+| Consultazione tecnica | 13/20 (65.0%) |
 | Procedure | 4/5 (80.0%) |
 | Troubleshooting | 3/3 (100.0%) |
 
 ## Breakdown per Difficoltà
 | Difficoltà | Accuratezza (SI/Totale) |
 | :--- | :--- |
-| low | 6/9 (66.7%) |
+| low | 7/9 (77.8%) |
 | medium | 10/16 (62.5%) |
 | hard | 5/5 (100.0%) |

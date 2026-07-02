@@ -52,7 +52,15 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
         print(f"❌ Database non trovato in: {db_path}")
         return
 
-    print(f"🗄️ Caricamento DB e Retriever ({env}, chunk: {chunk_size}, lingua: {lang}, RAG: {rag_type})...")
+    # Determina il vero nome del modello
+    actual_model = model
+    if not actual_model:
+        if env == "locale":
+            actual_model = os.getenv("LOCAL_LLM_MODEL", "local_model")
+        elif env == "cloud":
+            actual_model = "openai/gpt-4o-mini"
+
+    print(f"🗄️ Caricamento DB e Retriever ({env}, chunk: {chunk_size}, lingua: {lang}, RAG: {rag_type}, Modello: {actual_model})...")
     embedder = get_embeddings(env)
     lc_chroma = Chroma(
         persist_directory=db_path,
@@ -230,7 +238,7 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
         print(f"❌ Errore durante l'esecuzione di Ragas: {e}")
         return
 
-    model_suffix = model.replace('/', '_').replace(':', '_') if model else ("default_local" if env == "locale" else "default_cloud")
+    model_suffix = actual_model.replace('/', '_').replace(':', '_')
     # Salva e visualizza i risultati
     out_dir = os.path.join(TESTS_DIR, "results_llm", "logs")
     os.makedirs(out_dir, exist_ok=True)
@@ -257,7 +265,7 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
 | Metric | Value |
 | :--- | :--- |
 | **RAG Algorithm** | {rag_type.capitalize()} |
-| **LLM Model** | {model if model else 'Default'} |
+| **LLM Model** | {actual_model} |
 | **Faithfulness (Fedeltà)** | {faithfulness_mean:.4f} |
 | **Answer Relevancy (Pertinenza)** | {answer_relevancy_mean:.4f} |
 | **Context Precision (Prec. Contesto)** | {context_precision_mean:.4f} |
@@ -270,7 +278,7 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
     
     print("\n📊 --- REPORT FINALE RAGAS ---")
     print(f"  RAG Algorithm                    : {rag_type.capitalize()}")
-    print(f"  LLM Model                        : {model if model else 'Default'}")
+    print(f"  LLM Model                        : {actual_model}")
     print(f"  Faithfulness (Fedeltà)           : {faithfulness_mean:.4f}")
     print(f"  Answer Relevancy (Pertinenza)     : {answer_relevancy_mean:.4f}")
     print(f"  Context Precision (Prec. Contesto): {context_precision_mean:.4f}")
