@@ -26,10 +26,10 @@ I dati seguenti registrano il tempo di esecuzione ed il vero picco assoluto di R
 | Pdf4llm    | `overview_configuration.pdf` (33 pag) |        3.9  |     855.2  |        0    | Locale (CPU PyMuPDF)               |
 | Pdf4llm    | `safety_precautions.pdf` (13 pag)     |        3.67 |     876.36 |        0    | Locale (CPU PyMuPDF)               |
 | Pdf4llm    | `test_telemetry.pdf` (1 pag)          |        0.17 |     876.36 |        0    | Locale (CPU PyMuPDF)               |
-| Qwen       | `checks_maintenance.pdf` (1 pag)      |       13.19 |     904.04 |        0    | Locale GPU (Transformers Qwen2-VL) |
-| Qwen       | `overview_configuration.pdf` (33 pag) |      100    |     925.14 |        0    | Locale GPU (Transformers Qwen2-VL) |
-| Qwen       | `safety_precautions.pdf` (13 pag)     |      251.72 |     908.54 |        0    | Locale GPU (Transformers Qwen2-VL) |
-| Qwen       | `test_telemetry.pdf` (1 pag)          |       18.52 |     901.6  |        0    | Locale GPU (Transformers Qwen2-VL) |
+| Qwen       | `checks_maintenance.pdf` (1 pag)      |       13.19 |     904.04 |     5456.37 | Locale GPU (Transformers Qwen2-VL) |
+| Qwen       | `overview_configuration.pdf` (33 pag) |      100    |     925.14 |     5456.37 | Locale GPU (Transformers Qwen2-VL) |
+| Qwen       | `safety_precautions.pdf` (13 pag)     |      251.72 |     908.54 |     5456.37 | Locale GPU (Transformers Qwen2-VL) |
+| Qwen       | `test_telemetry.pdf` (1 pag)          |       18.52 |     901.6  |     5456.37 | Locale GPU (Transformers Qwen2-VL) |
 
 ---
 
@@ -147,11 +147,11 @@ Le tabelle seguenti sintetizzano l'efficacia del retrieval semantico sul test se
 
 ---
 
-## 🔬 SEZIONE 4: Strategie di Retrieval Avanzate (Reranking)
+## 🔬 SEZIONE 4: Strategie di Retrieval Avanzate (Reranking e GraphRAG)
 
-I dati seguenti confrontano l'efficacia del **Re-ranking (Cross-Encoder)** applicato su database estratti con i diversi metodi di parsing (dimensione chunk fissa a 700 token).
+I dati seguenti confrontano l'efficacia delle strategie di retrieval avanzate: **Re-ranking (Cross-Encoder)** e **GraphRAG (Grafo Relazionale)**, applicati su database a 700 token.
 
-### FASE E: Valutazione Reranking (Locale vs Cloud, k=3)
+### FASE E: Valutazione Strategie Avanzate (k=3)
 
 #### 1. Reranking su DB Cloud (text-embedding-3-small + BM25 + Cross-Encoder)
 | DB Name                    |   Hit Rate@3 (%) |   Precision@3 (%) |   Recall@3 (%) |    MRR |   Tempo Medio (s) |
@@ -162,32 +162,55 @@ I dati seguenti confrontano l'efficacia del **Re-ranking (Cross-Encoder)** appli
 #### 2. Reranking su DB Locali (BGE-M3 + BM25 + Cross-Encoder)
 | DB Name                      |   Hit Rate@3 (%) |   Precision@3 (%) |   Recall@3 (%) |    MRR |   Tempo Medio (s) |
 |:-----------------------------|-----------------:|------------------:|---------------:|-------:|------------------:|
-| chroma_euristico_locale_700  |               69 |             34    |             69 | 0.635  |            0.0658 |
-| chroma_pdf4llm_locale_700    |               73 |             37.67 |             73 | 0.6383 |            0.087  |
-| chroma_docling_locale_700    |               53 |             27.67 |             53 | 0.4633 |            0.0887 |
-| chroma_llamaparse_locale_700 |               68 |             33    |             68 | 0.5833 |            0.0972 |
-| chroma_mineru_locale_700     |               69 |             30.33 |             69 | 0.605  |            0.0925 |
-| chroma_qwen_locale_700       |               57 |             26.67 |             57 | 0.5183 |            0.084  |
+| chroma_euristico_locale_700  |               69 |             34    |             69 | 0.635  |            0.0673 |
+| chroma_pdf4llm_locale_700    |               73 |             37.67 |             73 | 0.6383 |            0.0962 |
+| chroma_docling_locale_700    |               53 |             27.67 |             53 | 0.4633 |            0.0862 |
+| chroma_llamaparse_locale_700 |               68 |             33    |             68 | 0.5833 |            0.089  |
+| chroma_mineru_locale_700     |               69 |             30.33 |             69 | 0.605  |            0.0888 |
+| chroma_qwen_locale_700       |               57 |             26.67 |             57 | 0.5183 |            0.078  |
+
+#### 3. GraphRAG su DB Cloud (text-embedding-3-small + BM25 + Graph)
+| DB Name                    |   Hit Rate@3 (%) |   Precision@3 (%) |   Recall@3 (%) |    MRR |   Tempo Medio (s) |
+|:---------------------------|-----------------:|------------------:|---------------:|-------:|------------------:|
+| chroma_euristico_cloud_700 |               79 |              29.2 |             79 | 0.719  |            2.9036 |
+| chroma_pdf4llm_cloud_700   |               83 |              33.6 |             83 | 0.7492 |            3.039  |
+
+#### 4. GraphRAG su DB Locali (BGE-M3 + BM25 + Graph Expansion + Cross-Encoder)
+| DB Name                      |   Hit Rate@3 (%) |   Precision@3 (%) |   Recall@3 (%) |    MRR |   Tempo Medio (s) |
+|:-----------------------------|-----------------:|------------------:|---------------:|-------:|------------------:|
+| chroma_euristico_locale_700  |               70 |             36.33 |             70 | 0.62   |            0.1089 |
+| chroma_pdf4llm_locale_700    |               70 |             38    |             70 | 0.6217 |            0.1125 |
+| chroma_docling_locale_700    |               52 |             29.67 |             52 | 0.4667 |            0.1052 |
+| chroma_llamaparse_locale_700 |               66 |             33    |             66 | 0.5817 |            0.1138 |
+| chroma_mineru_locale_700     |               66 |             30.33 |             66 | 0.5883 |            0.1188 |
+| chroma_qwen_locale_700       |               55 |             27    |             55 | 0.5033 |            0.0989 |
 
 ---
 
 ## 🌎 SEZIONE 5: Valutazione Multilingua (Test Set Inglese - EN)
 
-Per verificare le prestazioni in un contesto monolingua nativo, le strategie di retrieval sono state valutate anche sul test set composto da 30 domande formulate direttamente in lingua inglese (dimensione chunk fissa a 700 token).
+Per verificare le prestazioni in un contesto monolingua nativo, le strategie di retrieval sono state valutate anche sul test set composto da 100 domande formulate direttamente in lingua inglese (dimensione chunk fissa a 700 token).
 
-### FASE F: Benchmark di Retrieval in Lingua Inglese (30 domande, k=3)
+### FASE F: Benchmark di Retrieval in Lingua Inglese (100 domande, k=3)
 
 | DB Name                     | Strategia   |   Hit Rate@3 (%) |   Precision@3 (%) |   Recall@3 (%) |    MRR |   Tempo Medio (s) |
 |:----------------------------|:------------|-----------------:|------------------:|---------------:|-------:|------------------:|
-| chroma_pdf4llm_locale_700   | Vector      |               75 |             38    |             75 | 0.6667 |            0.0374 |
-| chroma_pdf4llm_locale_700   | Hybrid      |               75 |             37.67 |             75 | 0.6833 |            0.0469 |
-| chroma_pdf4llm_locale_700   | Rerank      |               79 |             41.33 |             79 | 0.7183 |            0.1074 |
-| chroma_pdf4llm_cloud_700    | Vector      |               73 |             38.67 |             73 | 0.6417 |            0.4277 |
-| chroma_pdf4llm_cloud_700    | Hybrid      |               72 |             39    |             72 | 0.6483 |            0.3674 |
-| chroma_pdf4llm_cloud_700    | Rerank      |               83 |             43.33 |             83 | 0.75   |            0.5424 |
-| chroma_euristico_locale_700 | Vector      |               69 |             49    |             69 | 0.6183 |            0.0199 |
-| chroma_euristico_locale_700 | Hybrid      |               73 |             34    |             73 | 0.6917 |            0.0241 |
-| chroma_euristico_locale_700 | Rerank      |               78 |             37.33 |             78 | 0.715  |            0.0622 |
+| chroma_pdf4llm_locale_700   | Vector      |               75 |             38    |             75 | 0.6667 |            0.0259 |
+| chroma_pdf4llm_locale_700   | Hybrid      |               75 |             37.67 |             75 | 0.6833 |            0.0281 |
+| chroma_pdf4llm_locale_700   | Rerank      |               79 |             41.33 |             79 | 0.7183 |            0.0944 |
+| chroma_pdf4llm_locale_700   | Graph       |               78 |             41.33 |             78 | 0.7133 |            0.111  |
+| chroma_pdf4llm_cloud_700    | Vector      |               73 |             38.67 |             73 | 0.6417 |            0.4253 |
+| chroma_pdf4llm_cloud_700    | Hybrid      |               72 |             39    |             72 | 0.6483 |            0.4237 |
+| chroma_pdf4llm_cloud_700    | Rerank      |               83 |             43.33 |             83 | 0.75   |            0.7959 |
+| chroma_pdf4llm_cloud_700    | Graph       |               81 |             43.67 |             81 | 0.7517 |            0.484  |
+| chroma_euristico_locale_700 | Vector      |               68 |             48    |             68 | 0.6067 |            0.0262 |
+| chroma_euristico_locale_700 | Hybrid      |               73 |             34    |             73 | 0.6917 |            0.0304 |
+| chroma_euristico_locale_700 | Rerank      |               78 |             37.33 |             78 | 0.715  |            0.0644 |
+| chroma_euristico_locale_700 | Graph       |               75 |             38.67 |             75 | 0.71   |            0.1056 |
+| chroma_euristico_cloud_700  | Vector      |               68 |             36.67 |             68 | 0.62   |            0.468  |
+| chroma_euristico_cloud_700  | Hybrid      |               68 |             36.67 |             68 | 0.62   |            0.3293 |
+| chroma_euristico_cloud_700  | Rerank      |               72 |             36.67 |             72 | 0.6867 |            0.3829 |
+| chroma_euristico_cloud_700  | Graph       |               75 |             39    |             75 | 0.71   |            0.6579 |
 
 ---
 *Catalogo unificato generato in automatico il 02 July 2026 in data/metrics/report_sperimentale_completo.md.*
