@@ -179,6 +179,7 @@ sse-starlette==3.4.4
 starlette==1.0.0
 streamlit==1.57.0
 sympy==1.14.0
+tabulate==0.10.0
 tenacity==9.1.4
 threadpoolctl==3.6.0
 tiktoken==0.12.0

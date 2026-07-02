@@ -6,8 +6,8 @@ Questo report riassume le metriche di accuratezza del **Retrieval con Grafo Rela
 
 | DB Name                    |   Hit Rate@k (%) |   Precision@k (%) |   Recall@k (%) |    MRR |   Tempo Medio (s) |
 |:---------------------------|-----------------:|------------------:|---------------:|-------:|------------------:|
-| chroma_euristico_cloud_700 |               72 |              26.6 |             72 | 0.5812 |            7.5424 |
-| chroma_pdf4llm_cloud_700   |               72 |              29.2 |             72 | 0.5862 |            7.844  |
+| chroma_euristico_cloud_700 |               79 |              29.2 |             79 | 0.719  |            2.9036 |
+| chroma_pdf4llm_cloud_700   |               83 |              33.6 |             83 | 0.7492 |            3.039  |
 
 ---
 *Report generato automaticamente dallo script `valuta_rag_graph.py`.*
