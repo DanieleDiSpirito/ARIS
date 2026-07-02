@@ -4,6 +4,7 @@ import pandas as pd
 import chromadb
 import argparse
 import os
+from tqdm import tqdm
 from dotenv import load_dotenv
 
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -12,6 +13,7 @@ from langchain_openai import OpenAIEmbeddings
 from retrieval_metrics import calcola_metriche_query, stampa_report
 
 load_dotenv()
+os.environ["LANGCHAIN_TRACING_V2"] = "false"
 
 BASE_DIR     = os.path.dirname(os.path.abspath(__file__))
 TESTS_DIR    = os.path.dirname(BASE_DIR)
@@ -113,7 +115,7 @@ def valuta_db(db_path: str, env: str, test_file: str, k: int = 3,
     all_metas = []
     tempi     = []
 
-    for _, row in df.iterrows():
+    for _, row in tqdm(df.iterrows(), total=len(df), desc=f"Valutazione {os.path.basename(db_path)}"):
         t0 = time.perf_counter()
         query_embedding = emb_fn.embed_query(row['question'])
         results = collection.query(

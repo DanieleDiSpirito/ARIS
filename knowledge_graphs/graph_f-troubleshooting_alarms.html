@@ -1,0 +1,3160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Visualizzazione Grafo GraphRAG</title>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    <style type="text/css">
+        body {
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #4fc3f7;
+        }
+        .container {
+            display: flex;
+            flex-direction: row;
+            height: 820px;
+        }
+        #mynetwork {
+            flex-grow: 1;
+            height: 100%;
+            border: 1px solid #333;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+        }
+        #details {
+            width: 380px;
+            padding: 20px;
+            background-color: #1c1c1c;
+            margin-left: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            height: calc(100% - 40px);
+            overflow-y: auto;
+        }
+        .legend-item {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 12px;
+        }
+        .legend-color {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        #legend {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #1a1a1a;
+            border-radius: 6px;
+            border: 1px solid #2d2d2d;
+        }
+    </style>
+</head>
+<body>
+    <h2>Mappa Relazionale GraphRAG (ARIS)</h2>
+    <div id="legend">
+        <strong>Legenda File: </strong>
+        <span class="legend-item"><span class="legend-color" style="background-color: rgb(224, 81, 81);"></span>troubleshooting_alarms.pdf</span>
+    </div>
+    <div class="container">
+        <div id="mynetwork"></div>
+        <div id="details">
+            <h3>Dettagli Nodo</h3>
+            <p style="color: #888;">Seleziona un nodo del grafo per visualizzarne il contenuto e le relazioni.</p>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var nodes = new vis.DataSet([
+  {
+    "id": "04_3_5_54_0_cloud_pdf4llm_cece37f6",
+    "label": "Pag: 54 (04_3_5_54_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 54",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "54",
+    "entities": [
+      "SRVO-213"
+    ],
+    "text": "[SRVO-213 E-STOP Board FUSE2 blown]\n## 3. TROUBLESHOOTING \n|TBOP20 No. 12 11 10 9 8 7 6 5 4 3 2 1 TBOP19 No. 4 3 2 1|TBOP20 No. 12 11 10 9 8 7 6 5 4 3 2 1 TBOP19 No. 4 3 2 1|Name 21 2 11 E-STOP (ESPB) 1 21 2 11 FENCE (EAS) 1 21 2 11 EMGIN (EES) 1 Name EXT0V INT0V INT24V EXT24V|Name 21 2 11 E-STOP (ESPB) 1 21 2 11 FENCE (EAS) 1 21 2 11 EMGIN (EES) 1 Name EXT0V INT0V INT24V EXT24V|Name 21 2 11 E-STOP (ESPB) 1 21 2 11 FENCE (EAS) 1 21 2 11 EMGIN (EES) 1 Name EXT0V INT0V INT24V EXT24V||||\n||No. 12 11 10 9|Name 21 2 11 E-STOP (ESPB) 1||||||\n||8 7 6 5 4|FENCE (EAS) EMGIN|21 2 11 1 21|||||\n**(Emergency stop board)**"
+  },
+  {
+    "id": "04_3_5_45_0_cloud_pdf4llm_c219e65e",
+    "label": "Pag: 45 (04_3_5_45_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 45",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "45",
+    "entities": [
+      "SRVO-087",
+      "SRVO-065"
+    ],
+    "text": "[SRVO-087 BLAL alarm (Track enc:i)]\n(Explanation) This alarm occurs if the voltage of the backup battery for the absolute position of the Pulsecoder is low. See the description about the BLAL alarm (SRVO-065)."
+  },
+  {
+    "id": "04_3_5_65_0_cloud_pdf4llm_c54416a5",
+    "label": "Pag: 65 (04_3_5_65_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 65",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "65",
+    "entities": [
+      "SRVO-278",
+      "SRVO-274",
+      "SRVO-277",
+      "SRVO-275"
+    ],
+    "text": "[This alarm may be issued if the emergency stop button is pressed very slowly.]\nE-stop unit 6-Axis servo amplifier (Emergency stop board) \n(Mode switch) \n**Fig.3.5 (ad) SRVO-274 NTED1 status abnormal SRVO-275 NTED2 status abnormal SRVO-277 Panel E-stop (SVEMG abnormal) SRVO-278 TP E-stop (SVEMG abnormal)**"
+  },
+  {
+    "id": "04_3_5_51_0_cloud_pdf4llm_5e1173c0",
+    "label": "Pag: 51 (04_3_5_51_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 51",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "51",
+    "entities": [
+      "SRVO-205"
+    ],
+    "text": "[SRVO-205 Fence open (SVEMG abnormal)]\n(Explanation) The switch connected across EAS1 \u2013 EAS11 and EAS2 \u2013 EAS21 on the TBOP20 on the emergency stop board was opened, but the EMERGENCY STOP line was not disconnected. \n(Action 1) Check the switch and cable connected to EAS1 \u2013 EAS11 and EAS2 \u2013 EAS21 on the TBOP20. If the cable is abnormal, replace it. \nBefore executing the (Action 2), perform a complete controller back up to save all your programs and settings. \n(Action 2) Replace the main board. (Action 3) Replace the emergency stop board. (Action 4) Replace the 6-Axis servo amplifier. \n6-Axis servo amplifier E-stop unit (Emergency stop board)"
+  },
+  {
+    "id": "04_3_5_36_0_cloud_pdf4llm_7e64b97e",
+    "label": "Pag: 36 (04_3_5_36_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 36",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "36",
+    "entities": [
+      "SRVO-045",
+      "SRVO-044",
+      "SRVO-046"
+    ],
+    "text": "[SRVO-046 OVC alarm (Group:i Axis:j)]\n## 3. TROUBLESHOOTING \n6-Axis servo amplifier \n**Fig.3.5\n(k) SRVO-044 HVAL alarm SRVO-045 HCAL alarm SRVO-046 OVC alarm**"
+  },
+  {
+    "id": "04_3_5_63_0_cloud_pdf4llm_0e3c6226",
+    "label": "Pag: 63 (04_3_5_63_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 63",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "63",
+    "entities": [
+      "SRVO-270",
+      "SRVO-271"
+    ],
+    "text": "[SRVO-270 EXEMG1 status abnormal SRVO-271 EXEMG2 status abnormal]\n3. TROUBLESHOOTING \n**(Emergency stop board)** \n**Fig.3.5 (ac) SRVO-270 EXEMG1 status abnormal SRVO-271 EXEMG2 status abnormal**"
+  },
+  {
+    "id": "04_3_5_31_0_cloud_pdf4llm_2caf8c58",
+    "label": "Pag: 31 (04_3_5_31_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 31",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "31",
+    "entities": [
+      "SRVO-021",
+      "CRMA91",
+      "CRMA92"
+    ],
+    "text": "[SRVO-021 SRDY off (Group:i Axis:j)]\n(Explanation) The HRDY is on and the SRDY is off, although there is no other cause of an alarm. (HRDY is a signal with which the host detects the servo system whether to turn on or off the servo amplifier magnetic contactor. SRDY is a signal with which the servo system informs the host whether the magnetic contactor is turned on.) \nIf the servo amplifier magnetic contactor cannot be turned on when directed so, it is most likely that a servo amplifier alarm has occurred. If a servo amplifier alarm has been detected, the host will not issue this alarm (SRDY off). Therefore, this alarm indicates that the magnetic contactor cannot be turned on for an unknown reason. \n- (Action 1) Make sure that the emergency stop board connectors CP5A, CRMA92, CRMB22, and 6-Axis servo amplifier CRMA91 are securely attached to the servo amplifier. In case of using aux. axis amplifier, make sure that the connectors CXA2A (6-axis amplifier) or CXA2B (aux. axis amplifier) are securely attached to the servo amplifier. \n(Action 2) It is possible that an instant disconnection of power source causes this alarm. Check whether an instant disconnection occurred. \n(Action 3) Replace the E-stop unit. (Action 4) Replace the servo amplifier."
+  },
+  {
+    "id": "04_3_5_51_0_cloud_pdf4llm_c0b9642a",
+    "label": "Pag: 51 (04_3_5_51_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 51",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "51",
+    "entities": [
+      "SRVO-204"
+    ],
+    "text": "[SRVO-204 External (SVEMG abnormal) E-stop]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_55_0_cloud_pdf4llm_c7086a9a",
+    "label": "Pag: 55 (04_3_5_55_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 55",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "55",
+    "entities": [
+      "SRVO-216"
+    ],
+    "text": "[SRVO-216 OVC (total) (Robot:i)]\n(Explanation) The current (total current for six axes) flowing through the motor is too large. (Action 1) Slow the motion of the robot where possible. Check the robot operation conditions. If the robot is used with a condition exceeding the duty or load weight robot rating, reduce the load condition value to the specification range. \n(Action 2) Check the input voltage to the controller is within the rated voltage. (Action 3) Replace the 6-Axis servo amplifier."
+  },
+  {
+    "id": "04_3_5_31_0_cloud_pdf4llm_427dc803",
+    "label": "Pag: 31 (04_3_5_31_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 31",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "31",
+    "entities": [
+      "SRVO-023"
+    ],
+    "text": "[SRVO-023 Stop error excess (G:i A:j)]\n(Explanation) When the servo is at stop, the position error is abnormally large. \nCheck whether the brake is released through the clack sound of the brake or vibration. \nIn case that the brake is not released. \n(Action 1) If the brake is not released, check the continuity of the brake line in the robot connection cable and the mechanical unit cable. \n(Action 2) If the disconnection is not found, replace the 6-Axis servo amplifier or the servo motor. \nIn case that the brake is released. (Action 1) Check whether the obstacle disturbs the robot motion."
+  },
+  {
+    "id": "04_3_5_47_0_cloud_pdf4llm_f921f42e",
+    "label": "Pag: 47 (04_3_5_47_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 47",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "47",
+    "entities": [
+      "SRVO-156",
+      "CRR88",
+      "SRVO-134"
+    ],
+    "text": "[SRVO-134 DCLVAL alarm (G:i A:j)]\n(Explanation) The DC voltage (DC link voltage) of the main circuit power supply for the servo amplifier is abnormally low. \n(Action 1) It is possible that an instant disconnection of power source causes this alarm. Check whether an instant disconnection occurred. (Action 2) Check the input voltage to the controller is within the rated voltage. (Action 3) Modify the program in order that robot and the auxiliary axis do not accelerate simultaneously in the system with the auxiliary axis. (Action 4) Replace the E-stop unit. (Action 5) Replace the servo amplifier. \n**SRVO-156 IPMAL alarm (G:iA:j)** \n(Explanation) Abnormally high current flowed through the main circuit of the servo amplifier. \n(Action 1) Turn off the power, and disconnect the power cable from the servo amplifier indicated by the alarm message. (And disconnect the brake cable (CRR88 on the servo amplifier) to avoid the axis falling unexpectedly.) Turn on the power, and if the alarm occurs again, replace the servo amplifier. \n(Action 2) Turn off the power and disconnect the power cable from the servo amplifier indicated by the alarm message, and check the insulation of their U, V, W and the GND lines each other. If there is a short-circuit, replace the power cable. \n- (Action 3) Turn off the power and disconnect the power cable from the servo amplifier by the alarm message, and measure the resistance between their U and V, V and W and W and U with an ohmmeter that has a very low resistance range. If the resistances at the three places are different from each other, the motor, the power cable is defective. Check each item in detail and replace it if necessary."
+  },
+  {
+    "id": "04_3_5_49_0_cloud_pdf4llm_686725b2",
+    "label": "Pag: 49 (04_3_5_49_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 49",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "49",
+    "entities": [
+      "SRVO-157"
+    ],
+    "text": "[SRVO-157 CHGAL alarm (G:i A:j)]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_33_0_cloud_pdf4llm_d024319a",
+    "label": "Pag: 33 (04_3_5_33_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 33",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "33",
+    "entities": [
+      "SRVO-043"
+    ],
+    "text": "[SRVO-043 DCAL alarm (Group:i Axis:j)]\n(Explanation) The regenerative discharge energy was too high to be dissipated as heat. (To run the robot, the servo amplifier supplies energy to the robot. When going down the"
+  },
+  {
+    "id": "04_3_5_42_0_cloud_pdf4llm_a7d8575e",
+    "label": "Pag: 42 (04_3_5_42_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 42",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "42",
+    "entities": [
+      "SRVO-064"
+    ],
+    "text": "[SRVO-064 PHAL alarm (Group:i Axis:j)]\n(Explanation) This alarm occurs if the phase of the pulses generated in the Pulsecoder is abnormal. (Action) Replace the Pulsecoder with which an alarm has been issued. \nThis alarm might accompany the DTERR, CRCERR, or STBERR alarm. In this case, however, there may be no actual condition for this alarm."
+  },
+  {
+    "id": "04_3_5_53_0_cloud_pdf4llm_a2dc804e",
+    "label": "Pag: 53 (04_3_5_53_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 53",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "53",
+    "entities": [
+      "SRVO-213"
+    ],
+    "text": "[SRVO-213 E-STOP Board FUSE2 blown]\n- (Explanation) A fuse (FUSE2) on the emergency stop board has blown, or no voltage is supplied to EXT24V. \n(Action 1) Check whether the fuse (FUSE2) on the emergency stop board has blown. If the fuse has blown, 24EXT may be short-circuited to 0EXT. Take Action 2. If FUSE2 has not blown, take Action 3 and up. \n(Action 2) Disconnect the connection destinations of 24EXT that can cause grounding then check that the fuse (FUSE2) does not blow. Disconnect the following on the emergency stop board then turn on the power:\n- CRS36\n- CRT30\n- TBOP20: EES1, EES11, EAS1, EAS11 If the fuse (FUSE2) does not blow in this state, 24EXT and 0EXT may be short-circuited at any of the connection destinations above. Isolate the faulty location then take action. \nIf the fuse (FUSE2) blows even when the connection destinations above are detached, replace the emergency stop board. \n(Action 3) Check whether 24 V is applied to between EXT24V and EXT0V of TBOP19. If not, check the external power supply circuit. If no external power supply is used, check whether the terminals above are connected to the INT24V and INT0V terminals, respectively. \n(Action 4) Replace the emergency stop board. (Action 5) Replace the teach pendant cable. (Action 6) Replace the teach pendant. (Action 7) Replace the operator\u2019s panel cable (CRT30)."
+  },
+  {
+    "id": "04_3_5_60_0_cloud_pdf4llm_d9d1bd7f",
+    "label": "Pag: 60 (04_3_5_60_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 60",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "60",
+    "entities": [
+      "SRVO-253"
+    ],
+    "text": "[SRVO-253 Amp internal over heat (G:i A:j)]\n## 3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_32_0_cloud_pdf4llm_7a4a8c0b",
+    "label": "Pag: 32 (04_3_5_32_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 32",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "32",
+    "entities": [
+      "SRVO-022",
+      "CNJ6",
+      "SRVO-024",
+      "SRVO-021",
+      "SRVO-018",
+      "SRVO-023"
+    ],
+    "text": "[SRVO-024 Move error excess (G:i A:j)]\n(Explanation) When the robot is running, its position error is greater than a specified value ($PARAM _ GROUP. $MOVER _ OFFST). It is likely that the robot cannot follow the speed specified by program. \n(Action 1) Take the same actions as SRVO-023.\n\n[ENRICHMENT FROM SRVO-023]:\n(Explanation) When the servo is at stop, the position error is abnormally large. \nCheck whether the brake is released through the clack sound of the brake or vibration. \nIn case that the brake is not released. \n(Action 1) If the brake is not released, check the continuity of the brake line in the robot connection cable and the mechanical unit cable. \n(Action 2) If the disconnection is not found, replace the 6-Axis servo amplifier or the servo motor. \nIn case that the brake is released. (Action 1) Check whether the obstacle disturbs the robot motion.\n## 3. TROUBLESHOOTING \n- (Action 2) Make sure that connectors CNJ1A-CNJ6 are securely attached to the 6-Axis servo amplifier. \n- (Action 3) Check the continuity of the robot connection cable and the internal robot power cable. \n- (Action 4) Check to see if the load is greater than the rating. If greater, reduce it to within the rating. (If the load is too great, the torque required for acceleration / deceleration becomes higher than the capacity of the motor. \n- As a result, the motor becomes unable to follow the command, and an alarm is issued.) \n- (Action 5) Check the input voltage to the controller is within the rated voltage and no phase is lack. \n- Check each phase voltage of the CRR38A or CRR38B connector of the three-phase power (200 VAC) input to the 6-Axis servo amplifier. If it is 210 VAC or lower, check the line voltage. (If the voltage input to the 6-Axis servo amplifier becomes low, the torque output also becomes low. As a result, the motor may become unable to follow the command, hence possibly causing an alarm.). \n- (Action 6) Replace the servo amplifier. (Action 7) Replace the motor of the alarm axis. \nIncorrect setting of the brake number causes this alarm. \n6-Axis servo amplifier \n**SRVO-018 Brake abnormal SRVO-021 SRDY off SRVO-022 SRDY on SRVO-023 Stop error excess**"
+  },
+  {
+    "id": "04_3_5_26_0_cloud_pdf4llm_7421fd77",
+    "label": "Pag: 26 (04_3_5_26_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 26",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "26",
+    "entities": [
+      "SRVO-005",
+      "SRVO-006"
+    ],
+    "text": "[SRVO-006 Hand broken]\n## 3. TROUBLESHOOTING \n**(6-Axis servo amplifier)** \n**Fig.3.5 \n(d) SRVO-005 Robot overtravel SRVO-006 Hand broken**"
+  },
+  {
+    "id": "04_3_5_72_0_cloud_pdf4llm_66008835",
+    "label": "Pag: 72 (04_3_5_72_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 72",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "72",
+    "entities": [
+      "SRVO-479"
+    ],
+    "text": "[SRVO-479 Temperature changes too fast]\n## 3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_34_0_cloud_pdf4llm_2de8a9db",
+    "label": "Pag: 34 (04_3_5_34_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 34",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "34",
+    "entities": [
+      "SRVO-043"
+    ],
+    "text": "[SRVO-043 DCAL alarm (Group:i Axis:j)]\n3. TROUBLESHOOTING \nvertical axis, the robot operates from the potential energy. If a reduction in the potential energy is higher than the energy needed for acceleration, the servo amplifier receives energy from the motor. A similar phenomenon occurs even when no gravity is applied, for example, at deceleration on a horizontal axis. The energy that the servo amplifier receives from the motor is called the regenerative energy. The servo amplifier dissipates this energy as heat. If the regenerative energy is higher than the energy dissipated as heat, the difference is stored in the servo amplifier, causing an alarm.) \n(Action 1) This alarm may occur if the axis is subjected to frequent acceleration/deceleration or if the axis is vertical and generates a large amount of regenerative energy. If this alarm has occurred, relax the service conditions. \n- (Action 2) Check fuse (FS3) in the 6-Axis servo amplifier. If it has blown, remove the cause, and replace the fuse. \n- (Action 3) The ambient temperature is excessively high. Or the regenerative resistor can't be cooled effectively. Check the external fan unit and related fuses. Clean up the fun unit, the regenerative resistor and the louver if they are dirty. \n(Action 4) Make sure that the 6-Axis servo amplifier CRR63A and CRR63B connectors are connected tightly. Then detach the cable from CRR63A and CRR63B connectors on the 6-Axis servo amplifier, and check for continuity between pins 1 and 2 of the cable-end connector. If there is no continuity between the pins, replace the regenerative resistor. \n(Action 5) Make sure that the 6-Axis servo amplifier CRRA11A and CRRA11B are connected tightly, then detach the cables from CRRA11A and CRRA11B on the 6-Axis servo amplifier and check the resistance between pins 1 and 3 of each cable end connector. If the resistance is not 6.5 \u2126 , replace the regenerative resistor. CRRA11B may not be used depending on the robot model. \n(Action 6) Replace the 6-Axis servo amplifier. \nRegenerative resistor Regenerative resistor \n**(Small size) (Middle/Large size)** \n**Fig.3.5 (ja) SRVO-043 DCAL alarm** \n6-Axis servo amplifier E-stop unit Fig.3.5 (jb) SRVO-043 DCAL alarm"
+  },
+  {
+    "id": "04_3_5_48_0_cloud_pdf4llm_fdbc45ff",
+    "label": "Pag: 48 (04_3_5_48_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 48",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "48",
+    "entities": [
+      "SRVO-156",
+      "SRVO-157"
+    ],
+    "text": "[SRVO-157 CHGAL alarm (G:i A:j)]\n(Explanation) The capacitor on the servo amplifier was not charged properly within the specified time when the servo power is on. \n(Action 1) Check the input voltage to the controller is within the rated voltage. (Action 2) Make sure that the 6-axis servo amplifier CRRA12 and emergency stop board CRRA12 connector are connected tightly. \nIn case of single phase, make sure that the connectors CRRB14 is securely attached to the servo amplifier. \n(Action 3) Replace the E-stop unit. (Action 4) Replace the 6 axis servo amplifier. \n6-Axis servo amplifier E-stop unit (Emergency stop board) \n**SRVO-156 IPMAL alarm** \n**SRVO-157 CHGAL alarm**"
+  },
+  {
+    "id": "04_3_5_28_0_cloud_pdf4llm_0e913b73",
+    "label": "Pag: 28 (04_3_5_28_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 28",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "28",
+    "entities": [
+      "SRVO-007"
+    ],
+    "text": "[SRVO-007 External emergency stops]\n## 3. TROUBLESHOOTING \n## **WARNING** \nIn a system using the external emergency stop signal, it is very dangerous to disable the signal when a connection is made between EES1 and EES11 and between EES2 and EES21. Never make such an attempt. If a temporary connection is needed for operation, separate safety measures must be taken."
+  },
+  {
+    "id": "04_3_5_44_0_cloud_pdf4llm_d96b8281",
+    "label": "Pag: 44 (04_3_5_44_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 44",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "44",
+    "entities": [
+      "SRVO-074"
+    ],
+    "text": "[SRVO-074 LDAL alarm (Group:i Axis:j)]\n(Explanation) The LED in the Pulsecoder is broken. (Action) Replace the Pulsecoder, and remaster the robot."
+  },
+  {
+    "id": "04_3_5_43_0_cloud_pdf4llm_5be14fa7",
+    "label": "Pag: 43 (04_3_5_43_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 43",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "43",
+    "entities": [
+      "SRVO-067"
+    ],
+    "text": "[SRVO-067 OHAL2 alarm (Grp:i Ax:j)]\n3. TROUBLESHOOTING \n(Action 1) Check the robot operating conditions. If a condition such as the duty cycle and load weight has exceeded the rating, relax the robot load condition to meet the allowable range. \n(Action 2) When power is supplied to the motor after it has become sufficiently cool, if the alarm still occurs, replace the motor."
+  },
+  {
+    "id": "04_3_5_58_0_cloud_pdf4llm_ff956be3",
+    "label": "Pag: 58 (04_3_5_58_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 58",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "58",
+    "entities": [
+      "SRVO-230",
+      "SRVO-231"
+    ],
+    "text": "[SRVO-230 Chain 1 abnormal a, b SRVO-231 Chain 2 abnormal a, b]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_46_0_cloud_pdf4llm_ae6453c3",
+    "label": "Pag: 46 (04_3_5_46_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 46",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "46",
+    "entities": [
+      "SRVO-096",
+      "SRVO-074"
+    ],
+    "text": "[SRVO-096 LDAL alarm (Track enc:i)]\n(Explanation) The LED in the Pulsecoder is broken. See the description about the LDAL alarm (SRVO-074)."
+  },
+  {
+    "id": "04_3_5_58_0_cloud_pdf4llm_9fb783a1",
+    "label": "Pag: 58 (04_3_5_58_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 58",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "58",
+    "entities": [
+      "SRVO-235"
+    ],
+    "text": "[SRVO-235 Short term Chain abnormal]\n(Explanation) Short term single chain failure condition is detected. \n- Cause of this alarm is;\n- Half release of DEADMAN switch \n- Half operation of emergency stop switch. \n- (Action 1) Cause the same error to occur again, and then perform resetting. (Action 2) Replace the emergency stop board. (Action 3) Replace the 6-Axis servo amplifier."
+  },
+  {
+    "id": "04_3_5_59_0_cloud_pdf4llm_b365e770",
+    "label": "Pag: 59 (04_3_5_59_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 59",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "59",
+    "entities": [
+      "SRVO-251"
+    ],
+    "text": "[SRVO-251 DB relay abnormal (G:i A:j)]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_46_0_cloud_pdf4llm_b6bf90d0",
+    "label": "Pag: 46 (04_3_5_46_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 46",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "46",
+    "entities": [
+      "SRVO-093"
+    ],
+    "text": "[SRVO-093 SPHAL alarm (Track enc:i)]\n## 3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_40_0_cloud_pdf4llm_3c2c8c77",
+    "label": "Pag: 40 (04_3_5_40_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 40",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "40",
+    "entities": [
+      "SRVO-068",
+      "SRVO-058"
+    ],
+    "text": "[SRVO-058 FSSB xx init error (yy)]\n(Explanation) Communication was interrupted between the main board and servo amplifier. (Action 1) Check whether fuse (FS1) on the 6-Axis servo amplifier has blown. If the fuse has blown, replace the 6-Axis servo amplifier including the fuse. (Action 2) Turn off the power and disconnect the CRF8 connector on the 6-Axis servo amplifier. Then check whether this alarm occurs again. (Ignore the alarm SRVO-068 because of disconnecting the CRF8 connector.) If this alarm does not occur, the robot connection cable (RMP1, RP1) or the internal cable of the robot may be short-circuited to the ground. Check the cables and replace it if necessary. (Action 3) Check whether the LED (P5V and P3.3V) on the 6-Axis servo amplifier is lit. If they are not lit, the DC power is not supplied to the 6-Axis servo amplifier. Make sure the connector CP5 on the power supply unit and the connector CXA2B on the 6-Axis servo amplifier are connected tightly. If they are connected tightly, replace the 6-Axis servo amplifier. (Action 4) Check the optical fiber cable between the axis control card and servo amplifier. Replace it if it is faulty. (Action 5) Replace the axis control card on the main board. (Action 6) Replace the 6-Axis servo amplifier. (Action 7) If the other units (the servo amplifier for the auxiliary axis and the line tracking interface) are connected in the FSSB optical communication, disconnect these units and connect only 6-Axis servo amplifier for the robot. Then turn on the power. If this alarm does not occur, search the failed unit and replace it. \nBefore executing the (Action 8), perform a complete controller back up to save all your programs and settings. \n(Action 8) Replace the main board."
+  },
+  {
+    "id": "04_3_5_43_0_cloud_pdf4llm_1f440e4e",
+    "label": "Pag: 43 (04_3_5_43_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 43",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "43",
+    "entities": [
+      "SRVO-068"
+    ],
+    "text": "[SRVO-068 DTERR alarm (Grp:i Ax:j)]\n(Explanation) The serial Pulsecoder does not return serial data in response to a request signal. (Action 1) Make sure that the robot connection cable (RMP1, RP1) connector (CRF8) of 6-Axis servo amplifier and the connector (motor side) are connected tightly. \n(Action 2) Check that the shielding of the robot connection cable (RMP1, RP1) is grounded securely in the cabinet. \n(Action 3) Replace the Pulsecoder. (Action 4) Replace the servo amplifier. (Action 5) Replace the robot connection cable (RMP1, RP1, RM1). (Action 6) Replace the internal cable of the robot (for the Pulsecoder, For the Motor)."
+  },
+  {
+    "id": "04_3_5_43_0_cloud_pdf4llm_80d23f1b",
+    "label": "Pag: 43 (04_3_5_43_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 43",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "43",
+    "entities": [
+      "SRVO-068",
+      "SRVO-069"
+    ],
+    "text": "[SRVO-069 CRCERR alarm (Grp:i Ax:j)]\n(Explanation) The serial data has disturbed during communication. (Action) See actions on SRVO-068"
+  },
+  {
+    "id": "04_3_5_30_0_cloud_pdf4llm_fdad06cb",
+    "label": "Pag: 30 (04_3_5_30_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 30",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "30",
+    "entities": [
+      "SRVO-015"
+    ],
+    "text": "[SRVO-015 System over heat]\n(Explanation) The temperature in the controller exceeds the specified value. In one minutes from occurring of alarm, robot stops and cannot be operated from TP. \n- (Action 1) If the ambient temperature is higher than specified (45 \u00b0 C), cool down the ambient temperature. \n- (Action 2) If the fan motor is not running, check it, its cables and related fuses. Replace them if necessary. \n- Before executing the (Action 3), perform a complete controller backup to save all your programs and settings. \n- (Action 3) Replace the main board. (The thermostat on the main board may be faulty.)"
+  },
+  {
+    "id": "04_3_5_48_0_cloud_pdf4llm_2cb43c93",
+    "label": "Pag: 48 (04_3_5_48_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 48",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "48",
+    "entities": [
+      "SRVO-134"
+    ],
+    "text": "[SRVO-134 DCLVAL alarm (G:i A:j)]\n## 3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_40_0_cloud_pdf4llm_f8266991",
+    "label": "Pag: 40 (04_3_5_40_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 40",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "40",
+    "entities": [
+      "SRVO-055"
+    ],
+    "text": "[SRVO-055 FSSB com error 1 (G:i A:j)]\n## 3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_46_0_cloud_pdf4llm_fcb684d3",
+    "label": "Pag: 46 (04_3_5_46_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 46",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "46",
+    "entities": [
+      "SRVO-105",
+      "CRMA91",
+      "CRMA92"
+    ],
+    "text": "[SRVO-105 Door open or E.Stop]\n(Explanation) The cabinet door is open. \n- When the door switch is not mounted skip Action 1 and 2 and start from Action 3 (Action 1) If the auxiliary cabinet (option) is installed, check whether the door of the auxiliary cabinet is open. When the door is open, close it \n(Action 2) If the auxiliary cabinet (option) is installed, check the door switch and its wiring. If the switch or wiring is faulty, replace it. \n- (Action 3) Check that the CRMA92, CRMB8 connectors on the E-STOP unit and CRMA91 on the 6-Axis servo amplifier are connected securely. \n- (Action 4) Replace the emergency stop board. (Action 5) Replace the 6- Axis servo amplifier. \nE-stop unit 6-Axis servo amplifier (Emergency stop board) \n**SRVO-105 Door open or E-stop**"
+  },
+  {
+    "id": "04_3_5_32_0_cloud_pdf4llm_edc0d5b8",
+    "label": "Pag: 32 (04_3_5_32_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 32",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "32",
+    "entities": [
+      "SRVO-022",
+      "CNJ6",
+      "SRVO-021",
+      "SRVO-018",
+      "SRVO-023"
+    ],
+    "text": "[SRVO-023 Stop error excess (G:i A:j)]\n## 3. TROUBLESHOOTING \n- (Action 2) Make sure that connectors CNJ1A-CNJ6 are securely attached to the 6-Axis servo amplifier. \n- (Action 3) Check the continuity of the robot connection cable and the internal robot power cable. \n- (Action 4) Check to see if the load is greater than the rating. If greater, reduce it to within the rating. (If the load is too great, the torque required for acceleration / deceleration becomes higher than the capacity of the motor. \n- As a result, the motor becomes unable to follow the command, and an alarm is issued.) \n- (Action 5) Check the input voltage to the controller is within the rated voltage and no phase is lack. \n- Check each phase voltage of the CRR38A or CRR38B connector of the three-phase power (200 VAC) input to the 6-Axis servo amplifier. If it is 210 VAC or lower, check the line voltage. (If the voltage input to the 6-Axis servo amplifier becomes low, the torque output also becomes low. As a result, the motor may become unable to follow the command, hence possibly causing an alarm.). \n- (Action 6) Replace the servo amplifier. (Action 7) Replace the motor of the alarm axis. \nIncorrect setting of the brake number causes this alarm. \n6-Axis servo amplifier \n**SRVO-018 Brake abnormal SRVO-021 SRDY off SRVO-022 SRDY on SRVO-023 Stop error excess**"
+  },
+  {
+    "id": "04_3_5_59_0_cloud_pdf4llm_57dfdf4b",
+    "label": "Pag: 59 (04_3_5_59_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 59",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "59",
+    "entities": [
+      "SRVO-252"
+    ],
+    "text": "[SRVO-252 Current detect abnl (G:i A:j)]\n- (Explanation) An abnormality was detected in the current detection circuit inside the servo amplifier. \n(Action) Replace the servo amplifier."
+  },
+  {
+    "id": "04_3_5_44_0_cloud_pdf4llm_6625fcff",
+    "label": "Pag: 44 (04_3_5_44_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 44",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "44",
+    "entities": [
+      "SRVO-076"
+    ],
+    "text": "[SRVO-076 Tip Stick Detection (G:i A:j)]\n(Explanation) An excessive disturbance was assumed in servo software at the start of operation. (An abnormal load was detected. The cause may be welding.) \n(Action 1) Check whether the robot has collided. Or check whether the machinery load of the corresponding axis is increased. \n(Action 2) Check whether the load settings are valid. (Action 3) Check whether the brake of the corresponding axis is released. (Action 4) Check whether the load weight is within the rated range. If the weight exceeds the upper limit, decrease it to the limit. \n(Action 5) Check whether the voltage input to the controller is within the rated voltage. (Action 6) Replace the servo amplifier. (Action 7) Replace the corresponding servo motor. (Action 8) Replace the E-stop unit. (Action 9) Replace the power cable of the robot connection cable in which the corresponding axis is connected. \n(Action 10) Replace the internal cable of the robot (power/brake) in which the corresponding axis is connected. \n6-Axis servo amplifier E-stop unit \n**Fig.3.5 \n(r) SRVO-076 Tip stick detection**"
+  },
+  {
+    "id": "04_3_5_30_0_cloud_pdf4llm_83486c0c",
+    "label": "Pag: 30 (04_3_5_30_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 30",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "30",
+    "entities": [
+      "SRVO-014"
+    ],
+    "text": "[SRVO-014 Fan motor abnormal (n), CPU STOP]\n## 3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_62_0_cloud_pdf4llm_f3c503ae",
+    "label": "Pag: 62 (04_3_5_62_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 62",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "62",
+    "entities": [
+      "SRVO-266",
+      "SRVO-267"
+    ],
+    "text": "[SRVO-266 FENCE1 status abnormal SRVO-267 FENCE2 status abnormal]\n## 3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_42_0_cloud_pdf4llm_6dea6d17",
+    "label": "Pag: 42 (04_3_5_42_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 42",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "42",
+    "entities": [
+      "SRVO-065"
+    ],
+    "text": "[SRVO-065 BLAL alarm (Group:i Axis:j)]\n(Explanation) The battery voltage for the Pulsecoder is lower than the rating. \n(Action) Replace the battery. \n(If this alarm occurs, turn on the power and replace the battery as soon as possible. A delay in battery replacement may result in the BZAL alarm being detected. In this case, the position data will be lost. Once the position data is lost, mastering will become necessary."
+  },
+  {
+    "id": "04_3_5_55_0_cloud_pdf4llm_166e9609",
+    "label": "Pag: 55 (04_3_5_55_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 55",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "55",
+    "entities": [
+      "SRVO-180",
+      "SRVO-058",
+      "SRVO-223"
+    ],
+    "text": "[SRVO-223 DSP dry run (a,b)]\n(Explanation) A servo DSP initialization failure occurred due to hardware failure or wrong software setting. Then, the software entered DSP dry run mode. The first number indicates the cause of the failure. The second number is extra information. \n(Action) Perform an action according to the first number that is displayed in the alarm message. \n- 1: This is a warning due to $scr.$startup_cnd=12. \n2,3,4,7: Replace a servo card. \n- 5: Invalid ATR setting. Software axis config (FSSB line number, hardware start axis number, amplifier number, and amplifier type) might be wrong. \n- 6: SRVO-180 occurs simultaneously. Controllable axis does not exist on any group. Execute aux axis setting to add axis at controlled start. \n- 8,10: SRVO-058 (FSSB init error) occurs simultaneously. Follow the remedy of SRVO-058. \n- 9: There is no amplifier that is connected to the servo card. \n- \u2022Check the hardware connection."
+  },
+  {
+    "id": "04_3_5_39_0_cloud_pdf4llm_677cf0cb",
+    "label": "Pag: 39 (04_3_5_39_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 39",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "39",
+    "entities": [
+      "SRVO-050"
+    ],
+    "text": "[SRVO-050 Collision Detect alarm (G:i A:j)]\n- (Explanation) The disturbance torque estimated by the servo software is abnormally high. (A collision has been detected.) \n- (Action 1) Check whether the robot has collided and also check whether there is a factor that has increased the mechanical load on the corresponding axis. \n- (Action 2) Check whether the load settings are valid. (Action 3) Check whether the brake of the corresponding axis is released. (Action 4) If the load weight exceeds the rated range, decrease it to within the limit. (Action 5) Check whether the voltage input to the controller is within the rated voltage. (Action 6) Replace the servo amplifier. (Action 7) Replace the motor of the corresponding axis. (Action 8) Replace the E-stop unit. (Action 9) Replace the motor power line (robot connection cable) of the corresponding axis. (Action 10) Replace the motor power line and brake line (internal cable of the robot) of the corresponding axis."
+  },
+  {
+    "id": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "label": "Pag: 67 (04_3_5_67_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 67",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "67",
+    "entities": [
+      "SRVO-371",
+      "SRVO-348",
+      "SRVO-349",
+      "SRVO-231",
+      "SRVO-370",
+      "SRVO-297",
+      "SRVO-291",
+      "SRVO-230",
+      "SRVO-295",
+      "SRVO-335"
+    ],
+    "text": "[SRVO-371 SVON2 status abnormal]\n(Explanation) A chain alarm was detected with the main board internal signal (SVON). \nBefore executing the (Action 1), perform a complete controller back up to save all your programs and settings. \n(Action 1) Replace the main board. (Action 2) Replace the 6-Axis servo amplifier. (Action 3) Replace the emergency stop board. \n## **WARNING** \nIf this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails. \nFor the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231. \nE-stop unit 6-Axis servo amplifir Main board (Emergency stop board) \n**SRVO-291 IPM over heat SRVO-295 Amp com error** \n**SRVO-297 Improper input power SRVO-335 DCS OFFCHK alarm a, b SRVO-348 DCS MCC OFF alarm a, b SRVO-349 DCS MCC ON alarm a, b SRVO-370 SVON1 status abnormal SRVO-371 SVON2 status abnormal**"
+  },
+  {
+    "id": "04_3_5_35_0_cloud_pdf4llm_00d1b75c",
+    "label": "Pag: 35 (04_3_5_35_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 35",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "35",
+    "entities": [
+      "SRVO-044"
+    ],
+    "text": "[SRVO-044 DCHVAL%s alarm (G:i A:j)]\n(Explanation) The DC voltage (DC link voltage) of the main circuit power supply is abnormally high. (Action 1) Check the input voltage to the controller is within the rated voltage. And check the setting of the transformer is correct. \n- (Action 2) Check the three-phase input voltage at the 6-Axis servo amplifier. If it is 240 VAC or higher, check the line voltage. (If the three-phase input voltage is higher than 240 VAC, high acceleration/deceleration can cause in this alarm.) \n- (Action 3) Check that the load weight is within the rating. If it is higher than the rating, reduce it to within the rating. (If the machine load is higher than the rating, the accumulation of regenerative energy might result in the HVAL alarm even when the three-phase input voltage is within the rating.) \n(Action 4) Check that the CRRA11A and CRRA11B connectors of the 6-Axis servo amplifier are attached firmly. Next, detach the cables then check the continuity between pins. If the resistance is not 6.5 \u2126 , replace the regenerative resistor. CRRA11B may not be used depending on the robot model. (Action 5) Replace the 6-Axis servo amplifier."
+  },
+  {
+    "id": "04_3_5_66_0_cloud_pdf4llm_b294dec5",
+    "label": "Pag: 66 (04_3_5_66_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 66",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "66",
+    "entities": [
+      "SRVO-335"
+    ],
+    "text": "[SRVO-335 DCS OFFCHK alarm a, b]\n(Explanation) A failure was detected in the safety signal input circuit. \nBefore executing the (Action 1), perform a complete controller back up to save all your programs and settings. \n(Action 1) Replace the main board."
+  },
+  {
+    "id": "04_3_5_67_0_cloud_pdf4llm_903e7e52",
+    "label": "Pag: 67 (04_3_5_67_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 67",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "67",
+    "entities": [
+      "SRVO-348"
+    ],
+    "text": "[SRVO-348 DCS MCC OFF alarm a, b]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_64_0_cloud_pdf4llm_c54504fe",
+    "label": "Pag: 64 (04_3_5_64_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 64",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "64",
+    "entities": [
+      "SRVO-270",
+      "SRVO-271"
+    ],
+    "text": "[SRVO-270 EXEMG1 status abnormal SRVO-271 EXEMG2 status abnormal]\n## 3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_44_0_cloud_pdf4llm_5a4563e8",
+    "label": "Pag: 44 (04_3_5_44_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 44",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "44",
+    "entities": [
+      "SRVO-073"
+    ],
+    "text": "[SRVO-073 CMAL alarm (Group:i Axis:j)]\n(Explanation) It is likely that the Pulsecoder is abnormal or the Pulsecoder has malfunctioned due to noise. \n(Action 1) Check whether the connection of the controller earth is good. Check the earth cable connection between controller and robot connection cables are connected securely to the grounding plate. \n(Action 2) Reinforce the earth of the motor flange. (In case of Auxiliary axis) (Action 3) Reset the Pulse count. (Action 4) Replace the Pulsecoder. (Action 5) Replace the robot connection cable (RMP1, RM1, RP1). (Action 6) Replace the internal cable of the robot (for the Pulsecoder, For the Motor)."
+  },
+  {
+    "id": "04_3_5_53_0_cloud_pdf4llm_108a01e4",
+    "label": "Pag: 53 (04_3_5_53_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 53",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "53",
+    "entities": [
+      "SRVO-205"
+    ],
+    "text": "[SRVO-205 Fence open (SVEMG abnormal)]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_67_0_cloud_pdf4llm_ff6223da",
+    "label": "Pag: 67 (04_3_5_67_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 67",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "67",
+    "entities": [
+      "SRVO-349"
+    ],
+    "text": "[SRVO-349 DCS MCC ON alarm a, b]\n(Explanation) A command was issued to turn on the magnetic contactor, but the magnetic contactor was not turned on. \n(Action 1) Replace the E-stop unit (included the magnetic contactor). \nBefore executing the (Action 2), perform a complete controller back up to save all your programs and settings. \n(Action 2) Replace the main board. (Action 3) Replace the 6-Axis servo amplifier."
+  },
+  {
+    "id": "04_3_5_29_0_cloud_pdf4llm_be89d451",
+    "label": "Pag: 29 (04_3_5_29_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 29",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "29",
+    "entities": [
+      "SRVO-014"
+    ],
+    "text": "[SRVO-014 Fan motor abnormal (n), CPU STOP]\n(Explanation) When a fan motor stops on backplane unit, Teach pendant shows the following message. In one minutes from occurring of alarm, robot stops and cannot be operated from TP. The robot can be recovered by replacing a fan motor. Number in the bracket indicates which fan is abnormal. \n(1): FAN0 \n(2): FAN1 \n(3): both fans (Action 1) Check the fan motor and its cables. Replace them if necessary. (Action 2) Replace the fan board. \nBefore executing the (Action 3), perform a complete controller back up to save all your programs and settings. \n(Action 3) Replace the main board. \nThe controller will stop operation after 1 minutes of this alarm. \nFan motor (FAN0) Fan motor (FAN1) Main board \n**Fig.3.5 \n(g) SRVO-014 Fan motor abnormal**"
+  },
+  {
+    "id": "04_3_5_45_0_cloud_pdf4llm_7d212d60",
+    "label": "Pag: 45 (04_3_5_45_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 45",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "45",
+    "entities": [
+      "SRVO-068",
+      "SRVO-090"
+    ],
+    "text": "[SRVO-090 DTERR alarm (Track enc:i)]\n(Explanation) Communication between the Pulsecoder and line tracking board is abnormal. See the SRVO-068 DTERR alarm. \n(Action 1) Check the connection cable at each end (the line tracking board and the Pulsecoder) (Action 2) Check whether the shielding of the connection cable is connected securely to the grounding plate. (Action 3) Replace the Pulsecoder. (Action 4) Replace the line tracking cable. (Action 5) Replace the line tracking board."
+  },
+  {
+    "id": "04_3_5_56_0_cloud_pdf4llm_8ba1c0d9",
+    "label": "Pag: 56 (04_3_5_56_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 56",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "56",
+    "entities": [
+      "SRVO-221",
+      "SRVO-216",
+      "SRVO-214",
+      "SRVO-223"
+    ],
+    "text": "[Axis control card]\n**(Main board)** \n**Fig.3.5 \n(y) SRVO-214 6ch amplifier fuse blown (Panel PCB) SRVO-216 OVC (total) SRVO-221 Lack of DSP SRVO-223 DSP dry run (a,b)**"
+  },
+  {
+    "id": "04_3_5_39_0_cloud_pdf4llm_c58fb286",
+    "label": "Pag: 39 (04_3_5_39_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 39",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "39",
+    "entities": [
+      "SRVO-049",
+      "SRVO-051",
+      "SRVO-050"
+    ],
+    "text": "[SRVO-051 CUER alarm (Group:i Axis:j)]\n(Explanation) The offset of the current feedback value is abnormally high. (Action) Replace the servo amplifier. \n6-Axis servo amplifier E-stop unit \n**Fig.3.5 \n(o) SRVO-049 OHAL1 alarm SRVO-050 CLALM alarm SRVO-051 CUER alarm**"
+  },
+  {
+    "id": "04_3_5_43_0_cloud_pdf4llm_3759e402",
+    "label": "Pag: 43 (04_3_5_43_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 43",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "43",
+    "entities": [
+      "SRVO-070",
+      "SRVO-059",
+      "SRVO-068"
+    ],
+    "text": "[SRVO-070 STBERR alarm (Grp:i Ax:j)]\n(Explanation) The start and stop bits of the serial data are abnormal. (Action) See actions on SRVO-068 \n6-Axis servo amplifier \n(q) SRVO-059 Servo amp init error SRVO-070 STBERR alarm**"
+  },
+  {
+    "id": "04_3_5_31_0_cloud_pdf4llm_3676adeb",
+    "label": "Pag: 31 (04_3_5_31_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 31",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "31",
+    "entities": [
+      "CRR88",
+      "SRVO-018"
+    ],
+    "text": "[SRVO-018 Brake abnormal (G:i A:j)]\n(Explanation) An excessive brake current is detected. The ALM LED (SVALM) on the 6-Axis servo amplifier is lit. \n(Action 1) Check the robot connection cable (RMP1, RP1) and the internal cable of the robot and motor brakes connected to CRR88 connector on the 6-Axis servo amplifier. If a short-circuit or grounding fault is found, replace the failed part. \n(Action 2) Check the cables and motor brakes connected to CRR65A, CRR65B connector on the 6-Axis servo amplifier. If a short-circuit or grounding fault is found, replace the failed part. \n(Action 3) Replace the 6-Axis servo amplifier. \n## **CAUTION** \nThis error can be caused by the optional brake release unit if the on/off switch is left in on position while the operator attempts to jog the robot. To recover, turn the brake release unit off and cycle the controller power."
+  },
+  {
+    "id": "04_3_5_41_0_cloud_pdf4llm_694cc5f8",
+    "label": "Pag: 41 (04_3_5_41_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 41",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "41",
+    "entities": [
+      "SRVO-058"
+    ],
+    "text": "[SRVO-058 FSSB xx init error (yy)]\n3. TROUBLESHOOTING \nMain board 6-Axis servo amplifier \nAxis control card"
+  },
+  {
+    "id": "04_3_5_66_0_cloud_pdf4llm_6e6c31c1",
+    "label": "Pag: 66 (04_3_5_66_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 66",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "66",
+    "entities": [
+      "SRVO-291"
+    ],
+    "text": "[SRVO-291 IPM over heat (G:i A:j)]\n(Explanation) IPM on the servo amplifier is overheated. \n(Action 1) Check whether the vent hole is clogged. If necessary, clean them. (Action 2) If SRVO-291 is issued when the robot operating condition is severe, check the robot operating condition then relax the condition when possible. \n(Action 3) If SRVO-291 is issued frequently, replace the servo amplifier."
+  },
+  {
+    "id": "04_3_5_71_0_cloud_pdf4llm_9315e7ee",
+    "label": "Pag: 71 (04_3_5_71_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 71",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "71",
+    "entities": [
+      "SRVO-479"
+    ],
+    "text": "[SRVO-479 Temperature changes too fast]\n- (Explanation) The force sensor temperature changes too fast. \n(Action) Please make sure that the environment temperature does not change greatly, and then restart the controller. \n- If the error is not cleared, document the events that led to the error and contact your FANUC technical representative."
+  },
+  {
+    "id": "04_3_5_43_0_cloud_pdf4llm_ab1553c5",
+    "label": "Pag: 43 (04_3_5_43_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 43",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "43",
+    "entities": [
+      "SRVO-068",
+      "SRVO-071",
+      "SRVO-064"
+    ],
+    "text": "[SRVO-071 SPHAL alarm (Grp:i Ax:j)]\n(Explanation) The feedback speed is abnormally high. (Action) Action as same as the SRVO-068. \nIf this alarm occurs together with the PHAL alarm (SRVO-064), this alarm does not correspond to the major cause of the failure."
+  },
+  {
+    "id": "04_3_5_70_0_cloud_pdf4llm_803db42d",
+    "label": "Pag: 70 (04_3_5_70_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 70",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "70",
+    "entities": [
+      "SRVO-373",
+      "SRVO-372"
+    ],
+    "text": "[SRVO-372 OPEMG1 status abnormal SRVO-373 OPEMG2 status abnormal]\n## 3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_23_0_cloud_pdf4llm_a95e862d",
+    "label": "Pag: 23 (04_3_5_23_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 23",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "23",
+    "entities": [
+      "SRVO-004",
+      "SRVO-213"
+    ],
+    "text": "[SRVO-004 Fence open]\n(Explanation) In the automatic operation mode, the safety fence contact connected to EAS1-EAS11 or EAS2-EAS21 of TBOP20 is open. \n- (Action 1) When a safety fence is connected, close the safety fence. (Action 2) Check the cables and switches connected between EAS1 and EAS11 and between EAS2 and EAS21 of the terminal block TBOP20 on the emergency stop board. \n(Action 3) If the safety fence signal is not used, make a connection between EAS1 and EAS11 and between EAS2 and EAS21 of the terminal block TBOP20 on the emergency stop board. \n(Action 4) Check the mode switch. If trouble is found, replace the mode switch. (Action 5) Replace the emergency stop board. \nIf SRVO-004 is issued together with SRVO-213, a fuse may have blown. Take the same actions as for SRVO-213. \n(Mode switch)"
+  },
+  {
+    "id": "04_3_5_39_0_cloud_pdf4llm_3f6a0c75",
+    "label": "Pag: 39 (04_3_5_39_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 39",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "39",
+    "entities": [
+      "SRVO-049",
+      "CRMA91"
+    ],
+    "text": "[SRVO-049 OHAL1 alarm (Grp:i Ax:j)]\n(Explanation) The 6-Axis servo amplifier detects transformer overheat signal. \n- (Action 1) Check that a connection is made between the 6-Axis servo amplifier CRMA91. (Action 2) Check whether no phase occurs. (Action 3) Replace the E-stop unit. (Action 4) Replace the 6-Axis servo amplifier."
+  },
+  {
+    "id": "04_3_5_42_0_cloud_pdf4llm_3f68052c",
+    "label": "Pag: 42 (04_3_5_42_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 42",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "42",
+    "entities": [
+      "SRVO-067"
+    ],
+    "text": "[SRVO-067 OHAL2 alarm (Grp:i Ax:j)]\n(Explanation) The temperature inside the Pulsecoder or motor is abnormally high, and the built-in thermostat has operated."
+  },
+  {
+    "id": "04_3_5_22_0_cloud_pdf4llm_d64c0039",
+    "label": "Pag: 22 (04_3_5_22_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 22",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "22",
+    "entities": [
+      "SRVO-002"
+    ],
+    "text": "[SRVO-002 Teach pendant E-stop]\n(Explanation) The emergency stop button on the teach pendant was pressed. (Action 1) Release the emergency stop button on the teach pendant. (Action 2) Replace the teach pendant."
+  },
+  {
+    "id": "04_3_5_27_0_cloud_pdf4llm_3cb5a470",
+    "label": "Pag: 27 (04_3_5_27_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 27",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "27",
+    "entities": [
+      "SRVO-213",
+      "SRVO-007"
+    ],
+    "text": "[SRVO-007 External emergency stops]\n(Explanation) On the terminal block TBOP20 of the emergency stop board, no connection of external emergency stop is made between EES1 and EES11, EES2 and EES21. \n(Action 1) If an external emergency stop switch is connected, release the switch. (Action 2) Check the switch and cable connected to EES1-EES11 and EES2-EES21 on TBOP20 of the emergency stop board. \n(Action 3) When this signal is not used, make a connection between EES1 and EES11, EES2 and EES21. \n(Action 4) Replace the emergency stop board. \nIf SRVO-007 is issued together with SRVO-213, a fuse may have blown. Take the same actions as for SRVO-213. \nTBOP20 No. Name 12 E-STOP 21 11 (ESPB) 2 10 11 9 1 8 FENCE 21 7 (EAS) 2 6 11 5 1 4 EMGIN 21 3 (EES) 2 2 11 1 1 \nTBOP20 No. Name 12 E-STOP 21 11 (ESPB) 2 10 11 9 1 8 FENCE 21 7 (EAS) 2 6 11 5 1 4 EMGIN 21 3 (EES) 2 2 11 1 1 \n**(R-30** _**i**_ **B Mate Plus) (Emergency stop board) Fig.3.5 \n(e) SRVO-007 External emergency stops**"
+  },
+  {
+    "id": "04_3_5_41_0_cloud_pdf4llm_635b2ae5",
+    "label": "Pag: 41 (04_3_5_41_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 41",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "41",
+    "entities": [
+      "SRVO-055",
+      "SRVO-056",
+      "SRVO-057",
+      "SRVO-058"
+    ],
+    "text": "[Axis control card]\n**(Main board)** \n**SRVO-055 FSSB com error 1 SRVO-056 FSSB com error 2 SRVO-057 FSSB disconnect SRVO-058 FSSB init error**"
+  },
+  {
+    "id": "04_3_5_66_0_cloud_pdf4llm_0ffa18ad",
+    "label": "Pag: 66 (04_3_5_66_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 66",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "66",
+    "entities": [
+      "SRVO-348"
+    ],
+    "text": "[SRVO-348 DCS MCC OFF alarm a, b]\n(Explanation) A command was issued to turn off the magnetic contactor, but the magnetic contactor was not turned off. \n(Action 1) If a signal is connected to the E-stop unit CRMB8, check whether there is a problem in the connection destination. Make sure that the connector CRMB16 (6-axis amplifier) is securely attached to the servo amplifier. \n(Action 2) Replace the E-stop unit (included the magnetic contactor). \nBefore executing the (Action 3), perform a complete controller back up to save all your programs and settings. \n(Action 3) Replace the main board. (Action 4) Replace the 6-Axis servo amplifier."
+  },
+  {
+    "id": "04_3_5_62_0_cloud_pdf4llm_bb731e58",
+    "label": "Pag: 62 (04_3_5_62_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 62",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "62",
+    "entities": [
+      "SRVO-270",
+      "SRVO-271",
+      "SRVO-230",
+      "SRVO-231"
+    ],
+    "text": "[SRVO-270 EXEMG1 status abnormal SRVO-271 EXEMG2 status abnormal]\n(Explanation) A chain alarm was detected with the EES (EXEMG) signal. \n(Action 1) Check whether the circuitry connected to the dual input signal (EES) is faulty. (Action 2) Check whether the timing of the dual input signal (EES) satisfies the timing specification (See Subsection 3.2.5, Fig 3.2.5\n(c) in CONNECTIONS). (Action 3) Replace the teach pendant cable. (Action 4) Replace the teach pendant. (Action 5) Replace the emergency stop board. (Action 6) Replace the emergency stop switch on the operator's panel (or replace entire operator\u2019s panel). \nBefore executing the (Action 7), perform a complete controller back up to save all your programs and settings. \n(Action 7) Replace the main board. \n## **WARNING** \nIf this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails. \nFor the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231."
+  },
+  {
+    "id": "04_3_5_46_0_cloud_pdf4llm_a15510c7",
+    "label": "Pag: 46 (04_3_5_46_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 46",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "46",
+    "entities": [
+      "SRVO-097",
+      "SRVO-075"
+    ],
+    "text": "[SRVO-097 Pulse not established (Enc:i)]\n(Explanation) The absolute position of the Pulsecoder cannot be established. See the description about (SRVO-075). Pulse not established. \n- (Action 1) Reset the alarm, and jog the axis on which the alarm has occurred until the same alarm does not occur again. (Jog one motor revolution)"
+  },
+  {
+    "id": "04_3_5_44_0_cloud_pdf4llm_e1f72b95",
+    "label": "Pag: 44 (04_3_5_44_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 44",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "44",
+    "entities": [
+      "SRVO-075"
+    ],
+    "text": "[SRVO-075 Pulse not established (G:i A:j)]\n(Explanation) The absolute position of the Pulsecoder cannot be established. \n(Action) Reset the alarm, and jog the axis on which the alarm has occurred until the same alarm will not occur again."
+  },
+  {
+    "id": "04_3_5_29_0_cloud_pdf4llm_2535ae3e",
+    "label": "Pag: 29 (04_3_5_29_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 29",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "29",
+    "entities": [
+      "SRVO-009"
+    ],
+    "text": "[SRVO-009 Pneumatic pressure alarm]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_49_0_cloud_pdf4llm_32aecf8a",
+    "label": "Pag: 49 (04_3_5_49_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 49",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "49",
+    "entities": [
+      "SRVO-204"
+    ],
+    "text": "[SRVO-204 External (SVEMG abnormal) E-stop]\n(Explanation) The switch connected across EES1 \u2013 EES11 and EES2 \u2013 EES21 on the TBOP20 on the emergency stop board was pressed, but the EMERGENCY STOP line was not disconnected. \n(Action 1) Check the switch and cable connected to EES1 \u2013 EES11 and EES2 \u2013 EES21 on the TBOP20. If the cable is abnormal, replace it. \nBefore executing the (Action 2), perform a complete controller back up to save all your programs and settings. \n(Action 2) Replace the main board. (Action 3) Replace the emergency stop board. (Action 4) Replace the 6-Axis servo amplifier. \n6-Axis servo amplifier E-stop unit (Emergency stop board)"
+  },
+  {
+    "id": "04_3_5_45_0_cloud_pdf4llm_5d4bb4ea",
+    "label": "Pag: 45 (04_3_5_45_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 45",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "45",
+    "entities": [
+      "SRVO-076"
+    ],
+    "text": "[SRVO-076 Tip Stick Detection (G:i A:j)]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_65_0_cloud_pdf4llm_bd499426",
+    "label": "Pag: 65 (04_3_5_65_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 65",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "65",
+    "entities": [
+      "SRVO-277"
+    ],
+    "text": "[SRVO-277 Panel E-stop (SVEMG abnormal)]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_43_0_cloud_pdf4llm_77f0e0a8",
+    "label": "Pag: 43 (04_3_5_43_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 43",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "43",
+    "entities": [
+      "SRVO-072"
+    ],
+    "text": "[SRVO-072 PMAL alarm (Group:i Axis:j)]\n(Explanation) It is likely that the Pulsecoder is abnormal. (Action) Replace the Pulsecoder and remaster the robot."
+  },
+  {
+    "id": "04_3_5_46_0_cloud_pdf4llm_b6cd41c4",
+    "label": "Pag: 46 (04_3_5_46_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 46",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "46",
+    "entities": [
+      "SRVO-094",
+      "SRVO-072"
+    ],
+    "text": "[SRVO-094 PMAL alarm (Track enc:i)]\n(Explanation) It is likely that the Pulsecoder is abnormal. See the description about the PMAL alarm (SRVO-072). (Action) Replace the Pulsecoder."
+  },
+  {
+    "id": "04_3_5_42_0_cloud_pdf4llm_4bcf099f",
+    "label": "Pag: 42 (04_3_5_42_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 42",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "42",
+    "entities": [
+      "SRVO-062"
+    ],
+    "text": "[SRVO-062 BZAL alarm (Group:i Axis:j)]\n(Explanation) This alarm occurs if battery for Pulsecoder absolute-position backup is empty. \n- A probable cause is a broken battery cable or no batteries in the robot. \n- (Action 1) Replace the battery in the battery box of the robot base. (Action 2) Replace the Pulsecoder with which an alarm has been issued. (Action 3) Check whether the mechanical unit cable for feeding power from the battery to the Pulsecoder is not disconnected and grounded. If an abnormality is found, replace the cable. \n## **CAUTION** \n- After correcting the cause of this alarm, set the system variable ($MCR.$SPC_RESET) to TRUE then turn on the power again. Mastering is needed."
+  },
+  {
+    "id": "04_3_5_35_0_cloud_pdf4llm_7de44656",
+    "label": "Pag: 35 (04_3_5_35_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 35",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "35",
+    "entities": [
+      "SRVO-045",
+      "CRR88"
+    ],
+    "text": "[SRVO-045 HCAL alarm (Group:i Axis:j)]\n- (Explanation) Abnormally high current flowed in the main circuit of the servo amplifier. (Action 1) Turn off the power, and disconnect the power cable from the servo amplifier indicated by the alarm message. (And disconnect the brake cable (CRR88 on the 6-Axis servo amplifier) to avoid the axis falling unexpectedly.) Supply power and see if the alarm occurs again. If the alarm occurs again, replace the servo amplifier. \n- (Action 2) Turn off the power and disconnect the power cable from the servo amplifier indicated by the alarm message, and check the insulation of their U, V, W and the GND lines each other. If there is a short-circuit, replace the power cable. \n- (Action 3) Turn off the power and disconnect the power cable from the servo amplifier by the alarm message, and measure the resistance between their U and V, V and W and W and U with an ohmmeter that has a very low resistance range. If the resistances at the three places are different from each other, the motor, the power cable is defective. Check each item in detail and replace it if necessary."
+  },
+  {
+    "id": "04_3_5_56_0_cloud_pdf4llm_ba17ac46",
+    "label": "Pag: 56 (04_3_5_56_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 56",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "56",
+    "entities": [
+      "SRVO-059",
+      "SRVO-223"
+    ],
+    "text": "[SRVO-223 DSP dry run (a,b)]\n## 3. TROUBLESHOOTING \n\u2022Check the optical fiber cable. \n\u2022In case of using aux. axis amplifier, make sure that the connectors CXA2A (6-axis amplifier) or CXA2B (aux. axis amplifier) are securely attached to the servo amplifier. \n- \u2022Check whether the servo amplifier power is supplied. \n- \u2022Check whether the fuse on the servo amplifier has blown. \n- \u2022Replace the optical fiber cable. \n- \u2022Replace the servo amplifier \n- 11: Invalid axisorder setting. Non-existing axis number is specified. Software axis config (FSSB line number) might be wrong or auxiliary axis board is necessary. \n12: SRVO-059 (Servo amp init error) occurs simultaneously. Follow the remedy of SRVO-059. \n13,14,15: Document the events that led to the error, and contact your FANUC technical representative. \nMain board 6-Axis servo amplifier"
+  },
+  {
+    "id": "04_3_5_70_0_cloud_pdf4llm_e67b412b",
+    "label": "Pag: 70 (04_3_5_70_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 70",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "70",
+    "entities": [
+      "SRVO-453"
+    ],
+    "text": "[SRVO-453 Low volt driver (G:i A:j)]\n(Explanation) Driver supply voltage in the servo amplifier is low. (Action 1) Replace the servo amplifier."
+  },
+  {
+    "id": "04_3_5_40_0_cloud_pdf4llm_8936da5e",
+    "label": "Pag: 40 (04_3_5_40_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 40",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "40",
+    "entities": [
+      "SRVO-057"
+    ],
+    "text": "[SRVO-057 FSSB disconnect (G:i A:j)]\n(Explanation) Communication was interrupted between the main board and servo amplifier. (Action 1) Check whether fuse (FS1) on the 6-Axis servo amplifier has blown. If the fuse has blown, replace the 6-Axis servo amplifier including the fuse. \n(Action 2) Check the optical fiber cable between the axis control card and servo amplifier. Replace it if it is faulty. (Action 3) Replace the axis control card on the main board. (Action 4) Replace the servo amplifier. (Action 5) Check for a point where the robot connection cable (RMP1, RP1) or an internal cable running to each Pulsecoder through the robot mechanical section is grounded. \nBefore continuing to the next step, perform a complete controller back up to save all your programs and settings. \n(Action 6) Replace the main board."
+  },
+  {
+    "id": "04_3_5_60_0_cloud_pdf4llm_8382d4e3",
+    "label": "Pag: 60 (04_3_5_60_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 60",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "60",
+    "entities": [
+      "SRVO-266",
+      "SRVO-230",
+      "SRVO-231",
+      "SRVO-267"
+    ],
+    "text": "[SRVO-266 FENCE1 status abnormal SRVO-267 FENCE2 status abnormal]\n(Explanation) A chain alarm was detected with the EAS (FENCE) signal. \n(Action 1) Check whether the circuitry connected to the dual input signal (EAS) is faulty. (Action 2) Check whether the timing of the dual input signal (EAS) satisfies the timing specification (See Subsection 3.2.5, Table 3.2.5 in CONNECTIONS). \nBefore executing the (Action 3), perform a complete controller back up to save all your programs and settings. \n(Action 3) Replace the main board. (Action 4) Replace the emergency stop board. \n## **WARNING** \nIf this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails. \nFor the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231."
+  },
+  {
+    "id": "04_3_5_45_0_cloud_pdf4llm_3df1de8c",
+    "label": "Pag: 45 (04_3_5_45_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 45",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "45",
+    "entities": [
+      "SRVO-090",
+      "SRVO-092"
+    ],
+    "text": "[SRVO-092 STBERR alarm (Track enc:i)]\n(Explanation) Communication between the Pulsecoder and line tracking board is abnormal. (Action) Action as same as the SRVO-090."
+  },
+  {
+    "id": "04_3_5_61_0_cloud_pdf4llm_274bd52e",
+    "label": "Pag: 61 (04_3_5_61_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 61",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "61",
+    "entities": [
+      "SRVO-266",
+      "SRVO-267"
+    ],
+    "text": "[SRVO-266 FENCE1 status abnormal SRVO-267 FENCE2 status abnormal]\n3. TROUBLESHOOTING \n**(Emergency stop board)** \n**Fig.3.5 (ab) SRVO-266 FENCE1 status abnormal SRVO-267 FENCE2 status abnormal**"
+  },
+  {
+    "id": "04_3_5_28_0_cloud_pdf4llm_301328ce",
+    "label": "Pag: 28 (04_3_5_28_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 28",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "28",
+    "entities": [
+      "SRVO-009"
+    ],
+    "text": "[SRVO-009 Pneumatic pressure alarm]\n(Explanation) An abnormal air pressure was detected. The input signal is located on the end EE interface of the robot. Refer to the manual of your robot. \n(Action 1) If an abnormal air pressure is detected, check the cause. (Action 2) Check the EE connector. \n(Action 3) Check the robot connection cable (RMP1, RP1) and the internal cable of the robot for a ground fault or a cable disconnection. If a fault or a disconnection is detected, replace the cable. \n(Action 4) Replace the 6-Axis servo amplifier. (Action 5) Replace the internal cables of the robot. \nPneumatic pressure alarm input is on the EE interface. Please refer to the manual of your robot. \n6-Axis servo amplifier \n**Fig.3.5 \n(f) SRVO-009 Pneumatic pressure alarm**"
+  },
+  {
+    "id": "04_3_5_50_0_cloud_pdf4llm_2b4e59f6",
+    "label": "Pag: 50 (04_3_5_50_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 50",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "50",
+    "entities": [
+      "SRVO-204"
+    ],
+    "text": "[SRVO-204 External (SVEMG abnormal) E-stop]\n3. TROUBLESHOOTING \n**(Emergency stop board)** \n**Fig.3.5 \n(v) SRVO-204 External (SVEMG abnormal) E-stop**"
+  },
+  {
+    "id": "04_3_5_69_0_cloud_pdf4llm_58c8b84b",
+    "label": "Pag: 69 (04_3_5_69_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 69",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "69",
+    "entities": [
+      "SRVO-375",
+      "SRVO-372",
+      "SRVO-373",
+      "SRVO-376",
+      "SRVO-377",
+      "SRVO-374"
+    ],
+    "text": "[SRVO-372 OPEMG1 status abnormal SRVO-373 OPEMG2 status abnormal]\n3. TROUBLESHOOTING \nE-stop unit (Emergency stop board) \n(Mode switch) (Red) (Yellow) \n**(Emergency stop button)** \n**SRVO-372 OPEMG1 status abnormal SRVO-373 OPEMG2 status abnormal SRVO-374 MODE11 status abnormal SRVO-375 MODE12 status abnormal SRVO-376 MODE21 status abnormal SRVO-377 MODE22 status abnormal**"
+  },
+  {
+    "id": "04_3_5_32_0_cloud_pdf4llm_2ba19c8a",
+    "label": "Pag: 32 (04_3_5_32_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 32",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "32",
+    "entities": [
+      "SRVO-027"
+    ],
+    "text": "[SRVO-027 Robot not mastered (Group:i)]\n- (Explanation) An attempt was made to calibrate the robot, but the necessary adjustment had not been completed. \n(Action) Check whether the mastering is valid. If the mastering is invalid, master the robot."
+  },
+  {
+    "id": "04_3_5_57_0_cloud_pdf4llm_5288ef2e",
+    "label": "Pag: 57 (04_3_5_57_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 57",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "57",
+    "entities": [
+      "SRVO-231",
+      "SRVO-370",
+      "SRVO-385",
+      "SRVO-230",
+      "SRVO-237",
+      "SRVO-266",
+      "SRVO-275"
+    ],
+    "text": "[SRVO-230 Chain 1 abnormal a, b SRVO-231 Chain 2 abnormal a, b]\n(Explanation) A mismatch occurred between duplicate safety signals. \nSRVO-230 is issued if such a mismatch that a contact connected on the chain 1 side (between EES1 and EES11, between EAS1 and EAS11, and so forth) is closed, and a contact on the chain 2 side (between EES2 and EES21, between EAS2 and EAS21, and so forth) is open occurs. SRVO-231 is issued if such a mismatch that a contact on the chain 1 side is open, and a contact on the chain 2 side is closed occurs. If a chain error is detected, correct the cause of the alarm then reset the alarm according to the method described later. \n(Action) Check the alarms issued at the same time in order to identify with which signal the mismatch occurred. \nSRVO-266 through SRVO-275 and SRVO-370 through SRVO-385 are issued at the same time. Take the action\n(s) described for each item. \n## **WARNING** \n- If this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails. \n## **CAUTION** \n- 1 The state of this alarm is preserved by software. After correcting the cause of the alarm, reset the chain error alarm according to the chain error reset procedure described later. \n- 2 Until a chain error is reset, no ordinary reset operation must be performed. If an ordinary reset operation is performed before chain error resetting, the message \"SRVO-237 Chain error cannot be reset\" is displayed on the teach pendant. \n6-Axis servo amplifier E-stop unit (Emergency stop board) \n(z) SRVO-230 Chain 1 (+24V) abnormal a, b SRVO-231 Chain 2 (0V) abnormal a, b"
+  },
+  {
+    "id": "04_3_5_52_0_cloud_pdf4llm_d268449e",
+    "label": "Pag: 52 (04_3_5_52_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 52",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "52",
+    "entities": [
+      "SRVO-205"
+    ],
+    "text": "[SRVO-205 Fence open (SVEMG abnormal)]\n3. TROUBLESHOOTING \n**(Emergency stop board)** \n**Fig.3.5 \n(w) SRVO-205 Fence open (SVEMG abnormal)**"
+  },
+  {
+    "id": "04_3_5_37_0_cloud_pdf4llm_20f545d6",
+    "label": "Pag: 37 (04_3_5_37_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 37",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "37",
+    "entities": [
+      "SRVO-046"
+    ],
+    "text": "[SRVO-046 OVC alarm (Group:i Axis:j)]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_59_0_cloud_pdf4llm_0f9dc577",
+    "label": "Pag: 59 (04_3_5_59_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 59",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "59",
+    "entities": [
+      "SRVO-251",
+      "SRVO-253",
+      "SRVO-233",
+      "SRVO-252",
+      "SRVO-235"
+    ],
+    "text": "[SRVO-253 Amp internal over heat (G:i A:j)]\n(Explanation) An overheat was detected inside the servo amplifier. (Action) Replace the servo amplifier. \n6-Axis servo amplifier E-stop unit (Emergency stop board) \n**(Mode switch)** \n**SRVO-233 TP OFF in T1, T2 SRVO-235 Short term Chain abnormal SRVO-251 DB relay abnormal SRVO-252 Current detect abnl SRVO-253 Amp internal over heat**"
+  },
+  {
+    "id": "04_3_5_23_0_cloud_pdf4llm_8df61e1a",
+    "label": "Pag: 23 (04_3_5_23_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 23",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "23",
+    "entities": [
+      "SRVO-003"
+    ],
+    "text": "[SRVO-003 Deadman switch released]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_55_0_cloud_pdf4llm_63d61fd7",
+    "label": "Pag: 55 (04_3_5_55_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 55",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "55",
+    "entities": [
+      "SRVO-221"
+    ],
+    "text": "[SRVO-221 Lack of DSP (G:i A:j)]\n- (Explanation) A controlled axis card corresponding to the set number of axes is not mounted. (Action 1) Check whether the set number of axes is valid. If the number is invalid, set the correct number. \n- (Action 2) Replace the axis control card with a card corresponding to the set number of axes."
+  },
+  {
+    "id": "04_3_5_55_0_cloud_pdf4llm_971fcb2c",
+    "label": "Pag: 55 (04_3_5_55_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 55",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "55",
+    "entities": [
+      "SRVO-206",
+      "SRVO-213"
+    ],
+    "text": "[SRVO-213 E-STOP Board FUSE2 blown]\n3. TROUBLESHOOTING \n6-Axis servo amplifier E-stop unit (Emergency stop board) \n(x) SRVO-206 DEADMAN switch (SVEMG abnormal) SRVO-213 E-STOP Board FUSE2 blown**"
+  },
+  {
+    "id": "04_3_5_35_0_cloud_pdf4llm_b3239660",
+    "label": "Pag: 35 (04_3_5_35_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 35",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "35",
+    "entities": [
+      "SRVO-043"
+    ],
+    "text": "[SRVO-043 DCAL alarm (Group:i Axis:j)]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_35_0_cloud_pdf4llm_66650bea",
+    "label": "Pag: 35 (04_3_5_35_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 35",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "35",
+    "entities": [
+      "SRVO-046"
+    ],
+    "text": "[SRVO-046 OVC alarm (Group:i Axis:j)]\n- (Explanation) This alarm is issued to prevent the motor from thermal damage that might occur when the root meant square current calculated within the servo system is out of the allowable range. \n- (Action 1) Check the operating condition for the robot and relax the service condition if possible. If the load or operating condition has exceeded the rating, reduce the load or relax the operating condition to meet the rating. \n(Action 2) Check whether the voltage input to the controller is within the rated voltage. (Action 3) Check whether the brake of the corresponding axis is released. (Action 4) Check whether there is a factor that has increased the mechanical load on the corresponding axis. \n(Action 5) Replace the servo amplifier. (Action 6) Replace the motor of the corresponding axis. (Action 7) Replace the E-stop unit (Action 8) Replace the motor power line (robot connection cable) of the corresponding axis. (Action 9) Replace the motor power line and brake line (internal cable of the robot) of the corresponding axis."
+  },
+  {
+    "id": "04_3_5_46_0_cloud_pdf4llm_7545d83f",
+    "label": "Pag: 46 (04_3_5_46_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 46",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "46",
+    "entities": [
+      "SRVO-095",
+      "SRVO-073"
+    ],
+    "text": "[SRVO-095 CMAL alarm (Track enc:i)]\n(Explanation) It is likely that the Pulsecoder is abnormal or the Pulsecoder has malfunctioned due to noise. See the description about the CMAL alarm (SRVO-073). \n(Action 1) Reinforce the earth of the flange of the Pulsecoder. (Action 2) Reset the Pulse count. (Action 3) Replace the Pulsecoder."
+  },
+  {
+    "id": "04_3_5_33_0_cloud_pdf4llm_9ca1b41e",
+    "label": "Pag: 33 (04_3_5_33_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 33",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "33",
+    "entities": [
+      "SRVO-036",
+      "SRVO-023"
+    ],
+    "text": "[SRVO-036 Inpos time over (G:i A:j)]\n(Explanation) The robot did not get to the effective area ($PARAM _ GROUP.$ STOPTOL) even after the position check monitoring time ($PARAM _ GROUP. $INPOS _ TIME) elapsed. \n(Action) Take the same actions as for SRVO-023 (large position error at a stop)."
+  },
+  {
+    "id": "04_3_5_38_0_cloud_pdf4llm_3bb25255",
+    "label": "Pag: 38 (04_3_5_38_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 38",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "38",
+    "entities": [
+      "SRVO-047"
+    ],
+    "text": "[SRVO-047 LVAL alarm (Group:i Axis:j)]\n- (Explanation) The control power supply voltage (+5 V, etc.) supplied from the power supply circuit in the servo amplifier is abnormally low. \n(Action 1) Replace the servo amplifier. (Action 2) Replace the power supply unit. \n6-Axis servo amplifier Power supply unit \n**Fig.3.5 \n(n) SRVO-047 LVAL alarm**"
+  },
+  {
+    "id": "04_3_5_25_0_cloud_pdf4llm_26652ef5",
+    "label": "Pag: 25 (04_3_5_25_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 25",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "25",
+    "entities": [
+      "SRVO-006"
+    ],
+    "text": "[SRVO-006 Hand broken]\n- (Explanation) The safety joint (if in use) might have been broken. Alternatively, the HBK signal on the robot connection cable might be a ground fault or a cable disconnection. \n(Action 1) Hold down the shift key, and press the alarm release key to reset the alarm condition. Still hold down the shift key, and jog the tool to the work area. \n- 1) Replace the safety joint. \n2) Check the safety joint cable. (Action 2) Replace the 6-Axis servo amplifier. (Action 3) Verify the following for connector RMP1, RP1 at the base of the robot: 1) There are no bent or dislocated pins in the male or female connectors. 2) The connector is securely connected. Then verify that connectors CRF8 and CRM68 on the servo amplifier are securely connected. Also, verify that the robot connection cable (RMP1, RP1) is in good condition, and there are no cuts or kinks visible. Check the internal cable of the robot for a short circuit or connection to ground. \nIf the Hand broken signal is not in use, it can be disabled by software setting. Refer to Subsection 5.6.3 in CONNECTIONS to disable the Hand broken signal. \n6-Axis servo amplifier"
+  },
+  {
+    "id": "04_3_5_24_0_cloud_pdf4llm_35089614",
+    "label": "Pag: 24 (04_3_5_24_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 24",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "24",
+    "entities": [
+      "SRVO-004"
+    ],
+    "text": "[SRVO-004 Fence open]\n3. TROUBLESHOOTING \n**Fig.3.5 \n(c) SRVO-004 Fence open** \n## **WARNING** \n- In a system using the safety fence signal, it is very dangerous to disable the signal when a connection is made between EAS1 and EAS11 and between EAS2 and EAS21. Never make such an attempt. If a temporary connection is needed for operation, separate safety measures must be taken."
+  },
+  {
+    "id": "04_3_5_21_0_cloud_pdf4llm_522e9f12",
+    "label": "Pag: 21 (04_3_5_21_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 21",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "21",
+    "entities": [
+      "SRVO-001",
+      "SRVO-213"
+    ],
+    "text": "[SRVO-001 Operator panel E-stop]\n(Explanation) The emergency stop button on the operator's panel is pressed. \n- (Action 1) Release the emergency stop button pressed on the operator's panel. (Action 2) Check the wires connecting between the emergency stop button and the emergency stop board (CRT30) for continuity. If an open wire is found, replace the entire harness. \n- (Action 3) Check the wires connecting between the teach pendant and the emergency stop board (CRS36) for continuity. If an open wire is found, replace the entire harness. \n- (Action 4) With the emergency stop in the released position, check for continuity across the terminals of the switch. If continuity is not found, the emergency stop button is broken. Replace the emergency stop button or the operator's panel. \n- (Action 5) Replace the teach pendant. (Action 6) Replace the emergency stop board. \n- Before executing the (Action 7), perform a complete controller back-up to save all your programs and settings. \n- (Action 7) Replace the main board. \nIf SRVO-001 is issued together with SRVO-213, a fuse may have blown. Take the same actions as for SRVO-213. \nEmergency stop button (R-30 iB Mate) (R-30 iB Mate Plus) Fig.3.5 \n(a) SRVO-001 Operator panel E-stop"
+  },
+  {
+    "id": "04_3_5_53_0_cloud_pdf4llm_00a5a651",
+    "label": "Pag: 53 (04_3_5_53_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 53",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "53",
+    "entities": [
+      "SRVO-206"
+    ],
+    "text": "[SRVO-206 Deadman switch (SVEMG abnormal)]\n- (Explanation) When the teach pendant was enabled, the DEADMAN switch was released or pressed strongly, but the emergency stop line was not disconnected. \n(Action 1) Replace the teach pendant. (Action 2) Check the teach pendant cable. If it is inferior, replace the cable. \nBefore executing the (Action 3), perform a complete controller back up to save all your programs and settings. \n(Action 3) Replace the main board. (Action 4) Replace the emergency stop board. (Action 5) Replace the 6-Axis servo amplifier."
+  },
+  {
+    "id": "04_3_5_39_0_cloud_pdf4llm_9e23019f",
+    "label": "Pag: 39 (04_3_5_39_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 39",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "39",
+    "entities": [
+      "SRVO-047"
+    ],
+    "text": "[SRVO-047 LVAL alarm (Group:i Axis:j)]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_22_0_cloud_pdf4llm_2e08af69",
+    "label": "Pag: 22 (04_3_5_22_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 22",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "22",
+    "entities": [
+      "SRVO-002",
+      "SRVO-003"
+    ],
+    "text": "[SRVO-003 Deadman switch released]\n(Explanation) The teach pendant is enabled, but the deadman switch is not pressed. Alternatively, the deadman switch is pressed strongly. \n(Action 1) Check the intermediate position of the deadman switch on the teach pendant. (Action 2) Check that the mode switch on the operator's panel and the enable/disable switch on the teach pendant are at the correct positions. \n(Action 3) Replace the teach pendant. (Action 4) Check the mode switch connection and operation. If trouble is found, replace the mode switch. \n(Action 5) Replace the emergency stop board. \nEnable/disable Emergency stop button Deadman switch (Teach pendant) \n(Mode switch) \nEmergency stop board \n**Fig.3.5 \n(b) SRVO-002 Teach pendant E-stop SRVO-003 Deadman switch released**"
+  },
+  {
+    "id": "04_3_5_68_0_cloud_pdf4llm_096d228e",
+    "label": "Pag: 68 (04_3_5_68_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 68",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "68",
+    "entities": [
+      "SRVO-371"
+    ],
+    "text": "[SRVO-371 SVON2 status abnormal]\n## 3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_39_0_cloud_pdf4llm_749bbc63",
+    "label": "Pag: 39 (04_3_5_39_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 39",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "39",
+    "entities": [
+      "SRVO-055"
+    ],
+    "text": "[SRVO-055 FSSB com error 1 (G:i A:j)]\n(Explanation) A communication error has occurred between the main board and servo amplifier. (Action 1) Check the optical fiber cable between the axis control card and servo amplifier. Replace it if it is faulty. \n- (Action 2) Replace the axis control card on the main board. (Action 3) Replace the servo amplifier."
+  },
+  {
+    "id": "04_3_5_45_0_cloud_pdf4llm_0dd6a191",
+    "label": "Pag: 45 (04_3_5_45_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 45",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "45",
+    "entities": [
+      "SRVO-093",
+      "SRVO-090"
+    ],
+    "text": "[SRVO-093 SPHAL alarm (Track enc:i)]\n(Explanation) This alarm occurs if the current position data from the Pulsecoder is higher than the previous position data. \n(Action) Action as same as the SRVO-090."
+  },
+  {
+    "id": "04_3_5_68_0_cloud_pdf4llm_1fefb0a3",
+    "label": "Pag: 68 (04_3_5_68_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 68",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "68",
+    "entities": [
+      "SRVO-375",
+      "SRVO-372",
+      "SRVO-231",
+      "SRVO-230",
+      "SRVO-373",
+      "SRVO-376",
+      "SRVO-377",
+      "SRVO-374"
+    ],
+    "text": "[SRVO-372 OPEMG1 status abnormal SRVO-373 OPEMG2 status abnormal]\n(Explanation) A chain alarm was detected with the emergency stop button on the operator's panel. \n(Action 1) Replace the emergency stop board. (Action 2) Replace the teach pendant cable. (Action 3) Replace the teach pendant. (Action 4) Replace the emergency stop button on the operator's panel. \nBefore executing the (Action 5), perform a complete controller back up to save all your programs and settings. \n(Action 5) Replace the main board. \n## **WARNING** \nIf this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails. \nFor the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231. \n**SRVO-374 MODE11 status abnormal SRVO-375 MODE12 status abnormal SRVO-376 MODE21 status abnormal SRVO-377 MODE22 status abnormal** \n(Explanation) A chain alarm was detected with the mode switch signal. (Action 1) Check the mode switch and its cable. Replace them if a defect is found. (Action 2) Replace the emergency stop board. Before executing the (Action 3), perform a complete controller back up to save all your programs and settings. (Action 3) Replace the main board. \n## **WARNING** \nIf this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails. \nFor the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231."
+  },
+  {
+    "id": "04_3_5_65_0_cloud_pdf4llm_4eab5846",
+    "label": "Pag: 65 (04_3_5_65_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 65",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "65",
+    "entities": [
+      "SRVO-278"
+    ],
+    "text": "[SRVO-278 TP E-stop (SVEMG abnormal)]\n(Explanation) The emergency stop line was not disconnected although the emergency stop button on the teach pendant was pressed. \n(Action 1) Replace the teach pendant. (Action 2) Replace the teach pendant cable. \nBefore executing the (Action 3), perform a complete controller back up to save all your programs and settings. \n- (Action 3) Replace the main board. (Action 4) Replace the emergency stop board. (Action 5) Replace the 6-Axis servo amplifier."
+  },
+  {
+    "id": "04_3_5_45_0_cloud_pdf4llm_917b95cc",
+    "label": "Pag: 45 (04_3_5_45_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 45",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "45",
+    "entities": [
+      "SRVO-067",
+      "SRVO-089"
+    ],
+    "text": "[SRVO-089 OHAL2 alarm (Track enc:i)]\n(Explanation) The motor has overheated. When power is supplied to the Pulsecoder after it has become sufficiently cool, if the alarm still occurs. See the description about the OHAL2 alarm (SRVO-067)."
+  },
+  {
+    "id": "04_3_5_55_0_cloud_pdf4llm_4cc6bb28",
+    "label": "Pag: 55 (04_3_5_55_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 55",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "55",
+    "entities": [
+      "SRVO-214"
+    ],
+    "text": "[SRVO-214 6ch amplifier fuse blown (Robot:i)]\n- (Explanation) A fuse (FS2 or FS3) in the 6-Axis servo amplifier has blown. (Action 1) A fuse (FS2 or FS3) is blown, eliminate the cause, and then replace the fuse. (See Section 3.6) \n(Action 2) Replace the 6-Axis servo amplifier."
+  },
+  {
+    "id": "04_3_5_42_0_cloud_pdf4llm_62b65189",
+    "label": "Pag: 42 (04_3_5_42_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 42",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "42",
+    "entities": [
+      "SRVO-068",
+      "SRVO-059"
+    ],
+    "text": "[SRVO-059 Servo amp init error (G:i A:j)]\n(Explanation) Servo amplifier initialization is failed. \n(Action 1) Check the optical fiber cable between the axis control card on the main board servo amplifier. Replace it if it is faulty. \n(Action 2) Turn off the power and disconnect the CRF8 connector on the 6-Axis servo amplifier. Then check whether this alarm occurs again. (Ignore the alarm SRVO-068 because of disconnecting the CRF8 connector.) \nIf this alarm does not occur, the robot connection cable (RMP1, RP1) or the internal cable of the robot (Pulsecoder cable) may be short-circuited to the ground. Check the cables and replace it if necessary. (Action 3) Check whether the LED (P5V and P3.3V) on the 6-Axis servo amplifier is lit. If they are not lit, the DC power is not supplied to the servo amplifier. Make sure the connector CP5 on the power supply unit and the connector CXA2B on the 6-Axis servo amplifier are connected tightly. If they are connected tightly, replace the 6-Axis servo amplifier. (Action 4) Replace the servo amplifier. (Action 5) Replace the line tracking board (If installed). (Action 6) Replace the Pulsecoder"
+  },
+  {
+    "id": "04_3_5_45_0_cloud_pdf4llm_6f6aa967",
+    "label": "Pag: 45 (04_3_5_45_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 45",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "45",
+    "entities": [
+      "SRVO-090",
+      "SRVO-091"
+    ],
+    "text": "[SRVO-091 CRCERR alarm (Track enc:i)]\n(Explanation) Communication between the Pulsecoder and line tracking board is abnormal. (Action) Action as same as the SRVO-090."
+  },
+  {
+    "id": "04_3_5_58_0_cloud_pdf4llm_2eb4ece1",
+    "label": "Pag: 58 (04_3_5_58_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 58",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "58",
+    "entities": [
+      "SRVO-251"
+    ],
+    "text": "[SRVO-251 DB relay abnormal (G:i A:j)]\n(Explanation) An abnormality was detected in the internal relay (DB relay) of the servo amplifier. \n(Action 1) Replace the servo amplifier. (Action 2) Replace the E-stop unit."
+  },
+  {
+    "id": "04_3_5_45_0_cloud_pdf4llm_90fa9360",
+    "label": "Pag: 45 (04_3_5_45_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 45",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "45",
+    "entities": [
+      "SRVO-084",
+      "SRVO-062"
+    ],
+    "text": "[SRVO-084 BZAL alarm (Track enc:i)]\n(Explanation) This alarm occurs if the backup battery for the absolute position of the Pulsecoder has not been connected. See the description about the BZAL alarm (SRVO-062)."
+  },
+  {
+    "id": "04_3_5_33_0_cloud_pdf4llm_b968f044",
+    "label": "Pag: 33 (04_3_5_33_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 33",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "33",
+    "entities": [
+      "SRVO-027"
+    ],
+    "text": "[SRVO-027 Robot not mastered (Group:i)]\n3. TROUBLESHOOTING \n## **WARNING** \nIf the position data is incorrect, the robot or additional axis can operate abnormally, set the position data correctly. Otherwise, you could injure personnel or damage equipment."
+  },
+  {
+    "id": "04_3_5_31_0_cloud_pdf4llm_d32f063e",
+    "label": "Pag: 31 (04_3_5_31_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 31",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "31",
+    "entities": [
+      "SRVO-022"
+    ],
+    "text": "[SRVO-022 SRDY on (Group:i Axis:j)]\n(Explanation) When the HRDY is about to go on, the SRDY is already on. (HRDY is a signal with which the host directs the servo system whether to turn on or off the servo amplifier magnetic contactor. SRDY is a signal with which the servo system informs the host whether the magnetic contactor is turned on.) \n(Action 1) Replace the servo amplifier as the alarm message."
+  },
+  {
+    "id": "04_3_5_71_0_cloud_pdf4llm_4e879876",
+    "label": "Pag: 71 (04_3_5_71_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 71",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "71",
+    "entities": [
+      "SRVO-453"
+    ],
+    "text": "[SRVO-453 Low volt driver (G:i A:j)]\n3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_22_0_cloud_pdf4llm_578a3166",
+    "label": "Pag: 22 (04_3_5_22_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 22",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "22",
+    "entities": [
+      "SRVO-001"
+    ],
+    "text": "[SRVO-001 Operator panel E-stop]\n## 3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_64_0_cloud_pdf4llm_19be4562",
+    "label": "Pag: 64 (04_3_5_64_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 64",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "64",
+    "entities": [
+      "SRVO-277"
+    ],
+    "text": "[SRVO-277 Panel E-stop (SVEMG abnormal)]\n(Explanation) The emergency stop line was not disconnected although the emergency stop button on the operator's panel was pressed. \nBefore executing the (Action 1), perform a complete controller back up to save all your programs and settings. \n(Action 1) Replace the main board. (Action 2) Replace the emergency stop board. (Action 3) Replace the 6-Axis servo amplifier."
+  },
+  {
+    "id": "04_3_5_64_0_cloud_pdf4llm_8b3596b2",
+    "label": "Pag: 64 (04_3_5_64_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 64",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "64",
+    "entities": [
+      "SRVO-274",
+      "SRVO-230",
+      "SRVO-231",
+      "SRVO-275"
+    ],
+    "text": "[SRVO-274 NTED1 status abnormal SRVO-275 NTED2 status abnormal]\n(Explanation) A chain alarm was detected with the NTED signal. \n(Action 1) This alarm may be issued when the DEADMAN switch is pressed to a proper position or is operated very slowly. In such a case, release the DEADMAN switch once completely then press the DEADMAN switch again. \n(Action 2) Check whether the circuitry connected to the dual input signal (NTED) is faulty. (Action 3) Check whether the timing of the dual input signal (NTED) satisfies the timing specification (See Subsection 3.2.5, Fig 3.2.5\n(c) in CONNECTIONS). (Action 4) Replace the teach pendant cable. (Action 5) Replace the teach pendant. (Action 6) Replace the emergency stop board. (Action 7) Replace the mode switch on the operator's panel. \nBefore executing the (Action 8), perform a complete controller back up to save all your programs and settings. (Action 8) Replace the main board. \n## **WARNING** \nIf this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails. \nFor the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231."
+  },
+  {
+    "id": "04_3_5_70_0_cloud_pdf4llm_afa3b031",
+    "label": "Pag: 70 (04_3_5_70_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 70",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "70",
+    "entities": [
+      "SRVO-230",
+      "SRVO-231",
+      "SRVO-378"
+    ],
+    "text": "[SRVO-378 SFDIxx status abnormal]\n(Explanation) A chain alarm was detected with the SFDI signal. xx shows signal name. \n(Action 1) Check whether the circuitry connected to the dual input signal (SFDI) is faulty. (Action 2) Check whether the timing of the dual input signal (SFDI) satisfies the timing specification. (See Subsection 3.3.4, Fig 3.3.4\n(c) in CONNECTIONS). \n## **WARNING** \nIf this alarm is issued, do not reset the chain error alarm until the failure is identified and repaired. If robot use is continued with one of the duplicate circuits being faulty, safety may not be guaranteed when the other circuit fails. \nFor the procedure of recovery from this alarm, see the descriptions of SRVO-230 and SRVO-231. \nE-stop unit (Emergency stop board) \n**Fig.3.5 (ag) SRVO-378 SFDIxx status abnormal**"
+  },
+  {
+    "id": "04_3_5_58_0_cloud_pdf4llm_f6242d85",
+    "label": "Pag: 58 (04_3_5_58_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 58",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "58",
+    "entities": [
+      "SRVO-233"
+    ],
+    "text": "[SRVO-233 TP OFF in T1/ T2]\n(Explanation) Teach pendant is disabled when the mode switch is T1 or T2. \nOr controller door is opened. \n(Action 1) Enable the teach pendant in teaching operation. In other case the mode switch should be AUTO mode. \n(Action 2) Close the controller door, if open. (Action 3) Replace the teach pendant. (Action 4) Replace the teach pendant cable. (Action 5) Replace the mode switch. (Action 6) Replace the emergency stop board. (Action 7) Replace the 6-Axis servo amplifier."
+  },
+  {
+    "id": "04_3_5_40_0_cloud_pdf4llm_2b801bb6",
+    "label": "Pag: 40 (04_3_5_40_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 40",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "40",
+    "entities": [
+      "SRVO-056"
+    ],
+    "text": "[SRVO-056 FSSB com error 2 (G:i A:j)]\n(Explanation) A communication error has occurred between the main board and servo amplifier. (Action 1) Check the optical fiber cable between the axis control card and servo amplifier. Replace it if it is faulty. (Action 2) Replace the axis control card on the main board. (Action 3) Replace the servo amplifier."
+  },
+  {
+    "id": "04_3_5_30_0_cloud_pdf4llm_d3b24a92",
+    "label": "Pag: 30 (04_3_5_30_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 30",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "30",
+    "entities": [
+      "SRVO-015"
+    ],
+    "text": "[The controller will stop operation after 1 minutes of this alarm.]\nDoor fan \nRear fan \nFan motor Main board Heat exchanger \n**Fig.3.5 \n(h) SRVO-015 System over heat**"
+  },
+  {
+    "id": "04_3_5_44_0_cloud_pdf4llm_ff42250c",
+    "label": "Pag: 44 (04_3_5_44_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 44",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "44",
+    "entities": [
+      "SRVO-072"
+    ],
+    "text": "[SRVO-072 PMAL alarm (Group:i Axis:j)]\n## 3. TROUBLESHOOTING"
+  },
+  {
+    "id": "04_3_5_24_0_cloud_pdf4llm_93830857",
+    "label": "Pag: 24 (04_3_5_24_0_cloud_pdf4llm)",
+    "title": "File: troubleshooting_alarms.pdf | Pagina: 24",
+    "color": "rgb(224, 81, 81)",
+    "file": "troubleshooting_alarms.pdf",
+    "page": "24",
+    "entities": [
+      "SRVO-214",
+      "SRVO-005"
+    ],
+    "text": "[SRVO-005 Robot overtravel]\n(Explanation) The robot has moved beyond a hardware limit switch on the axes. \n- (Action 1) 1) Select [System OT release] on the overtravel release screen to release each robot axis from the overtravel state. \n- 2) Hold down the shift key, and press the alarm release key to reset the alarm condition. \n- 3) Still hold down the shift key, and jog to bring all axes into the movable range. \n- (Action 2) Replace the limit switch. \n(Action 3) Check the FS2 fuse on the servo amplifier. If the SRVO-214 6ch amplifier fuse blown alarm is also generated, the FS2 fuse has blown. \n(Action 4) Check the EE connector. (Action 5) Replace the 6-Axis servo amplifier. (Action 6) Verify the following for connector RMP1, RP1 at the base of the robot: 1) There are no bent or dislocated pins in the male or female connectors. 2) The connector is securely connected. Then verify that connectors CRF8 and CRM68 on the servo amplifier are securely connected. Also, verify that the robot connection cable (RMP1, RP1) is in good condition, and there are no cuts or kinks visible. Check the internal cable of the robot for a short circuit or connection to ground. \nIt is factory-placed in the overtravel state for packing purposes. If the Overtravel signal is not in use, it may have been disabled by short-circuiting in the mechanical unit."
+  }
+]);
+        var edges = new vis.DataSet([
+  {
+    "from": "04_3_5_54_0_cloud_pdf4llm_cece37f6",
+    "to": "04_3_5_21_0_cloud_pdf4llm_522e9f12",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_54_0_cloud_pdf4llm_cece37f6",
+    "to": "04_3_5_23_0_cloud_pdf4llm_a95e862d",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_54_0_cloud_pdf4llm_cece37f6",
+    "to": "04_3_5_27_0_cloud_pdf4llm_3cb5a470",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_54_0_cloud_pdf4llm_cece37f6",
+    "to": "04_3_5_53_0_cloud_pdf4llm_a2dc804e",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-213",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_54_0_cloud_pdf4llm_cece37f6",
+    "to": "04_3_5_55_0_cloud_pdf4llm_971fcb2c",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-213",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_45_0_cloud_pdf4llm_c219e65e",
+    "to": "04_3_5_42_0_cloud_pdf4llm_6dea6d17",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-065",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_65_0_cloud_pdf4llm_c54416a5",
+    "to": "04_3_5_57_0_cloud_pdf4llm_5288ef2e",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-275",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_65_0_cloud_pdf4llm_c54416a5",
+    "to": "04_3_5_64_0_cloud_pdf4llm_8b3596b2",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-275, SRVO-274",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_65_0_cloud_pdf4llm_c54416a5",
+    "to": "04_3_5_64_0_cloud_pdf4llm_19be4562",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-277",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_65_0_cloud_pdf4llm_c54416a5",
+    "to": "04_3_5_65_0_cloud_pdf4llm_bd499426",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-277",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_65_0_cloud_pdf4llm_c54416a5",
+    "to": "04_3_5_65_0_cloud_pdf4llm_4eab5846",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-278",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_51_0_cloud_pdf4llm_5e1173c0",
+    "to": "04_3_5_52_0_cloud_pdf4llm_d268449e",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-205",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_51_0_cloud_pdf4llm_5e1173c0",
+    "to": "04_3_5_53_0_cloud_pdf4llm_108a01e4",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-205",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_36_0_cloud_pdf4llm_7e64b97e",
+    "to": "04_3_5_35_0_cloud_pdf4llm_00d1b75c",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-044",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_36_0_cloud_pdf4llm_7e64b97e",
+    "to": "04_3_5_35_0_cloud_pdf4llm_7de44656",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-045",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_36_0_cloud_pdf4llm_7e64b97e",
+    "to": "04_3_5_35_0_cloud_pdf4llm_66650bea",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-046",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_36_0_cloud_pdf4llm_7e64b97e",
+    "to": "04_3_5_37_0_cloud_pdf4llm_20f545d6",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-046",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_63_0_cloud_pdf4llm_0e3c6226",
+    "to": "04_3_5_62_0_cloud_pdf4llm_bb731e58",
+    "value": 2.5,
+    "title": "Peso: 2.5 | Entit\u00e0: SRVO-270, SRVO-271",
+    "label": "2.5"
+  },
+  {
+    "from": "04_3_5_63_0_cloud_pdf4llm_0e3c6226",
+    "to": "04_3_5_64_0_cloud_pdf4llm_c54504fe",
+    "value": 2.5,
+    "title": "Peso: 2.5 | Entit\u00e0: SRVO-270, SRVO-271",
+    "label": "2.5"
+  },
+  {
+    "from": "04_3_5_31_0_cloud_pdf4llm_2caf8c58",
+    "to": "04_3_5_32_0_cloud_pdf4llm_edc0d5b8",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-021",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_31_0_cloud_pdf4llm_2caf8c58",
+    "to": "04_3_5_32_0_cloud_pdf4llm_7a4a8c0b",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-021",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_31_0_cloud_pdf4llm_2caf8c58",
+    "to": "04_3_5_39_0_cloud_pdf4llm_3f6a0c75",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: CRMA91",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_31_0_cloud_pdf4llm_2caf8c58",
+    "to": "04_3_5_46_0_cloud_pdf4llm_fcb684d3",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: CRMA91, CRMA92",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_51_0_cloud_pdf4llm_c0b9642a",
+    "to": "04_3_5_49_0_cloud_pdf4llm_32aecf8a",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-204",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_51_0_cloud_pdf4llm_c0b9642a",
+    "to": "04_3_5_50_0_cloud_pdf4llm_2b4e59f6",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-204",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_55_0_cloud_pdf4llm_c7086a9a",
+    "to": "04_3_5_56_0_cloud_pdf4llm_8ba1c0d9",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-216",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_31_0_cloud_pdf4llm_427dc803",
+    "to": "04_3_5_32_0_cloud_pdf4llm_edc0d5b8",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-023",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_31_0_cloud_pdf4llm_427dc803",
+    "to": "04_3_5_32_0_cloud_pdf4llm_7a4a8c0b",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-023",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_31_0_cloud_pdf4llm_427dc803",
+    "to": "04_3_5_33_0_cloud_pdf4llm_9ca1b41e",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-023",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_47_0_cloud_pdf4llm_f921f42e",
+    "to": "04_3_5_31_0_cloud_pdf4llm_3676adeb",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: CRR88",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_47_0_cloud_pdf4llm_f921f42e",
+    "to": "04_3_5_35_0_cloud_pdf4llm_7de44656",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: CRR88",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_47_0_cloud_pdf4llm_f921f42e",
+    "to": "04_3_5_48_0_cloud_pdf4llm_fdbc45ff",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-156",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_47_0_cloud_pdf4llm_f921f42e",
+    "to": "04_3_5_48_0_cloud_pdf4llm_2cb43c93",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-134",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_49_0_cloud_pdf4llm_686725b2",
+    "to": "04_3_5_48_0_cloud_pdf4llm_fdbc45ff",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-157",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_33_0_cloud_pdf4llm_d024319a",
+    "to": "04_3_5_34_0_cloud_pdf4llm_2de8a9db",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-043",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_33_0_cloud_pdf4llm_d024319a",
+    "to": "04_3_5_35_0_cloud_pdf4llm_b3239660",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-043",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_42_0_cloud_pdf4llm_a7d8575e",
+    "to": "04_3_5_43_0_cloud_pdf4llm_ab1553c5",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-064",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_53_0_cloud_pdf4llm_a2dc804e",
+    "to": "04_3_5_21_0_cloud_pdf4llm_522e9f12",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_53_0_cloud_pdf4llm_a2dc804e",
+    "to": "04_3_5_23_0_cloud_pdf4llm_a95e862d",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_53_0_cloud_pdf4llm_a2dc804e",
+    "to": "04_3_5_27_0_cloud_pdf4llm_3cb5a470",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_53_0_cloud_pdf4llm_a2dc804e",
+    "to": "04_3_5_55_0_cloud_pdf4llm_971fcb2c",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_60_0_cloud_pdf4llm_d9d1bd7f",
+    "to": "04_3_5_59_0_cloud_pdf4llm_0f9dc577",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-253",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_32_0_cloud_pdf4llm_7a4a8c0b",
+    "to": "04_3_5_32_0_cloud_pdf4llm_edc0d5b8",
+    "value": 5.5,
+    "title": "Peso: 5.5 | Entit\u00e0: CNJ6, SRVO-018, SRVO-021, SRVO-022, SRVO-023",
+    "label": "5.5"
+  },
+  {
+    "from": "04_3_5_32_0_cloud_pdf4llm_7a4a8c0b",
+    "to": "04_3_5_31_0_cloud_pdf4llm_3676adeb",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-018",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_32_0_cloud_pdf4llm_7a4a8c0b",
+    "to": "04_3_5_31_0_cloud_pdf4llm_d32f063e",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-022",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_32_0_cloud_pdf4llm_7a4a8c0b",
+    "to": "04_3_5_33_0_cloud_pdf4llm_9ca1b41e",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-023",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_26_0_cloud_pdf4llm_7421fd77",
+    "to": "04_3_5_25_0_cloud_pdf4llm_26652ef5",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-006",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_26_0_cloud_pdf4llm_7421fd77",
+    "to": "04_3_5_24_0_cloud_pdf4llm_93830857",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-005",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_72_0_cloud_pdf4llm_66008835",
+    "to": "04_3_5_71_0_cloud_pdf4llm_9315e7ee",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-479",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_34_0_cloud_pdf4llm_2de8a9db",
+    "to": "04_3_5_35_0_cloud_pdf4llm_b3239660",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-043",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_28_0_cloud_pdf4llm_0e913b73",
+    "to": "04_3_5_27_0_cloud_pdf4llm_3cb5a470",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-007",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_44_0_cloud_pdf4llm_d96b8281",
+    "to": "04_3_5_46_0_cloud_pdf4llm_ae6453c3",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-074",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_5be14fa7",
+    "to": "04_3_5_42_0_cloud_pdf4llm_3f68052c",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-067",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_5be14fa7",
+    "to": "04_3_5_45_0_cloud_pdf4llm_917b95cc",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-067",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_58_0_cloud_pdf4llm_ff956be3",
+    "to": "04_3_5_57_0_cloud_pdf4llm_5288ef2e",
+    "value": 2.5,
+    "title": "Peso: 2.5 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.5"
+  },
+  {
+    "from": "04_3_5_58_0_cloud_pdf4llm_ff956be3",
+    "to": "04_3_5_60_0_cloud_pdf4llm_8382d4e3",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_58_0_cloud_pdf4llm_ff956be3",
+    "to": "04_3_5_62_0_cloud_pdf4llm_bb731e58",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_58_0_cloud_pdf4llm_ff956be3",
+    "to": "04_3_5_64_0_cloud_pdf4llm_8b3596b2",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_58_0_cloud_pdf4llm_ff956be3",
+    "to": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_58_0_cloud_pdf4llm_ff956be3",
+    "to": "04_3_5_68_0_cloud_pdf4llm_1fefb0a3",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_58_0_cloud_pdf4llm_ff956be3",
+    "to": "04_3_5_70_0_cloud_pdf4llm_afa3b031",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_58_0_cloud_pdf4llm_9fb783a1",
+    "to": "04_3_5_59_0_cloud_pdf4llm_0f9dc577",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-235",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_59_0_cloud_pdf4llm_b365e770",
+    "to": "04_3_5_58_0_cloud_pdf4llm_2eb4ece1",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-251",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_59_0_cloud_pdf4llm_b365e770",
+    "to": "04_3_5_59_0_cloud_pdf4llm_0f9dc577",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-251",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_46_0_cloud_pdf4llm_b6bf90d0",
+    "to": "04_3_5_45_0_cloud_pdf4llm_0dd6a191",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-093",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_40_0_cloud_pdf4llm_3c2c8c77",
+    "to": "04_3_5_42_0_cloud_pdf4llm_62b65189",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_40_0_cloud_pdf4llm_3c2c8c77",
+    "to": "04_3_5_43_0_cloud_pdf4llm_1f440e4e",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_40_0_cloud_pdf4llm_3c2c8c77",
+    "to": "04_3_5_43_0_cloud_pdf4llm_80d23f1b",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_40_0_cloud_pdf4llm_3c2c8c77",
+    "to": "04_3_5_43_0_cloud_pdf4llm_3759e402",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_40_0_cloud_pdf4llm_3c2c8c77",
+    "to": "04_3_5_43_0_cloud_pdf4llm_ab1553c5",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_40_0_cloud_pdf4llm_3c2c8c77",
+    "to": "04_3_5_45_0_cloud_pdf4llm_7d212d60",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_40_0_cloud_pdf4llm_3c2c8c77",
+    "to": "04_3_5_41_0_cloud_pdf4llm_694cc5f8",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-058",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_40_0_cloud_pdf4llm_3c2c8c77",
+    "to": "04_3_5_41_0_cloud_pdf4llm_635b2ae5",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-058",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_40_0_cloud_pdf4llm_3c2c8c77",
+    "to": "04_3_5_55_0_cloud_pdf4llm_166e9609",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-058",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_1f440e4e",
+    "to": "04_3_5_42_0_cloud_pdf4llm_62b65189",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_1f440e4e",
+    "to": "04_3_5_43_0_cloud_pdf4llm_80d23f1b",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-068",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_1f440e4e",
+    "to": "04_3_5_43_0_cloud_pdf4llm_3759e402",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_1f440e4e",
+    "to": "04_3_5_43_0_cloud_pdf4llm_ab1553c5",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_1f440e4e",
+    "to": "04_3_5_45_0_cloud_pdf4llm_7d212d60",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_80d23f1b",
+    "to": "04_3_5_42_0_cloud_pdf4llm_62b65189",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_80d23f1b",
+    "to": "04_3_5_43_0_cloud_pdf4llm_3759e402",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-068",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_80d23f1b",
+    "to": "04_3_5_43_0_cloud_pdf4llm_ab1553c5",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_80d23f1b",
+    "to": "04_3_5_45_0_cloud_pdf4llm_7d212d60",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_30_0_cloud_pdf4llm_fdad06cb",
+    "to": "04_3_5_30_0_cloud_pdf4llm_d3b24a92",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-015",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_40_0_cloud_pdf4llm_f8266991",
+    "to": "04_3_5_39_0_cloud_pdf4llm_749bbc63",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-055",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_40_0_cloud_pdf4llm_f8266991",
+    "to": "04_3_5_41_0_cloud_pdf4llm_635b2ae5",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-055",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_46_0_cloud_pdf4llm_fcb684d3",
+    "to": "04_3_5_39_0_cloud_pdf4llm_3f6a0c75",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: CRMA91",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_32_0_cloud_pdf4llm_edc0d5b8",
+    "to": "04_3_5_31_0_cloud_pdf4llm_3676adeb",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-018",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_32_0_cloud_pdf4llm_edc0d5b8",
+    "to": "04_3_5_31_0_cloud_pdf4llm_d32f063e",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-022",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_32_0_cloud_pdf4llm_edc0d5b8",
+    "to": "04_3_5_33_0_cloud_pdf4llm_9ca1b41e",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-023",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_59_0_cloud_pdf4llm_57dfdf4b",
+    "to": "04_3_5_59_0_cloud_pdf4llm_0f9dc577",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-252",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_44_0_cloud_pdf4llm_6625fcff",
+    "to": "04_3_5_45_0_cloud_pdf4llm_5d4bb4ea",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-076",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_30_0_cloud_pdf4llm_83486c0c",
+    "to": "04_3_5_29_0_cloud_pdf4llm_be89d451",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-014",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_62_0_cloud_pdf4llm_f3c503ae",
+    "to": "04_3_5_57_0_cloud_pdf4llm_5288ef2e",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-266",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_62_0_cloud_pdf4llm_f3c503ae",
+    "to": "04_3_5_60_0_cloud_pdf4llm_8382d4e3",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-266, SRVO-267",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_62_0_cloud_pdf4llm_f3c503ae",
+    "to": "04_3_5_61_0_cloud_pdf4llm_274bd52e",
+    "value": 2.5,
+    "title": "Peso: 2.5 | Entit\u00e0: SRVO-266, SRVO-267",
+    "label": "2.5"
+  },
+  {
+    "from": "04_3_5_55_0_cloud_pdf4llm_166e9609",
+    "to": "04_3_5_41_0_cloud_pdf4llm_694cc5f8",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-058",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_55_0_cloud_pdf4llm_166e9609",
+    "to": "04_3_5_41_0_cloud_pdf4llm_635b2ae5",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-058",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_55_0_cloud_pdf4llm_166e9609",
+    "to": "04_3_5_56_0_cloud_pdf4llm_ba17ac46",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-223",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_55_0_cloud_pdf4llm_166e9609",
+    "to": "04_3_5_56_0_cloud_pdf4llm_8ba1c0d9",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-223",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_39_0_cloud_pdf4llm_677cf0cb",
+    "to": "04_3_5_39_0_cloud_pdf4llm_c58fb286",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-050",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "to": "04_3_5_57_0_cloud_pdf4llm_5288ef2e",
+    "value": 3.0,
+    "title": "Peso: 3.0 | Entit\u00e0: SRVO-231, SRVO-370, SRVO-230",
+    "label": "3.0"
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "to": "04_3_5_60_0_cloud_pdf4llm_8382d4e3",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "to": "04_3_5_62_0_cloud_pdf4llm_bb731e58",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "to": "04_3_5_64_0_cloud_pdf4llm_8b3596b2",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "to": "04_3_5_68_0_cloud_pdf4llm_1fefb0a3",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "to": "04_3_5_70_0_cloud_pdf4llm_afa3b031",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "to": "04_3_5_66_0_cloud_pdf4llm_6e6c31c1",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-291",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "to": "04_3_5_66_0_cloud_pdf4llm_b294dec5",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-335",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "to": "04_3_5_66_0_cloud_pdf4llm_0ffa18ad",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-348",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "to": "04_3_5_67_0_cloud_pdf4llm_903e7e52",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-348",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "to": "04_3_5_67_0_cloud_pdf4llm_ff6223da",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-349",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_e4e9c659",
+    "to": "04_3_5_68_0_cloud_pdf4llm_096d228e",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-371",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_67_0_cloud_pdf4llm_903e7e52",
+    "to": "04_3_5_66_0_cloud_pdf4llm_0ffa18ad",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-348",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_64_0_cloud_pdf4llm_c54504fe",
+    "to": "04_3_5_62_0_cloud_pdf4llm_bb731e58",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-270, SRVO-271",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_44_0_cloud_pdf4llm_5a4563e8",
+    "to": "04_3_5_46_0_cloud_pdf4llm_7545d83f",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-073",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_53_0_cloud_pdf4llm_108a01e4",
+    "to": "04_3_5_52_0_cloud_pdf4llm_d268449e",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-205",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_45_0_cloud_pdf4llm_7d212d60",
+    "to": "04_3_5_42_0_cloud_pdf4llm_62b65189",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_45_0_cloud_pdf4llm_7d212d60",
+    "to": "04_3_5_43_0_cloud_pdf4llm_3759e402",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_45_0_cloud_pdf4llm_7d212d60",
+    "to": "04_3_5_43_0_cloud_pdf4llm_ab1553c5",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_45_0_cloud_pdf4llm_7d212d60",
+    "to": "04_3_5_45_0_cloud_pdf4llm_6f6aa967",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-090",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_45_0_cloud_pdf4llm_7d212d60",
+    "to": "04_3_5_45_0_cloud_pdf4llm_3df1de8c",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-090",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_45_0_cloud_pdf4llm_7d212d60",
+    "to": "04_3_5_45_0_cloud_pdf4llm_0dd6a191",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-090",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_56_0_cloud_pdf4llm_8ba1c0d9",
+    "to": "04_3_5_24_0_cloud_pdf4llm_93830857",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-214",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_56_0_cloud_pdf4llm_8ba1c0d9",
+    "to": "04_3_5_55_0_cloud_pdf4llm_4cc6bb28",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-214",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_56_0_cloud_pdf4llm_8ba1c0d9",
+    "to": "04_3_5_55_0_cloud_pdf4llm_63d61fd7",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-221",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_56_0_cloud_pdf4llm_8ba1c0d9",
+    "to": "04_3_5_56_0_cloud_pdf4llm_ba17ac46",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-223",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_39_0_cloud_pdf4llm_c58fb286",
+    "to": "04_3_5_39_0_cloud_pdf4llm_3f6a0c75",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-049",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_3759e402",
+    "to": "04_3_5_42_0_cloud_pdf4llm_62b65189",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-068, SRVO-059",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_3759e402",
+    "to": "04_3_5_43_0_cloud_pdf4llm_ab1553c5",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-068",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_3759e402",
+    "to": "04_3_5_56_0_cloud_pdf4llm_ba17ac46",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-059",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_31_0_cloud_pdf4llm_3676adeb",
+    "to": "04_3_5_35_0_cloud_pdf4llm_7de44656",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: CRR88",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_41_0_cloud_pdf4llm_694cc5f8",
+    "to": "04_3_5_41_0_cloud_pdf4llm_635b2ae5",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-058",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_ab1553c5",
+    "to": "04_3_5_42_0_cloud_pdf4llm_62b65189",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-068",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_70_0_cloud_pdf4llm_803db42d",
+    "to": "04_3_5_68_0_cloud_pdf4llm_1fefb0a3",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-372, SRVO-373",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_70_0_cloud_pdf4llm_803db42d",
+    "to": "04_3_5_69_0_cloud_pdf4llm_58c8b84b",
+    "value": 2.5,
+    "title": "Peso: 2.5 | Entit\u00e0: SRVO-372, SRVO-373",
+    "label": "2.5"
+  },
+  {
+    "from": "04_3_5_23_0_cloud_pdf4llm_a95e862d",
+    "to": "04_3_5_21_0_cloud_pdf4llm_522e9f12",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_23_0_cloud_pdf4llm_a95e862d",
+    "to": "04_3_5_27_0_cloud_pdf4llm_3cb5a470",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_23_0_cloud_pdf4llm_a95e862d",
+    "to": "04_3_5_55_0_cloud_pdf4llm_971fcb2c",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_23_0_cloud_pdf4llm_a95e862d",
+    "to": "04_3_5_24_0_cloud_pdf4llm_35089614",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-004",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_42_0_cloud_pdf4llm_3f68052c",
+    "to": "04_3_5_45_0_cloud_pdf4llm_917b95cc",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-067",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_22_0_cloud_pdf4llm_d64c0039",
+    "to": "04_3_5_22_0_cloud_pdf4llm_2e08af69",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-002",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_27_0_cloud_pdf4llm_3cb5a470",
+    "to": "04_3_5_21_0_cloud_pdf4llm_522e9f12",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_27_0_cloud_pdf4llm_3cb5a470",
+    "to": "04_3_5_55_0_cloud_pdf4llm_971fcb2c",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_41_0_cloud_pdf4llm_635b2ae5",
+    "to": "04_3_5_39_0_cloud_pdf4llm_749bbc63",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-055",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_41_0_cloud_pdf4llm_635b2ae5",
+    "to": "04_3_5_40_0_cloud_pdf4llm_2b801bb6",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-056",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_41_0_cloud_pdf4llm_635b2ae5",
+    "to": "04_3_5_40_0_cloud_pdf4llm_8936da5e",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-057",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_62_0_cloud_pdf4llm_bb731e58",
+    "to": "04_3_5_57_0_cloud_pdf4llm_5288ef2e",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_62_0_cloud_pdf4llm_bb731e58",
+    "to": "04_3_5_60_0_cloud_pdf4llm_8382d4e3",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_62_0_cloud_pdf4llm_bb731e58",
+    "to": "04_3_5_64_0_cloud_pdf4llm_8b3596b2",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_62_0_cloud_pdf4llm_bb731e58",
+    "to": "04_3_5_68_0_cloud_pdf4llm_1fefb0a3",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_62_0_cloud_pdf4llm_bb731e58",
+    "to": "04_3_5_70_0_cloud_pdf4llm_afa3b031",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_46_0_cloud_pdf4llm_a15510c7",
+    "to": "04_3_5_44_0_cloud_pdf4llm_e1f72b95",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-075",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_29_0_cloud_pdf4llm_2535ae3e",
+    "to": "04_3_5_28_0_cloud_pdf4llm_301328ce",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-009",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_49_0_cloud_pdf4llm_32aecf8a",
+    "to": "04_3_5_50_0_cloud_pdf4llm_2b4e59f6",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-204",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_65_0_cloud_pdf4llm_bd499426",
+    "to": "04_3_5_64_0_cloud_pdf4llm_19be4562",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-277",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_77f0e0a8",
+    "to": "04_3_5_44_0_cloud_pdf4llm_ff42250c",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-072",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_43_0_cloud_pdf4llm_77f0e0a8",
+    "to": "04_3_5_46_0_cloud_pdf4llm_b6cd41c4",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-072",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_46_0_cloud_pdf4llm_b6cd41c4",
+    "to": "04_3_5_44_0_cloud_pdf4llm_ff42250c",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-072",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_42_0_cloud_pdf4llm_4bcf099f",
+    "to": "04_3_5_45_0_cloud_pdf4llm_90fa9360",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-062",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_56_0_cloud_pdf4llm_ba17ac46",
+    "to": "04_3_5_42_0_cloud_pdf4llm_62b65189",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-059",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_70_0_cloud_pdf4llm_e67b412b",
+    "to": "04_3_5_71_0_cloud_pdf4llm_4e879876",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-453",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_60_0_cloud_pdf4llm_8382d4e3",
+    "to": "04_3_5_57_0_cloud_pdf4llm_5288ef2e",
+    "value": 3.0,
+    "title": "Peso: 3.0 | Entit\u00e0: SRVO-231, SRVO-230, SRVO-266",
+    "label": "3.0"
+  },
+  {
+    "from": "04_3_5_60_0_cloud_pdf4llm_8382d4e3",
+    "to": "04_3_5_64_0_cloud_pdf4llm_8b3596b2",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_60_0_cloud_pdf4llm_8382d4e3",
+    "to": "04_3_5_68_0_cloud_pdf4llm_1fefb0a3",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_60_0_cloud_pdf4llm_8382d4e3",
+    "to": "04_3_5_70_0_cloud_pdf4llm_afa3b031",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_60_0_cloud_pdf4llm_8382d4e3",
+    "to": "04_3_5_61_0_cloud_pdf4llm_274bd52e",
+    "value": 2.5,
+    "title": "Peso: 2.5 | Entit\u00e0: SRVO-266, SRVO-267",
+    "label": "2.5"
+  },
+  {
+    "from": "04_3_5_45_0_cloud_pdf4llm_3df1de8c",
+    "to": "04_3_5_45_0_cloud_pdf4llm_6f6aa967",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-090",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_45_0_cloud_pdf4llm_3df1de8c",
+    "to": "04_3_5_45_0_cloud_pdf4llm_0dd6a191",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-090",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_61_0_cloud_pdf4llm_274bd52e",
+    "to": "04_3_5_57_0_cloud_pdf4llm_5288ef2e",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-266",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_69_0_cloud_pdf4llm_58c8b84b",
+    "to": "04_3_5_68_0_cloud_pdf4llm_1fefb0a3",
+    "value": 6.5,
+    "title": "Peso: 6.5 | Entit\u00e0: SRVO-375, SRVO-372, SRVO-373, SRVO-376, SRVO-377, SRVO-374",
+    "label": "6.5"
+  },
+  {
+    "from": "04_3_5_32_0_cloud_pdf4llm_2ba19c8a",
+    "to": "04_3_5_33_0_cloud_pdf4llm_b968f044",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-027",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_57_0_cloud_pdf4llm_5288ef2e",
+    "to": "04_3_5_64_0_cloud_pdf4llm_8b3596b2",
+    "value": 3.0,
+    "title": "Peso: 3.0 | Entit\u00e0: SRVO-231, SRVO-230, SRVO-275",
+    "label": "3.0"
+  },
+  {
+    "from": "04_3_5_57_0_cloud_pdf4llm_5288ef2e",
+    "to": "04_3_5_68_0_cloud_pdf4llm_1fefb0a3",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_57_0_cloud_pdf4llm_5288ef2e",
+    "to": "04_3_5_70_0_cloud_pdf4llm_afa3b031",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_37_0_cloud_pdf4llm_20f545d6",
+    "to": "04_3_5_35_0_cloud_pdf4llm_66650bea",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-046",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_59_0_cloud_pdf4llm_0f9dc577",
+    "to": "04_3_5_58_0_cloud_pdf4llm_f6242d85",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-233",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_59_0_cloud_pdf4llm_0f9dc577",
+    "to": "04_3_5_58_0_cloud_pdf4llm_2eb4ece1",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-251",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_23_0_cloud_pdf4llm_8df61e1a",
+    "to": "04_3_5_22_0_cloud_pdf4llm_2e08af69",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-003",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_55_0_cloud_pdf4llm_971fcb2c",
+    "to": "04_3_5_21_0_cloud_pdf4llm_522e9f12",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-213",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_55_0_cloud_pdf4llm_971fcb2c",
+    "to": "04_3_5_53_0_cloud_pdf4llm_00a5a651",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-206",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_38_0_cloud_pdf4llm_3bb25255",
+    "to": "04_3_5_39_0_cloud_pdf4llm_9e23019f",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-047",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_21_0_cloud_pdf4llm_522e9f12",
+    "to": "04_3_5_22_0_cloud_pdf4llm_578a3166",
+    "value": 1.5,
+    "title": "Peso: 1.5 | Entit\u00e0: SRVO-001",
+    "label": "1.5"
+  },
+  {
+    "from": "04_3_5_45_0_cloud_pdf4llm_0dd6a191",
+    "to": "04_3_5_45_0_cloud_pdf4llm_6f6aa967",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-090",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_68_0_cloud_pdf4llm_1fefb0a3",
+    "to": "04_3_5_64_0_cloud_pdf4llm_8b3596b2",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_68_0_cloud_pdf4llm_1fefb0a3",
+    "to": "04_3_5_70_0_cloud_pdf4llm_afa3b031",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  },
+  {
+    "from": "04_3_5_55_0_cloud_pdf4llm_4cc6bb28",
+    "to": "04_3_5_24_0_cloud_pdf4llm_93830857",
+    "value": 1.0,
+    "title": "Peso: 1.0 | Entit\u00e0: SRVO-214",
+    "label": ""
+  },
+  {
+    "from": "04_3_5_64_0_cloud_pdf4llm_8b3596b2",
+    "to": "04_3_5_70_0_cloud_pdf4llm_afa3b031",
+    "value": 2.0,
+    "title": "Peso: 2.0 | Entit\u00e0: SRVO-231, SRVO-230",
+    "label": "2.0"
+  }
+]);
+
+        var container = document.getElementById('mynetwork');
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+        var options = {
+            nodes: {
+                shape: 'dot',
+                size: 16,
+                font: {
+                    color: '#ffffff',
+                    size: 11
+                },
+                borderWidth: 1.5,
+                borderColor: '#424242'
+            },
+            edges: {
+                color: {
+                    color: '#555555',
+                    highlight: '#ffcc00',
+                    hover: '#ffcc00'
+                },
+                scaling: {
+                    min: 1,
+                    max: 5
+                }
+            },
+            interaction: {
+                hover: true,
+                tooltipDelay: 200
+            },
+            physics: {
+                stabilization: true,
+                barnesHut: {
+                    gravitationalConstant: -10000,
+                    springConstant: 0.03,
+                    springLength: 100
+                }
+            }
+        };
+        var network = new vis.Network(container, data, options);
+
+        network.on("click", function (params) {
+            if (params.nodes.length > 0) {
+                var nodeId = params.nodes[0];
+                var nodeData = nodes.get(nodeId);
+                var detailDiv = document.getElementById('details');
+                
+                var html = '<h3 style="color: #4fc3f7; margin-top: 0;">' + nodeData.label + '</h3>';
+                html += '<p><strong>File:</strong> ' + nodeData.file + '</p>';
+                html += '<p><strong>Pagina:</strong> ' + nodeData.page + '</p>';
+                
+                if (nodeData.entities.length > 0) {
+                    html += '<p><strong>Entità individuate:</strong><br/>';
+                    nodeData.entities.forEach(function(ent) {
+                        html += '<span style="display:inline-block; background-color:#333; padding:2px 6px; margin:2px; border-radius:4px; font-size:11px;">' + ent + '</span>';
+                    });
+                    html += '</p>';
+                }
+                
+                html += '<hr style="border: 0; border-top: 1px solid #333; margin: 15px 0;"/>';
+                html += '<p style="white-space: pre-wrap; font-size: 13px; color: #e0e0e0; line-height: 1.5; font-family: monospace;">' + nodeData.text + '</p>';
+                
+                detailDiv.innerHTML = html;
+            }
+        });
+    </script>
+</body>
+</html>

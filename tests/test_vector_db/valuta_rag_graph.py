@@ -27,6 +27,7 @@ from langchain_openai import OpenAIEmbeddings
 from retrieval_metrics import calcola_metriche_query, stampa_report
 
 load_dotenv()
+os.environ["LANGCHAIN_TRACING_V2"] = "false"
 
 BASE_DIR     = os.path.dirname(os.path.abspath(__file__))
 TESTS_DIR    = os.path.dirname(BASE_DIR)

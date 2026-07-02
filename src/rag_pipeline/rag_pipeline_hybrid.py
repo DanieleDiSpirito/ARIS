@@ -305,6 +305,108 @@ def build_hybrid_retriever(db: Chroma, k: int = 3) -> EnsembleRetriever:
     return ensemble
 
 
+class DebugHybridRetriever:
+    """Retriever wrapper che mostra informazioni di debug dettagliate per la ricerca ibrida."""
+    def __init__(self, ensemble_retriever, db, k: int = 3, debug: bool = False):
+        self.ensemble_retriever = ensemble_retriever
+        self.db = db
+        self.k = k
+        self.debug = debug
+
+    def invoke(self, query: str) -> list:
+        if not self.debug:
+            return self.ensemble_retriever.invoke(query)
+
+        # 1. Vector Search manualmente
+        chroma_results = self.db.similarity_search_with_score(query, k=self.k)
+        
+        # 2. BM25 Search manualmente
+        bm25_retriever = None
+        for r in self.ensemble_retriever.retrievers:
+            if hasattr(r, 'vectorizer') and hasattr(r, 'docs'):
+                bm25_retriever = r
+                break
+        
+        bm25_results = []
+        if bm25_retriever:
+            bm25 = bm25_retriever.vectorizer
+            tokens = bm25_retriever.preprocess_func(query)
+            bm25_scores = bm25.get_scores(tokens)
+            
+            def compute_contrib(bm25, token, doc_idx):
+                k1 = bm25.k1
+                b = bm25.b
+                avgdl = bm25.avgdl
+                doc_len = bm25.doc_len[doc_idx]
+                q_freq = bm25.doc_freqs[doc_idx].get(token, 0)
+                q_idf = bm25.idf.get(token, 0)
+                denom = (q_freq + k1 * (1 - b + b * doc_len / avgdl))
+                return (q_idf * q_freq * (k1 + 1)) / denom if denom != 0 else 0.0
+
+            scored_docs = []
+            for doc_idx, doc in enumerate(bm25_retriever.docs):
+                score = bm25_scores[doc_idx]
+                if score > 0:
+                    contribs = []
+                    for t in tokens:
+                        c = compute_contrib(bm25, t, doc_idx)
+                        if c > 0:
+                            contribs.append((t, c))
+                    contribs = sorted(contribs, key=lambda x: x[1], reverse=True)
+                    scored_docs.append((score, doc, contribs))
+            bm25_results = sorted(scored_docs, key=lambda x: x[0], reverse=True)[:self.k]
+
+        print("\n🔎 [Debug Ibrido] --- VECTOR SEARCH (Chroma) ---")
+        for idx, (doc, score) in enumerate(chroma_results):
+            chunk_id = doc.metadata.get("chunk_id", "unknown")
+            file_name = doc.metadata.get("file_name", "unknown")
+            page = doc.metadata.get("page", "N/A")
+            print(f"  [{idx+1}] Distanza: {score:.4f} | ID: {chunk_id} | File: {file_name} | Pagina: {page}")
+            print(f"      Snippet: {doc.page_content[:80].replace(chr(10), ' ')}...")
+
+        print("\n🔎 [Debug Ibrido] --- KEYWORD SEARCH (BM25) ---")
+        for idx, (score, doc, contribs) in enumerate(bm25_results):
+            chunk_id = doc.metadata.get("chunk_id", "unknown")
+            file_name = doc.metadata.get("file_name", "unknown")
+            page = doc.metadata.get("page", "N/A")
+            contribs_str = ", ".join([f"'{w}': {c:.3f}" for w, c in contribs[:3]])
+            print(f"  [{idx+1}] Score BM25: {score:.4f} | ID: {chunk_id} | File: {file_name} | Pagina: {page}")
+            print(f"      Contribuzioni parole chiave: {contribs_str}")
+            print(f"      Snippet: {doc.page_content[:80].replace(chr(10), ' ')}...")
+
+        fused_docs = self.ensemble_retriever.invoke(query)
+        print("\n🔎 [Debug Ibrido] --- RISULTATO FUSO (Reciprocal Rank Fusion) ---")
+        for idx, doc in enumerate(fused_docs):
+            chunk_id = doc.metadata.get("chunk_id", "unknown")
+            file_name = doc.metadata.get("file_name", "unknown")
+            page = doc.metadata.get("page", "N/A")
+            print(f"  [{idx+1}] ID: {chunk_id} | File: {file_name} | Pagina: {page}")
+            print(f"      Snippet: {doc.page_content[:80].replace(chr(10), ' ')}...")
+        print("--------------------------------------------------\n")
+
+        return fused_docs
+
+
+def load_questions_from_csv(csv_path: str, question_indices: list) -> dict:
+    """Carica le domande selezionate per ID dal file CSV delle domande di test."""
+    import csv
+    questions = {}
+    target_ids = {f"Q{idx:03d}" for idx in question_indices}
+    if not os.path.exists(csv_path):
+        raise FileNotFoundError(f"File non trovato: {csv_path}")
+    with open(csv_path, mode='r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            qid = row.get("id")
+            if qid in target_ids:
+                try:
+                    num = int(qid[1:])
+                    questions[num] = row.get("question")
+                except ValueError:
+                    pass
+    return questions
+
+
 def main():
     parser = argparse.ArgumentParser(description="Testa la RAG Pipeline Ibrida (BM25 + Vector Search) dal terminale")
     parser.add_argument("--env", type=str, choices=["locale", "cloud"], default="locale",
@@ -317,6 +419,10 @@ def main():
                         help="Metodo di estrazione da utilizzare (default: pdf4llm)")
     parser.add_argument("--query", type=str, default="Cosa significa l'allarme SRVO-004?",
                         help="La domanda da porre al sistema")
+    parser.add_argument("--question", type=str, default=None,
+                        help="Indice o lista di indici di domande (da 1 a 100, es: 1 o 1,2,5) dal file tests/test_questions_it.csv")
+    parser.add_argument("--debug", action="store_true",
+                        help="Mostra il debug del retrieval ibrido (distanza vector search, keyword BM25 e contributo parole chiave)")
     args = parser.parse_args()
 
     db_path = get_db_path(args.env, args.chunk_size, args.metodo)
@@ -340,6 +446,7 @@ def main():
     print("🤝 Costruzione Retriever Ibrido (50% BM25 + 50% Vector Search)...")
     try:
         retriever = build_hybrid_retriever(db, k=3)
+        retriever = DebugHybridRetriever(retriever, db, k=3, debug=args.debug)
     except RuntimeError as e:
         print(e)
         return
@@ -350,14 +457,41 @@ def main():
         print(e)
         return
 
-    print(f"\n🗣️ Domanda: {args.query}")
-    print("⏳ Generazione risposta in corso...\n")
+    # Caricamento domande se specificato --question
+    questions_to_run = []
+    if args.question:
+        try:
+            indices = [int(x.strip()) for x in args.question.split(",") if x.strip()]
+            invalid_indices = [idx for idx in indices if idx < 1 or idx > 100]
+            if invalid_indices:
+                print(f"❌ ERRORE: Gli indici delle domande devono essere compresi tra 1 e 100. Indici non validi: {invalid_indices}")
+                return
+            csv_path = os.path.join("tests", "test_questions_it.csv")
+            loaded_questions = load_questions_from_csv(csv_path, indices)
+            for idx in indices:
+                if idx in loaded_questions:
+                    questions_to_run.append((idx, loaded_questions[idx]))
+                else:
+                    print(f"⚠️ Domanda con indice {idx} non trovata nel file CSV.")
+        except ValueError:
+            print("❌ ERRORE: Formato di --question non valido. Usa numeri separati da virgole (es. --question 1,2,3)")
+            return
+    else:
+        questions_to_run = [(None, args.query)]
 
-    risposta = answer_question(chain, args.query)
+    for idx, query in questions_to_run:
+        if idx is not None:
+            print(f"\n================ DOMANDA {idx} ================")
+        else:
+            print(f"\n🗣️ Domanda: {query}")
+        print(f"🗣️ Testo Domanda: {query}")
+        print("⏳ Generazione risposta in corso...\n")
 
-    print("================ RISPOSTA ================")
-    print(risposta)
-    print("==========================================")
+        risposta = answer_question(chain, query)
+
+        print("================ RISPOSTA ================")
+        print(risposta)
+        print("==========================================")
 
 
 if __name__ == "__main__":

@@ -263,6 +263,51 @@ def answer_question(rag_chain, question):
         return f"❌ Errore di connessione o generazione. Dettagli: {str(e)}"
 
 
+def load_questions_from_csv(csv_path: str, question_indices: list) -> dict:
+    """Carica le domande selezionate per ID dal file CSV delle domande di test."""
+    import csv
+    questions = {}
+    target_ids = {f"Q{idx:03d}" for idx in question_indices}
+    if not os.path.exists(csv_path):
+        raise FileNotFoundError(f"File non trovato: {csv_path}")
+    with open(csv_path, mode='r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            qid = row.get("id")
+            if qid in target_ids:
+                try:
+                    num = int(qid[1:])
+                    questions[num] = row.get("question")
+                except ValueError:
+                    pass
+    return questions
+
+
+class DebugVectorRetriever:
+    """Wrapper Retriever che mostra informazioni di debug dettagliate (distanze della ricerca vettoriale)."""
+    def __init__(self, base_retriever, db, k: int = 3, debug: bool = False):
+        self.base_retriever = base_retriever
+        self.db = db
+        self.k = k
+        self.debug = debug
+
+    def invoke(self, query: str) -> list:
+        if not self.debug:
+            return self.base_retriever.invoke(query)
+            
+        results = self.db.similarity_search_with_score(query, k=self.k)
+        print("\n🔎 [Debug Puro] --- VECTOR SEARCH (Chroma) ---")
+        for idx, (doc, score) in enumerate(results):
+            chunk_id = doc.metadata.get("chunk_id", "unknown")
+            file_name = doc.metadata.get("file_name", "unknown")
+            page = doc.metadata.get("page", "N/A")
+            print(f"  [{idx+1}] Distanza: {score:.4f} | ID: {chunk_id} | File: {file_name} | Pagina: {page}")
+            print(f"      Snippet: {doc.page_content[:80].replace(chr(10), ' ')}...")
+        print("------------------------------------------------\n")
+        
+        return [doc for doc, _ in results]
+
+
 def main():
     parser = argparse.ArgumentParser(description="Testa la RAG Pipeline (Puro Vector Search) dal terminale")
     parser.add_argument("--env", type=str, choices=["locale", "cloud"], default="locale",
@@ -275,6 +320,10 @@ def main():
                         help="Metodo di estrazione da utilizzare (default: pdf4llm)")
     parser.add_argument("--query", type=str, default="Cosa significa l'allarme SRVO-004?",
                         help="La domanda da porre al sistema")
+    parser.add_argument("--question", type=str, default=None,
+                        help="Indice o lista di indici di domande (da 1 a 100, es: 1 o 1,2,5) dal file tests/test_questions_it.csv")
+    parser.add_argument("--debug", action="store_true",
+                        help="Mostra il debug del retrieval (distanza Chroma)")
     args = parser.parse_args()
 
     db_path = get_db_path(args.env, args.chunk_size, args.metodo)
@@ -293,7 +342,8 @@ def main():
         embedding_function=embeddings,
         collection_name=COLLECTION_NAME
     )
-    retriever = db.as_retriever(search_kwargs={"k": 3})
+    base_retriever = db.as_retriever(search_kwargs={"k": 3})
+    retriever = DebugVectorRetriever(base_retriever, db, k=3, debug=args.debug)
 
     try:
         chain = setup_rag_chain(retriever, env=args.env)
@@ -301,14 +351,41 @@ def main():
         print(e)
         return
 
-    print(f"\n🗣️ Domanda: {args.query}")
-    print("⏳ Generazione risposta in corso...\n")
+    # Caricamento domande se specificato --question
+    questions_to_run = []
+    if args.question:
+        try:
+            indices = [int(x.strip()) for x in args.question.split(",") if x.strip()]
+            invalid_indices = [idx for idx in indices if idx < 1 or idx > 100]
+            if invalid_indices:
+                print(f"❌ ERRORE: Gli indici delle domande devono essere compresi tra 1 e 100. Indici non validi: {invalid_indices}")
+                return
+            csv_path = os.path.join("tests", "test_questions_it.csv")
+            loaded_questions = load_questions_from_csv(csv_path, indices)
+            for idx in indices:
+                if idx in loaded_questions:
+                    questions_to_run.append((idx, loaded_questions[idx]))
+                else:
+                    print(f"⚠️ Domanda con indice {idx} non trovata nel file CSV.")
+        except ValueError:
+            print("❌ ERRORE: Formato di --question non valido. Usa numeri separati da virgole (es. --question 1,2,3)")
+            return
+    else:
+        questions_to_run = [(None, args.query)]
 
-    risposta = answer_question(chain, args.query)
+    for idx, query in questions_to_run:
+        if idx is not None:
+            print(f"\n================ DOMANDA {idx} ================")
+        else:
+            print(f"\n🗣️ Domanda: {query}")
+        print(f"🗣️ Testo Domanda: {query}")
+        print("⏳ Generazione risposta in corso...\n")
 
-    print("================ RISPOSTA ================")
-    print(risposta)
-    print("==========================================")
+        risposta = answer_question(chain, query)
+
+        print("================ RISPOSTA ================")
+        print(risposta)
+        print("==========================================")
 
 
 if __name__ == "__main__":

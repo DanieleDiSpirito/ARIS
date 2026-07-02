@@ -136,59 +136,133 @@ class LightweightGraphRAG:
         
         return list(set(entities))
 
-    def retrieve_expanded(self, query: str, base_retrieved_docs: list, top_n: int = 4) -> list:
-        if not base_retrieved_docs:
-            return []
-            
-        retrieved_keys = [_get_node_key(d) for d in base_retrieved_docs]
-        
-        # 1. Raccogli tutti i candidati (base + migliori vicini del grafo per evitare combinazioni eccessive)
-        candidate_docs = list(base_retrieved_docs)
-        candidate_keys = set(retrieved_keys)
-        
-        # Aggiungiamo al massimo i 2 vicini più fortemente connessi per ciascuno dei primi top_n-1 documenti
-        for rk in retrieved_keys[:max(top_n - 1, 2)]:
-            if not self.G.has_node(rk):
-                continue
-            neighbors_with_weights = []
-            for neighbor in self.G.neighbors(rk):
-                if neighbor not in candidate_keys:
-                    edge_data = self.G.get_edge_data(rk, neighbor)
-                    weight = edge_data.get("weight", 1.0)
-                    neighbors_with_weights.append((neighbor, weight))
-            
-            # Prendi solo i primi 2 vicini con il peso più alto
-            sorted_neighbors = sorted(neighbors_with_weights, key=lambda x: x[1], reverse=True)[:2]
-            for neighbor, weight in sorted_neighbors:
-                candidate_docs.append(self.chunk_dict[neighbor])
-                candidate_keys.add(neighbor)
-                    
-        # 2. Calcola i punteggi del Cross-Encoder per tutti i candidati rispetto alla query
-        pairs = [[query, doc.page_content] for doc in candidate_docs]
-        scores = self.reranker.predict(pairs)
-        
-        # Ordina per punteggio del Cross-Encoder decrescente
-        scored_docs = sorted(zip(scores, candidate_docs), key=lambda x: x[0], reverse=True)
-        
-        # 3. Restituisci i primi top_n
-        return [doc for score, doc in scored_docs[:top_n]]
-
-
 class GraphExpandedRetriever:
     """Wrapper Retriever LangChain compatibile che implementa l'espansione dei chunk via Grafo."""
-    def __init__(self, base_retriever, graph_rag, k_base: int = 8, top_n: int = 4):
+    def __init__(self, base_retriever, graph_rag, k_base: int = 12, top_n: int = 4, debug: bool = False):
         self.base_retriever = base_retriever
         self.graph_rag = graph_rag
         self.k_base = k_base
         self.top_n = top_n
+        self.debug = debug
 
     def invoke(self, query: str) -> list:
-        # 1. Recupera un pool più ampio dall'ibrido base (es. k_base = 8)
+        # 1. Recupera un pool più ampio dall'ibrido base (es. k_base = 12)
         base_docs = self.base_retriever.invoke(query)[:self.k_base]
         
-        # 2. Riordina ed espande usando il Grafo
-        expanded_docs = self.graph_rag.retrieve_expanded(query, base_docs, top_n=self.top_n)
-        return expanded_docs
+        if self.debug:
+            print("\n🔎 [Debug GraphRAG] Chunk presi in maniera IBRIDA:")
+            for idx, doc in enumerate(base_docs):
+                chunk_id = doc.metadata.get("chunk_id", "unknown")
+                file_name = doc.metadata.get("file_name", "unknown")
+                page = doc.metadata.get("page", "N/A")
+                print(f"  [{idx+1}] ID: {chunk_id} | File: {file_name} | Pagina: {page} | Snippet: {doc.page_content[:60].replace(chr(10), ' ')}...")
+        
+        if not base_docs:
+            return []
+            
+        # Rimuove duplicati basati sul contenuto testuale
+        seen = set()
+        unique_base_docs = []
+        for doc in base_docs:
+            if doc.page_content not in seen:
+                seen.add(doc.page_content)
+                unique_base_docs.append(doc)
+                
+        # 2. Primo Rerank sui chunk base per selezionare i top_n base docs
+        pairs = [[query, doc.page_content] for doc in unique_base_docs]
+        scores_base = self.graph_rag.reranker.predict(pairs)
+        scored_base_docs = sorted(zip(scores_base, unique_base_docs), key=lambda x: x[0], reverse=True)
+        
+        # Selezioniamo fino a self.top_n chunk base
+        selected_base = [doc for score, doc in scored_base_docs[:self.top_n]]
+        
+        if self.debug:
+            print("\n🔎 [Debug GraphRAG] --- RERANK 1 (Su tutti i chunk base) ---")
+            for idx, (score, doc) in enumerate(scored_base_docs):
+                chunk_id = doc.metadata.get("chunk_id", "unknown")
+                file_name = doc.metadata.get("file_name", "unknown")
+                page = doc.metadata.get("page", "N/A")
+                is_selected = "SELEZIONATO per espansione" if idx < len(selected_base) else "Escluso"
+                print(f"  [{idx+1}] Score: {score:.4f} | ID: {chunk_id} | File: {file_name} | Pagina: {page} | Stato: {is_selected}")
+                print(f"      Snippet: {doc.page_content[:80].replace(chr(10), ' ')}...")
+                
+        # 3. Espansione tramite il Grafo per tutti i selected_base
+        candidate_pool = list(selected_base)
+        final_keys = {_get_node_key(doc) for doc in selected_base}
+        
+        if self.debug:
+            print("\n🔎 [Debug GraphRAG] --- ESPANSIONE VICINI NEL GRAFO ---")
+
+        for doc in selected_base:
+            rk = _get_node_key(doc)
+            if not self.graph_rag.G.has_node(rk):
+                if self.debug:
+                    print(f"  * Chunk {rk} non trovato nel grafo.")
+                continue
+            
+            # Trova i vicini
+            neighbors_with_weights = []
+            for neighbor in self.graph_rag.G.neighbors(rk):
+                if neighbor not in final_keys:
+                    edge_data = self.graph_rag.G.get_edge_data(rk, neighbor)
+                    weight = edge_data.get("weight", 1.0)
+                    neighbors_with_weights.append((neighbor, weight))
+            
+            # Trova il miglior vicino
+            best_neighbor = None
+            if neighbors_with_weights:
+                best_neighbor = sorted(neighbors_with_weights, key=lambda x: x[1], reverse=True)[0][0]
+                
+            if self.debug:
+                doc_rk = self.graph_rag.chunk_dict[rk]
+                print(f"  * Relazioni per il chunk {rk} ({doc_rk.metadata.get('file_name')} | Pag: {doc_rk.metadata.get('page')}):")
+                all_neighbors = list(self.graph_rag.G.neighbors(rk))
+                if not all_neighbors:
+                    print("    (Nessun collegamento nel grafo)")
+                else:
+                    for neighbor in all_neighbors:
+                        edge_data = self.graph_rag.G.get_edge_data(rk, neighbor)
+                        weight = edge_data.get("weight", 1.0)
+                        entities = edge_data.get("entities", [])
+                        n_doc = self.graph_rag.chunk_dict[neighbor]
+                        if neighbor in final_keys and neighbor != best_neighbor:
+                            status = "Già presente nel pool candidati"
+                        elif neighbor == best_neighbor:
+                            status = "SELEZIONATO come vicino (migliore)"
+                        else:
+                            status = "Escluso (non il migliore)"
+                        print(f"    - collegato a -> {neighbor} ({n_doc.metadata.get('file_name')} | Pag: {n_doc.metadata.get('page')})")
+                        print(f"      Peso: {weight} | Entità in comune: {entities} | Stato: {status}")
+
+            if best_neighbor:
+                final_keys.add(best_neighbor)
+                candidate_pool.append(self.graph_rag.chunk_dict[best_neighbor])
+                
+        # 4. Secondo Rerank sul pool combinato (base + vicini) per selezionare i top_n finali
+        # Rimuove eventuali ulteriori duplicati per sicurezza
+        seen_pool = set()
+        unique_candidate_pool = []
+        for doc in candidate_pool:
+            if doc.page_content not in seen_pool:
+                seen_pool.add(doc.page_content)
+                unique_candidate_pool.append(doc)
+                
+        pairs_pool = [[query, doc.page_content] for doc in unique_candidate_pool]
+        scores_pool = self.graph_rag.reranker.predict(pairs_pool)
+        scored_pool = sorted(zip(scores_pool, unique_candidate_pool), key=lambda x: x[0], reverse=True)
+        
+        if self.debug:
+            print("\n🔎 [Debug GraphRAG] --- RERANK 2 (Su pool combinato: base + vicini) ---")
+            for idx, (score, doc) in enumerate(scored_pool):
+                chunk_id = doc.metadata.get("chunk_id", "unknown")
+                file_name = doc.metadata.get("file_name", "unknown")
+                page = doc.metadata.get("page", "N/A")
+                is_selected = "SELEZIONATO (top_n finale)" if idx < self.top_n else "Escluso"
+                print(f"  [{idx+1}] Score: {score:.4f} | ID: {chunk_id} | File: {file_name} | Pagina: {page} | Stato: {is_selected}")
+                print(f"      Snippet: {doc.page_content[:80].replace(chr(10), ' ')}...")
+            print("--------------------------------------------------\n")
+            
+        return [doc for score, doc in scored_pool[:self.top_n]]
 
 
 def build_prompt():
@@ -421,7 +495,27 @@ def build_hybrid_retriever(db: Chroma, k: int = 3) -> EnsembleRetriever:
     return ensemble
 
 
-def build_graph_retriever(db: Chroma, k_base: int = 3, top_n: int = 4) -> GraphExpandedRetriever:
+def load_questions_from_csv(csv_path: str, question_indices: list) -> dict:
+    """Carica le domande selezionate per ID dal file CSV delle domande di test."""
+    import csv
+    questions = {}
+    target_ids = {f"Q{idx:03d}" for idx in question_indices}
+    if not os.path.exists(csv_path):
+        raise FileNotFoundError(f"File non trovato: {csv_path}")
+    with open(csv_path, mode='r', encoding='utf-8') as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            qid = row.get("id")
+            if qid in target_ids:
+                try:
+                    num = int(qid[1:])
+                    questions[num] = row.get("question")
+                except ValueError:
+                    pass
+    return questions
+
+
+def build_graph_retriever(db: Chroma, k_base: int = 12, top_n: int = 4, debug: bool = False) -> GraphExpandedRetriever:
     """Inizializza il retriever espanso con il Grafo di Conoscenza relazionale."""
     ensemble = build_hybrid_retriever(db, k=k_base)
     
@@ -436,7 +530,7 @@ def build_graph_retriever(db: Chroma, k_base: int = 3, top_n: int = 4) -> GraphE
     graph_rag = LightweightGraphRAG(docs)
     print(f"✅ Grafo costruito: {graph_rag.G.number_of_nodes()} nodi, {graph_rag.G.number_of_edges()} archi.")
     
-    return GraphExpandedRetriever(ensemble, graph_rag, k_base=k_base, top_n=top_n)
+    return GraphExpandedRetriever(ensemble, graph_rag, k_base=k_base, top_n=top_n, debug=debug)
 
 
 def main():
@@ -450,6 +544,10 @@ def main():
                         help="Metodo di estrazione da utilizzare (default: pdf4llm)")
     parser.add_argument("--query", type=str, default="Cosa significa l'allarme SRVO-004?",
                         help="La domanda da porre al sistema")
+    parser.add_argument("--debug", action="store_true",
+                        help="Mostra il debug del GraphRAG (chunk ibridi, collegamenti del grafo, classifica rerank)")
+    parser.add_argument("--question", type=str, default=None,
+                        help="Indice o lista di indici di domande (da 1 a 100, es: 1 o 1,2,5) dal file tests/test_questions_it.csv")
     args = parser.parse_args()
 
     db_path = get_db_path(args.env, args.chunk_size, args.metodo)
@@ -467,18 +565,45 @@ def main():
         collection_name=COLLECTION_NAME
     )
 
-    retriever = build_graph_retriever(db, k_base=3, top_n=4)
+    retriever = build_graph_retriever(db, k_base=12, top_n=4, debug=args.debug)
 
     chain = setup_rag_chain(retriever, env=args.env)
 
-    print(f"\n🗣️ Domanda: {args.query}")
-    print("⏳ Generazione risposta in corso...\n")
+    # Caricamento domande se specificato --question
+    questions_to_run = []
+    if args.question:
+        try:
+            indices = [int(x.strip()) for x in args.question.split(",") if x.strip()]
+            invalid_indices = [idx for idx in indices if idx < 1 or idx > 100]
+            if invalid_indices:
+                print(f"❌ ERRORE: Gli indici delle domande devono essere compresi tra 1 e 100. Indici non validi: {invalid_indices}")
+                return
+            csv_path = os.path.join("tests", "test_questions_it.csv")
+            loaded_questions = load_questions_from_csv(csv_path, indices)
+            for idx in indices:
+                if idx in loaded_questions:
+                    questions_to_run.append((idx, loaded_questions[idx]))
+                else:
+                    print(f"⚠️ Domanda con indice {idx} non trovata nel file CSV.")
+        except ValueError:
+            print("❌ ERRORE: Formato di --question non valido. Usa numeri separati da virgole (es. --question 1,2,3)")
+            return
+    else:
+        questions_to_run = [(None, args.query)]
 
-    risposta = answer_question(chain, args.query)
+    for idx, query in questions_to_run:
+        if idx is not None:
+            print(f"\n================ DOMANDA {idx} ================")
+        else:
+            print(f"\n🗣️ Domanda: {query}")
+        print(f"🗣️ Testo Domanda: {query}")
+        print("⏳ Generazione risposta in corso...\n")
 
-    print("================ RISPOSTA ================")
-    print(risposta)
-    print("==========================================")
+        risposta = answer_question(chain, query)
+
+        print("================ RISPOSTA ================")
+        print(risposta)
+        print("==========================================")
 
 
 if __name__ == "__main__":
