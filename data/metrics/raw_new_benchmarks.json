@@ -5,7 +5,7 @@
             "Precision@3 (%)": 34.0,
             "Recall@3 (%)": 69.0,
             "MRR": 0.635,
-            "Tempo Medio (s)": 0.0658,
+            "Tempo Medio (s)": 0.0673,
             "DB Name": "chroma_euristico_locale_700"
         },
         {
@@ -13,7 +13,7 @@
             "Precision@3 (%)": 37.67,
             "Recall@3 (%)": 73.0,
             "MRR": 0.6383,
-            "Tempo Medio (s)": 0.087,
+            "Tempo Medio (s)": 0.0962,
             "DB Name": "chroma_pdf4llm_locale_700"
         },
         {
@@ -21,7 +21,7 @@
             "Precision@3 (%)": 27.67,
             "Recall@3 (%)": 53.0,
             "MRR": 0.4633,
-            "Tempo Medio (s)": 0.0887,
+            "Tempo Medio (s)": 0.0862,
             "DB Name": "chroma_docling_locale_700"
         },
         {
@@ -29,7 +29,7 @@
             "Precision@3 (%)": 33.0,
             "Recall@3 (%)": 68.0,
             "MRR": 0.5833,
-            "Tempo Medio (s)": 0.0972,
+            "Tempo Medio (s)": 0.089,
             "DB Name": "chroma_llamaparse_locale_700"
         },
         {
@@ -37,7 +37,7 @@
             "Precision@3 (%)": 30.33,
             "Recall@3 (%)": 69.0,
             "MRR": 0.605,
-            "Tempo Medio (s)": 0.0925,
+            "Tempo Medio (s)": 0.0888,
             "DB Name": "chroma_mineru_locale_700"
         },
         {
@@ -45,7 +45,57 @@
             "Precision@3 (%)": 26.67,
             "Recall@3 (%)": 57.0,
             "MRR": 0.5183,
-            "Tempo Medio (s)": 0.084,
+            "Tempo Medio (s)": 0.078,
+            "DB Name": "chroma_qwen_locale_700"
+        }
+    ],
+    "graph_local_it": [
+        {
+            "Hit Rate@3 (%)": 70.0,
+            "Precision@3 (%)": 36.33,
+            "Recall@3 (%)": 70.0,
+            "MRR": 0.62,
+            "Tempo Medio (s)": 0.1089,
+            "DB Name": "chroma_euristico_locale_700"
+        },
+        {
+            "Hit Rate@3 (%)": 70.0,
+            "Precision@3 (%)": 38.0,
+            "Recall@3 (%)": 70.0,
+            "MRR": 0.6217,
+            "Tempo Medio (s)": 0.1125,
+            "DB Name": "chroma_pdf4llm_locale_700"
+        },
+        {
+            "Hit Rate@3 (%)": 52.0,
+            "Precision@3 (%)": 29.67,
+            "Recall@3 (%)": 52.0,
+            "MRR": 0.4667,
+            "Tempo Medio (s)": 0.1052,
+            "DB Name": "chroma_docling_locale_700"
+        },
+        {
+            "Hit Rate@3 (%)": 66.0,
+            "Precision@3 (%)": 33.0,
+            "Recall@3 (%)": 66.0,
+            "MRR": 0.5817,
+            "Tempo Medio (s)": 0.1138,
+            "DB Name": "chroma_llamaparse_locale_700"
+        },
+        {
+            "Hit Rate@3 (%)": 66.0,
+            "Precision@3 (%)": 30.33,
+            "Recall@3 (%)": 66.0,
+            "MRR": 0.5883,
+            "Tempo Medio (s)": 0.1188,
+            "DB Name": "chroma_mineru_locale_700"
+        },
+        {
+            "Hit Rate@3 (%)": 55.0,
+            "Precision@3 (%)": 27.0,
+            "Recall@3 (%)": 55.0,
+            "MRR": 0.5033,
+            "Tempo Medio (s)": 0.0989,
             "DB Name": "chroma_qwen_locale_700"
         }
     ],
@@ -55,7 +105,7 @@
             "Precision@3 (%)": 38.0,
             "Recall@3 (%)": 75.0,
             "MRR": 0.6667,
-            "Tempo Medio (s)": 0.0374,
+            "Tempo Medio (s)": 0.0259,
             "DB Name": "chroma_pdf4llm_locale_700",
             "Strategia": "Vector"
         },
@@ -64,7 +114,7 @@
             "Precision@3 (%)": 37.67,
             "Recall@3 (%)": 75.0,
             "MRR": 0.6833,
-            "Tempo Medio (s)": 0.0469,
+            "Tempo Medio (s)": 0.0281,
             "DB Name": "chroma_pdf4llm_locale_700",
             "Strategia": "Hybrid"
         },
@@ -73,16 +123,25 @@
             "Precision@3 (%)": 41.33,
             "Recall@3 (%)": 79.0,
             "MRR": 0.7183,
-            "Tempo Medio (s)": 0.1074,
+            "Tempo Medio (s)": 0.0944,
             "DB Name": "chroma_pdf4llm_locale_700",
             "Strategia": "Rerank"
+        },
+        {
+            "Hit Rate@3 (%)": 78.0,
+            "Precision@3 (%)": 41.33,
+            "Recall@3 (%)": 78.0,
+            "MRR": 0.7133,
+            "Tempo Medio (s)": 0.111,
+            "DB Name": "chroma_pdf4llm_locale_700",
+            "Strategia": "Graph"
         },
         {
             "Hit Rate@3 (%)": 73.0,
             "Precision@3 (%)": 38.67,
             "Recall@3 (%)": 73.0,
             "MRR": 0.6417,
-            "Tempo Medio (s)": 0.4277,
+            "Tempo Medio (s)": 0.4253,
             "DB Name": "chroma_pdf4llm_cloud_700",
             "Strategia": "Vector"
         },
@@ -91,7 +150,7 @@
             "Precision@3 (%)": 39.0,
             "Recall@3 (%)": 72.0,
             "MRR": 0.6483,
-            "Tempo Medio (s)": 0.3674,
+            "Tempo Medio (s)": 0.4237,
             "DB Name": "chroma_pdf4llm_cloud_700",
             "Strategia": "Hybrid"
         },
@@ -100,16 +159,25 @@
             "Precision@3 (%)": 43.33,
             "Recall@3 (%)": 83.0,
             "MRR": 0.75,
-            "Tempo Medio (s)": 0.5424,
+            "Tempo Medio (s)": 0.7959,
             "DB Name": "chroma_pdf4llm_cloud_700",
             "Strategia": "Rerank"
         },
         {
-            "Hit Rate@3 (%)": 69.0,
-            "Precision@3 (%)": 49.0,
-            "Recall@3 (%)": 69.0,
-            "MRR": 0.6183,
-            "Tempo Medio (s)": 0.0199,
+            "Hit Rate@3 (%)": 81.0,
+            "Precision@3 (%)": 43.67,
+            "Recall@3 (%)": 81.0,
+            "MRR": 0.7517,
+            "Tempo Medio (s)": 0.484,
+            "DB Name": "chroma_pdf4llm_cloud_700",
+            "Strategia": "Graph"
+        },
+        {
+            "Hit Rate@3 (%)": 68.0,
+            "Precision@3 (%)": 48.0,
+            "Recall@3 (%)": 68.0,
+            "MRR": 0.6067,
+            "Tempo Medio (s)": 0.0262,
             "DB Name": "chroma_euristico_locale_700",
             "Strategia": "Vector"
         },
@@ -118,7 +186,7 @@
             "Precision@3 (%)": 34.0,
             "Recall@3 (%)": 73.0,
             "MRR": 0.6917,
-            "Tempo Medio (s)": 0.0241,
+            "Tempo Medio (s)": 0.0304,
             "DB Name": "chroma_euristico_locale_700",
             "Strategia": "Hybrid"
         },
@@ -127,9 +195,54 @@
             "Precision@3 (%)": 37.33,
             "Recall@3 (%)": 78.0,
             "MRR": 0.715,
-            "Tempo Medio (s)": 0.0622,
+            "Tempo Medio (s)": 0.0644,
             "DB Name": "chroma_euristico_locale_700",
             "Strategia": "Rerank"
+        },
+        {
+            "Hit Rate@3 (%)": 75.0,
+            "Precision@3 (%)": 38.67,
+            "Recall@3 (%)": 75.0,
+            "MRR": 0.71,
+            "Tempo Medio (s)": 0.1056,
+            "DB Name": "chroma_euristico_locale_700",
+            "Strategia": "Graph"
+        },
+        {
+            "Hit Rate@3 (%)": 68.0,
+            "Precision@3 (%)": 36.67,
+            "Recall@3 (%)": 68.0,
+            "MRR": 0.62,
+            "Tempo Medio (s)": 0.468,
+            "DB Name": "chroma_cloud_700",
+            "Strategia": "Vector"
+        },
+        {
+            "Hit Rate@3 (%)": 68.0,
+            "Precision@3 (%)": 36.67,
+            "Recall@3 (%)": 68.0,
+            "MRR": 0.62,
+            "Tempo Medio (s)": 0.3293,
+            "DB Name": "chroma_cloud_700",
+            "Strategia": "Hybrid"
+        },
+        {
+            "Hit Rate@3 (%)": 72.0,
+            "Precision@3 (%)": 36.67,
+            "Recall@3 (%)": 72.0,
+            "MRR": 0.6867,
+            "Tempo Medio (s)": 0.3829,
+            "DB Name": "chroma_cloud_700",
+            "Strategia": "Rerank"
+        },
+        {
+            "Hit Rate@3 (%)": 75.0,
+            "Precision@3 (%)": 39.0,
+            "Recall@3 (%)": 75.0,
+            "MRR": 0.71,
+            "Tempo Medio (s)": 0.6579,
+            "DB Name": "chroma_cloud_700",
+            "Strategia": "Graph"
         }
     ]
 }
