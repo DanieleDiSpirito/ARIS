@@ -1,0 +1,135 @@
+{
+    "rerank_local_it": [
+        {
+            "Hit Rate@3 (%)": 69.0,
+            "Precision@3 (%)": 34.0,
+            "Recall@3 (%)": 69.0,
+            "MRR": 0.635,
+            "Tempo Medio (s)": 0.0658,
+            "DB Name": "chroma_euristico_locale_700"
+        },
+        {
+            "Hit Rate@3 (%)": 73.0,
+            "Precision@3 (%)": 37.67,
+            "Recall@3 (%)": 73.0,
+            "MRR": 0.6383,
+            "Tempo Medio (s)": 0.087,
+            "DB Name": "chroma_pdf4llm_locale_700"
+        },
+        {
+            "Hit Rate@3 (%)": 53.0,
+            "Precision@3 (%)": 27.67,
+            "Recall@3 (%)": 53.0,
+            "MRR": 0.4633,
+            "Tempo Medio (s)": 0.0887,
+            "DB Name": "chroma_docling_locale_700"
+        },
+        {
+            "Hit Rate@3 (%)": 68.0,
+            "Precision@3 (%)": 33.0,
+            "Recall@3 (%)": 68.0,
+            "MRR": 0.5833,
+            "Tempo Medio (s)": 0.0972,
+            "DB Name": "chroma_llamaparse_locale_700"
+        },
+        {
+            "Hit Rate@3 (%)": 69.0,
+            "Precision@3 (%)": 30.33,
+            "Recall@3 (%)": 69.0,
+            "MRR": 0.605,
+            "Tempo Medio (s)": 0.0925,
+            "DB Name": "chroma_mineru_locale_700"
+        },
+        {
+            "Hit Rate@3 (%)": 57.0,
+            "Precision@3 (%)": 26.67,
+            "Recall@3 (%)": 57.0,
+            "MRR": 0.5183,
+            "Tempo Medio (s)": 0.084,
+            "DB Name": "chroma_qwen_locale_700"
+        }
+    ],
+    "english_benchmark": [
+        {
+            "Hit Rate@3 (%)": 75.0,
+            "Precision@3 (%)": 38.0,
+            "Recall@3 (%)": 75.0,
+            "MRR": 0.6667,
+            "Tempo Medio (s)": 0.0374,
+            "DB Name": "chroma_pdf4llm_locale_700",
+            "Strategia": "Vector"
+        },
+        {
+            "Hit Rate@3 (%)": 75.0,
+            "Precision@3 (%)": 37.67,
+            "Recall@3 (%)": 75.0,
+            "MRR": 0.6833,
+            "Tempo Medio (s)": 0.0469,
+            "DB Name": "chroma_pdf4llm_locale_700",
+            "Strategia": "Hybrid"
+        },
+        {
+            "Hit Rate@3 (%)": 79.0,
+            "Precision@3 (%)": 41.33,
+            "Recall@3 (%)": 79.0,
+            "MRR": 0.7183,
+            "Tempo Medio (s)": 0.1074,
+            "DB Name": "chroma_pdf4llm_locale_700",
+            "Strategia": "Rerank"
+        },
+        {
+            "Hit Rate@3 (%)": 73.0,
+            "Precision@3 (%)": 38.67,
+            "Recall@3 (%)": 73.0,
+            "MRR": 0.6417,
+            "Tempo Medio (s)": 0.4277,
+            "DB Name": "chroma_pdf4llm_cloud_700",
+            "Strategia": "Vector"
+        },
+        {
+            "Hit Rate@3 (%)": 72.0,
+            "Precision@3 (%)": 39.0,
+            "Recall@3 (%)": 72.0,
+            "MRR": 0.6483,
+            "Tempo Medio (s)": 0.3674,
+            "DB Name": "chroma_pdf4llm_cloud_700",
+            "Strategia": "Hybrid"
+        },
+        {
+            "Hit Rate@3 (%)": 83.0,
+            "Precision@3 (%)": 43.33,
+            "Recall@3 (%)": 83.0,
+            "MRR": 0.75,
+            "Tempo Medio (s)": 0.5424,
+            "DB Name": "chroma_pdf4llm_cloud_700",
+            "Strategia": "Rerank"
+        },
+        {
+            "Hit Rate@3 (%)": 69.0,
+            "Precision@3 (%)": 49.0,
+            "Recall@3 (%)": 69.0,
+            "MRR": 0.6183,
+            "Tempo Medio (s)": 0.0199,
+            "DB Name": "chroma_euristico_locale_700",
+            "Strategia": "Vector"
+        },
+        {
+            "Hit Rate@3 (%)": 73.0,
+            "Precision@3 (%)": 34.0,
+            "Recall@3 (%)": 73.0,
+            "MRR": 0.6917,
+            "Tempo Medio (s)": 0.0241,
+            "DB Name": "chroma_euristico_locale_700",
+            "Strategia": "Hybrid"
+        },
+        {
+            "Hit Rate@3 (%)": 78.0,
+            "Precision@3 (%)": 37.33,
+            "Recall@3 (%)": 78.0,
+            "MRR": 0.715,
+            "Tempo Medio (s)": 0.0622,
+            "DB Name": "chroma_euristico_locale_700",
+            "Strategia": "Rerank"
+        }
+    ]
+}

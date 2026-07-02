@@ -181,3 +181,11 @@ overview_configuration.pdf,mineru,121.5,503.1,0.0
 safety_precautions.pdf,mineru,36.11,503.1,0.0
 test_telemetry.pdf,mineru,17.98,503.1,0.0
 test_telemetry.pdf,qwen,26.35,4530.01,5456.04
+test_telemetry.pdf,qwen,18.52,901.6,0.0
+checks_maintenance.pdf,qwen,13.19,904.04,0.0
+safety_precautions.pdf,qwen,251.72,908.54,0.0
+overview_configuration.pdf,qwen,100.0,925.14,0.0
+test_telemetry.pdf,llamaparse,5.25,925.14,0.0
+checks_maintenance.pdf,llamaparse,3.64,925.14,0.0
+safety_precautions.pdf,llamaparse,41.03,925.14,0.0
+overview_configuration.pdf,llamaparse,31.3,925.14,0.0
