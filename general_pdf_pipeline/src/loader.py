@@ -137,7 +137,8 @@ def estrai_con_vlm(page, host_vlm: str, model_vlm: str) -> Optional[str]:
                 ]
             }
         ],
-        "temperature": 0.1
+        "temperature": 0.1,
+        "max_tokens": 2048
     }
 
     try:

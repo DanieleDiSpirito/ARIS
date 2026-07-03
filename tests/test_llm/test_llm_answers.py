@@ -47,6 +47,12 @@ load_dotenv()
 # Disabilita il tracing di LangSmith per evitare errori di limite di quota nei benchmark
 os.environ["LANGCHAIN_TRACING_V2"] = "false"
 
+def _is_model_not_loaded_error(error: Exception) -> bool:
+    """Verifica se l'errore è dovuto al modello non caricato in LM Studio o errori di rete (es. 400)."""
+    err_msg = str(error).lower()
+    keywords = ["not loaded", "no model", "400", "bad request", "ejected", "connection refused", "failed to connect", "connection error"]
+    return any(kw in err_msg for kw in keywords)
+
 def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = None, tolleranza: int = 1, model: str = None, rag_type: str = "ibrido", metodo: str = "pdf4llm"):
     test_file = os.path.join(TESTS_DIR, f"test_questions_{lang}.csv")
     if not os.path.exists(test_file):
@@ -110,16 +116,27 @@ def valuta_llm(env: str, lang: str, chunk_size: int = 700, max_questions: int = 
         print(f"[{index+1}/{len(df)}] Q: {domanda}")
         
         t0 = time.time()
-        try:
-            risposta = rag_chain.invoke({
-                "question": domanda,
-                "history": ""
-            })
-            stato = "OK"
-        except Exception as e:
-            risposta = f"ERRORE: {str(e)}"
-            stato = "ERRORE"
-            print(risposta)
+        while True:
+            try:
+                risposta = rag_chain.invoke({
+                    "question": domanda,
+                    "history": ""
+                })
+                stato = "OK"
+                break
+            except Exception as e:
+                if env == "locale" and _is_model_not_loaded_error(e):
+                    print(f"\n⚠️ [ERRORE LM STUDIO] Il modello locale sembra non essere caricato o è andato in crash.")
+                    print(f"Dettaglio errore: {e}")
+                    print("Assicurati che LM Studio sia attivo e che il modello sia caricato correttamente.")
+                    input("Premi [INVIO] dopo aver caricato/riavviato il modello per riprovare...")
+                    print("Ripristino esecuzione della domanda corrente...\n")
+                    continue
+                else:
+                    risposta = f"ERRORE: {str(e)}"
+                    stato = "ERRORE"
+                    print(risposta)
+                    break
             
         t1 = time.time()
         tempo = round(t1 - t0, 2)

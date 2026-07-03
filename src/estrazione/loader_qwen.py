@@ -261,7 +261,8 @@ class QwenLMStudioEngine:
                     ]
                 }
             ],
-            "temperature": 0.0
+            "temperature": 0.0,
+            "max_tokens": 2048
         }
         
         url = f"{self.host}/v1/chat/completions"

@@ -82,7 +82,8 @@ def genera_domande(env: str, lang: str, metodo: str, target_count: int = 100, mo
             model=local_model,
             base_url=base_url,
             api_key="lm-studio",
-            temperature=0.3
+            temperature=0.3,
+            max_tokens=1000
         )
     elif env == "cloud":
         print("☁️ Generatore LLM: Cloud (OpenRouter)")

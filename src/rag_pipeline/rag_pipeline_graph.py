@@ -351,21 +351,24 @@ def setup_rag_chain(retriever, env="locale", model_name=None):
             base_url=base_url,
             api_key="lm-studio",
             temperature=0.0,
-            streaming=False
+            streaming=False,
+            max_tokens=1024
         )
         llm_technical = ChatOpenAI(
             model=model,
             base_url=base_url,
             api_key="lm-studio",
             temperature=0.0,
-            streaming=True
+            streaming=True,
+            max_tokens=2048
         )
         llm_general = ChatOpenAI(
             model=model,
             base_url=base_url,
             api_key="lm-studio",
             temperature=0.7,
-            streaming=True
+            streaming=True,
+            max_tokens=2048
         )
     elif env == "cloud":
         model = model_name if model_name else "openai/gpt-4o-mini"

@@ -114,7 +114,8 @@ def valida_domande(env: str, lang: str, limit: int = None, model_name: str = Non
             model=local_model,
             base_url=base_url,
             api_key="lm-studio",
-            temperature=0.0
+            temperature=0.0,
+            max_tokens=1000
         )
     elif env == "cloud":
         print("☁️ LLM Judge: Cloud (OpenRouter)")

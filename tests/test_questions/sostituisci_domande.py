@@ -232,8 +232,8 @@ def main():
         print("🤖 LLM: Locale (localhost:1234)")
         local_model = os.getenv("LOCAL_LLM_MODEL", None)
         base_url = os.getenv("LOCAL_LLM_URL", "http://localhost:1234/v1")
-        llm_gen = ChatOpenAI(model=local_model, base_url=base_url, api_key="lm-studio", temperature=0.3)
-        llm_judge = ChatOpenAI(model=local_model, base_url=base_url, api_key="lm-studio", temperature=0.0)
+        llm_gen = ChatOpenAI(model=local_model, base_url=base_url, api_key="lm-studio", temperature=0.3, max_tokens=500)
+        llm_judge = ChatOpenAI(model=local_model, base_url=base_url, api_key="lm-studio", temperature=0.0, max_tokens=400)
         llm_trans = llm_gen
     elif args.env == "cloud":
         print(f"☁️ LLM: Cloud (OpenRouter) -> Gen: {args.model_gen} | Judge: {args.model_judge}")

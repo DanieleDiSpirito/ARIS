@@ -35,8 +35,38 @@ import rag_pipeline_rerank
 import rag_pipeline_graph
 from rag_pipeline_hybrid import get_db_path, get_embeddings, COLLECTION_NAME
 
+# Lock globale per sincronizzare l'input manuale dell'utente nell'asincrono
+_input_lock = asyncio.Lock()
 
-def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None, k: int = 3, model: str = None, rag_type: str = "ibrido", metodo: str = "pdf4llm"):
+def _is_model_not_loaded_error(error: Exception) -> bool:
+    """Verifica se l'errore è dovuto al modello non caricato in LM Studio o errori di rete (es. 400)."""
+    err_msg = str(error).lower()
+    keywords = ["not loaded", "no model", "400", "bad request", "ejected", "connection refused", "failed to connect", "connection error"]
+    return any(kw in err_msg for kw in keywords)
+
+async def _safe_ragas_call(func, *args, env="locale", **kwargs):
+    """Esegue una chiamata Ragas (ascore) e gestisce l'errore di modello non caricato chiedendo il ripristino."""
+    while True:
+        try:
+            res = await func(*args, **kwargs)
+            return res.value if res is not None else 0.0
+        except Exception as e:
+            if env == "locale" and _is_model_not_loaded_error(e):
+                async with _input_lock:
+                    # Chiediamo all'utente una volta sola tramite lock
+                    print(f"\n⚠️ [ERRORE LM STUDIO] Rilevato modello offline o non caricato durante la valutazione Ragas.")
+                    print(f"Dettaglio errore: {e}")
+                    print("Si prega di ricaricare il modello su LM Studio.")
+                    # Usiamo loop.run_in_executor per non bloccare l'event loop di asyncio sull'input() sincrono
+                    loop = asyncio.get_event_loop()
+                    await loop.run_in_executor(None, input, "Premi [INVIO] dopo aver ricaricato il modello per riprovare...")
+                    print("Ripristino e riprovo la valutazione...\n")
+                continue
+            else:
+                # Per altri errori, rilanciamo l'eccezione
+                raise e
+
+def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None, k: int = 3, model: str = None, rag_type: str = "ibrido", metodo: str = "pdf4llm", judge_env: str = "cloud"):
     test_file = os.path.join(TESTS_DIR, f"test_questions_{lang}.csv")
     if not os.path.exists(test_file):
         print(f"❌ File di test non trovato: {test_file}")
@@ -105,11 +135,22 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
             contexts = []
 
         # 2. Genera la risposta
-        try:
-            answer = rag_chain.invoke({"question": question, "history": ""})
-        except Exception as e:
-            print(f"   ⚠️ Errore di generazione: {e}")
-            answer = f"ERRORE: {str(e)}"
+        while True:
+            try:
+                answer = rag_chain.invoke({"question": question, "history": ""})
+                break
+            except Exception as e:
+                if env == "locale" and _is_model_not_loaded_error(e):
+                    print(f"\n⚠️ [ERRORE LM STUDIO] Il modello locale sembra non essere caricato o è andato in crash.")
+                    print(f"Dettaglio errore: {e}")
+                    print("Assicurati che LM Studio sia attivo e che il modello sia caricato correttamente.")
+                    input("Premi [INVIO] dopo aver caricato/riavviato il modello per riprovare...")
+                    print("Ripristino esecuzione della domanda corrente...\n")
+                    continue
+                else:
+                    print(f"   ⚠️ Errore di generazione: {e}")
+                    answer = f"ERRORE: {str(e)}"
+                    break
 
         questions.append(question)
         answers.append(answer)
@@ -120,7 +161,7 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
 
     print("\n⚖️ Configurazione dei modelli RAGAS Judge...")
     # Configurazione LLM ed Embeddings per il Judge di Ragas
-    if env == "cloud":
+    if judge_env == "cloud":
         if "OPENAI_API_KEY" not in os.environ:
             raise ValueError("❌ ERRORE: Variabile OPENAI_API_KEY non trovata nel file .env")
         
@@ -169,44 +210,48 @@ def run_ragas_evaluation(env: str, lang: str, chunk_size: int, limit: int = None
         async def evaluate_row(q, a, ctx, gt):
             async with semaphore:
                 try:
-                    f_res = await faithfulness_metric.ascore(
+                    f_val = await _safe_ragas_call(
+                        faithfulness_metric.ascore,
                         user_input=q,
                         response=a,
-                        retrieved_contexts=ctx
+                        retrieved_contexts=ctx,
+                        env=judge_env
                     )
-                    f_val = f_res.value if f_res is not None else 0.0
                 except Exception as e:
                     print(f"   ⚠️ Errore Faithfulness per '{q[:30]}...': {e}")
                     f_val = None
                     
                 try:
-                    ar_res = await answer_relevancy_metric.ascore(
+                    ar_val = await _safe_ragas_call(
+                        answer_relevancy_metric.ascore,
                         user_input=q,
-                        response=a
+                        response=a,
+                        env=judge_env
                     )
-                    ar_val = ar_res.value if ar_res is not None else 0.0
                 except Exception as e:
                     print(f"   ⚠️ Errore AnswerRelevancy per '{q[:30]}...': {e}")
                     ar_val = None
 
                 try:
-                    cp_res = await context_precision_metric.ascore(
+                    cp_val = await _safe_ragas_call(
+                        context_precision_metric.ascore,
                         user_input=q,
                         reference=gt,
-                        retrieved_contexts=ctx
+                        retrieved_contexts=ctx,
+                        env=judge_env
                     )
-                    cp_val = cp_res.value if cp_res is not None else 0.0
                 except Exception as e:
                     print(f"   ⚠️ Errore ContextPrecision per '{q[:30]}...': {e}")
                     cp_val = None
 
                 try:
-                    cr_res = await context_recall_metric.ascore(
+                    cr_val = await _safe_ragas_call(
+                        context_recall_metric.ascore,
                         user_input=q,
                         retrieved_contexts=ctx,
-                        reference=gt
+                        reference=gt,
+                        env=judge_env
                     )
-                    cr_val = cr_res.value if cr_res is not None else 0.0
                 except Exception as e:
                     print(f"   ⚠️ Errore ContextRecall per '{q[:30]}...': {e}")
                     cr_val = None
@@ -304,6 +349,8 @@ if __name__ == "__main__":
         default="pdf4llm",
         help="Metodo di estrazione dei PDF da testare."
     )
+    parser.add_argument("--judge_env", type=str, choices=["locale", "cloud"], default="cloud",
+                        help="Ambiente LLM/Embedding da usare come Judge per la valutazione Ragas (locale o cloud)")
     args = parser.parse_args()
 
-    run_ragas_evaluation(args.env, args.lang, args.chunk_size, args.limit, args.k, args.model, args.rag_type, args.metodo)
+    run_ragas_evaluation(args.env, args.lang, args.chunk_size, args.limit, args.k, args.model, args.rag_type, args.metodo, args.judge_env)

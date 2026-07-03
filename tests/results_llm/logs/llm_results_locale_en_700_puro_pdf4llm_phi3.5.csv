@@ -1,0 +1,207 @@
+id,domanda,risposta_llm,llm_file_trovato,llm_pag_trovata,expected_file,expected_page,match,tempo_sec,stato
+Q001,What maintenance tools are recommended for the Fanuc R-30iB controller?,"Fonte documentale: A63L-0002-0154 #230-M, A20B-2004-0381, A20B-2101-0731, A05B-2650-J150, A05B-2650-J160, A05B-2650-J161, A05B-2650-J162, A05B-2650-J070, A05B-2650-J071, A05B-2652-H031
+
+Secondo il manuale FANUC R-30iB Controller Specification List, per la manutenzione del controller sono raccomandati i seguenti strumenti:
+
+1. Process I/O board MA (Origine: A05B-2650-J060, Specs: A20B-2004-0381, Nota: DI/DO=20/16, Sink type)
+2. Process I/O board MB (Origine: A05B-2650-J061, Specs: A20B-2101-0731, Nota: WI/WO=5/4, D/A=2)
+3. Peripheral device cable (Process I/O MA) con una lunghezza di connessione di 10m o 20m (Origine: A05B-2650-J150)
+4. Conector conversion board (Origine: A05B-2650-J070, Specs: A20B-2004-0411, Nota: CRMA15,CRMA16)
+5. Terminal conversion board (Origine: A05B-2650-J071, Specs: A20B-1009-0690, Nota: CRMA15,CRMA16, PHOENIX CONTACT)
+6. 6-axis servo amplifier (Origine: A05B-2652-H031, Specs: A06B-6400-H102)
+7. Discharge resistor (Origine: A05B-2650-C100)
+
+Questi strumenti sono indicati nelle sezioni relative alle specifiche hardware utilizzabili nel controller e ai componenti periferici, fornendo le informazioni necessarie per l'operazione e la manutenzione corretta del sistema FANUC R-30iB. Si consiglia di consultare il manuale completo o di contattare un tecnico qualificato per ulteriori dettagli ed istruzioni specifiche sull'uso di questi strumenti.
+",,,checks_maintenance.pdf,11,NO PAGE,173.14,OK
+Q005,What value should be set by adjusting the potentiometers VR1 and VR2 during the gain and offset adjustment of channel 1?,"Per regolare gli attenuatori VR1 e VR2 durante l'aggiustamento del guadagno e dell'offset della canale 1, dovresti impostare una tensione di 15.0V secondo il documento tecnico recuperato:
+
+Fonte documentale: circuit_boards_amplifiers.pdf (Pagina: 101)",circuit_boards_amplifiers.pdf,101,circuit_boards_amplifiers.pdf,101,SI,68.08,OK
+Q010,What is the weight per meter of the non-flexible cable for the RP1 robot of group 1?,"In base al contesto tecnico recuperato, la pagina pertinente è connections.pdf (Pagina: 274)
+
+Il peso del cavo rigido per l'RP1 Robot di gruppo 1 non è specificamente menzionato in quel passaggio. Tuttavia, ti forniscono informazioni sulle Brake Release Unit con i loro pesi: Brake Release Unit (AC 100V): 2.3 kg e Brake Release Unit (AC 200V): 3.5 kg.
+
+Per ottenere il peso specifico del cavo rigido per l'RP1 Robot di gruppo 1, sarebbe necessario ulteriori informazioni o documentazione tecnica non riportate nelle parti citate della cronologia conversazione.
+
+Fonte documentale: connections.pdf (Pagina: 274), 139, 176, 177","connections.pdf, connections.pdf","274, 274",connections.pdf,138,MISS,110.05,OK
+Q011,What are the connector codes associated with the servo amplifier of the R-30 i B Mate/R-30 i B Mate Plus robot?,"1. CNJx (Motor power/brake) - Pagina: 139, 131, 208 del documento ""connections.pdf""
+2. XHBK, XROT - Pagina: 131, 208 del documento ""connections.pdf""
+
+Fonte documentale: connections.pdf (Pagine: 139, 131, 208)","connections.pdf, connections.pdf, connections.pdf",", , ",connections.pdf,139,MISS,91.01,OK
+Q013,What is the rated voltage and current of the contact for the emergency circuit?,"1. Significato: Rated voltage e corrente del contatto per l'emergenza
+2. Possibili cause: Interpretazione della documentazione tecnica
+3. Controlli: Cerca le informazioni nelle tabelle specifiche pagine dei manuali di connessioni
+4. Azioni: Identificare la riga corrispondente nella fonte documentale
+5. Fonte documentale: connections.pdf (Pagina: 144)
+
+Fonte documentale: connections.pdf (Pagina: 144)","connections.pdf, connections.pdf","144, 144",connections.pdf,144,SI,90.22,OK
+Q016,Which boards can be mounted according to the provided text?,"In base al contesto tecnico recuperato, i board che possono essere montati sono:
+
+- Axis control card (specie modelli A05B-2600-H040 a A05B-2670-H044) con varie specifiche di ordine come A20B-3300-0815 fino ad A20B-3300-0664, che hanno da 6 a 36 assi.
+- FROM/SRAM module (specie modelli A05B-2600-H060 a A05B-2600-H068) con varie specifiche di ordine come A20B-3900-0280 fino ad A20B-3900-0296.
+
+Le immagini e le descrizioni fornite mostrano anche il processo per montare un card, inclusi l'uso di una spazzola o bullone per fissarlo nell'alloggiamento, ed è indicato che questo può essere applicato agli Axis control card CPU card e FROM/SRAM module menzionati sopra.
+
+Fonte documentale: connections.pdf (Pagina: 206), replacing_units.pdf (Pagine: 115, 116), overview_configuration.pdf (Pagina: 5).","connections.pdf, replacing_units.pdf, overview_configuration.pdf","206, , 5",connections.pdf,154,MISS,124.36,OK
+Q019,What is the common voltage of the input devices according to the provided diagram?,"La documentazione disponibile indica che la comune tensione degli input dei dispositivi è +24V.
+Fonte documentale: connections.pdf (Pagina: 162), connections.pdf (Pagina: 164), circuit_boards_amplifiers.pdf (Pagina: 106)","connections.pdf, connections.pdf, circuit_boards_amplifiers.pdf","162, 164, 106",connections.pdf,164,SI,89.45,OK
+Q023,What is the maximum voltage applicable to the input of the receiver in the peripheral device A interface?,ERRORE: Model reloaded.,,,connections.pdf,179,NO PAGE,44.62,ERRORE
+Q027,Which cable connector is recommended for connections in the Fanuc R-30iB controller?,"Secondo il Contesto tecnico recuperato dalla pagina connections.pdf, Pagina 157, per la connessione con l'hardware del controller FANUC R-30iB è raccomandata una delle seguenti cablature: CRMA15, CRMA58, CRMA16 o CRMA59. Queste informazioni si trovano nel diagramma di connessione della conversione board. 
+Fonte documentale: connections.pdf (Pagina: 157)","connections.pdf, connections.pdf","157, 157",connections.pdf,191,MISS,117.48,OK
+Q031,What is the recommended type of cable to improve resistance to electrical noise in a FA environment according to the Fanuc R-30iB controller manual?,"Fonte documentale: connections.pdf (Pagina: 218)
+
+Per migliorare la resistenza alle interferenze elettromagnetiche nell'ambiente FA, secondo il manuale del controller Fanuc R-30iB, si raccomanda di tagliare una parte della guaina dell'avvolgimento dello striscia per esporre lo schermo e fissarlo all'apposito piatto terra utilizzando un clip dell'avvolgimento. Questa metodologia è descritta nella sezione ""Specifiche"" del documento, pagina 218.
+
+Fonte documentale: connections.pdf (Pagina: 218)","connections.pdf, connections.pdf","218, 218",connections.pdf,198,MISS,102.8,OK
+Q032,What are the names of the manufacturing companies and their respective contact offices for the Fanuc R-30iB controller?,ERRORE: Model reloaded.,,,connections.pdf,200,NO PAGE,49.6,ERRORE
+Q034,What are the conditions that must be met for the type of Ethernet cable used in the R-30iB system?,"1. Diameter of fiber optic cord: φ2.2 mm x 2 cords
+2. Tensile strength of cable with reinforced cover: 75 kg
+3. Weight per fiber optic cord: 7 kg
+4. Between fiber optic cord and connector: 2 kg
+5. Minimum bending radius of fiber optic cord: 25 mm
+6. Minimum bending radius of cable with reinforced cover: 50 mm
+7. Bending resistance (cable with reinforced cover): 10 million bending cycles at room temperature (when the bending radius is 100 mm) - Equivalent to UL VW-1 standard (-20 to 70ºC)
+8. Flame resistance: Operating temperature not specified, but implied as part of flame retardant properties
+
+Fonte documentale: connections.pdf (Pagina: 200), Fig. D (a), Table 4, Pagina: 153",connections.pdf,200,connections.pdf,204,MISS,336.49,OK
+Q040,What is the type of electrical connection diagram mentioned in the text for the R-30iB controller in the case of three-phase power supply?,"(e) AC power line connection diagram (R-30** _**i**_ **B Mate Plus, in case of three phase input)
+Fonte documentale: connections.pdf (Pagina: 225)",connections.pdf,225,connections.pdf,225,SI,57.36,OK
+Q041,What is the difference between the emergency circuit connection diagram of the R-30iB Mate for single-phase input and that for three-phase input?,"1. Fig.B(b) mostra il diagramma di sistema block per l'input singolo, mentre Fig.B(d) illustra il diagramma di sistema block per l'input trifase.
+2. Per la connessione dell'interruttore di emergenza in caso di input singolo, è possibile collegare un +24V esterno invece del livello interno +24V per evitare che l'output dell'interruttore di emergenza influenzi il potere della controller. Questa configurazione non è menzionata esplicitamente per i circuiti di input trifase.
+3. Per le connessioni unit-to-unit, gli apparecchi esterni come EES1, EAS1 e CRS36 Teach pendant sono collegati in modo diverso rispetto a quelli nella configurazione di input singolo (Fig.3.1(b)). Potrebbe essere necessario consultare il capitolo 4.3 dell'interfaccia dei dispositivi periferici per dettagli specifici.
+Fonte documentale: connections.pdf (Pagina: 222, 231, 229, 132, Fig.3.1(b))",connections.pdf,222,connections.pdf,229,MISS,56.8,OK
+Q043,"What is the content of section B of the technical manual for the Fanuc R-30iB controller, specifically regarding the omitted figure?","""Fonte documentale: connections.pdf (Pagina: 235), overview_configuration.pdf (Pagine: 3-4)""
+
+Questa risposta si basa sul contesto della conversazione precedente e sull'informazione fornita, che chiede riguardo alla sezione mancante del diagramma nel documento tecnico per il controller Fanuc R-30iB. La fonte è indicata come specifiche pagine dei file tecnici menzionati nell'input dell'operatore.","connections.pdf, overview_configuration.pdf","235, ",connections.pdf,239,MISS,78.26,OK
+Q045,Which robot models are mentioned in the RI/RO connection diagram and where can further details on the EE connectors of the mechanical unit be found?,"1. LR Mate 200 iD, M-1000i, M-200i, ARC Mate 50, ARC Mate 100, ARC Mate 120, M-10, M-20, R-0, CR-4, CR-7 - These models are mentioned in the RI/RO connection diagram (Fig. B) as per connections.pdf, pages 245, 246, and 247.
+2. Further details on the EE connectors of the mechanical unit can be found in the same document ""connections.pdf"" specifically in Appendix Fig.B, with detailed descriptions shown on pages 245 to 248.
+
+Fonte documentale: connections.pdf (Pagine: 245-248)","connections.pdf, connections.pdf, connections.pdf",", , ",connections.pdf,247,MISS,78.59,OK
+Q046,Which models of mechanical units are mentioned in the total connection diagram of the Fanuc R-30iB controller?,"Basandosi sulle informazioni fornite nella cronologia conversazione e nel contesto tecnico recuperato, il messaggio dell'operatore chiede riguardo ai modelli di unità meccaniche menzionati nella TOTAL CONNECTION DIAGRAM per l'FANUC R-30iB controller.
+
+Risposta: Il documento specifica che dettagli sui tipi EE connettori delle unità meccaniche sono trovati nel manuale degli apparecchiature meccaniche. Poiché il contesto tecnico recuperato menziona solo i componenti e le loro specifiche ma non descrive direttamente gli schemi di connessione o le unità meccaniche, non posso fornire una lista dettagliata dalle informazioni disponibili.
+
+Fonte documentale: [connections.pdf] (Pagine: 219, 222)",connections.pdf,,connections.pdf,251,MISS,87.17,OK
+Q054,What components are mentioned in the text regarding the brake release unit?,"1. Brake Release Unit connection cable
+2. RM1 (RMP) connector
+3. Power cable of Brake release unit
+4. Deadman switch
+5. Table E.3.1 (for reference on brake switch positions corresponding to axes)
+6. Robot connection cable (excluding the RM1 (RMP) cable)
+
+Fonte documentale: connections.pdf (Pagina: 267), troubleshooting_alarms.pdf (Pagina: 31), SRVO-023 page reference","connections.pdf, troubleshooting_alarms.pdf","267, 31",connections.pdf,272,MISS,73.13,OK
+Q056,What are the steps to correctly connect a connector to the header according to the Fanuc R-30iB controller manual?,"1. Push in the connector to engage with the header.
+2. Verify that the latch is securely attached to the header, ensuring proper alignment with the corresponding shape of the other component.
+
+Fonte documentale: connections.pdf (Pagina: 195)",connections.pdf,195,connections.pdf,277,MISS,70.79,OK
+Q070,What are the steps to replace the power supply unit in the Fanuc R-30iB controller?,"1. Ensure that the machine and all necessary safety precautions are taken before starting the replacement process, as outlined in ""Transportation and Installation"" (pages 212 of connections.pdf).
+2. Shut down the controller and disconnect it from any power sources to prevent electrical hazards.
+3. Locate the power supply unit within the R-30iB controller, as described under ""Mounting a Card"" in replacing_units.pdf (page 115). It is typically secured with screws and may require pressing around the center of a heat sink for removal.
+4. Carefully unmount the power supply unit by removing any securing screws or fasteners, following the illustrations provided in Fig.8.2(f) from replacing_units.pdf.
+5. Once removed, handle the old power supply unit and replace it with a new one of the same specifications (A05B-2600 series as per Specification List on pages 218 of connections.pdf). Ensure that any securing screws or fasteners are properly reinstalled to their original positions.
+6. Reconnect the power supply unit, ensuring it is firmly in place and secured according to Fig.8.2(e) from replacing_units.pdf.
+7. Restore power to the controller following proper safety protocols outlined earlier.
+8. Test the new installation by running a diagnostic check or performing a simple operation, such as verifying that all I/O points are functioning correctly and observing any display indicators for normal operation.
+
+Fonte documentale: replacing_units.pdf (Pagina: 115), connections.pdf (Pagine: 212 e 261)
+
+*Si prega di notare che, se non si dispone dei manuali o delle istruzioni dettagliate per il processo di sostituzione del power supply unit, è consigliato consultare un tecnico qualificato per evitare danni al controller o rischio di incidente.","connections.pdf, replacing_units.pdf, replacing_units.pdf, connections.pdf, replacing_units.pdf, replacing_units.pdf, connections.pdf",", 115, , , , 115, ",replacing_units.pdf,118,MISS,109.47,OK
+Q071,What are the steps to replace the teach pendant of the Fanuc R-30iB controller?,"1. Ensure that the power to the robot controller is turned off.
+2. Pull out the old fan motor by holding the latch and unlatching it from the case.
+3. Install a new fan unit into the case, ensuring the latch snaps securely back into place.
+
+Per i passaggi specifici per la sostituzione del teach pendant dell'R-30iB controller Fanuc, secondo il contesto tecnico recuperato:
+
+- Prima di eseguire le azioni 5 e 7 (sostituire il teach pendant o il main board), effettua un backup completo della controller. Questo per evitare la perdita dei programmi ed impostazioni memorizzate nella memoria.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 21), replacing_units.pdf (Pagina: 115), overview_configuration.pdf (Pagina: 3), replacing_teachpendant.pdf (non specificata nella cronologia fornita).
+""Fonte documentale: troubleshooting_alarms.pdf (Pagina: 21), replacing_units.pdf (Pagina: 115), overview_configuration.pdf (Pagina: 3)""","troubleshooting_alarms.pdf, replacing_units.pdf, overview_configuration.pdf, replacing_teachpendant.pdf, troubleshooting_alarms.pdf, replacing_units.pdf, overview_configuration.pdf","21, 115, 3, , 21, 115, 3",replacing_units.pdf,122,MISS,100.18,OK
+Q073,What are the steps to install a new battery unit in the Fanuc R-30iB controller?,"1. Prepare a new lithium battery with the ordering specification A05B-2650-K030.
+2. Turn on the robot controller for about 30 seconds.
+3. Turn off the robot controller.
+4. Locate and pull out the battery unit from the lower right part of the backplane unit by holding the latch and pulling the unit out.
+5. For a memory backup, ensure you have made a copy of the robot programs and system variables before proceeding with the replacement.
+6. Dispose of the replaced battery following local industrial waste disposal regulations.
+
+Fonte documentale: replacing_units.pdf (Pagina: 125), connections.pdf (Pagina: 218), overview_configuration.pdf (Pagina: 3)","replacing_units.pdf, connections.pdf, overview_configuration.pdf","125, 218, 3",replacing_units.pdf,126,SI,99.7,OK
+Q074,What is the difference between the 'WARNING' and 'CAUTION' symbols according to the Fanuc R-30iB controller manual?,"1. **Significato**:
+   - **WARNING**: Utilizzato quando c'è il rischio di morte o grave lesione dell'utente se non viene seguita la procedura approvata. Indica un pericolo più serio che richiede attenzione immediata e adesione rigorosa alle procedure stabilite.
+   - **CAUTION**: Utilizzato quando c'è il rischio di lesioni minori o moderate dell'utente, oppure danni all'attrezzatura se non viene seguita la procedura approvata. Indica un pericolo inferiore rispetto a quello segnalato da WARNING ma comunque necessario attenersi alla procedura corretta.
+
+2. **Possibili cause**:
+   - Le cause di entrambe le situazioni possono derivare dall'uso improprio o dalla mancata adesione alle procedure operative, dal non seguire le istruzioni del manuale o da errori tecnici che potrebbero portare a incidenti.
+
+3. **Controlli**:
+   - Per evitare di emettere un WARNING o CAUTION, è fondamentale eseguire controlli regolari e correttivi dell'attrezzatura, ricevere una formazione adeguata sull'uso del robot, seguire tutte le istruzioni operative e procedurale ed essere consapevoli dei rischi associati alle attività svolte.
+
+4. **Azioni**:
+   - Se si verifica un WARNING, è necessario immediatamente fermare l'operazione e adottare misure di sicurezza per prevenire incidenti gravi. Questo può includere il disinserimento dell'attrezzatura o la chiusura del circuito elettrico.
+   - In caso di CAUTION, è consigliato prestare maggiore attenzione e adottare precauzioni per evitare lesioni minori o danni all'attrezzatura, come verificare l'integrità dell'impostazione prima della continuazione delle operazioni.
+
+5. **Fonte documentale**:
+   - Fonte tecnica: safety_precautions.pdf (Pagina: s-2)
+     ""INIZIO FONTE:""
+     ""[DEFINITION OF SAFETY NOTATIONS]
+     |AFETY PRECAUTION|SB-83525EN/|
+     |**Symbol**|**Definitions**|""
+
+Fonte documentale: safety_precautions.pdf (Pagina: s-2)","safety_precautions.pdf, safety_precautions.pdf","s-2, s-2",safety_precautions.pdf,s-2,SI,154.45,OK
+Q077,What precautions should be taken regarding the robot's mechanical unit cables to avoid issues?,"1. Utilizzare il cavo di unità meccanica che abbia l'interfaccia richiesta per la comunicazione utente.
+2. Evitare di inserire fili o tubazioni user in dentro dell'unità meccanica.
+3. Non ostacolare il movimento della unità meccanica quando i cavi sono aggiunti all'esterno dell'unità.
+4. Se il cavo è esposto, non effettuare modifiche che impediscono la normale comportamento del filo esterno.
+5. Durante l'installazione di dispositivi periferici sull'unità meccanica, assicurarsi che questi dispositivi non interferiscano con il funzionamento del robot stesso.
+
+Fonte documentale: safety_precautions.pdf (Pagina: s-4)",safety_precautions.pdf,s-4,safety_precautions.pdf,s-8,MISS,81.07,OK
+Q078,What environmental conditions must be met to ensure safe operation of the robot according to the Fanuc R-30iB manual?,"1. Operating altitude should not exceed 1000m for operation and up to 12000m when non-operating.
+2. The environment must be free from large amounts of contaminants such as dust, dielectric fluid, organic solvents, acid, corrosive gas, or salt if the machine is installed in such an area; additional protective measures are necessary.
+3. A shielding provision should be made for environments where the robot may be exposed to ionized and non-ionized radiation like microwave, ultraviolet rays, laser beams, or X-rays.
+4. The ambient temperature during operation must range from 0°C to 45°C with a rate of change not exceeding 0.3°C per minute.
+5. Ambient humidity should be maintained at normal levels (75%RH or less) and no condensation allowed, even for short periods up to one month.
+6. The robot system must have an earth grounding appropriate to its environment as specified in the safety fence installation guidelines.
+
+Fonte documentale: connections.pdf (Pagina: 210), safety_precautions.pdf (pagine s-2, s-3, s-9)","connections.pdf, safety_precautions.pdf","210, ",safety_precautions.pdf,s-9,MISS,94.07,OK
+Q081,What actions should be taken if the emergency stop button has been pressed and the error code SRVO-001 is displayed along with SRVO-213?,"1. Release the emergency stop button pressed on the operator's panel.
+2. Check the wires connecting between the emergency stop button (CRT30) and the emergency stop board (CRT30) for continuity, and replace the entire harness if an open wire is found.
+3. Check the wires connecting between the teach pendant (CRS36) and the emergency stop board (CRS36) for continuity, and replace the entire harness if an open wire is discovered.
+4. With the emergency stop in the released position, check for continuity across the terminals of the switch; if not found, replace the emergency stop button or the operator's panel.
+5. Perform a complete controller back-up to save all programs and settings before replacing any components.
+6. Replace the main board as part of standard procedure when dealing with related error codes like SRVO-213.
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 21), (Pagina: 27), (Pagina: 68), (Pagina: 33)",troubleshooting_alarms.pdf,21,troubleshooting_alarms.pdf,21,SI,74.54,OK
+Q084,"What are the steps to follow if the alert SRVO-015 occurs due to system overheating, and what precautions should be taken before replacing the main board?","1. If the ambient temperature exceeds 45 °C, attempt to cool down the environment to reduce heat.
+2. Verify that the fan motor is operational; inspect its cables and related fuses for any signs of damage or failure, and replace them if necessary.
+3. Before proceeding with replacing the main board (Action 3), it's crucial to perform a complete controller backup to save all programs and settings as per Fonte: troubleshooting_alarms.pdf (Pagina: 30).
+   Fonte documentale: troubleshooting_alarms.pdf (Pagina: 30), 35
+
+4. Replace the main board to address the SRVO-015 System Overheat alarm once precautions and backups have been taken.
+   Fonte documentale: troubleshooting_alarms.pdf (Pagine: 30, 35)
+
+Please ensure all safety protocols are followed when handling electrical components and machinery is powered off before attempting repairs or replacements to prevent accidents or further damage.","troubleshooting_alarms.pdf, troubleshooting_alarms.pdf, troubleshooting_alarms.pdf","30, 30, ",troubleshooting_alarms.pdf,30,SI,99.06,OK
+Q089,What are the steps to follow to resolve the alarm SRVO-044 DCHVAL%s in case of abnormal DC voltage in the main circuit?,"1. Check the input voltage to the controller to ensure it is within the rated voltage. (Action 1 from Fonte: troubleshooting_alarms.pdf, Pagina: 35)
+2. Verify that the setting of the transformer is correct. (Action 1 from Fonte: troubleshooting_alarms.pdf, Pagina: 35)
+3. If the three-phase input voltage at the 6-Axis servo amplifier is higher than 240 VAC, check the line voltage as this can cause a high acceleration/deceleration alarm. (Action 2 from Fonte: troubleshooting_alarms.pdf, Pagina: 35)
+4. If applicable and indicated by the robot model, ensure that CRRA11B connector is used instead of another if there's an issue with continuity or resistance not being 6.5 Ω. (Action 5 from Fonte: troubleshooting_alarms.pdf, Pagina: 35)
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagine: 35, 67, 68)","troubleshooting_alarms.pdf, troubleshooting_alarms.pdf, troubleshooting_alarms.pdf, troubleshooting_alarms.pdf, troubleshooting_alarms.pdf","35, 35, 35, 35, ",troubleshooting_alarms.pdf,35,SI,93.75,OK
+Q091,What are the steps to follow if the alarm SRVO-050 Collision Detect occurs and an overload on the robot is suspected?,"1. Check whether the robot has collided, which might cause a high disturbance torque as indicated by the collision detect alarm (SRVO-050).
+2. Inspect for any factors that have increased the mechanical load on the affected axis.
+3. Verify if the load settings are valid and within acceptable parameters.
+4. Ensure that the brake of the corresponding axis is properly released to prevent excessive force application.
+5. If the load weight exceeds its rated range, adjust it down to fall within safe operational limits.
+6. Confirm that the voltage input supplied to the controller matches the rated requirements for proper operation.
+7. Should these steps not resolve the issue, consider replacing components such as:
+   - The servo amplifier (Action 7)
+   - The motor of the corresponding axis (Action 8)
+   - The E-stop unit (Action 9)
+   - Power cables connected to the robot's control system for that specific axis, including both external and internal cabling (Actions 10).
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagine: 39, 44)",troubleshooting_alarms.pdf,,troubleshooting_alarms.pdf,39,MISS,104.0,OK
+Q097,What is the cause of the alarm SRVO-084 BZAL in the Fanuc R-30iB controller and which component is involved in this situation?,"1. Significato: L'alarm SRVO-084 BZAL si attiva quando la batteria di backup per l'assoluta posizione del Pulsecoder non è collegata.
+2. Possibili cause: Non collegare correttamente o mancanza della batteria di backup nel sistema.
+3. Controlli: Verifica se la batteria di backup è inserita e collegata secondo le specifiche tecniche.
+4. Azioni: 
+   - Se il collegamento è saltato, reinstalla la batteria di backup.
+   - Se necessario, sostituisci la batteria di backup se danneggiata.
+5. Fonte documentale: troubleshooting_alarms.pdf (Pagina: 45), troubleshooting_alarms.pdf (Pagina: 72)
+
+Fonte documentale: troubleshooting_alarms.pdf (Pagina: 45), troubleshooting_alarms.pdf (Pagina: 72)","troubleshooting_alarms.pdf, troubleshooting_alarms.pdf, troubleshooting_alarms.pdf, troubleshooting_alarms.pdf","45, 72, 45, 72",troubleshooting_alarms.pdf,45,SI,71.71,OK
