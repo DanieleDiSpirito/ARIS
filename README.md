@@ -428,12 +428,13 @@ Prestazioni end-to-end registrate combinando le pipeline di retrieval con i mode
 ---
 
 ### 📈 Grafici e Telemetrie
-Tutti i grafici analitici ed i plot delle metriche sono salvati e consultabili all'interno della cartella [thesis_report/images/](thesis_report/images/):
-- **Precisione RAGAS:** [ragas_strategie.png](thesis_report/images/png/ragas_strategie.png)
-- **Accuratezza LLM (SI/NO):** [accuracy_strategie.png](thesis_report/images/png/accuracy_strategie.png)
-- **Latenze di Retrieval:** [tempo_medio_retrieval_metodi_it.png](thesis_report/images/png/tempo_medio_retrieval_metodi_it.png) e [tempo_medio_retrieval_en.png](thesis_report/images/png/tempo_medio_retrieval_en.png)
-- **Tempi Risposta LLM Cloud:** [tempo_medio_risposta_llm_cloud.png](thesis_report/images/png/tempo_medio_risposta_llm_cloud.png)
-- **Hit Rate dei Metodi in Italiano:** [hit_rate_metodo_it.png](thesis_report/images/png/hit_rate_metodo_it.png)
+Tutti i grafici analitici ed i plot delle metriche sono salvati e consultabili all'interno della cartella [thesis_report/images](thesis_report/images/):
+- **Precisione RAGAS:** ![ragas_strategie.png](thesis_report/images/png/ragas_strategie.png)
+- **Accuratezza LLM (SI/NO):** ![accuracy_strategie.png](thesis_report/images/png/accuracy_strategie.png)
+- **Latenze di Retrieval:** ![tempo_medio_retrieval_metodi_it.png](thesis_report/images/png/tempo_medio_retrieval_metodi_it.png)
+![tempo_medio_retrieval_en.png](thesis_report/images/png/tempo_medio_retrieval_en.png)
+- **Tempi Risposta LLM Cloud:** ![tempo_medio_risposta_llm_cloud.png](thesis_report/images/png/tempo_medio_risposta_llm_cloud.png)
+- **Hit Rate dei Metodi in Italiano:** ![hit_rate_metodo_it.png](thesis_report/images/png/hit_rate_metodo_it.png)
 
 ---
 
