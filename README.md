@@ -24,6 +24,7 @@
 - [Installazione](#-installazione)
 - [Utilizzo](#-utilizzo)
 - [Pipeline di Estrazione](#-pipeline-di-estrazione)
+- [Valutazione Sperimentale e Risultati](#-valutazione-sperimentale-e-risultati)
 - [Roadmap](#-roadmap)
 - [Licenza](#-licenza)
 
@@ -98,33 +99,55 @@ ARIS/
 ├── 📁 artifacts/                        # Artifacts del progetto
 │   ├── 📄 analysis_chunking.md
 │   └── 📄 analysis_knowledge_base.md
-|
+│
 ├── 📁 data/
-│   ├── 📁 raw/                          # Documentazione originale
-│   │   ├── 📁 manuali_manutenzione/     # Manuali PDF del controller
-│   │   ├── 📁 codici_errore/            # Tabelle errori e troubleshooting
-│   │   ├── 📁 procedure/                # Procedure di sostituzione
-│   │   ├── 📁 schede_tecniche/          # Schemi circuiti e cablaggi
-│   │   └── 📁 metadata/                 # Indice documentale (CSV)
-│   ├── 📁 processed/                    # Testo estratto (JSON)
-│   └── 📁 chunks/                       # Chunk pronti per il RAG
-│
+│   ├── 📁 raw/                          # Documentazione originale (manuali, procedure, cablaggi, ecc.)
+│   ├── 📁 processed/                    # Testo strutturato estratto per ciascun parser (JSON)
+│   │   ├── 📁 docling/
+│   │   ├── 📁 euristico/
+│   │   ├── 📁 llamaparse/
+│   │   ├── 📁 mineru/
+│   │   ├── 📁 pdf4llm/
+│   │   └── 📁 qwen/
+│   ├── 📁 chunks/                       # Dataset di chunk pronti per l'indicizzazione
+│   └── 📁 metrics/                      # Risultati dei benchmark ed esperimenti qualitativi/quantitativi
+│       ├── 📄 raw_new_benchmarks.json   # Dati grezzi dei benchmark
+│       ├── 📄 report_sperimentale_completo.md # Report unificato delle metriche
+│       ├── 📄 questions_quality_it.csv  # Test set di 100 domande in Italiano
+│       └── 📄 questions_quality_en.csv  # Test set di 100 domande in Inglese
 ├── 📁 src/
-│   ├── 📁 estrazione/                   # Script di estrazione PDF
-│   │   └── 📄 document_loader.py
-|   ├── 📁 chunking/                     # Script di chunking
-│   │   └── 📄 chunking.py
-|   ├── 📁 embeddings/                   # Script per la creazione del database vettoriale
-│   │   └── 📄 create_vector_db.py
-|   ├── 📁 preprocessing/                # Script di pulizia dati
-│   │   └── 📄 data_cleaner.py
-|   ├── 📁 rag_pipeline/                 # Pipeline RAG
+│   ├── 📁 app/                          # Interfaccia Utente (Streamlit)
+│   │   └── 📄 app.py                    # Script principale del chatbot Streamlit
+│   ├── 📁 chunking/                     # Logica di chunking semantico
+│   │   └── 📄 chunking.py               # Segmentazione del testo context-aware
+│   ├── 📁 embeddings/                   # Database vettoriale
+│   │   └── 📄 create_vector_db.py       # Creazione e popolamento di ChromaDB
+│   ├── 📁 estrazione/                   # Ingestione dei manuali PDF (loader dei vari parser)
+│   │   ├── 📄 loader_docling.py
+│   │   ├── 📄 loader_euristico.py
+│   │   ├── 📄 loader_llamaparse.py
+│   │   ├── 📄 loader_mineru.py
+│   │   ├── 📄 loader_pdf4llm.py
+│   │   └── 📄 loader_qwen.py
+│   ├── 📁 preprocessing/                # Pulizia del testo e arricchimento di dominio
+│   │   ├── 📄 cleaner_docling.py
+│   │   ├── 📄 cleaner_euristico.py
+│   │   ├── 📄 cleaner_llamaparse.py
+│   │   ├── 📄 cleaner_mineru.py
+│   │   ├── 📄 cleaner_pdf4llm.py
+│   │   ├── 📄 cleaner_qwen.py
+│   │   └── 📄 domain_ernichment.py
+│   ├── 📁 rag_pipeline/                 # Motori di retrieval e generazione RAG
+│   │   ├── 📄 inspect_kb.py             # Utility di ispezione del database
 │   │   ├── 📄 rag_pipeline.py           # Pipeline Puro RAG (Vector Search)
-│   │   └── 📄 rag_pipeline_hybrid.py    # Pipeline Ibrida (BM25 + Vector Search)
-│   └── 📁 app/                          # Interfaccia Streamlit
-│       └── 📄 app.py
+│   │   ├── 📄 rag_pipeline_hybrid.py    # Pipeline Ibrida (BM25 + Vector Search)
+│   │   ├── 📄 rag_pipeline_rerank.py    # Pipeline RAG con Reranking (Cross-Encoder)
+│   │   ├── 📄 rag_pipeline_graph.py     # Pipeline GraphRAG (Grafo relazionale)
+│   │   └── 📄 visualize_graph.py        # Utility di visualizzazione del grafo
+│   └── 📁 utils/                        # Utility comuni
+│       └── 📄 telemetry.py              # Tracciamento dei tempi e risorse hardware (Peak Working Set)
 │
-├── 📁 vector_db/                       # Database vettoriale ChromaDB
+├── 📁 vector_db/                       # Database vettoriali ChromaDB suddivisi per parser, env e chunk size
 │   ├── 📁 chroma_locale_300/           # bge-m3 · collection "langchain" · 300 token
 │   ├── 📁 chroma_locale_700/           # bge-m3 · collection "langchain" · 700 token
 │   ├── 📁 chroma_locale_1000/          # bge-m3 · collection "langchain" · 1000 token
@@ -140,7 +163,7 @@ ARIS/
 ├── 📄 requirements.txt                  # Dipendenze Python
 ├── 📄 LICENSE                           # MIT License
 ├── 📄 INFO.md                           # Informazioni sul progetto
-└── 📄 README.md                         # Questo file
+└── 📄 README.md                         # <- Sei qui!
 ```
 
 ---
@@ -187,17 +210,16 @@ pip install -r requirements.txt
 
 ### Configurazione `.env`
 
-Crea un file `.env` nella root del progetto:
+Il progetto utilizza variabili d'ambiente per configurare gli endpoint locali e le chiavi API dei servizi cloud. Nella root del progetto è presente il file modello [.env.example](.env.example). 
 
-```env
-# Chiave OpenRouter (per LLM e Embedding cloud)
-OPENAI_API_KEY=sk-or-v1-...
+Per configurare l'ambiente:
 
-# Opzionale: LangSmith (per debug della pipeline)
-# LANGCHAIN_TRACING_V2=true
-# LANGCHAIN_API_KEY=ls__...
-# LANGCHAIN_PROJECT=aris-rag-project
-```
+1. Copia il file di esempio rinominandolo in `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+2. Modifica i valori all'interno del file `.env` secondo le tue necessità (ad esempio inserendo la tua chiave API di OpenRouter in `OPENAI_API_KEY` o configurando l'endpoint del LLM locale).
+
 
 ---
 
@@ -243,42 +265,50 @@ Ogni blocco estratto segue questo schema JSON:
 
 ### 3. Pipeline RAG — Test da Terminale
 
-Entrambi gli script si avviano dalla **root del progetto** (`ARIS/`) e supportano gli stessi argomenti:
+Gli script si avviano dalla **root del progetto** (`ARIS/`) e supportano i seguenti argomenti da CLI:
 
 | Argomento | Valori | Default | Descrizione |
 |---|---|---|---|
-| `--env` | `locale`, `cloud` | `locale` | LM Studio locale o OpenRouter cloud |
-| `--chunk_size` | `300`, `700`, `1000` | `700` | Dimensione chunk → seleziona il DB corretto |
-| `--query` | stringa | `"SRVO-004?"` | Domanda da porre al sistema |
+| `--env` | `locale`, `cloud` | `locale` | Modello ed embedding (Locale: LM Studio/BGE-M3, Cloud: OpenRouter/text-embedding-3-small) |
+| `--chunk_size` | `300`, `700`, `1000` | `700` | Dimensione dei chunk del database da interrogare |
+| `--metodo` | `pdf4llm`, `euristico`, `docling`, `llamaparse`, `mineru`, `qwen` | `pdf4llm` | Ingestion parser del database selezionato |
+| `--query` | stringa | `"Cosa significa l'allarme SRVO-004?"` | Domanda tecnica da inviare alla pipeline RAG |
+| `--debug` | (flag) | (disattivo) | Mostra i log di debug e i metadati dei chunk recuperati |
 
 ```bash
-# Puro RAG (Vector Search), motore locale
-python src/rag_pipeline/rag_pipeline.py --query "Cosa significa l'allarme SRVO-004?"
+# 1. Puro RAG (Vector Search)
+python src/rag_pipeline/rag_pipeline.py --env cloud --chunk_size 700 --metodo pdf4llm --query "Specifiche Main board A05B-2650-H001"
 
-# Puro RAG, motore cloud (OpenRouter), chunk da 700
-python src/rag_pipeline/rag_pipeline.py --env cloud --chunk_size 700 --query "Specifiche Main board A05B-2650-H001"
+# 2. RAG Ibrido (BM25 + Vector Search)
+python src/rag_pipeline/rag_pipeline_hybrid.py --env locale --chunk_size 700 --metodo pdf4llm --query "Cosa significa l'allarme SRVO-004?"
 
-# Ibrido BM25 + Vector Search, motore locale
-python src/rag_pipeline/rag_pipeline_hybrid.py --query "Cosa significa l'allarme SRVO-004?"
+# 3. Rerank RAG (Vector + BM25 + Cross-Encoder Reranker)
+python src/rag_pipeline/rag_pipeline_rerank.py --env cloud --chunk_size 700 --metodo pdf4llm --query "Procedura per la sostituzione della batteria del controller"
+
+# 4. GraphRAG (Grafo Relazionale + Cross-Encoder Reranker)
+python src/rag_pipeline/rag_pipeline_graph.py --env cloud --chunk_size 700 --metodo pdf4llm --query "Quali moduli sono collegati al cabinet del controller?"
 ```
 
-> **Embedding usato:**
-> - `locale` → `BAAI/bge-m3` (1024 dim, eseguito localmente, nessuna API)
-> - `cloud` → `text-embedding-3-small` (1536 dim, OpenRouter)
+> **Modelli di Embedding associati:**
+> - `--env locale` → `BAAI/bge-m3` (1024 dim, locale HuggingFace)
+> - `--env cloud` → `text-embedding-3-small` (1536 dim, OpenAI via OpenRouter)
 
 ### 4. Interfaccia Streamlit
 
 ```bash
+# Attiva l'ambiente conda ed esegui l'app streamlit
 conda activate aris_311
-cd src/app
-python -m streamlit run app.py
+streamlit run src/app/app.py
 ```
 
-L'interfaccia supporta lo **streaming dei token in tempo reale** per un'esperienza d'uso fluida ed immediata.
+L'interfaccia utente Streamlit permette di interagire graficamente con l'assistente chatbot. Supporta lo **streaming dei token in tempo reale** per la visualizzazione progressiva della risposta dell'LLM.
 
-Dalla sidebar è possibile configurare:
-- **Motore LLM**: impostato di default su **cloud** (OpenRouter) per massima velocità e accuratezza di generazione, con possibilità di commutare sul motore **locale** (LM Studio su localhost).
-- **Dimensione Chunk**: seleziona al volo il Vector DB corrispondente (300, 700 o 1000 token).
+Dalla sidebar è possibile configurare al volo:
+- **Motore LLM/Embedding** (Locale o Cloud)
+- **Dimensione Chunk** (300, 700, 1000)
+- **Parser di Ingestione** (pdf4llm, euristico, docling, llamaparse, mineru, qwen)
+- **Algoritmo RAG** (Puro, Ibrido, Rerank, Graph)
+- **Debug View** (abilitazione della visualizzazione dei chunk recuperati con sorgenti, punteggi e metadati)
 
 ---
 
@@ -309,6 +339,104 @@ L'estrazione utilizza un approccio **dual-engine** per massimizzare la qualità:
 
 ---
 
+## 📊 Valutazione Sperimentale e Risultati
+
+Il sistema ARIS è stato testato e valutato empiricamente su tutte le fasi della sua pipeline di elaborazione. Di seguito vengono riportati i principali risultati estratti dal [Report Sperimentale Completo](data/metrics/report_sperimentale_completo.md).
+
+I test qualitativi e quantitativi si basano su due test set da **100 domande ciascuno** (in lingua italiana e in lingua inglese), coprendo scenari reali di manutenzione FANUC categorizzati per difficoltà (Low, Medium, Hard) e tipologia (Codici errore, Procedure, Troubleshooting, Consultazione).
+
+### 1. Ingestione dei PDF (Benchmark Risorse e Scalabilità)
+Valutazione del tempo di esecuzione e del picco massimo di RAM e VRAM per l'estrazione dei documenti tecnici originali con i vari parser:
+
+| Parser | File | Tempo (s) | RAM (MB) | VRAM (MB) | Esecuzione |
+| :--- | :--- | :---: | :---: | :---: | :--- |
+| **Docling** | `safety_precautions.pdf` (13 pag) | 6.79 | 2765.77 | 1189.70 | Locale (GPU CUDA PyTorch) |
+| **LlamaParse** | `safety_precautions.pdf` (13 pag) | 41.03 | 925.14 | 0.00 | Cloud API |
+| **MinerU** | `safety_precautions.pdf` (13 pag) | 36.11 | 503.10 | 0.00 | Locale CLI (magic-pdf) |
+| **Pdf4llm** | `safety_precautions.pdf` (13 pag) | 3.67 | 876.36 | 0.00 | Locale (CPU PyMuPDF) |
+| **Qwen** | `safety_precautions.pdf` (13 pag) | 251.72 | 908.54 | 5456.37 | Locale GPU (Transformers Qwen2-VL) |
+
+> 📌 **Verdetto:** **PDF4LLM** si dimostra il loader CPU più veloce in assoluto, ideale per pipelines leggere. **Docling** offre prestazioni eccellenti su GPU locale. **Qwen2-VL** e **LlamaParse** presentano tempi d'attesa e requisiti hardware significativamente più onerosi.
+
+### 2. Analisi Qualitativa della Pulizia dei Chunk per Layout
+Analisi della pulizia del testo segmentato (dimensione target 700 token) in base al layout del manuale originale:
+
+#### Categoria: Layout Tecnico (`troubleshooting_alarms.pdf`)
+*Manuali densi di allarmi e diagnostica causa-effetto. Misura la conservazione dei codici critici (es. SRVO-004).*
+| Metodo | N. Chunk | Garbage Ratio (%) | Righe Orfane (%) | Chunks con Tabelle (%) | Codici Allarme Rilevati |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **euristico** | 274 | 0.02% | 0.62% | 0.00% | **553** |
+| **pdf4llm** | 170 | 0.01% | 1.07% | 0.00% | 309 |
+| **docling** | 173 | 0.01% | 10.00% | 0.00% | 295 |
+| **llamaparse** | 139 | 0.03% | 11.07% | 0.00% | 249 |
+| **mineru** | 52 | 0.20% | 6.91% | 0.00% | 208 |
+| **qwen** | 238 | 0.03% | 29.16% | 0.00% | 134 |
+
+---
+
+### 3. Valutazione della Fase di Retrieval (Hit Rate@3 e MRR)
+Valutazione del corretto recupero delle informazioni pertinenti sul test set italiano (100 domande).
+
+#### Confronto Motori di Ingestione (FASE A - baseline 700 token, Locale BGE-M3)
+| DB Name / Parser | Hit Rate@3 (%) (Vector) | MRR (Vector) | Hit Rate@3 (%) (Hybrid) | MRR (Hybrid) |
+| :--- | :---: | :---: | :---: | :---: |
+| **pdf4llm** | **71.0%** | **0.6417** | **71.0%** | 0.6167 |
+| **euristico** | 68.0% | 0.6067 | 69.0% | **0.6217** |
+| **llamaparse** | 67.0% | 0.5950 | 67.0% | 0.5700 |
+| **mineru** | 65.0% | 0.5683 | 65.0% | 0.5617 |
+| **qwen** | 60.0% | 0.5350 | 59.0% | 0.5067 |
+| **docling** | 53.0% | 0.4783 | 55.0% | 0.4833 |
+
+#### Sensibilità al Chunk Size e Modello di Embedding (FASE B & C - pdf4llm)
+- **Chunk Size (BGE-M3 Locale):** 700 token si dimostra ottimale (HR@3 = **71.0%**, MRR = **0.6417**) rispetto a 300 token (HR@3 = 69.0%) e 1000 token (HR@3 = 71.0%, MRR = 0.6267).
+- **Modello di Embedding (pdf4llm 700):** L'embedding locale **BGE-M3** supera l'embedding cloud **text-embedding-3-small** sia in Hit Rate@3 (**71%** vs **68%**) sia in tempi medi di ricerca semantica (**0.022 s** vs **0.347 s**).
+
+---
+
+### 4. Strategie Avanzate (Cross-Encoder Reranking & GraphRAG)
+Introduzione di modelli di re-ranking (Cross-Encoder) ed espansione del contesto relazionale tramite GraphRAG:
+
+| Database Config (700 chunk) | Algoritmo di Retrieval | Hit Rate@3 (%) | MRR | Tempo Medio Retrieval |
+| :--- | :--- | :---: | :---: | :---: |
+| **pdf4llm Cloud 700** | Puro Vettoriale | 68.0% | 0.5733 | 0.3472 s |
+| **pdf4llm Cloud 700** | Rerank (Cross-Encoder) | 76.0% | 0.6373 | 3.0101 s |
+| **pdf4llm Cloud 700** | **GraphRAG (Grafo Relazionale)** | **83.0%** | **0.7492** | 3.0390 s |
+| **pdf4llm Locale 700** | Puro Vettoriale | 71.0% | 0.6417 | 0.0220 s |
+| **pdf4llm Locale 700** | **Rerank (Cross-Encoder)** | **73.0%** | **0.6383** | **0.0962 s** |
+| **pdf4llm Locale 700** | GraphRAG (Grafo Relazionale) | 70.0% | 0.6217 | 0.1125 s |
+
+> 💡 **Insights:** L'espansione relazionale del contesto operata da **GraphRAG** ottiene le migliori prestazioni assolute in cloud (**83% di Hit Rate@3**), risolvendo query complesse che collegano concetti distribuiti in più pagine. Il **Reranker** locale rappresenta la scelta ottimale a bassa latenza, incrementando l'Hit Rate locale al **73%** in meno di **100 ms**.
+
+---
+
+### 5. Generazione LLM End-to-End (RAGAS ed LLM-as-a-Judge)
+Prestazioni end-to-end registrate combinando le pipeline di retrieval con i modelli di generazione:
+- **Cloud LLM:** `openai/gpt-4o-mini` (via OpenRouter)
+- **Locale LLM:** `phi3.5` (via LM Studio)
+
+| Env | Lingua | Algoritmo | LLM Model | Accuracy (LLM Judge) | Tempo Risposta | Faithfulness (Fedeltà) | Answer Relevancy | Context Precision |
+| :---: | :---: | :---: | :--- | :---: | :---: | :---: | :---: | :---: |
+| **cloud** | **it** | **Graph** | GPT-4o-mini | **70.0%** | 10.83 s | 0.4508 | 0.8897 | 0.7222 |
+| **cloud** | **it** | **Ibrido** | GPT-4o-mini | **70.0%** | **8.29 s** | 0.7011 | **0.9160** | 0.5026 |
+| **cloud** | **it** | **Puro** | GPT-4o-mini | 63.3% | 8.27 s | **0.7376** | 0.8400 | **0.7556** |
+| **cloud** | **it** | **Rerank** | GPT-4o-mini | **70.0%** | 9.11 s | 0.7063 | 0.8961 | 0.7333 |
+| **locale** | **it** | **Puro** | Phi-3.5 | **50.0%** | 111.43 s | 0.5592 | 0.5872 | 0.7222 |
+| **locale** | **it** | **Ibrido** | Phi-3.5 | 33.3% | **90.05 s** | **0.6158** | 0.5624 | 0.5381 |
+| **locale** | **it** | **Rerank** | Phi-3.5 | 33.3% | 97.11 s | 0.6151 | 0.5589 | **0.8667** |
+| **locale** | **it** | **Graph** | Phi-3.5 | 26.7% | 124.41 s | 0.4102 | **0.7037** | **0.8667** |
+
+---
+
+### 📈 Grafici e Telemetrie
+Tutti i grafici analitici ed i plot delle metriche sono salvati e consultabili all'interno della cartella [thesis_report/images/](thesis_report/images/):
+- **Precisione RAGAS:** [ragas_strategie.png](thesis_report/images/png/ragas_strategie.png)
+- **Accuratezza LLM (SI/NO):** [accuracy_strategie.png](thesis_report/images/png/accuracy_strategie.png)
+- **Latenze di Retrieval:** [tempo_medio_retrieval_metodi_it.png](thesis_report/images/png/tempo_medio_retrieval_metodi_it.png) e [tempo_medio_retrieval_en.png](thesis_report/images/png/tempo_medio_retrieval_en.png)
+- **Tempi Risposta LLM Cloud:** [tempo_medio_risposta_llm_cloud.png](thesis_report/images/png/tempo_medio_risposta_llm_cloud.png)
+- **Hit Rate dei Metodi in Italiano:** [hit_rate_metodo_it.png](thesis_report/images/png/hit_rate_metodo_it.png)
+
+---
+
 ## 🗺 Roadmap
 
 - [x] Raccolta e organizzazione documentazione FANUC
@@ -329,8 +457,11 @@ L'estrazione utilizza un approccio **dual-engine** per massimizzare la qualità:
 - [x] Configurazione LangSmith per tracing della pipeline (variabili `.env` configurate)
 - [x] Configurazione motore Cloud (OpenRouter) come predefinito per il Chatbot
 - [x] Streaming in tempo reale delle risposte dell'assistente (real-time chat response streaming)
-- [ ] Costruzione dataset di test (15-20 casi d'uso di manutenzione reale)
-- [ ] Valutazione quantitativa (RAGAS / LLM-as-a-judge)
+- [x] Integrazione Reranking (Cross-Encoder) per ottimizzazione recupero (`rag_pipeline_rerank.py`)
+- [x] Integrazione GraphRAG per espansione relazionale del contesto (`rag_pipeline_graph.py`)
+- [x] Costruzione dataset di test completo (100 domande in Italiano e 100 domande in Inglese)
+- [x] Valutazione quantitativa delle fasi di retrieval (Hit Rate, Precision, Recall, MRR, tempi)
+- [x] Valutazione end-to-end con metriche RAGAS (Faithfulness, Relevancy, Precision, Recall) e accuratezza LLM
 
 ---
 
