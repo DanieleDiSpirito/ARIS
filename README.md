@@ -435,6 +435,8 @@ Tutti i grafici analitici ed i plot delle metriche sono salvati e consultabili a
 ![tempo_medio_retrieval_en.png](thesis_report/images/png/tempo_medio_retrieval_en.png)
 - **Tempi Risposta LLM Cloud:** ![tempo_medio_risposta_llm_cloud.png](thesis_report/images/png/tempo_medio_risposta_llm_cloud.png)
 - **Hit Rate dei Metodi in Italiano:** ![hit_rate_metodo_it.png](thesis_report/images/png/hit_rate_metodo_it.png)
+- **Benchmark Radar (Cloud):** ![radar_plot_en.png](thesis_report/images/png/radar_plot_en.png)
+![radar_subplot_en.png](thesis_report/images/png/radar_subplot_en.png)
 
 ---
 
