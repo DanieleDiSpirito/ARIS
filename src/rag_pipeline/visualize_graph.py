@@ -55,6 +55,7 @@ def main():
     parser.add_argument("--chunk_size", type=int, default=700)
     parser.add_argument("--metodo", type=str, default="pdf4llm")
     parser.add_argument("--output", type=str, default=os.path.join("knowledge_graphs", "graph.html"), help="File HTML di output")
+    parser.add_argument("--theme", type=str, choices=["dark", "light"], default="dark", help="Tema grafico del file HTML (default: dark)")
     
     # Filtri
     parser.add_argument("--keyword", type=str, help="Filtra i nodi contenenti questa parola chiave e i loro vicini")
@@ -219,7 +220,51 @@ def main():
             "label": str(weight) if weight > 1.0 else ""
         })
 
-    # Template HTML
+    # Definizione delle variabili CSS del tema
+    if args.theme == "light":
+        css_vars = """
+        :root {
+            --bg-body: #f5f5f5;
+            --text-body: #212121;
+            --title-color: #0288d1;
+            --bg-network: #ffffff;
+            --border-color: #ccc;
+            --bg-details: #ffffff;
+            --bg-legend: #eaeaea;
+            --border-legend: #ccc;
+            --bg-tag: #e0e0e0;
+            --text-tag: #212121;
+            --node-font-color: #212121;
+            --edge-color: #b0bec5;
+            --node-border: #bdbdbd;
+        }
+        """
+        vis_font_color = "#212121"
+        vis_node_border = "#bdbdbd"
+        vis_edge_color = "#b0bec5"
+    else:
+        css_vars = """
+        :root {
+            --bg-body: #121212;
+            --text-body: #ffffff;
+            --title-color: #4fc3f7;
+            --bg-network: #1e1e1e;
+            --border-color: #333;
+            --bg-details: #1c1c1c;
+            --bg-legend: #1a1a1a;
+            --border-legend: #2d2d2d;
+            --bg-tag: #333;
+            --text-tag: #ffffff;
+            --node-font-color: #ffffff;
+            --edge-color: #555555;
+            --node-border: #424242;
+        }
+        """
+        vis_font_color = "#ffffff"
+        vis_node_border = "#424242"
+        vis_edge_color = "#555555"
+
+    # Template HTML con CSS Variables
     html_template = """<!DOCTYPE html>
 <html>
 <head>
@@ -227,16 +272,18 @@ def main():
     <title>Visualizzazione Grafo GraphRAG</title>
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <style type="text/css">
+        CSS_VARS_PLACEHOLDER
+        
         body {
-            color: #ffffff;
+            color: var(--text-body);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
+            background-color: var(--bg-body);
             margin: 0;
             padding: 20px;
         }
         h2 {
             margin-top: 0;
-            color: #4fc3f7;
+            color: var(--title-color);
         }
         .container {
             display: flex;
@@ -246,17 +293,17 @@ def main():
         #mynetwork {
             flex-grow: 1;
             height: 100%;
-            border: 1px solid #333;
-            background-color: #1e1e1e;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-network);
             border-radius: 8px;
         }
         #details {
             width: 380px;
             padding: 20px;
-            background-color: #1c1c1c;
+            background-color: var(--bg-details);
             margin-left: 20px;
             border-radius: 8px;
-            border: 1px solid #333;
+            border: 1px solid var(--border-color);
             height: calc(100% - 40px);
             overflow-y: auto;
         }
@@ -276,14 +323,73 @@ def main():
         #legend {
             margin-bottom: 10px;
             padding: 10px;
-            background-color: #1a1a1a;
+            background-color: var(--bg-legend);
             border-radius: 6px;
-            border: 1px solid #2d2d2d;
+            border: 1px solid var(--border-legend);
+        }
+        .btn {
+            background-color: var(--title-color);
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            font-size: 13px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 15px;
+            font-weight: bold;
+            transition: opacity 0.2s;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        #header-area {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        @media print {
+            html, body {
+                height: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+            #details, h2, #header-area, .btn {
+                display: none !important;
+            }
+            #legend {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+                border: 1px solid #ccc !important;
+                margin: 5px 0 10px 0 !important;
+                padding: 8px !important;
+            }
+            .container {
+                height: calc(100% - 60px) !important;
+                width: 100% !important;
+                margin: 0 !important;
+            }
+            #mynetwork {
+                border: none !important;
+                width: 100% !important;
+                height: 100% !important;
+                background-color: #ffffff !important;
+            }
         }
     </style>
 </head>
 <body>
-    <h2>Mappa Relazionale GraphRAG (ARIS)</h2>
+    <div id="header-area">
+        <h2 style="margin: 0;">Mappa Relazionale GraphRAG (ARIS)</h2>
+        <div>
+            <button class="btn" onclick="exportPNG()">📷 Esporta PNG Alta Risoluzione</button>
+            <button class="btn" onclick="window.print()">🖨️ Stampa in PDF</button>
+        </div>
+    </div>
     <div id="legend">
         <strong>Legenda File: </strong>
         LEGEND_PLACEHOLDER
@@ -310,15 +416,15 @@ def main():
                 shape: 'dot',
                 size: 16,
                 font: {
-                    color: '#ffffff',
+                    color: 'VIS_FONT_COLOR_PLACEHOLDER',
                     size: 11
                 },
                 borderWidth: 1.5,
-                borderColor: '#424242'
+                borderColor: 'VIS_NODE_BORDER_PLACEHOLDER'
             },
             edges: {
                 color: {
-                    color: '#555555',
+                    color: 'VIS_EDGE_COLOR_PLACEHOLDER',
                     highlight: '#ffcc00',
                     hover: '#ffcc00'
                 },
@@ -348,24 +454,84 @@ def main():
                 var nodeData = nodes.get(nodeId);
                 var detailDiv = document.getElementById('details');
                 
-                var html = '<h3 style="color: #4fc3f7; margin-top: 0;">' + nodeData.label + '</h3>';
+                var html = '<h3 style="color: var(--title-color); margin-top: 0;">' + nodeData.label + '</h3>';
                 html += '<p><strong>File:</strong> ' + nodeData.file + '</p>';
                 html += '<p><strong>Pagina:</strong> ' + nodeData.page + '</p>';
                 
                 if (nodeData.entities.length > 0) {
                     html += '<p><strong>Entità individuate:</strong><br/>';
                     nodeData.entities.forEach(function(ent) {
-                        html += '<span style="display:inline-block; background-color:#333; padding:2px 6px; margin:2px; border-radius:4px; font-size:11px;">' + ent + '</span>';
+                        html += '<span style="display:inline-block; background-color: var(--bg-tag); color: var(--text-tag); padding:2px 6px; margin:2px; border-radius:4px; font-size:11px;">' + ent + '</span>';
                     });
                     html += '</p>';
                 }
                 
-                html += '<hr style="border: 0; border-top: 1px solid #333; margin: 15px 0;"/>';
-                html += '<p style="white-space: pre-wrap; font-size: 13px; color: #e0e0e0; line-height: 1.5; font-family: monospace;">' + nodeData.text + '</p>';
+                html += '<hr style="border: 0; border-top: 1px solid var(--border-color); margin: 15px 0;"/>';
+                html += '<p style="white-space: pre-wrap; font-size: 13px; color: var(--text-body); line-height: 1.5; font-family: monospace;">' + nodeData.text + '</p>';
                 
                 detailDiv.innerHTML = html;
             }
         });
+
+        function exportPNG() {
+            var canvas = document.getElementsByTagName('canvas')[0];
+            if (canvas) {
+                var ctx = canvas.getContext('2d');
+                ctx.save();
+                
+                var legendItems = document.querySelectorAll('.legend-item');
+                
+                var startX = 20;
+                var startY = 30;
+                var boxWidth = 330;
+                var boxHeight = 25 + (legendItems.length * 20);
+                
+                // Disegna sfondo box legenda
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--bg-details').trim() || '#ffffff';
+                ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--border-color').trim() || '#cccccc';
+                ctx.lineWidth = 1.5;
+                
+                ctx.beginPath();
+                if (ctx.roundRect) {
+                    ctx.roundRect(startX, startY, boxWidth, boxHeight, 8);
+                } else {
+                    ctx.rect(startX, startY, boxWidth, boxHeight);
+                }
+                ctx.fill();
+                ctx.stroke();
+                
+                // Titolo legenda
+                ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-body').trim() || '#000000';
+                ctx.font = 'bold 12px "Segoe UI", Tahoma, Geneva, Verdana, sans-serif';
+                ctx.fillText('LEGENDA FILE PDF', startX + 15, startY + 20);
+                
+                // Disegna le voci
+                ctx.font = '11px "Segoe UI", Tahoma, Geneva, Verdana, sans-serif';
+                legendItems.forEach(function(item, idx) {
+                    var colorSpan = item.querySelector('.legend-color');
+                    var color = colorSpan ? colorSpan.style.backgroundColor : '#97c2fc';
+                    var text = item.textContent.trim();
+                    
+                    var itemY = startY + 45 + (idx * 20);
+                    
+                    ctx.fillStyle = color;
+                    ctx.beginPath();
+                    ctx.arc(startX + 22, itemY - 4, 6, 0, 2 * Math.PI);
+                    ctx.fill();
+                    
+                    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--text-body').trim() || '#000000';
+                    ctx.fillText(text, startX + 38, itemY);
+                });
+                
+                var link = document.createElement('a');
+                link.download = 'mappa_relazionale_aris.png';
+                link.href = canvas.toDataURL('image/png', 1.0);
+                link.click();
+                
+                ctx.restore();
+                network.redraw();
+            }
+        }
     </script>
 </body>
 </html>
@@ -377,7 +543,11 @@ def main():
         legend_html += f'<span class="legend-item"><span class="legend-color" style="background-color: {color};"></span>{f}</span>'
 
     # Rimpiazza i placeholder nel template
-    html_content = html_template.replace("NODES_PLACEHOLDER", json.dumps(vis_nodes, indent=2))
+    html_content = html_template.replace("CSS_VARS_PLACEHOLDER", css_vars)
+    html_content = html_content.replace("VIS_FONT_COLOR_PLACEHOLDER", vis_font_color)
+    html_content = html_content.replace("VIS_NODE_BORDER_PLACEHOLDER", vis_node_border)
+    html_content = html_content.replace("VIS_EDGE_COLOR_PLACEHOLDER", vis_edge_color)
+    html_content = html_content.replace("NODES_PLACEHOLDER", json.dumps(vis_nodes, indent=2))
     html_content = html_content.replace("EDGES_PLACEHOLDER", json.dumps(vis_edges, indent=2))
     html_content = html_content.replace("LEGEND_PLACEHOLDER", legend_html)
 
